@@ -8,9 +8,9 @@
     right: 0;
 }
 
-    #page-content.slide-active {
-        padding-top: 0
-    }
+#page-content.slide-active {
+    padding-top: 0
+}
 
 #slide-nav .navbar-toggle {
     cursor: pointer;
@@ -26,8 +26,8 @@
 }
 
     #slide-nav .navbar-toggle.slide-active .icon-bar {
-        background: #CC0F0F;
-        color: #CC0F0F;
+        background: #000000;
+        color: #737dc4;
     }
 
 .navbar-header {
@@ -35,7 +35,8 @@
 }
 
 .navbar.navbar-fixed-top.slide-active {
-    position: relative
+    position: relative;
+   
 }
 
 @media (max-width: 767px) {
@@ -48,6 +49,7 @@
     #slide-nav .navbar-header {
         margin: 0 auto;
         padding: 0 15px;
+        background: #737dc4;
     }
 
     #slide-nav .navbar.slide-active {
@@ -55,10 +57,12 @@
         width: 80%;
         top: -1px;
         z-index: 1000;
+        background: #99a5ff;
+       
     }
 
     #slide-nav #slidemenu {
-        background: #f7f7f7;
+        background: #ffffff;
         right: -100%;
         min-width: 0;
         position: absolute;
@@ -72,12 +76,14 @@
             min-width: 0;
             width: 100%;
             margin: 0;
+            background: #737dc4;
         }
 
             #slide-nav #slidemenu .navbar-nav .dropdown-menu li a {
                 min-width: 0;
                 width: 80%;
                 white-space: normal;
+               
             }
 
     #slide-nav {
@@ -85,7 +91,7 @@
     }
 
         #slide-nav.navbar-inverse #slidemenu {
-            background: #333
+            background: #96a3ff;
         }
 
     #navbar-height-col {
@@ -93,14 +99,14 @@
         top: 0;
         height: 100%;
         bottom: 0;
-        background: #f7f7f7;
+        background: #ffffff;
     }
-
-        #navbar-height-col.inverse {
-            background: #333;
-            z-index: 1;
-            border: 0;
-        }
+    
+    #navbar-height-col.inverse {
+        background: #737dc4;
+        z-index: 1;
+        border: 0;
+    }
 
     #slide-nav .navbar-form {
         width: 100%;
@@ -125,7 +131,8 @@
     }
 
     .navbar.navbar-fixed-top.slide-active {
-        position: fixed
+        position: fixed;
+        background: #737dc4; 
     }
 
     .navbar-header {

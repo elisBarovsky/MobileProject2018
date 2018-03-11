@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TelephoneList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserTypeFilter" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PupilID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TelephoneListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TelephoneListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GivenAllNotes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PupilID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GivenAllNotesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GivenAllNotesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GivenNotesBySubject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PupilID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ChooseSubjectCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GivenNotesBySubjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GivenNotesBySubjectResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GivenTimeTableByClassCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PupilID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GivenTimeTableByClassCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GivenTimeTableByClassCodeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FillAllHomeWork">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PupilID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FillAllHomeWorkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FillAllHomeWorkResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FillBySubjectHomeWork">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PupilID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ChooseSubjectCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FillBySubjectHomeWorkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FillBySubjectHomeWorkResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="TelephoneListSoapIn">
+    <wsdl:part name="parameters" element="tns:TelephoneList" />
+  </wsdl:message>
+  <wsdl:message name="TelephoneListSoapOut">
+    <wsdl:part name="parameters" element="tns:TelephoneListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GivenAllNotesSoapIn">
+    <wsdl:part name="parameters" element="tns:GivenAllNotes" />
+  </wsdl:message>
+  <wsdl:message name="GivenAllNotesSoapOut">
+    <wsdl:part name="parameters" element="tns:GivenAllNotesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GivenNotesBySubjectSoapIn">
+    <wsdl:part name="parameters" element="tns:GivenNotesBySubject" />
+  </wsdl:message>
+  <wsdl:message name="GivenNotesBySubjectSoapOut">
+    <wsdl:part name="parameters" element="tns:GivenNotesBySubjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="GivenTimeTableByClassCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GivenTimeTableByClassCode" />
+  </wsdl:message>
+  <wsdl:message name="GivenTimeTableByClassCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GivenTimeTableByClassCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="FillAllHomeWorkSoapIn">
+    <wsdl:part name="parameters" element="tns:FillAllHomeWork" />
+  </wsdl:message>
+  <wsdl:message name="FillAllHomeWorkSoapOut">
+    <wsdl:part name="parameters" element="tns:FillAllHomeWorkResponse" />
+  </wsdl:message>
+  <wsdl:message name="FillBySubjectHomeWorkSoapIn">
+    <wsdl:part name="parameters" element="tns:FillBySubjectHomeWork" />
+  </wsdl:message>
+  <wsdl:message name="FillBySubjectHomeWorkSoapOut">
+    <wsdl:part name="parameters" element="tns:FillBySubjectHomeWorkResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BetseferWSSoap">
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TelephoneList">
+      <wsdl:input message="tns:TelephoneListSoapIn" />
+      <wsdl:output message="tns:TelephoneListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GivenAllNotes">
+      <wsdl:input message="tns:GivenAllNotesSoapIn" />
+      <wsdl:output message="tns:GivenAllNotesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GivenNotesBySubject">
+      <wsdl:input message="tns:GivenNotesBySubjectSoapIn" />
+      <wsdl:output message="tns:GivenNotesBySubjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GivenTimeTableByClassCode">
+      <wsdl:input message="tns:GivenTimeTableByClassCodeSoapIn" />
+      <wsdl:output message="tns:GivenTimeTableByClassCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FillAllHomeWork">
+      <wsdl:input message="tns:FillAllHomeWorkSoapIn" />
+      <wsdl:output message="tns:FillAllHomeWorkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FillBySubjectHomeWork">
+      <wsdl:input message="tns:FillBySubjectHomeWorkSoapIn" />
+      <wsdl:output message="tns:FillBySubjectHomeWorkSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BetseferWSSoap" type="tns:BetseferWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TelephoneList">
+      <soap:operation soapAction="http://tempuri.org/TelephoneList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GivenAllNotes">
+      <soap:operation soapAction="http://tempuri.org/GivenAllNotes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GivenNotesBySubject">
+      <soap:operation soapAction="http://tempuri.org/GivenNotesBySubject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GivenTimeTableByClassCode">
+      <soap:operation soapAction="http://tempuri.org/GivenTimeTableByClassCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FillAllHomeWork">
+      <soap:operation soapAction="http://tempuri.org/FillAllHomeWork" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FillBySubjectHomeWork">
+      <soap:operation soapAction="http://tempuri.org/FillBySubjectHomeWork" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BetseferWSSoap12" type="tns:BetseferWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TelephoneList">
+      <soap12:operation soapAction="http://tempuri.org/TelephoneList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GivenAllNotes">
+      <soap12:operation soapAction="http://tempuri.org/GivenAllNotes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GivenNotesBySubject">
+      <soap12:operation soapAction="http://tempuri.org/GivenNotesBySubject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GivenTimeTableByClassCode">
+      <soap12:operation soapAction="http://tempuri.org/GivenTimeTableByClassCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FillAllHomeWork">
+      <soap12:operation soapAction="http://tempuri.org/FillAllHomeWork" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FillBySubjectHomeWork">
+      <soap12:operation soapAction="http://tempuri.org/FillBySubjectHomeWork" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BetseferWS">
+    <wsdl:port name="BetseferWSSoap" binding="tns:BetseferWSSoap">
+      <soap:address location="http://localhost:52285/BetseferWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BetseferWSSoap12" binding="tns:BetseferWSSoap12">
+      <soap12:address location="http://localhost:52285/BetseferWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -7,8 +7,12 @@
     <link href="CSS/StyleSheetCss.css" rel="stylesheet" /> <!--ours-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="Scripts/JavaScript.js"></script> <!--ours-->
-   
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="Scripts/BootstrapJS.js"></script>
+    <link href="CSS/StyleSheet2.css" rel="stylesheet" /><!--ours-->
+    <script src="Scripts/AjaxCalls.js"></script>
 
 </head>
 <body>
@@ -21,7 +25,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="navbar-brand" href="#"> <img src="Images/Betsefer.png" alt="logo" style="width:60px;height:30px"> </a>
+               
             </div>
             <div id="slidemenu" style="text-align:center">
                 <ul class="nav navbar-nav">
@@ -57,23 +61,61 @@
     </div>
     <div id="page-content">
         <div class="container">
-            <h1 class="no-margin-top">right Sidebar menu</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid sunt minus libero quas soluta blanditiis voluptatibus, eveniet sint tempora! Maxime!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad laudantium deleniti ratione ea voluptas, dolore expedita nisi? Veniam, doloremque, reiciendis.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis nam esse molestiae voluptatem maiores fugiat nulla commodi magni impedit.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora ducimus iure ipsa ea officia aliquid quibusdam nostrum obcaecati itaque temporibus!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid sunt minus libero quas soluta blanditiis voluptatibus, eveniet sint tempora! Maxime!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad laudantium deleniti ratione ea voluptas, dolore expedita nisi? Veniam, doloremque, reiciendis.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis nam esse molestiae voluptatem maiores fugiat nulla commodi magni impedit.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora ducimus iure ipsa ea officia aliquid quibusdam nostrum obcaecati itaque temporibus!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid sunt minus libero quas soluta blanditiis voluptatibus, eveniet sint tempora! Maxime!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad laudantium deleniti ratione ea voluptas, dolore expedita nisi? Veniam, doloremque, reiciendis.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis nam esse molestiae voluptatem maiores fugiat nulla commodi magni impedit.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora ducimus iure ipsa ea officia aliquid quibusdam nostrum obcaecati itaque temporibus!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid sunt minus libero quas soluta blanditiis voluptatibus, eveniet sint tempora! Maxime!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad laudantium deleniti ratione ea voluptas, dolore expedita nisi? Veniam, doloremque, reiciendis.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis nam esse molestiae voluptatem maiores fugiat nulla commodi magni impedit.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora ducimus iure ipsa ea officia aliquid quibusdam nostrum obcaecati itaque temporibus!</p>
+            <!--main page - Login-->
+            <div data-role="page" data-theme="a" data-position="fixed" id="home">
+                <br/><br /><br /><br />
+                <img src="Images/Betsefer.png"  class="center"/>
+                <div class="containerLogin" style="text-align:right">
+                    <form >
+                        <div class="form-group">
+                            <label for="IDTB">תעודת זהות</label>
+                            <input type="number" class="form-control" id="IDTB" name="ID">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">סיסמה</label>
+                            <input type="password" class="form-control" id="pwdTB" name="PSWD">
+                        </div>
+                        <div class="form-check" style="text-align:right">
+                            <label class="form-check-label" >
+                                <input class="form-check-input" type="checkbox" name="remember"> זכור אותי
+                            </label>
+                        </div>
+                        <button type="submit" id="LoginSubmit" class="btn btn-primary">התחבר</button>
+                    </form>
+                </div>
+            </div>
+            <!--product page by category - choose product from a category -->
+            <div data-role="page" data-theme="a" data-position="fixed" id="Product" data-add-back-btn="true">
+                <div data-role="header" id="head">
+                    <a href="#home" class="ui-btn-left" data-theme="b" data-transition="slide" data-direction="reverse" data-icon="back" style="color:white">Back</a>
+                    <!--<h1>  Product List  </h1>-->
+                </div>
+                <!-- /header -->
+                <div data-role="content">
+                    <ul data-role="listview" data-filter="true" data-filter-placeholder="Enter a product" data-inset="true" id="DynamicListProduct"></ul>
+                    <!-- /content -->
+                    <!--<div data-role="footer" data-position="fixed" id="foot">
+                        <img src="images/Altmetric_rgb.png" id="logo" />
+                    </div>-->
+                </div>
+            </div>
+            <!--product page  - info about the choosen product  -->
+            <div data-role="page" data-theme="a" data-position="fixed" id="ProductInfo" data-add-back-btn="true">
+                <div data-role="header" id="head">
+                    <a href="#Product" class="ui-btn-left" data-theme="b" data-transition="slide" data-direction="reverse" data-icon="back" style="color:white"></a>
+                    <!--<h1>  Product View  </h1>-->
+                </div>
+                <!-- /header -->
+                <div data-role="content">
+                    <ul data-role="listview" data-split-icon="info" id="DynamicInfoProduct"></ul>
+                    <div data-role="collapsible-set" data-theme="c" data-content-theme="d" id="attriInfo">
+                    </div>
+                    <!-- /content -->
+                    <!--<div data-role="footer" data-position="fixed" id="foot">
+                        <img src="images/Altmetric_rgb.png" id="logo" />
+                    </div>-->
+                </div>
+            </div>
         </div>
     </div>
 </body>
