@@ -66,6 +66,24 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonStringCategory;
     }
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string FillSecurityQ()
+    {
+        string[] Qestions = new string[8];
+        Qestions[0]= "מה שם חיית המחמד שלך";
+        Qestions[1] = "מה שם סבתך מצד אמא";
+        Qestions[2] = "מה שם בית הספר היסודי שבו אביך למד";
+        Qestions[3] = "מה שם בית הספר היסודי בו למדה אמך";
+        Qestions[4] = "מה שם סבך מצד אמך";
+        Qestions[5] = "מה שם סבך מצד אביך";
+        Qestions[6] = "מה שם סבתך מצד אביך";
+        Qestions[7] = "מה הצבע המועדף עליך";
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringTelephoneList = js.Serialize(Qestions);
+        return jsonStringTelephoneList;
+    }
+
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]

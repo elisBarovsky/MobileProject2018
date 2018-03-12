@@ -1,4 +1,17 @@
 ﻿$(document).ready(function () {
+    $(".navbar-header").hide();
+});
+
+UserInfo = new Object();
+
+$(document).on('vclick', '#LoginSubmit', function () { // on the pageinit of Product page
+    UserInfo.ID = document.getElementById("IDTB").value;
+    UserInfo.PS = document.getElementById("pwdTB").value;
+    localStorage.setItem("UserID", UserInfo.ID); //saving in localS
+    localStorage.setItem("UserPS", UserInfo.PS); //saving in localS
+    alert(UserInfo.ID + " " + UserInfo.PS);     ///////*********************** לא לשכוח למחוק בסוף
+    Login(UserInfo, renderlogin); 
+
     $('#slide-nav.navbar-inverse').after($('<div class="inverse" id="navbar-height-col"></div>'));
     $('#slide-nav.navbar-default').after($('<div id="navbar-height-col"></div>'));
 
@@ -51,22 +64,39 @@
         }
     });
 });
-UserInfo = new Object();
 
-$(document).on('vclick', '#LoginSubmit', function () { // on the pageinit of Product page
-    UserInfo.ID = document.getElementById("IDTB").value;
-    UserInfo.PS = document.getElementById("pwdTB").value;
-    localStorage.setItem("UserID", UserInfo.ID);
-    localStorage.setItem("UserPS", UserInfo.PS);
-    alert(UserInfo.ID +" "+ UserInfo.PS);
-
-    Login(UserInfo, renderlogin);
-});
 
 function renderlogin(results) {
     //this is the callBackFunc 
     resutls = $.parseJSON(results.d);
 
+    if (resutls = "openSeqQestion") {
+        FillSecurityQ(renderFillSecurityQ);
+        $.mobile.changePage("#SequrityQ", { transition: "slide", changeHash: false }); // מעביר עמוד 
+    }
+    else {
+        $.mobile.changePage("#DashbordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+        $(".navbar-header").show();
+    }
+    //$('#DynamicList').empty();
+    //$.each(resutls, function (i, row) {
+    //    dynamicLi = "<li> <a href='#' id=" + row.Id + "><h3>" + row.Name + "</h3><span class='ui-li-count' style='float: right;'>" + row.ProductAmount + "</span></li>";
+    //    $('#DynamicList').append(dynamicLi);
+    //    $('#DynamicList').listview('refresh');
+    //});
+}
+
+
+function renderFillSecurityQ(results) {
+    //this is the callBackFunc 
+    resutls = $.parseJSON(results.d);
+    dynamicLy = "<select>";
+    $.each(results, function (i, row) {
+        dynamicLy += " <option value='" + row +"'>"+row+"</option> ";
+    }); 
+    dynamicLy += "</select>";
+
+ 
     //$('#DynamicList').empty();
     //$.each(resutls, function (i, row) {
     //    dynamicLi = "<li> <a href='#' id=" + row.Id + "><h3>" + row.Name + "</h3><span class='ui-li-count' style='float: right;'>" + row.ProductAmount + "</span></li>";
