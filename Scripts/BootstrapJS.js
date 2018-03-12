@@ -89,7 +89,7 @@ function renderlogin(results) {
 
 function renderFillSecurityQ(results) {
     //this is the callBackFunc 
-    resutls = $.parseJSON(results.d);
+    resutls[] = $.parseJSON(results.d);
     dynamicLy = "<select>";
     $.each(results, function (i, row) {
         dynamicLy += " <option value='" + row +"'>"+row+"</option> ";
