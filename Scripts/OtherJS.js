@@ -1,7 +1,4 @@
 ﻿$(document).ready(function () {
-   
-
-
    // alert(localStorage.getItem("UserID")); // how to get the local storage 
 
 $('#slide-nav.navbar-inverse').after($('<div class="inverse" id="navbar-height-col"></div>'));
@@ -96,17 +93,21 @@ function renderlogin(results) {
 
 //new user login - fill questions
 $(document).on("pageinit", "#SecurityQuestionsPage", function (event) {
-    Q1
-    renderFillSecurityQ(renderFillSecurityQ);
+    FillSecurityQ(renderFillSecurityQ);
 });
 
 function renderFillSecurityQ(results) {
     //this is the callBackFunc 
     res = $.parseJSON(results.d);
 
-    dynamicLy = "<select>";
+   // $('#Q1').empty();
+    dynamicLy = "";
     $.each(res, function (i, row) {
-        dynamicLy += " <option value='" + row + "'>" + row + "</option> ";
+        dynamicLy = " <option value='" +( i +1)+ "'>" + row + "</option> ";
+        $('#Q1').append(dynamicLy);
+        $('#Q1').selectmenu('refresh');
+        $('#Q2').append(dynamicLy);
+        $('#Q2').selectmenu('refresh');
     });
-    dynamicLy += "</select>";
+  //  choosen= document.getElementById("Q1").value;
 }
