@@ -4,62 +4,19 @@
     <meta charset="utf-8" />
     <title></title>
 
-    <link href="CSS/StyleSheetCss.css" rel="stylesheet" /> <!--ours-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <script src="Scripts/BootstrapJS.js"></script>
+    <script src="Scripts/Login.js"></script>
     <link href="CSS/StyleSheet2.css" rel="stylesheet" /><!--ours-->
     <script src="Scripts/AjaxCalls.js"></script>
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="slide-nav">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-toggle">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-            </div>
-            <div id="slidemenu" style="text-align:center">
-                <ul class="nav navbar-nav">
-                    <br/><br /><br />
-                    <li class="active">
-                        <a href="#"><img src="Images/LuzUIcon.png" alt="logo" style="width:40px;"> <br />  לוח שנה</a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="Images/timeTableIcon.png" alt="logo" style="width:40px;"> <br /> מערכת שעות</a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="Images/UnlikeIcon.png" alt="logo" style="width:40px;"> <br /> הערות משמעת</a>
-                    </li>
-                    <li class="">
-                        <a href="#"><img src="Images/HWIcon.png" alt="logo" style="width:40px;"> <br /> שיעורי בית</a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="Images/GradeIcon.png" alt="logo" style="width:40px;"> <br /> ציונים</a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="Images/msgIcon.png" alt="logo" style="width:40px;"> <br/> הודעות</a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="Images/ContactIcon.png" alt="logo" style="width:40px;"> <br /> דף קשר</a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="Images/logoutIcon.png" alt="logo" style="width:40px;"></a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </div>
     <div id="page-content">
-        <div class="container1">
+        <div class="container">
             <!--main page - Login-->
             <div data-role="page" data-theme="a" data-position="fixed" id="LoginPage">
                 <br/><br /><br /><br />
@@ -81,40 +38,6 @@
                         </div>
                         <button type="submit" id="LoginSubmit" class="btn btn-primary">התחבר</button>
                     </form>
-                </div>
-            </div>
-            <!--product page by category - choose product from a category -->
-            <div data-role="page" data-theme="a" data-position="fixed" id="SequrityQ" data-add-back-btn="true">
-                <br /><br /><br /><br />
-                <div data-role="header" id="head">
-                    <!--<h1>  Product List  </h1>-->
-                </div>
-                <!-- /header -->
-                <div data-role="content">
-                    <ul data-role="listview" id="DynamicListProduct"></ul>
-                   some Securuty QQQ
-                    <!-- /content -->
-                    <!--<div data-role="footer" data-position="fixed" id="foot">
-                        <img src="images/Altmetric_rgb.png" id="logo" />
-                    </div>-->
-                </div>
-            </div>
-            <!--product page  - info about the choosen product  -->
-            <div data-role="page" data-theme="a" data-position="fixed" id="DashbordPage" data-add-back-btn="true">
-                <div data-role="header" id="head">
-                    <!--<h1>  Product View  </h1>-->
-                </div>
-                <!-- /header -->
-                <div data-role="content">
-                    <ul data-role="listview" data-split-icon="info" id="DynamicInfoProduct"></ul>
-                    this is the login !!
-                    <!--<div data-role="collapsible-set" data-theme="c" data-content-theme="d" id="attriInfo">
-
-                    </div>-->
-                    <!-- /content -->
-                    <!--<div data-role="footer" data-position="fixed" id="foot">
-                        <img src="images/Altmetric_rgb.png" id="logo" />
-                    </div>-->
                 </div>
             </div>
         </div>

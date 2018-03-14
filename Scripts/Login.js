@@ -70,12 +70,15 @@ function renderlogin(results) {
     //this is the callBackFunc 
     resutls = $.parseJSON(results.d);
 
-    if (resutls = "openSeqQestion") {
-        FillSecurityQ(renderFillSecurityQ);
-        $.mobile.changePage("#SequrityQ", { transition: "slide", changeHash: false }); // מעביר עמוד 
+    if (resutls === "openSeqQestion") {
+
+      //  FillSecurityQ(renderFillSecurityQ);
+      //  $.mobile.changePage("#SequrityQ", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
     else {
-        $.mobile.changePage("#DashbordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+        alert("שלוום");  
+        $.mobile.changePage("otherHTML.html", { transition: "slide", changeHash: false }); // מעביר עמוד 
+        //window.location = "otherHTML.html";
         $(".navbar-header").show();
     }
     //$('#DynamicList').empty();
@@ -87,20 +90,23 @@ function renderlogin(results) {
 }
 
 
-function renderFillSecurityQ(results) {
-    //this is the callBackFunc 
-    resutls[] = $.parseJSON(results.d);
-    dynamicLy = "<select>";
-    $.each(results, function (i, row) {
-        dynamicLy += " <option value='" + row +"'>"+row+"</option> ";
-    }); 
-    dynamicLy += "</select>";
+
+
+//function renderFillSecurityQ(results) {
+//    //this is the callBackFunc 
+//    results[] = $.parseJSON(results.d);
+
+//    //dynamicLy = "<select>";
+//    //$.each(results, function (i, row) {
+//    //    dynamicLy += " <option value='" + row +"'>"+row+"</option> ";
+//    //}); 
+//    //dynamicLy += "</select>";
 
  
-    //$('#DynamicList').empty();
-    //$.each(resutls, function (i, row) {
-    //    dynamicLi = "<li> <a href='#' id=" + row.Id + "><h3>" + row.Name + "</h3><span class='ui-li-count' style='float: right;'>" + row.ProductAmount + "</span></li>";
-    //    $('#DynamicList').append(dynamicLi);
-    //    $('#DynamicList').listview('refresh');
-    //});
-}
+//    //$('#DynamicList').empty();
+//    //$.each(resutls, function (i, row) {
+//    //    dynamicLi = "<li> <a href='#' id=" + row.Id + "><h3>" + row.Name + "</h3><span class='ui-li-count' style='float: right;'>" + row.ProductAmount + "</span></li>";
+//    //    $('#DynamicList').append(dynamicLi);
+//    //    $('#DynamicList').listview('refresh');
+//    //});
+//}
