@@ -101,13 +101,24 @@ function renderFillSecurityQ(results) {
     res = $.parseJSON(results.d);
 
    // $('#Q1').empty();
-    dynamicLy = "";
+    dynamicLy = "<option value='0'>בחר</option>";
     $.each(res, function (i, row) {
         dynamicLy = " <option value='" +( i +1)+ "'>" + row + "</option> ";
         $('#Q1').append(dynamicLy);
         $('#Q1').selectmenu('refresh');
-        $('#Q2').append(dynamicLy);
-        $('#Q2').selectmenu('refresh');
+        
     });
-  //  choosen= document.getElementById("Q1").value;
+  
 }
+
+$(document).on("change", "#Q1", function (event) {
+    choosen = document.getElementById("Q1").value;
+    dynamicLy = "<option value='0'>בחר</option>";;
+    $.each(res, function (i, row) {
+        if ((i + 1) != choosen) {
+            dynamicLy = " <option value='" + (i + 1) + "'>" + row + "</option> ";
+            $('#Q2').append(dynamicLy);
+            $('#Q2').selectmenu('refresh');
+        }
+    });
+});
