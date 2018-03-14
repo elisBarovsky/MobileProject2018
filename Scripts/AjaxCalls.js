@@ -30,7 +30,7 @@ function FillSecurityQ(renderFillSecurityQ) {
             renderFillSecurityQ(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!' + UserInfo.ID);
+            alert('Network error has occurred please try again!');
         }
     });
 }

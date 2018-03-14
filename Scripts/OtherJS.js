@@ -87,7 +87,7 @@ function renderlogin(results) {
     else { // already login -> go to main page according the type user. 
         alert("שלוום");
         localStorage.setItem("UserType", res[1]);
-        $.mobile.changePage("#EllisPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+        $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
 }
 
@@ -103,7 +103,7 @@ function renderFillSecurityQ(results) {
    // $('#Q1').empty();
     dynamicLy = "";
     $.each(res, function (i, row) {
-        dynamicLy = " <option value='" +( i +1)+ "'>" + row + "</option> ";
+        dynamicLy = " <option value='" + (i + 1) + "' style='text- align:right'>" + row + "</option> ";
         $('#Q1').append(dynamicLy);
         $('#Q1').selectmenu('refresh');
         $('#Q2').append(dynamicLy);
