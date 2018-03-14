@@ -1,6 +1,13 @@
 ﻿$(document).ready(function () {
-  
+    UserInfo.ID = document.getElementById("IDTB").value;
+    UserInfo.PS = document.getElementById("PasswordTB").value;
+    localStorage.setItem("UserID", UserInfo.ID); //saving in localS
+    localStorage.setItem("PasswordTB", UserInfo.PS); //saving in localS
+    alert(UserInfo.ID + " " + UserInfo.PS);     ///////*********************** לא לשכוח למחוק בסוף
+    Login(UserInfo, renderlogin); 
 
+
+   // alert(localStorage.getItem("UserID")); // how to get the local storage 
 
 $('#slide-nav.navbar-inverse').after($('<div class="inverse" id="navbar-height-col"></div>'));
 $('#slide-nav.navbar-default').after($('<div id="navbar-height-col"></div>'));
@@ -55,9 +62,9 @@ $(window).on("resize", function () {
 });
 });
 
-    $(document).on('vclick', '#CHBottom', function () {
+$(document).on('vclick', '#LoginBTN', function () {
   //  alert("כפתור נלחץ");
-    $.mobile.changePage("#DashbordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+    $.mobile.changePage("#SecurityPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
 }); 
 
 $(document).on('vclick', '#CHBottom1', function () {

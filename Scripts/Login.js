@@ -1,7 +1,4 @@
-﻿$(document).ready(function () {
-    $(".navbar-header").hide();
-});
-
+﻿
 UserInfo = new Object();
 
 $(document).on('vclick', '#LoginSubmit', function () { // on the pageinit of Product page
@@ -71,15 +68,14 @@ function renderlogin(results) {
     resutls = $.parseJSON(results.d);
 
     if (resutls === "openSeqQestion") {
-
-      //  FillSecurityQ(renderFillSecurityQ);
-      //  $.mobile.changePage("#SequrityQ", { transition: "slide", changeHash: false }); // מעביר עמוד 
+        $.mobile.changePage("OtherHTML.html", { transition: "slide", changeHash: true }); // מעביר עמוד 
+    }
+    else if (results === "אחד מהפרטים שהקשת שגוים") {
+        alert("פרטים לא קיימים במערכת.");
     }
     else {
-        alert("שלוום");  
-        $.mobile.changePage("otherHTML.html", { transition: "slide", changeHash: false }); // מעביר עמוד 
-        //window.location = "otherHTML.html";
-        $(".navbar-header").show();
+        alert("שלוום"); 
+        $.mobile.changePage("#EllisPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
     //$('#DynamicList').empty();
     //$.each(resutls, function (i, row) {
