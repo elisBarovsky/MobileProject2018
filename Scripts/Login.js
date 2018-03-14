@@ -63,20 +63,7 @@ $(document).on('vclick', '#LoginSubmit', function () { // on the pageinit of Pro
 });
 
 
-function renderlogin(results) {
-    //this is the callBackFunc 
-    resutls = $.parseJSON(results.d);
 
-    if (resutls === "openSeqQestion") {
-        $.mobile.changePage("OtherHTML.html", { transition: "slide", changeHash: true }); // מעביר עמוד 
-    }
-    else if (results === "אחד מהפרטים שהקשת שגוים") {
-        alert("פרטים לא קיימים במערכת.");
-    }
-    else {
-        alert("שלוום"); 
-        $.mobile.changePage("#EllisPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
-    }
     //$('#DynamicList').empty();
     //$.each(resutls, function (i, row) {
     //    dynamicLi = "<li> <a href='#' id=" + row.Id + "><h3>" + row.Name + "</h3><span class='ui-li-count' style='float: right;'>" + row.ProductAmount + "</span></li>";

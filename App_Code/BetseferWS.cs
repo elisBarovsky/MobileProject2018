@@ -28,20 +28,25 @@ public class BetseferWS : System.Web.Services.WebService
     public string Login(string UserID, string password)
     {
         Users UserLogin = new Users();
-        string isAlreadyLogin = UserLogin.IsAlreadyLogin(UserID, password);
-        string UserType = "";
-        if (isAlreadyLogin != "")
+        string UserType = UserLogin.GetUserType(UserID, password);
+        string isvalid = "";
+
+        if (UserType == "")
         {
-            if (!bool.Parse(isAlreadyLogin))
+            isvalid = "wrongDetails";
+        }
+        else
+        {
+            bool isAlreadyLogin = bool.Parse(UserLogin.IsAlreadyLogin(UserID, password));
+
+            if (!isAlreadyLogin)
             {
-                UserType = "openSeqQestion";/*FillSecurityQ();*/
+                isvalid = "openSeqQestion";/*FillSecurityQ();*/
             }
-            else
-            {
-                switch (int.Parse(UserLogin.GetUserType(UserID, password)))
+                switch (int.Parse(UserType))
                 {
                     case 1:
-                        UserType="Admin";
+                        UserType = "Admin";
                         break;
                     case 2:
                         UserType = "Teacher";
@@ -52,17 +57,11 @@ public class BetseferWS : System.Web.Services.WebService
                     case 4:
                         UserType = "Child";
                         break;
-                }             
-            }
+                }
         }
-        else
-        {
-            UserType = "אחד מהפרטים שהקשת שגוים";
-        }
-     
-
+        string[] arr = new string[] { isvalid, UserType };
         JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonStringCategory = js.Serialize(UserType);
+        string jsonStringCategory = js.Serialize(arr);
         return jsonStringCategory;
     }
 
@@ -70,15 +69,14 @@ public class BetseferWS : System.Web.Services.WebService
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string FillSecurityQ()
     {
-        string[] Qestions = new string[8];
-        Qestions[0]= "מה שם חיית המחמד שלך";
-        Qestions[1] = "מה שם סבתך מצד אמא";
-        Qestions[2] = "מה שם בית הספר היסודי שבו אביך למד";
-        Qestions[3] = "מה שם בית הספר היסודי בו למדה אמך";
-        Qestions[4] = "מה שם סבך מצד אמך";
-        Qestions[5] = "מה שם סבך מצד אביך";
-        Qestions[6] = "מה שם סבתך מצד אביך";
-        Qestions[7] = "מה הצבע המועדף עליך";
+        Questions q = new Questions();
+        List<Questions> qqqq = q.GetQuestions();
+        string[] Qestions = new string[qqqq.Count];
+        for (int i = 0; i < qqqq.Count; i++)
+        {
+            Qestions[i] = qqqq[i].SecurityInfo;
+        }
+        
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringTelephoneList = js.Serialize(Qestions);
         return jsonStringTelephoneList;

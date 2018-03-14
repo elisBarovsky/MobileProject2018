@@ -1,10 +1,5 @@
 ﻿$(document).ready(function () {
-    UserInfo.ID = document.getElementById("IDTB").value;
-    UserInfo.PS = document.getElementById("PasswordTB").value;
-    localStorage.setItem("UserID", UserInfo.ID); //saving in localS
-    localStorage.setItem("PasswordTB", UserInfo.PS); //saving in localS
-    alert(UserInfo.ID + " " + UserInfo.PS);     ///////*********************** לא לשכוח למחוק בסוף
-    Login(UserInfo, renderlogin); 
+   
 
 
    // alert(localStorage.getItem("UserID")); // how to get the local storage 
@@ -62,12 +57,56 @@ $(window).on("resize", function () {
 });
 });
 
+UserInfo = new Object();
+
 $(document).on('vclick', '#LoginBTN', function () {
-  //  alert("כפתור נלחץ");
-    $.mobile.changePage("#SecurityPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+
+    UserInfo.ID = document.getElementById("IDTB").value;
+    UserInfo.PS = document.getElementById("PasswordTB").value;
+    localStorage.setItem("UserID", UserInfo.ID); //saving in localS
+    localStorage.setItem("PasswordTB", UserInfo.PS); //saving in localS
+    Login(UserInfo, renderlogin); 
+
 }); 
 
-$(document).on('vclick', '#CHBottom1', function () {
-    //  alert("כפתור נלחץ");
-    $.mobile.changePage("#DiklaPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+
+
+//check login details and decide which page to go.
+function renderlogin(results) {
+    //this is the callBackFunc 
+    res = $.parseJSON(results.d);
+
+    if (res[0] == "openSeqQestion") { // go to fill identity questions page
+
+        localStorage.setItem("UserType", res[1]);
+        $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false });
+    }
+    else if (res == "wrongDetails") { //wrong details
+
+        alert("פרטים לא קיימים במערכת.");
+        document.getElementById("IDTB").value = "";
+        document.getElementById("PasswordTB").value = "";
+    }
+    else { // already login -> go to main page according the type user. 
+        alert("שלוום");
+        localStorage.setItem("UserType", res[1]);
+        $.mobile.changePage("#EllisPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+    }
+}
+
+//new user login - fill questions
+$(document).on("pageinit", "#SecurityQuestionsPage", function (event) {
+    Q1
+    renderFillSecurityQ(renderFillSecurityQ);
 });
+
+function renderFillSecurityQ(results) {
+    //this is the callBackFunc 
+    res = $.parseJSON(results.d);
+
+    dynamicLy = "<select>";
+    $.each(res, function (i, row) {
+        dynamicLy += " <option value='" + row + "'>" + row + "</option> ";
+    });
+    dynamicLy += "</select>";
+}
