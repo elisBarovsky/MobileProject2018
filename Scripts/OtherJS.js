@@ -55,7 +55,6 @@ $(window).on("resize", function () {
 });
 
 UserInfo = new Object();
-
 $(document).on('vclick', '#LoginBTN', function () {
 
     UserInfo.ID = document.getElementById("IDTB").value;
@@ -66,11 +65,8 @@ $(document).on('vclick', '#LoginBTN', function () {
 
 }); 
 
-
-
 //check login details and decide which page to go.
 function renderlogin(results) {
-    //this is the callBackFunc 
     res = $.parseJSON(results.d);
 
     if (res[0] == "openSeqQestion") { // go to fill identity questions page
@@ -93,27 +89,34 @@ function renderlogin(results) {
 
 //new user login - fill questions
 $(document).on("pageinit", "#SecurityQuestionsPage", function (event) {
-    FillSecurityQ(renderFillSecurityQ);
+    //document.getElementById("Q2").style.display = 'none'; 
+    //document.getElementById("LQ2").style.display = 'none'; 
+    FillSecurityQ(renderFillSecurityQ);  
 });
 
 function renderFillSecurityQ(results) {
     //this is the callBackFunc 
     res = $.parseJSON(results.d);
 
-   // $('#Q1').empty();
+    $('#Q1').empty();
     dynamicLy = "<option value='0'>בחר</option>";
+    $('#Q1').append(dynamicLy);
+    $('#Q1').selectmenu('refresh');
     $.each(res, function (i, row) {
         dynamicLy = " <option value='" + (i + 1) + "' style='text- align:right'>" + row + "</option> ";
         $('#Q1').append(dynamicLy);
         $('#Q1').selectmenu('refresh');
-        
     });
-  
 }
 
 $(document).on("change", "#Q1", function (event) {
+    //$("#Q2").show();
+    //$("#LQ2").show();
+    $('#Q2').empty()
     choosen = document.getElementById("Q1").value;
     dynamicLy = "<option value='0'>בחר</option>";;
+    $('#Q2').append(dynamicLy);
+    $('#Q2').selectmenu('refresh');
     $.each(res, function (i, row) {
         if ((i + 1) != choosen) {
             dynamicLy = " <option value='" + (i + 1) + "'>" + row + "</option> ";
@@ -122,3 +125,28 @@ $(document).on("change", "#Q1", function (event) {
         }
     });
 });
+
+SecurityQA = new Object();
+$(document).on('vclick', '#SaveQBTN', function () {
+    SecurityQA.UserID = localStorage.getItem("UserID");
+    SecurityQA.choosenQ1 = document.getElementById("Q1").value;
+    SecurityQA.choosenQ2 = document.getElementById("Q2").value;
+    SecurityQA.choosenA1 = document.getElementById("ans1").value;
+    SecurityQA.choosenA2 = document.getElementById("ans2").value;
+
+    //localStorage.setItem("UserID", UserInfo.ID); //saving in localS
+    //localStorage.setItem("PasswordTB", UserInfo.PS); //saving in localS
+    SaveQuestion(SecurityQA, renderSaveQuestion);
+});
+
+function renderSaveQuestion(results) {
+    //this is the callBackFunc 
+    res = $.parseJSON(results.d);
+    if (res==2) {
+        alert("נכנס לשמירה " + res);
+        $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+    }
+    else {
+        alert("הייתה בעיה בשמירת נתונים, פנה לשירות לקוחות");
+    }
+}

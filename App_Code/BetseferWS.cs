@@ -16,7 +16,6 @@ using System.Web.Services;
 [System.Web.Script.Services.ScriptService]
 public class BetseferWS : System.Web.Services.WebService
 {
-
     public BetseferWS()
     {
         //Uncomment the following line if using designed components 
@@ -82,6 +81,20 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonStringTelephoneList;
     }
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string SaveQuestion(string ID,string Q1, string Q2, string A1, string A2)
+    {
+        Users UserSaveQA = new Users();
+        int ans = UserSaveQA.SaveQuestion(ID,int.Parse(Q1),A1, int.Parse(Q2), A2);
+        Users UserUpdateLogin = new Users();
+        int ans2 = UserUpdateLogin.ChangeFirstLogin(ID);
+        int anssss = ans + ans2;
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringTelephoneList = js.Serialize(anssss);
+        return jsonStringTelephoneList;
+    }
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
