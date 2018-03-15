@@ -58,6 +58,7 @@ $(window).on("resize", function () {
 });
 });
 
+
 UserInfo = new Object();
 $(document).on('vclick', '#LoginBTN', function () {
 
@@ -155,6 +156,7 @@ function renderSaveQuestion(results) {
 }
 
 Useraouto = new Object();
+
 $(document).on('vclick', '#toQuestions', function (event) {
     Useraouto.ID = document.getElementById("UserId").value;
     Useraouto.Bday = document.getElementById("bDay").value;
@@ -163,7 +165,6 @@ $(document).on('vclick', '#toQuestions', function (event) {
 
     GetUserQuestionsByIdAndBday(Useraouto, renderMoveToQuestions);
 });
-
 
 function renderMoveToQuestions(results) {
     res = $.parseJSON(results.d);
@@ -196,7 +197,6 @@ $(document).on('vclick', '#CheckMyAns', function (event) {
         $.mobile.changePage("#ChangePassword", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
 });
-
 
 $(document).on('vclick', '#CheckThePasswords', function (event) {
     pas1 = document.getElementById("pas1").value;
@@ -273,3 +273,16 @@ $(document).on('vclick', '#LogOut', function () {
         }
     });
 });
+
+$(document).on('pageload', '#TimeTablePage', function () {
+    user = new Object();
+    user.UserID = localStorage.getItem("UserID");
+    user.UserType = localStorage.getItem("UserType");
+    LoadTimeTableByTypeAndId(user, LoadTimeTable);
+});
+
+
+
+function LoadTimeTable(results) {
+    res = $.parseJSON(results.d);
+    }

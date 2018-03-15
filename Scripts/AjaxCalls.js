@@ -87,3 +87,24 @@ function SaveNewPassword(user, tellMeItsOk) {
         }
     });
 }
+
+
+
+
+function LoadTimeTableByTypeAndId(user, LoadTimeTable) {
+
+    var dataString = JSON.stringify(Useraouto);
+    $.ajax({
+        url: 'BetseferWS.asmx/GivenTimeTableByPupilID',
+        data: JSON.stringify({ 'UserID': user.UserID, 'UserType': user.UserType }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            LoadTimeTable(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
