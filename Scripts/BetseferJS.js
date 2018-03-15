@@ -1,6 +1,6 @@
-﻿$('#LoginPage').ready(function () {
-    $(".navbar-header").hide(); 
-});
+﻿//$('#LoginPage').ready(function () {
+//    $(".navbar-header").hide(); 
+//});
 
 $(document).on("pageinit", "#LoginPage", function (event) {
     $(".navbar-header").hide();
@@ -177,3 +177,53 @@ $(document).on('vclick', '#moveToQuestions', function () {
 //        document.getElementById("bDay").value = "";
 //    }
 //}
+
+$(document).on('vclick', '#LogOut', function () {
+    ////$(".navbar-header").hide();
+    //if (confirm("האם אתה בטוח רוצה להתנתק ?")) {
+    //    window.location.href = "index.html"
+    //} else {
+    //    alert("בנאדם מעצבן שלא רוצה להתנתק");
+    //}
+    //$.alert({
+    //    title: 'זהירות',
+    //    content: 'האם אתה בטוח רוצה להתנתק?',
+    //    rtl: true,
+    //    closeIcon: true,
+    //    buttons: {
+    //        confirm: {
+    //            text: 'בחרת להתנתק, ההתנתקות תתרחש תוך 10 שניות',
+    //            btnClass: 'btn-blue',
+    //            action: function () {
+    //                window.location.href = "index.html"
+    //            }
+    //        },
+    //        cancel: {
+    //            text: 'לא',
+    //            action: function () {
+    //            }
+    //        }
+    //    }
+    //});
+    
+    $.confirm({
+        title: 'התנתקות',
+        content: 'בחרת להתנתק, ההתנתקות תתרחש תוך 10 שניות',
+        rtl: true,
+        autoClose: 'logoutUser|10000',
+        buttons: {
+            logoutUser: {
+                text: 'התנתק עכשיו',
+                action: function () {
+                    window.location.href = "index.html"
+                }
+            },
+            cancel: {
+                text: 'לא',
+                action:  function() {
+
+                }
+            }
+        }
+    });
+});

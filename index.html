@@ -5,10 +5,14 @@
     <title></title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
+
 
     <link href="CSS/BetseferCSS.css" rel="stylesheet" />
 
@@ -51,7 +55,7 @@
                         <a href="#ContactsPage"><img src="Images/ContactIcon.png" alt="logo" style="width:40px;"> <br /> דף קשר</a>
                     </li>
                     <li>
-                        <a href="#LoginPage"><img src="Images/logoutIcon.png" alt="logo" style="width:40px;"></a>
+                        <a href="#" id="LogOut"><img src="Images/logoutIcon.png" alt="logo" style="width:40px;"></a>
                     </li>
                 </ul>
             </div>
@@ -71,7 +75,7 @@
                                 <input id="PasswordTB" type="password" />
                                 <br /><br />
                                 <input id="LoginBTN" type="button" value="התחבר" />
-                                <input id="Forget" type="image" src="Images/5897a7cfcba9841eabab6152.png" height="75" onclick="window.location='#ForgetMyPassword'">
+                                <input id="Forget" type="image" src="Images/5897a7cfcba9841eabab6152.png" onclick="window.location='#ForgetMyPassword'">
                                 <div data-role="footer" data-position="fixed" id="foot">
                                     <img src="Images/Betsefer.png" id="logo" style="visibility:hidden" />
                                 </div>
@@ -106,7 +110,6 @@
                                 <label for="Q2" id="LQ2">בחר שאלת הזדהות נוספת</label>
                                 <select name="Q2" id="Q2"> </select>
                                 <input id="ans2" type="text" />
-                                <input id="SaveQBTN" type="button" value="עדכן" />
                                 <br />
                                 <input id="SaveQBTN" type="button" value="עדכן" style="background-color:red;border-bottom-color:black;border-bottom-width:3px" />
                                 <div data-role="footer" data-position="fixed" id="foot">
@@ -216,7 +219,7 @@
                     </div>
                 </div>
             </div>
-                    </div>
-                </div>
+         </div>
+     </div>
 </body>
 </html>
