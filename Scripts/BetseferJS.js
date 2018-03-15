@@ -1,4 +1,4 @@
-
+﻿
 $(document).on("pageinit", "#LoginPage", function (event) {
     $(".navbar-header").hide();
 });
@@ -165,6 +165,10 @@ $(document).on('vclick', '#toQuestions', function (event) {
     GetUserQuestionsByIdAndBday(user, moveToQuestions);
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5898898f801964430c91d09c32f75a6c8581ad1d
 function moveToQuestions(results) {
     res = $.parseJSON(results.d);
     if (res.count > 0) {
@@ -177,6 +181,10 @@ function moveToQuestions(results) {
         document.getElementById("bDay").value = "";
     }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5898898f801964430c91d09c32f75a6c8581ad1d
 //moveToQuestions function(results) {
 //    if (parse.int(results) > 0) {
 //        $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
@@ -188,34 +196,29 @@ function moveToQuestions(results) {
 //    }
 //}
 
+$(document).on('vclick', '#Forget', function () {
+    $.confirm({
+        title: 'איפוס סיסמה',
+        content: 'האם אתה בטוח שתרצה לאפס סיסמה?',
+        rtl: true,
+        buttons: {
+            logoutUser: {
+                text: 'כו',
+                action: function () {
+                    $.mobile.changePage("#ForgetMyPassword", { transition: "slide", changeHash: false }); // מעביר עמוד 
+                }
+            },
+            cancel: {
+                text: 'לא',
+                action: function () {
+
+                }
+            }
+        }
+    });
+});
+
 $(document).on('vclick', '#LogOut', function () {
-    ////$(".navbar-header").hide();
-    //if (confirm("האם אתה בטוח רוצה להתנתק ?")) {
-    //    window.location.href = "index.html"
-    //} else {
-    //    alert("בנאדם מעצבן שלא רוצה להתנתק");
-    //}
-    //$.alert({
-    //    title: 'זהירות',
-    //    content: 'האם אתה בטוח רוצה להתנתק?',
-    //    rtl: true,
-    //    closeIcon: true,
-    //    buttons: {
-    //        confirm: {
-    //            text: 'בחרת להתנתק, ההתנתקות תתרחש תוך 10 שניות',
-    //            btnClass: 'btn-blue',
-    //            action: function () {
-    //                window.location.href = "index.html"
-    //            }
-    //        },
-    //        cancel: {
-    //            text: 'לא',
-    //            action: function () {
-    //            }
-    //        }
-    //    }
-    //});
-    
     $.confirm({
         title: 'התנתקות',
         content: 'בחרת להתנתק, ההתנתקות תתרחש תוך 10 שניות',
