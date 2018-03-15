@@ -30,25 +30,25 @@
                 <ul class="nav navbar-nav">
                     <br /><br /><br />
                     <li > <!--class="active"-->
-                        <a href="#"><img src="Images/LuzUIcon.png" alt="logo" style="width:40px;"> <br />  לוח שנה</a>
+                        <a href="#CalendarPage"><img src="Images/LuzUIcon.png" alt="logo" style="width:40px;"> <br />  לוח שנה</a>
                     </li>
                     <li>
-                        <a href="#"><img src="Images/timeTableIcon.png" alt="logo" style="width:40px;"> <br /> מערכת שעות</a>
+                        <a href="#TimeTablePage"><img src="Images/timeTableIcon.png" alt="logo" style="width:40px;"> <br /> מערכת שעות</a>
                     </li>
                     <li>
-                        <a href="#SomePage"><img src="Images/UnlikeIcon.png" alt="logo" style="width:40px;"> <br /> הערות משמעת</a>
+                        <a href="#NotesPage"><img src="Images/UnlikeIcon.png" alt="logo" style="width:40px;"> <br /> הערות משמעת</a>
                     </li>
                     <li class="">
-                        <a href="#"><img src="Images/HWIcon.png" alt="logo" style="width:40px;"> <br /> שיעורי בית</a>
+                        <a href="#HomeWorkPage"><img src="Images/HWIcon.png" alt="logo" style="width:40px;"> <br /> שיעורי בית</a>
                     </li>
                     <li>
-                        <a href="#"><img src="Images/GradeIcon.png" alt="logo" style="width:40px;"> <br /> ציונים</a>
+                        <a href="#GradesPage"><img src="Images/GradeIcon.png" alt="logo" style="width:40px;"> <br /> ציונים</a>
                     </li>
                     <li>
-                        <a href="#"><img src="Images/msgIcon.png" alt="logo" style="width:40px;"> <br /> הודעות</a>
+                        <a href="#MSGPage"><img src="Images/msgIcon.png" alt="logo" style="width:40px;"> <br /> הודעות</a>
                     </li>
                     <li>
-                        <a href="#"><img src="Images/ContactIcon.png" alt="logo" style="width:40px;"> <br /> דף קשר</a>
+                        <a href="#ContactsPage"><img src="Images/ContactIcon.png" alt="logo" style="width:40px;"> <br /> דף קשר</a>
                     </li>
                     <li>
                         <a href="#LoginPage"><img src="Images/logoutIcon.png" alt="logo" style="width:40px;"></a>
@@ -59,8 +59,7 @@
     </div>
     <div id="page-content">
         <div class="container">
-                        <div data-role="page" data-theme="d" id="LoginPage" style="color:cadetblue">
-                            <!--Login page-->
+                        <div data-role="page" data-theme="d" id="LoginPage" style="color:cadetblue">    <!--Login page-->
                             <br /><br />
                             <div data-role="header" id="head">
                             </div>
@@ -78,13 +77,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div data-role="page" id="ForgetMyPassword">
-                            <!--Forget My Password page -->
+                        <div data-role="page" id="ForgetMyPassword"><!--Forget My Password page -->
                             <div data-role="header" id="head">
                             </div>
                             <!-- /header -->
-                            <div data-role="content" style="text-align:right">
-                                <br /><br /><br /><br /><br /><br />
+                            <div data-role="content" style="text-align:right">                             
                                 <label for="UserId">ת.ז.</label>
                                 <input id="UserId" type="text" />
                                 <label for="bDay" id="LQ2">יומולדת</label>
@@ -96,14 +93,11 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div data-role="page" id="SecurityQuestionsPage">
-                            <!--Sequrity question page - first login-->
+                        <div data-role="page" id="SecurityQuestionsPage">       <!--Sequrity question page - first login-->
                             <div data-role="header" id="head">
                             </div>
                             <!-- /header -->
                             <div data-role="content" style="text-align:right">
-                                <br /><br /><br /><br /><br /><br />
                                 <h2 style="text-align:center">התחברות ראשונה- שאלות זיהוי</h2>
                                 <br />
                                 <label for="Q1">בחר שאלת הזדהות</label>
@@ -120,8 +114,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div data-role="page" id="DashBordPage">
-                            <!--DashBordPage-->
+                        <div data-role="page" id="DashBordPage">             <!--DashBordPage-->
                             <div data-role="header" id="head">
                             </div>
                             <!-- /header -->
@@ -132,20 +125,97 @@
                                 </div>
                             </div>
                         </div>
-                        <div data-role="page" id="SomePage">
-                            <!--SomePage-->
+                        <div data-role="page" id="CalendarPage">  <!--Calendar Page-->
                             <div data-role="header" id="head">
                             </div>
                             <!-- /header -->
                             <div data-role="content">
                                 <br /><br /><br />
-                                Some Page is open
+                                Calendar Page is open
                                 <input id="CHBottom" type="button" value="button" />
                                 <div data-role="footer" data-position="fixed" id="foot">
                                     <img src="Images/Betsefer.png" id="logo" />
                                 </div>
                             </div>
                         </div>
+                        <div data-role="page" id="TimeTablePage"> <!--TimeTablePage Page-->
+                <div data-role="header" id="head">
+                </div>
+                <!-- /header -->
+                <div data-role="content">
+                    <br /><br /><br />
+                    TimeTablePage is open
+                    <input id="CHBottom" type="button" value="button" />
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+                </div>
+            </div>
+                        <div data-role="page" id="NotesPage">    <!--NotesPage Page-->
+                <div data-role="header" id="head">
+                </div>
+                <!-- /header -->
+                <div data-role="content">
+                    <br /><br /><br />
+                    Notes Page is open
+                    <input id="CHBottom" type="button" value="button" />
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+                </div>
+            </div>
+                        <div data-role="page" id="HomeWorkPage">   <!--HomeWork Page -->
+                <div data-role="header" id="head">
+                </div>
+                <!-- /header -->
+                <div data-role="content">
+                    <br /><br /><br />
+                    HomeWork Page is open
+                    <input id="CHBottom" type="button" value="button" />
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+                </div>
+            </div>
+            <div data-role="page" id="GradesPage"> <!--Grades Page  -->               
+                <div data-role="header" id="head">
+                </div>
+                <!-- /header -->
+                <div data-role="content">
+                    <br /><br /><br />
+                    Grades Page is open
+                    <input id="CHBottom" type="button" value="button" />
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+                </div>
+            </div>
+                        <div data-role="page" id="MSGPage">   <!--MSG Page -->
+                <div data-role="header" id="head">
+                </div>
+                <!-- /header -->
+                <div data-role="content">
+                    <br /><br /><br />
+                    MSG Page is open
+                    <input id="CHBottom" type="button" value="button" />
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+                </div>
+            </div>
+                        <div data-role="page" id="ContactsPage"> <!--Contacts Page  -->
+                <div data-role="header" id="head">
+                </div>
+                <!-- /header -->
+                <div data-role="content">
+                    <br /><br /><br />
+                    Contacts Page is open
+                    <input id="CHBottom" type="button" value="button" />
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+                </div>
+            </div>
                     </div>
                 </div>
 </body>
