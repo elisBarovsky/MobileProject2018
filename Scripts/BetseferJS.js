@@ -167,13 +167,13 @@ $(document).on('vclick', '#moveToQuestions', function () {
     CheckUser(user, moveToQuestions);
 });
 
-moveToQuestions function(results) {
-    if (parse.int(results) > 0) {
-        $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
-    }
-    else {
-        alert("משתמש לא קיים.");
-        document.getElementById("UserId").value = "";
-        document.getElementById("bDay").value = "";
-    }
-}
+//moveToQuestions function(results) {
+//    if (parse.int(results) > 0) {
+//        $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+//    }
+//    else {
+//        alert("משתמש לא קיים.");
+//        document.getElementById("UserId").value = "";
+//        document.getElementById("bDay").value = "";
+//    }
+//}
