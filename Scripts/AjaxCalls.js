@@ -51,3 +51,21 @@ function SaveQuestion(SecurityQA, renderlogin) {
         }
     });
 }
+
+function CheckUser(user, moveToQuestions) {
+
+    var dataString = JSON.stringify(user);
+    $.ajax({
+        url: 'BetseferWS.asmx/SaveQuestion',
+        data: JSON.stringify({ 'ID': user.id, 'bday': user.bday }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            moveToQuestions(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}

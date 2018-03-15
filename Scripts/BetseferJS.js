@@ -209,3 +209,24 @@ function renderSaveQuestion(results) {
         alert("הייתה בעיה בשמירת נתונים, פנה לשירות לקוחות");
     }
 }
+
+$(document).on('vclick', '#moveToQuestions', function () {
+    user = new object();
+    user.id = document.getElementById("UserId").value;
+    user.bday = document.getElementById("bDay").value;
+
+    localStorage.setItem("UserID", UserInfo.ID);
+
+    CheckUser(user, moveToQuestions);
+});
+
+moveToQuestions function(results) {
+    if (parse.int(results) > 0) {
+        $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+    }
+    else {
+        alert("משתמש לא קיים.");
+        document.getElementById("UserId").value = "";
+        document.getElementById("bDay").value = "";
+    }
+}

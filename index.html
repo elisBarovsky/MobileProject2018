@@ -56,12 +56,12 @@
             </div>
         </div>
     </div>
-    <div id="page-content" >
-        <div class="container" style="background-color:red">
+    <div id="page-content">
+        <div class="container">
                                                                  <!--Login page-->
-            <div data-role="page" data-theme="d"  id="LoginPage" style="color:cadetblue" > 
+            <div data-role="page"  id="LoginPage" > 
                 <br /><br /><br /><br />
-                <div data-role="header" id="head" >
+                <div data-role="header" id="head">
                 </div>
                 <div data-role="content" style="text-align:right">
                     <img src="Images/Betsefer.png" class="center" />
@@ -69,24 +69,41 @@
                     <input id="IDTB" type="text" />
                     <label for="PasswordLBL">סיסמה</label>
                     <input id="PasswordTB" type="password" />
-                    <input id="LoginBTN" type="button" value="התחבר"/>
+                    <br/><br/>
+                    <input id="LoginBTN" type="button" value="התחבר" />
+                    <input id="Forget" type="image" src="Images/5897a7cfcba9841eabab6152.png" height="75" onclick="window.location='#ForgetMyPassword'">
+
+
+
                 </div>
-            </div>
-                                                                <!--Sequrity question page - first login-->
+            </div>                                                   <!--Sequrity question page - first login-->
+            <div data-role="page" id="ForgetMyPassword">
+                <div data-role="header" id="head">
+                </div>
+                <!-- /header -->
+                <div data-role="content" style="text-align:right">
+                    <br /><br /><br /><br /><br /><br />
+                    <label for="UserId">ת.ז.</label>
+                    <input id="UserId" type="text" />
+                    <label for="bDay" id="LQ2">יומולדת</label>
+                    <input id="bDay" type="text" />
+                    <br /><br />
+                    <input id="moveToQuestions" type="button" value="בדוקותי" />
+                </div>
+            </div>                                                   <!--Sequrity question page - first login-->
             <div data-role="page" id="SecurityQuestionsPage" >
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
                 <div data-role="content" style="text-align:right">
-                    <br/><br /><br />
+                    <br/><br /><br /><br /><br /><br />
                     <label for="Q1">בחר שאלת הזדהות</label>
                     <select name="Q1" id="Q1"> </select>
                     <input id="ans1" type="text" />
                     <label for="Q2"  id="LQ2">בחר שאלת הזדהות נוספת</label>
                     <select name="Q2" id="Q2"> </select>
                     <input id="ans2" type="text" />
-                    <br />
-                    <input id="SaveQBTN" type="button" value="עדכן" style="background-color:red;border-bottom-color:black;border-bottom-width:3px" />
+                    <input id="SaveQBTN" type="button" value="עדכן" />
                 </div>
             </div>
             <div data-role="page" id="DashBordPage">             <!--DashBordPage-->
