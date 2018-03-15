@@ -1,6 +1,3 @@
-﻿$('#LoginPage').ready(function () {
-    $(".navbar-header").hide(); 
-});
 
 $(document).on("pageinit", "#LoginPage", function (event) {
     $(".navbar-header").hide();
@@ -168,6 +165,7 @@ $(document).on('vclick', '#toQuestions', function () {
     GetUserQuestionsByIdAndBday(user, moveToQuestions);
 });
 
+<<<<<<< HEAD
 function moveToQuestions(results) {
     res = $.parseJSON(results.d);
     if (res.count > 0) {
@@ -180,3 +178,65 @@ function moveToQuestions(results) {
         document.getElementById("bDay").value = "";
     }
 }
+=======
+//moveToQuestions function(results) {
+//    if (parse.int(results) > 0) {
+//        $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+//    }
+//    else {
+//        alert("משתמש לא קיים.");
+//        document.getElementById("UserId").value = "";
+//        document.getElementById("bDay").value = "";
+//    }
+//}
+
+$(document).on('vclick', '#LogOut', function () {
+    ////$(".navbar-header").hide();
+    //if (confirm("האם אתה בטוח רוצה להתנתק ?")) {
+    //    window.location.href = "index.html"
+    //} else {
+    //    alert("בנאדם מעצבן שלא רוצה להתנתק");
+    //}
+    //$.alert({
+    //    title: 'זהירות',
+    //    content: 'האם אתה בטוח רוצה להתנתק?',
+    //    rtl: true,
+    //    closeIcon: true,
+    //    buttons: {
+    //        confirm: {
+    //            text: 'בחרת להתנתק, ההתנתקות תתרחש תוך 10 שניות',
+    //            btnClass: 'btn-blue',
+    //            action: function () {
+    //                window.location.href = "index.html"
+    //            }
+    //        },
+    //        cancel: {
+    //            text: 'לא',
+    //            action: function () {
+    //            }
+    //        }
+    //    }
+    //});
+    
+    $.confirm({
+        title: 'התנתקות',
+        content: 'בחרת להתנתק, ההתנתקות תתרחש תוך 10 שניות',
+        rtl: true,
+        autoClose: 'logoutUser|10000',
+        buttons: {
+            logoutUser: {
+                text: 'התנתק עכשיו',
+                action: function () {
+                    window.location.href = "index.html"
+                }
+            },
+            cancel: {
+                text: 'לא',
+                action:  function() {
+
+                }
+            }
+        }
+    });
+});
+>>>>>>> 4161d4634ba1beceaff40a14558cbc8c17b51d7d

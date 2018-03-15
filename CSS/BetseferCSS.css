@@ -10,6 +10,13 @@
     margin-right: auto;
     padding-top:10px;
 }
+
+#Forget {
+    height: 75px;
+   position:absolute;
+   padding-left:35%;
+}
+
 #foot {
     text-align: center;
     background-color: #28accc;
