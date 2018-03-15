@@ -156,7 +156,7 @@ function renderSaveQuestion(results) {
 
 user = new Object();
 
-$(document).on('vclick', '#toQuestions', function () {
+$(document).on('vclick', '#toQuestions', function (event) {
     user.id = document.getElementById("UserId").value;
     user.bday = document.getElementById("bDay").value;
 
@@ -165,7 +165,6 @@ $(document).on('vclick', '#toQuestions', function () {
     GetUserQuestionsByIdAndBday(user, moveToQuestions);
 });
 
-<<<<<<< HEAD
 function moveToQuestions(results) {
     res = $.parseJSON(results.d);
     if (res.count > 0) {
@@ -178,7 +177,6 @@ function moveToQuestions(results) {
         document.getElementById("bDay").value = "";
     }
 }
-=======
 //moveToQuestions function(results) {
 //    if (parse.int(results) > 0) {
 //        $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
@@ -239,4 +237,3 @@ $(document).on('vclick', '#LogOut', function () {
         }
     });
 });
->>>>>>> 4161d4634ba1beceaff40a14558cbc8c17b51d7d
