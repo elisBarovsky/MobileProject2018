@@ -52,11 +52,11 @@ function SaveQuestion(SecurityQA, renderlogin) {
     });
 }
 
-function CheckUser(user, moveToQuestions) {
+function GetUserQuestionsByIdAndBday(user, moveToQuestions) {
 
     var dataString = JSON.stringify(user);
     $.ajax({
-        url: 'BetseferWS.asmx/SaveQuestion',
+        url: 'BetseferWS.asmx/GetUserQuestionsByIdAndBday',
         data: JSON.stringify({ 'ID': user.id, 'bday': user.bday }),
         type: 'POST',
         dataType: "json",

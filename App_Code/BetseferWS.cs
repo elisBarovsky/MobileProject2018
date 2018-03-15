@@ -205,5 +205,15 @@ public class BetseferWS : System.Web.Services.WebService
         }
         return key;
     }
+
+    public static string GetUserQuestionsByIdAndBday(string ID, string bDay)
+    {
+        Users UserLogin = new Users();
+        List<string> questionsDetails = UserLogin.GetUserSecurityDetailsByuserIDandBday(ID, bDay);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(questionsDetails);
+        return jsonString;
+    }
 }
 

@@ -133,6 +133,7 @@ $(document).on("change", "#Q1", function (event) {
 });
 
 SecurityQA = new Object();
+
 $(document).on('vclick', '#SaveQBTN', function () {
     SecurityQA.UserID = localStorage.getItem("UserID");
     SecurityQA.choosenQ1 = document.getElementById("Q1").value;
@@ -149,7 +150,6 @@ function renderSaveQuestion(results) {
     //this is the callBackFunc 
     res = $.parseJSON(results.d);
     if (res==2) {
-        alert("נכנס לשמירה " + res);
         $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
     else {
@@ -157,23 +157,26 @@ function renderSaveQuestion(results) {
     }
 }
 
-$(document).on('vclick', '#moveToQuestions', function () {
-    user = new object();
+user = new Object();
+
+$(document).on('vclick', '#toQuestions', function () {
     user.id = document.getElementById("UserId").value;
     user.bday = document.getElementById("bDay").value;
 
     localStorage.setItem("UserID", UserInfo.ID);
 
-    CheckUser(user, moveToQuestions);
+    GetUserQuestionsByIdAndBday(user, moveToQuestions);
 });
 
-//moveToQuestions function(results) {
-//    if (parse.int(results) > 0) {
-//        $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
-//    }
-//    else {
-//        alert("משתמש לא קיים.");
-//        document.getElementById("UserId").value = "";
-//        document.getElementById("bDay").value = "";
-//    }
-//}
+function moveToQuestions(results) {
+    res = $.parseJSON(results.d);
+    if (res.count > 0) {
+        $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+
+    }
+    else {
+        alert("משתמש לא קיים.");
+        document.getElementById("UserId").value = "";
+        document.getElementById("bDay").value = "";
+    }
+}
