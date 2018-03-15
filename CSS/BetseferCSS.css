@@ -28,6 +28,14 @@
     border-width:1px 0;
 
 }
+
+.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+    background-color:#ffffff;
+}
+.ui-mobile [data-role=page], .ui-mobile [data-role=dialog], .ui-page {
+    top:50px;
+
+}
 .ui-header-fixed, .ui-footer-fixed {
     left: 0px;
     right: 0px;

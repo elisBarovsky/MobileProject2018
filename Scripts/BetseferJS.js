@@ -75,15 +75,14 @@ $(document).on('vclick', '#LoginBTN', function () {
 //check login details and decide which page to go.
 function renderlogin(results) {
     res = $.parseJSON(results.d);
-
     if (res[0] == "openSeqQestion") { // go to fill identity questions page
 
         localStorage.setItem("UserType", res[1]);
         $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false });
     }
-    else if (res == "wrongDetails") { //wrong details
+    else if (res[0] == "wrongDetails") { //wrong details
 
-        alert("פרטים לא קיימים במערכת.");
+        alert("פרטים לא קיימים במערכת, בדוק שהקלדת פרטי זיהוי נכון.");
         document.getElementById("IDTB").value = "";
         document.getElementById("PasswordTB").value = "";
     }
