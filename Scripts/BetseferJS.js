@@ -159,7 +159,7 @@ Useraouto = new Object();
 
 $(document).on('vclick', '#toQuestions', function (event) {
     Useraouto.ID = document.getElementById("UserId").value;
-    Useraouto.Bday = document.getElementById("bDay").value;
+    Useraouto.Bday = document.getElementById("date").value;
 
     localStorage.setItem("UserID", Useraouto.ID);
 
@@ -274,10 +274,6 @@ $(document).on('vclick', '#LogOut', function () {
     });
 });
 
-<<<<<<< HEAD
-
-
-=======
 $(document).on('pageload', '#TimeTablePage', function () {
     user = new Object();
     user.UserID = localStorage.getItem("UserID");
@@ -289,5 +285,5 @@ $(document).on('pageload', '#TimeTablePage', function () {
 
 function LoadTimeTable(results) {
     res = $.parseJSON(results.d);
-    }
->>>>>>> 2fa08c9fe116c95649a6d6b00f4927f1a3fc4826
+}
+
