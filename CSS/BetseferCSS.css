@@ -1,0 +1,190 @@
+﻿.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+#logo {
+    height: 65px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top:10px;
+}
+#foot {
+    text-align: center;
+    background-color: #28accc;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+/*.ui-bar-a, .ui-page-theme-a .ui-bar-inherit, html .ui-bar-a .ui-bar-inherit, html .ui-body-a .ui-bar-inherit, html body .ui-group-theme-a .ui-bar-inherit body.slide-active {
+    overflow-x: hidden;
+    background-color: #28accc
+}*/
+.ui-footer-fixed {
+    bottom: -1px;
+    padding-bottom:1px;
+}
+
+.ui-header, .ui-footer{
+    border-width:1px 0;
+
+}
+
+.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+    background-color:#ffffff;
+}
+.ui-mobile [data-role=page], .ui-mobile [data-role=dialog], .ui-page {
+    top:50px;
+
+}
+.ui-header-fixed, .ui-footer-fixed {
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+}
+    
+    #page-content {
+        position: page;
+        padding-top: 70px;
+        right: 0;
+    }
+
+#page-content.slide-active {
+    padding-top: 0
+}
+
+#slide-nav .navbar-toggle { /*הכפתור של התפריט*/
+    cursor: pointer;
+    position: relative;
+    line-height: 0;
+    float: right;
+    margin: 0;
+    width: 30px;
+    height: 40px;
+    padding: 17px 0 0 0;
+    border: 0;
+    background: transparent;
+}
+
+    #slide-nav .navbar-toggle.slide-active .icon-bar { /*הצבע של הכפתור התפריט*/
+        background: #ffffff;
+        color: #737dc4;
+    }
+
+.navbar-header {
+    position: relative
+}
+
+.navbar.navbar-fixed-top.slide-active {
+    position: relative
+}
+
+@media (max-width: 767px) {
+#slide-nav .container {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100%;
+}
+
+    #slide-nav .navbar-header {
+        margin: 0 auto;
+        padding: 0 15px;
+        background: #28accc; /*צבע לרקע למעלה*/
+    }
+
+    #slide-nav .navbar.slide-active {
+        position: absolute;
+        width: 80%;
+        top: -1px;
+        z-index: 1000;
+        background: #99a5ff;
+    }
+    .navbar-inverse .navbar-nav > li > a {
+        color: #ffffff
+    }
+    .navbar-inverse {
+        background-color: #28accc;
+        border-color: #1184a0;
+    }
+    .ui-header, .ui-footer {
+        border-width: 0px;
+      
+    }
+    
+    #slide-nav #slidemenu {
+        background: #ffffff;
+        right: -100%;
+        min-width: 0;
+        position: absolute;
+        padding-left: 0;
+        z-index: 2;
+        top: -8px;
+        margin: 0;
+    }
+
+        #slide-nav #slidemenu .navbar-nav {
+            min-width: 0;
+            width: 100%;
+            margin: 0;
+            background: #28accc; /*רקע של התפריט בצד */
+        }
+
+            #slide-nav #slidemenu .navbar-nav .dropdown-menu li a {
+                min-width: 0;
+                width: 80%;
+                white-space: normal;
+            }
+
+    #slide-nav {
+        border-top: 0
+    }
+
+        #slide-nav.navbar-inverse #slidemenu {
+            background: #333
+        }
+
+    #navbar-height-col {
+        position: fixed;
+        top: 0;
+        height: 100%;
+        bottom: 0;
+        background: #ffffff;
+    }
+
+        #navbar-height-col.inverse {
+            background: #28accc;
+            z-index: 1;
+            border: 0;
+        }
+
+    #slide-nav .navbar-form {
+        width: 100%;
+        margin: 8px 0;
+        text-align: center;
+        overflow: hidden;
+        /*fast clearfixer*/
+    }
+
+        #slide-nav .navbar-form .form-control {
+            text-align: center
+        }
+
+        #slide-nav .navbar-form .btn {
+            width: 100%
+        }
+}
+
+@media (min-width: 768px) {
+    #page-content {
+        right: 0 !important
+    }
+
+    .navbar.navbar-fixed-top.slide-active {
+        position: fixed
+    }
+
+    .navbar-header {
+        right: 0 !important
+    }
+}

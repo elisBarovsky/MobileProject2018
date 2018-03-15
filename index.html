@@ -3,18 +3,22 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <link href="CSS/StyleSheetCss.css" rel="stylesheet" media="screen"/> <!--ours-->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!--<link href="CSS/StyleSheet2.css" rel="stylesheet" media="screen" />-->   <!--ours-->
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <link href="CSS/BetseferCSS.css" rel="stylesheet" />
+
     <script src="Scripts/BetseferJS.js"></script>
-    <link href="CSS/StyleSheet2.css" rel="stylesheet" media="screen" /><!--ours-->
     <script src="Scripts/AjaxCalls.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="slide-nav">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="slide-nav" >
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-toggle">
@@ -27,7 +31,7 @@
             <div id="slidemenu" style="text-align:center">
                 <ul class="nav navbar-nav">
                     <br /><br /><br />
-                    <li class="active">
+                    <li > <!--class="active"-->
                         <a href="#"><img src="Images/LuzUIcon.png" alt="logo" style="width:40px;"> <br />  לוח שנה</a>
                     </li>
                     <li>
@@ -49,19 +53,27 @@
                         <a href="#"><img src="Images/ContactIcon.png" alt="logo" style="width:40px;"> <br /> דף קשר</a>
                     </li>
                     <li>
-                        <a href="#"><img src="Images/logoutIcon.png" alt="logo" style="width:40px;"></a>
+                        <a href="#LoginPage"><img src="Images/logoutIcon.png" alt="logo" style="width:40px;"></a>
                     </li>
                 </ul>
 
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <div id="page-content">
         <div class="container">
                                                                  <!--Login page-->
             <div data-role="page"  id="LoginPage" > 
                 <br /><br /><br /><br />
                 <div data-role="header" id="head">
+=======
+    <div id="page-content" >
+        <div class="container" style="background-color:red">
+            <div data-role="page" data-theme="d"  id="LoginPage" style="color:cadetblue" >     <!--Login page-->
+                <br /><br />
+                <div data-role="header" id="head" >
+>>>>>>> 1b3c150a9b138ad0b646461373244b20e716d09e
                 </div>
                 <div data-role="content" style="text-align:right">
                     <img src="Images/Betsefer.png" class="center" />
@@ -69,6 +81,7 @@
                     <input id="IDTB" type="text" />
                     <label for="PasswordLBL">סיסמה</label>
                     <input id="PasswordTB" type="password" />
+<<<<<<< HEAD
                     <br/><br/>
                     <input id="LoginBTN" type="button" value="התחבר" />
                     <input id="Forget" type="image" src="Images/5897a7cfcba9841eabab6152.png" height="75" onclick="window.location='#ForgetMyPassword'">
@@ -92,27 +105,51 @@
                 </div>
             </div>                                                   <!--Sequrity question page - first login-->
             <div data-role="page" id="SecurityQuestionsPage" >
+=======
+                    <input id="LoginBTN" type="button" value="התחבר"/>
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" style="visibility:hidden"/>
+                    </div>
+                </div>
+            </div>
+            <div data-role="page" id="SecurityQuestionsPage" >                      <!--Sequrity question page - first login-->
+>>>>>>> 1b3c150a9b138ad0b646461373244b20e716d09e
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
                 <div data-role="content" style="text-align:right">
+<<<<<<< HEAD
                     <br/><br /><br /><br /><br /><br />
+=======
+                    <h2 style="text-align:center">התחברות ראשונה- שאלות זיהוי</h2>
+                    <br />
+>>>>>>> 1b3c150a9b138ad0b646461373244b20e716d09e
                     <label for="Q1">בחר שאלת הזדהות</label>
                     <select name="Q1" id="Q1"> </select>
                     <input id="ans1" type="text" />
                     <label for="Q2"  id="LQ2">בחר שאלת הזדהות נוספת</label>
                     <select name="Q2" id="Q2"> </select>
                     <input id="ans2" type="text" />
+<<<<<<< HEAD
                     <input id="SaveQBTN" type="button" value="עדכן" />
+=======
+                    <br />
+                    <input id="SaveQBTN" type="button" value="עדכן" style="background-color:red;border-bottom-color:black;border-bottom-width:3px" />
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+>>>>>>> 1b3c150a9b138ad0b646461373244b20e716d09e
                 </div>
             </div>
             <div data-role="page" id="DashBordPage">             <!--DashBordPage-->
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
-                <div data-role="content" style="text-align:right">
-                    <br /><br /><br /><br /><br /><br />
+                <div data-role="content" style="text-align:right">                
                     מסך ראשי אחרי הזדהות
+                    <div data-role="footer" data-position="fixed" id="foot" >
+                        <img src="Images/Betsefer.png" id="logo" style="position:center"/>
+                    </div>
                 </div>
             </div>
             <div data-role="page" id="SomePage">
@@ -124,6 +161,9 @@
                     <br /><br /><br />
                    Some Page is open
                     <input id="CHBottom" type="button" value="button" />
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
                 </div>
             </div>
         </div>
