@@ -56,12 +56,12 @@
             </div>
         </div>
     </div>
-    <div id="page-content">
-        <div class="container">
+    <div id="page-content" >
+        <div class="container" style="background-color:red">
                                                                  <!--Login page-->
-            <div data-role="page"  id="LoginPage" > 
+            <div data-role="page" data-theme="d"  id="LoginPage" style="color:cadetblue" > 
                 <br /><br /><br /><br />
-                <div data-role="header" id="head">
+                <div data-role="header" id="head" >
                 </div>
                 <div data-role="content" style="text-align:right">
                     <img src="Images/Betsefer.png" class="center" />
@@ -69,7 +69,7 @@
                     <input id="IDTB" type="text" />
                     <label for="PasswordLBL">סיסמה</label>
                     <input id="PasswordTB" type="password" />
-                    <input id="LoginBTN" type="button" value="התחבר" />
+                    <input id="LoginBTN" type="button" value="התחבר"/>
                 </div>
             </div>
                                                                 <!--Sequrity question page - first login-->
@@ -78,14 +78,15 @@
                 </div>
                 <!-- /header -->
                 <div data-role="content" style="text-align:right">
-                    <br/><br /><br /><br /><br /><br />
+                    <br/><br /><br />
                     <label for="Q1">בחר שאלת הזדהות</label>
                     <select name="Q1" id="Q1"> </select>
                     <input id="ans1" type="text" />
                     <label for="Q2"  id="LQ2">בחר שאלת הזדהות נוספת</label>
                     <select name="Q2" id="Q2"> </select>
                     <input id="ans2" type="text" />
-                    <input id="SaveQBTN" type="button" value="עדכן" />
+                    <br />
+                    <input id="SaveQBTN" type="button" value="עדכן" style="background-color:red;border-bottom-color:black;border-bottom-width:3px" />
                 </div>
             </div>
             <div data-role="page" id="DashBordPage">             <!--DashBordPage-->
