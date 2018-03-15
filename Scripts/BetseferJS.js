@@ -154,41 +154,80 @@ function renderSaveQuestion(results) {
     }
 }
 
-user = new Object();
-
+Useraouto = new Object();
 $(document).on('vclick', '#toQuestions', function (event) {
-    user.userID = document.getElementById("UserId").value;
-    user.Bday = document.getElementById("bDay").value;
+    Useraouto.ID = document.getElementById("UserId").value;
+    Useraouto.Bday = document.getElementById("bDay").value;
 
-    localStorage.setItem("UserID", UserInfo.ID);
+    localStorage.setItem("UserID", Useraouto.ID);
 
-    GetUserQuestionsByIdAndBday(user, moveToQuestions);
+    GetUserQuestionsByIdAndBday(Useraouto, renderMoveToQuestions);
 });
 
 
-function moveToQuestions(results) {
+function renderMoveToQuestions(results) {
     res = $.parseJSON(results.d);
-    //if (res.count > 0) {
-    //    $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+    if (res.length > 0) {
+        document.getElementById("Q1").innerHTML = "?" + res[0];
+        document.getElementById("Q2").innerHTML = "?" + res[2];
+        localStorage.setItem("ans1", res[1]);
+        localStorage.setItem("ans2", res[3]);
+    $.mobile.changePage("#AnswerQuestionsBeforeLogin", { transition: "slide", changeHash: false }); // מעביר עמוד 
 
-    //}
-    //else {
-    //    alert("משתמש לא קיים.");
-    //    document.getElementById("UserId").value = "";
-    //    document.getElementById("bDay").value = "";
-    //}
+    }
+    else {
+        alert("משתמש לא קיים.");
+        document.getElementById("UserId").value = "";
+        document.getElementById("bDay").value = "";
+    }
 }
 
-//moveToQuestions function(results) {
-//    if (parse.int(results) > 0) {
-//        $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
-//    }
-//    else {
-//        alert("משתמש לא קיים.");
-//        document.getElementById("UserId").value = "";
-//        document.getElementById("bDay").value = "";
-//    }
-//}
+$(document).on('vclick', '#CheckMyAns', function (event) {
+    ans1 = document.getElementById("ans1").value;
+    ans2 = document.getElementById("ans2").value;
+    q1 = localStorage.getItem("ans1");
+    q2 = localStorage.getItem("ans2");
+
+    if (ans1 == "" || ans2 == "") {
+        alert("עליך לענות על שתי השאלות");
+    }
+    else if (q1 == ans1 && q2 == ans2) {
+
+        $.mobile.changePage("#ChangePassword", { transition: "slide", changeHash: false }); // מעביר עמוד 
+    }
+});
+
+
+$(document).on('vclick', '#CheckThePasswords', function (event) {
+    pas1 = document.getElementById("pas1").value;
+    pas2 = document.getElementById("pas2").value;
+
+    if (pas1 == "" || pas2 == "") {
+        alert("יש להזין את הסיסמא פעמיים");
+    }
+    else if (pas1 == pas2) {
+        user = new Object();
+        user.Id = localStorage.getItem("UserID");
+        user.password = pas1;
+        SaveNewPassword(user, tellMeItsOk);
+    }
+    else {
+        alert("הסיסמאות שהוזנו אינן תואמות");
+        document.getElementById("pas1").value = "";
+        document.getElementById("pas2").value = "";
+    }
+});
+
+function tellMeItsOk(results) {
+    res = $.parseJSON(results.d);
+    if (res > 0) {
+        alert("סיסמתך נשמרה בהצלה");
+        $.mobile.changePage("#ChangePassword", { transition: "slide", changeHash: false }); // מעביר עמוד 
+    }
+    else {
+        alert("ארעה תקלה בעת שמירת הסיסמא. נא פנה לשירות הלקוחות");
+    }
+}
 
 $(document).on('vclick', '#Forget', function () {
     $.confirm({

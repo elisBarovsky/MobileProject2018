@@ -52,20 +52,38 @@ function SaveQuestion(SecurityQA, renderlogin) {
     });
 }
 
-function GetUserQuestionsByIdAndBday(user, moveToQuestions) {
+function GetUserQuestionsByIdAndBday(Useraouto, renderMoveToQuestions) {
 
-    var dataString = JSON.stringify(user);
+    var dataString = JSON.stringify(Useraouto);
     $.ajax({
         url: 'BetseferWS.asmx/GetUserQuestionsByIdAndBday',
-        data: JSON.stringify({ 'userID': user.userID, 'Bday': user.Bday }),
+        data: JSON.stringify({ 'userID': Useraouto.ID, 'BDay': Useraouto.Bday }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
-            moveToQuestions(results);
+            renderMoveToQuestions(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
+            alert('Network error has occurred please try again!' + request + error);
+        }
+    });
+}
+
+function SaveNewPassword(user, tellMeItsOk) {
+
+    var dataString = JSON.stringify(Useraouto);
+    $.ajax({
+        url: 'BetseferWS.asmx/SaveNewPassword',
+        data: JSON.stringify({ 'Id': user.Id, 'Password': user.password }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            tellMeItsOk(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!' + request + error);
         }
     });
 }
