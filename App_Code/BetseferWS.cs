@@ -206,10 +206,10 @@ public class BetseferWS : System.Web.Services.WebService
         return key;
     }
 
-    public static string GetUserQuestionsByIdAndBday(string ID, string bDay)
+    public static string GetUserQuestionsByIdAndBday(string userID, string BDay)
     {
         Users UserLogin = new Users();
-        List<string> questionsDetails = UserLogin.GetUserSecurityDetailsByuserIDandBday(ID, bDay);
+        List<string> questionsDetails = UserLogin.GetUserSecurityDetailsByuserIDandBday(userID, BDay);
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(questionsDetails);

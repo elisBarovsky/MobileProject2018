@@ -57,7 +57,7 @@ function GetUserQuestionsByIdAndBday(user, moveToQuestions) {
     var dataString = JSON.stringify(user);
     $.ajax({
         url: 'BetseferWS.asmx/GetUserQuestionsByIdAndBday',
-        data: JSON.stringify({ 'ID': user.id, 'bday': user.bday }),
+        data: JSON.stringify({ 'userID': user.userID, 'Bday': user.Bday }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',

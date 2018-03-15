@@ -157,34 +157,28 @@ function renderSaveQuestion(results) {
 user = new Object();
 
 $(document).on('vclick', '#toQuestions', function (event) {
-    user.id = document.getElementById("UserId").value;
-    user.bday = document.getElementById("bDay").value;
+    user.userID = document.getElementById("UserId").value;
+    user.Bday = document.getElementById("bDay").value;
 
     localStorage.setItem("UserID", UserInfo.ID);
 
     GetUserQuestionsByIdAndBday(user, moveToQuestions);
 });
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 5898898f801964430c91d09c32f75a6c8581ad1d
 function moveToQuestions(results) {
     res = $.parseJSON(results.d);
-    if (res.count > 0) {
-        $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+    //if (res.count > 0) {
+    //    $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
 
-    }
-    else {
-        alert("משתמש לא קיים.");
-        document.getElementById("UserId").value = "";
-        document.getElementById("bDay").value = "";
-    }
+    //}
+    //else {
+    //    alert("משתמש לא קיים.");
+    //    document.getElementById("UserId").value = "";
+    //    document.getElementById("bDay").value = "";
+    //}
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 5898898f801964430c91d09c32f75a6c8581ad1d
 //moveToQuestions function(results) {
 //    if (parse.int(results) > 0) {
 //        $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
