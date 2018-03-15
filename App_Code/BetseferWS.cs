@@ -166,17 +166,17 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string GivenTimeTableByPupilID(string PupilID, string UserType)
+    public string GivenTimeTableByPupilID(string UserID, string UserType)
     {
         switch (UserType)
         {
             case "teacher":
                 break;
-            case "pupil":
+            case "Child":
                 break;
         }
         Users PupilClass = new Users();
-        string PupilClassCode = PupilClass.GetPupilOtClass(PupilID);
+        string PupilClassCode = PupilClass.GetPupilOtClass(UserID);
         TimeTable TimeTableByClassCode = new TimeTable();
 
         List<Dictionary<string, string>> ls = TimeTableByClassCode.GetTimeTableAcordingToClassCode(int.Parse(PupilClassCode));

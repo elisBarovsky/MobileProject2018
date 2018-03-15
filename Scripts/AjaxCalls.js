@@ -91,12 +91,12 @@ function SaveNewPassword(user, tellMeItsOk) {
 
 
 
-function LoadTimeTableByTypeAndId(user, LoadTimeTable) {
+function LoadTimeTableByTypeAndId(userTT, LoadTimeTable) {
 
-    var dataString = JSON.stringify(Useraouto);
+    var dataString = JSON.stringify(userTT);
     $.ajax({
         url: 'BetseferWS.asmx/GivenTimeTableByPupilID',
-        data: JSON.stringify({ 'UserID': user.UserID, 'UserType': user.UserType }),
+        data: JSON.stringify({ 'UserID': userTT.UserID, 'UserType': userTT.UserType }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',

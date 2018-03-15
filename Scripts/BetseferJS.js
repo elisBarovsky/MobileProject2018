@@ -274,16 +274,17 @@ $(document).on('vclick', '#LogOut', function () {
     });
 });
 
-$(document).on('pageload', '#TimeTablePage', function () {
-    user = new Object();
-    user.UserID = localStorage.getItem("UserID");
-    user.UserType = localStorage.getItem("UserType");
-    LoadTimeTableByTypeAndId(user, LoadTimeTable);
+$(document).on('pageinit', '#TimeTablePage', function () {
+    userTT = new Object();
+    userTT.UserID = localStorage.getItem("UserID");
+    userTT.UserType = localStorage.getItem("UserType");
+    LoadTimeTableByTypeAndId(userTT, LoadTimeTable);
 });
 
 
 
 function LoadTimeTable(results) {
     res = $.parseJSON(results.d);
+    alert("מערכת שעות");
 }
 
