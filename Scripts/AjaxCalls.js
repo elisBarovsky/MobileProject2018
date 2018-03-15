@@ -65,7 +65,7 @@ function GetUserQuestionsByIdAndBday(Useraouto, renderMoveToQuestions) {
             renderMoveToQuestions(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!' + request + error);
+            alert('Network error has occurred please try again!' );
         }
     });
 }
@@ -75,7 +75,7 @@ function SaveNewPassword(user, tellMeItsOk) {
     var dataString = JSON.stringify(Useraouto);
     $.ajax({
         url: 'BetseferWS.asmx/SaveNewPassword',
-        data: JSON.stringify({ 'Id': user.Id, 'Password': user.password }),
+        data: JSON.stringify({ 'Id': user.Id, 'password': user.password }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
@@ -83,7 +83,7 @@ function SaveNewPassword(user, tellMeItsOk) {
             tellMeItsOk(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!' + request + error);
+            alert('Network error has occurred please try again!' );
         }
     });
 }

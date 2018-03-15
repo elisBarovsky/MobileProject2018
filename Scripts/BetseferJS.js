@@ -221,8 +221,8 @@ $(document).on('vclick', '#CheckThePasswords', function (event) {
 function tellMeItsOk(results) {
     res = $.parseJSON(results.d);
     if (res > 0) {
-        alert("סיסמתך נשמרה בהצלה");
-        $.mobile.changePage("#ChangePassword", { transition: "slide", changeHash: false }); // מעביר עמוד 
+        alert("סיסמתך נשמרה בהצלחה");
+        window.location.href = "index.html"
     }
     else {
         alert("ארעה תקלה בעת שמירת הסיסמא. נא פנה לשירות הלקוחות");
