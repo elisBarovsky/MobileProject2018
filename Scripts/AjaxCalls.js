@@ -16,6 +16,8 @@
     });
 }
 
+
+
 function FillSecurityQ(renderFillSecurityQ) {
 
     var dataString = JSON.stringify();
@@ -90,7 +92,6 @@ function SaveNewPassword(user, tellMeItsOk) {
 
 
 
-
 function LoadTimeTableByTypeAndId(userTT, LoadTimeTable) {
 
     var dataString = JSON.stringify(userTT);
@@ -102,6 +103,24 @@ function LoadTimeTableByTypeAndId(userTT, LoadTimeTable) {
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
             LoadTimeTable(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
+function GetUserInfo(UserFullInfo, renderFillUser) {
+
+    var dataString = JSON.stringify(UserFullInfo);
+    $.ajax({
+        url: 'BetseferWS.asmx/GetUserInfo',
+        data: JSON.stringify({ 'Id': UserFullInfo.Id }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            renderFillUser(results);
         },
         error: function (request, error) {
             alert('Network error has occurred please try again!');

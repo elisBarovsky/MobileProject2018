@@ -71,15 +71,14 @@ $(document).on('vclick', '#LoginBTN', function () {
 }); 
 
 //check login details and decide which page to go.
+UserFullInfo = new Object();
 function renderlogin(results) {
     res = $.parseJSON(results.d);
     if (res[0] == "openSeqQestion") { // go to fill identity questions page
-
         localStorage.setItem("UserType", res[1]);
         $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false });
     }
     else if (res[0] == "wrongDetails") { //wrong details
-
         alert("פרטים לא קיימים במערכת, בדוק שהקלדת פרטי זיהוי נכון.");
         document.getElementById("IDTB").value = "";
         document.getElementById("PasswordTB").value = "";
@@ -87,8 +86,38 @@ function renderlogin(results) {
     else { // already login -> go to main page according the type user. 
         alert("שלוום");
         localStorage.setItem("UserType", res[1]);
-        $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+        UserFullInfo.Id = localStorage.getItem("UserID");
+        GetUserInfo(UserFullInfo, renderFillUser);
     }
+}
+
+
+//$(document).on("pageinit", "#DashBordPage", function (event) {
+   
+//});
+
+function renderFillUser(results) {
+    //this is the callBackFunc 
+    res = $.parseJSON(results.d); 
+    document.getElementById("UserName").value = res[0] + " " + res[1] + " שלום ";
+    if (res[5]=="") {
+        imgSRC = "Images/NoImg.png";
+    }
+    else {
+        imgSRC = res[5];
+    }
+    document.getElementById("UserIMG").src = imgSRC;
+    $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+
+    //$('#Q1').empty();
+    //dynamicLy = "<option value='0'>בחר</option>";
+    //$('#Q1').append(dynamicLy);
+    //$('#Q1').selectmenu('refresh');
+    //$.each(res, function (i, row) {
+    //    dynamicLy = " <option value='" + (i + 1) + "' style='text- align:right'>" + row + "</option> ";
+    //    $('#Q1').append(dynamicLy);
+    //    $('#Q1').selectmenu('refresh');
+    //});
 }
 
 //new user login - fill questions

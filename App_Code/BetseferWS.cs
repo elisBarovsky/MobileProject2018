@@ -90,6 +90,18 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetUserInfo(string Id)
+    {
+        Users userInfo = new Users();
+        List<string> res = userInfo.GetUserInfo(Id);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string FillSecurityQ()
     {
         Questions q = new Questions();

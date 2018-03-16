@@ -307,5 +307,30 @@ public class Users
         DBconnection db = new DBconnection();
         return db.GetUserFullNameByID(teacherId);
     }
+
+    public bool IsLegalBday(string day, string month)
+    {
+        if (int.Parse(month) <= 7)
+        {
+            if (int.Parse(month) % 2 == 0)
+            {
+                if ((int.Parse(month) != 2 && int.Parse(day) > 30) || (int.Parse(month) == 2 && int.Parse(day) > 28))
+                {
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            if (int.Parse(month) % 2 != 0)
+            {
+                if (int.Parse(day) > 30)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
 
