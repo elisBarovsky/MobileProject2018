@@ -349,9 +349,7 @@ function renderNotes(results) {
     var counter = 0;
     $('#DynamicListNotes').empty();
     $.each(results, function (i, row) {
-        dynamicLy = "<li> <a href='#' data-id=" + row[counter].CodeGivenNote + "> <p>סוג הערה:" + row[counter].Comment + "</p><p>מקצוע:" + row[counter].LessonName + "</p><p>תאריך:" + row[counter].NoteDate+"</p> </li>";
-        var check = i.CodeGivenNote;
-        var check1 = i[counter].CodeGivenNote;
+        dynamicLy = "<li> <a href='#' data-id=" + res[counter].CodeGivenNote + "> <p>סוג הערה:" + res[counter].Comment + "</p><p>מקצוע:" + res[counter].LessonName + "</p><p>תאריך:" + res[counter].NoteDate+"</p> </li>";
         counter++;
         $('#DynamicListNotes').append(dynamicLy);
         $('#DynamicListNotes').listview('refresh');
