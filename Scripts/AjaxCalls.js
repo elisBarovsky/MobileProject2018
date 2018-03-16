@@ -88,8 +88,6 @@ function SaveNewPassword(user, tellMeItsOk) {
     });
 }
 
-
-
 function LoadTimeTableByTypeAndId(userTT, LoadTimeTable) {
 
     var dataString = JSON.stringify(userTT);
@@ -126,8 +124,6 @@ function GetUserInfo(UserFullInfo, renderFillUser) {
     });
 }
 
-
-
 function FillSubject(user, FillSubjectsDDL) {
 
     var dataString = JSON.stringify(UserFullInfo);
@@ -139,6 +135,24 @@ function FillSubject(user, FillSubjectsDDL) {
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
             renderFillUser(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
+function GetUserNotes(UserInfoNote, renderNotes) {
+
+    var dataString = JSON.stringify(UserInfo);
+    $.ajax({
+        url: 'BetseferWS.asmx/GivenAllNotes',
+        data: JSON.stringify({ 'PupilID': UserInfoNote.ID }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            renderNotes(results);
         },
         error: function (request, error) {
             alert('Network error has occurred please try again!');

@@ -337,9 +337,26 @@ $(document).on('pageinit', '#CalendarPage', function () {
 
 });
 
-$(document).on('pageinit', '#NotesPage', function () {
 
+UserInfoNote = new Object();
+$(document).on('pageinit', '#NotesPage', function () {
+    UserInfoNote.ID = localStorage.getItem("UserID");
+    GetUserNotes(UserInfoNote, renderNotes);
 });
+
+function renderNotes(results) {
+    res = $.parseJSON(results.d);
+    var counter = 0;
+    $('#DynamicListNotes').empty();
+    $.each(results, function (i, row) {
+        dynamicLy = "<li> <a href='#' data-id=" + row[counter].CodeGivenNote + "> <p>סוג הערה:" + row[counter].Comment + "</p><p>מקצוע:" + row[counter].LessonName + "</p><p>תאריך:" + row[counter].NoteDate+"</p> </li>";
+        var check = i.CodeGivenNote;
+        var check1 = i[counter].CodeGivenNote;
+        counter++;
+        $('#DynamicListNotes').append(dynamicLy);
+        $('#DynamicListNotes').listview('refresh');
+    }); 
+}
 
 function FillSubjectsDDL(results) {
 

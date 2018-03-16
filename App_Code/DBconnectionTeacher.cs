@@ -191,7 +191,7 @@ public class DBconnectionTeacher
 
     public DataTable GivenAllNotes(string PupilID) //webService
     {
-        string selectSTR = " SELECT  dbo.GivenNotes.Comment , dbo.GivenNotes.NoteDate , dbo.Lessons.LessonName , dbo.NoteType.NoteName " +
+        string selectSTR = " SELECT dbo.GivenNotes.CodeGivenNote, dbo.GivenNotes.Comment , dbo.GivenNotes.NoteDate , dbo.Lessons.LessonName , dbo.NoteType.NoteName " +
                           " FROM  dbo.Users inner JOIN dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID inner JOIN dbo.GivenNotes " +
                           "ON dbo.Users.UserID = dbo.GivenNotes.PupilID  inner JOIN dbo.NoteType ON dbo.GivenNotes.CodeNoteType = dbo.NoteType.CodeNoteType  INNER JOIN  dbo.Lessons ON dbo.GivenNotes.LessonsCode = dbo.Lessons.CodeLesson " +
                           " where dbo.Pupil.UserID='" + PupilID + "'";

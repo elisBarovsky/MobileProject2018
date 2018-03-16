@@ -154,8 +154,21 @@ public class BetseferWS : System.Web.Services.WebService
         Notes AllNotesByID = new Notes();
         DataTable DT = AllNotesByID.GivenAllNotes(PupilID);
 
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in DT.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in DT.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
         JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonStringGivenAllNotes = js.Serialize(DT);
+        string jsonStringGivenAllNotes = js.Serialize(list);
         return jsonStringGivenAllNotes;
     }
 
