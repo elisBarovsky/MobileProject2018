@@ -174,6 +174,31 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GivenNoteByCode(string NoteCode)
+    {
+        Notes AllNotesByID = new Notes();
+        DataTable DT = AllNotesByID.GivenNoteByCode(NoteCode);
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in DT.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in DT.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringGivenAllNotes = js.Serialize(list);
+        return jsonStringGivenAllNotes;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GivenNotesBySubject(string PupilID, string ChooseSubjectCode)
     {
         Dictionary<string, string> LessonsList = new Dictionary<string, string>();
@@ -227,6 +252,30 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonStringFillAllHomeWork;
     }
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GivenHWByCode(string HWCode)
+    {
+        Notes AllHWByID = new Notes();
+        DataTable DT = AllHWByID.GivenHTByCode(HWCode);
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in DT.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in DT.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringGivenAllNotes = js.Serialize(list);
+        return jsonStringGivenAllNotes;
+    }
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]

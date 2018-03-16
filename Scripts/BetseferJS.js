@@ -56,6 +56,7 @@ $(window).on("resize", function () {
         $(selected).removeClass('slide-active');
     }
 });
+
 });
 
 
@@ -90,11 +91,6 @@ function renderlogin(results) {
         GetUserInfo(UserFullInfo, renderFillUser);
     }
 }
-
-
-//$(document).on("pageinit", "#DashBordPage", function (event) {
-   
-//});
 
 function renderFillUser(results) {
     //this is the callBackFunc 
@@ -292,8 +288,6 @@ $(document).on('pageinit', '#TimeTablePage', function () {
     LoadTimeTableByTypeAndId(userTT, LoadTimeTable);
 });
 
-
-
 function LoadTimeTable(results) {
     res = $.parseJSON(results.d);
 
@@ -315,7 +309,6 @@ function LoadTimeTable(results) {
                     tableInfo += "<td> <br/> </td>"
                 }
             }
-
             tableInfo += "<td>" + i +"</td></tr>";
         }
         document.getElementById("TimeTable").innerHTML = tableInfo;
@@ -332,10 +325,9 @@ $(document).on('pageinit', '#HomeWorkPage', function () {
     FillSubjectByPupilId(user, FillSubjectsDDL);
 });
 
-$(document).on('pageinit', '#CalendarPage', function () {
+$(document).on('pageinit', '#CalendarPage', function () {    /////////////////////////////////////////////////not finished
 
 });
-
 
 UserInfoNote = new Object();
 $(document).on('pageinit', '#NotesPage', function () {
@@ -347,12 +339,43 @@ function renderNotes(results) {
     res = $.parseJSON(results.d);
     var counter = 0;
     $('#DynamicListNotes').empty();
-    $.each(results, function (i, row) {
-        dynamicLy = "<li> <a href='#' data-id=" + res[counter].CodeGivenNote + "> <p>סוג הערה:" + res[counter].Comment + "</p><p>מקצוע:" + res[counter].LessonName + "</p><p>תאריך:" + res[counter].NoteDate+"</p> </li>";
+    var ImgIcon;
+    for (var i = 0; i < res.length; i++) {
+        if (res[counter].NoteName =="הצטיינות") {
+            ImgIcon ="Images/happy.png";
+        }
+        else {
+            ImgIcon = "Images/sad.png";
+        }
+        dynamicLy = "<li> <a href='#' data-id=" + res[counter].CodeGivenNote + "><img src='" + ImgIcon + "'/> <p>סוג הערה:" + res[counter].NoteName + "</p><p>מקצוע:" + res[counter].LessonName + "</p><p>תאריך:" + res[counter].NoteDate + "</p> </li>";
         counter++;
         $('#DynamicListNotes').append(dynamicLy);
         $('#DynamicListNotes').listview('refresh');
-    }); 
+    }
+}
+
+Note = new Object();
+$(document).on('vclick', '#DynamicListNotes li a', function () { // on the pageinit of info about Product page
+    Note.Code = $(this).attr("data-id");
+    GivenNoteByCode(Note, renderGivenNoteByCode);
+    $.mobile.changePage("#NotesPageFull", { transition: "slide", changeHash: false });
+});
+
+function renderGivenNoteByCode(results) {
+    //this is the callBackFunc 
+    results = $.parseJSON(results.d);
+    var counter = 0;
+    var CommentInfo;
+    $('#DynamicNoteInfo').empty();
+    if (results[counter].Comment=="") {
+        CommentInfo = "אין תיאור";
+    }
+    else {
+        CommentInfo = results[counter].Comment;
+    }
+    dynamicLy = "<h1>" + results[counter].NoteName + "</h1><p>מקצוע : " + results[counter].LessonName + "</p> <p>תאריך ההערה: " + results[counter].NoteDate + "</p><p>המורה:" + results[counter].TeacherName + "</p><p>תיאור ההערה: " + CommentInfo+"</p>";
+    $('#DynamicNoteInfo').append(dynamicLy);
+    $('#DynamicNoteInfo').listview('refresh');
 }
 
 function FillSubjectsDDL(results) {
@@ -371,16 +394,43 @@ function FillSubjectsDDL(results) {
 
 function LoadHWTable(results) {
     res = $.parseJSON(results.d);
-    var HWstring = "<tr><th>תאריך</th><th>מקצוע</th><th>שיעורי בית</th></tr><tr>";
-    for (var i = 0; i < res.length; i++) {
-        for (var j = 1; j < 4; j++) {
-            HWstring += "<td id = 'info'>" + res[i].HWInfo + "</td>";
-            HWstring += "<td id = 'subject'>" + res[i].LessonsCode + "</td>";
-            HWstring += "<td id = 'date'>" + res[i].HWDueDate + "</td>";
 
+    var counter = 0;
+    var IsLehagasha = "לא להגשה";
+    $('#DynamicListHW').empty();
+    var ImgIcon;
+    for (var i = 0; i < res.length; i++) {
+        if (res[counter].IsLehagasha=="true") {
+            IsLehagasha = "להגשה";
         }
-        HWstring += "<input id = 'button" + i + "' type='button' value='button' /></tr>";
+        dynamicLy = "<li> <a href='#' data-id=" + res[counter].HWCode + "><img src='Images/HW.png'/> <p>מקצוע:" + res[counter].LessonName + "</p><p>נתנו בתאריך:" + res[counter].HWGivenDate + "</p><p>עד לתאריך:" + res[counter].HWDueDate + "</p><p>האם להגשה:" + IsLehagasha+" </li>";
+        counter++;
+        $('#DynamicListHW').append(dynamicLy);
+        $('#DynamicListHW').listview('refresh');
     }
-    $('#HWt').append(dynamicLy);
-    //$('#HWt').selectmenu('refresh');
+}
+
+HomeWork = new Object();
+$(document).on('vclick', '#DynamicListHW li a', function () { // on the pageinit of info about Product page
+    HomeWork.Code = $(this).attr("data-id");
+    GivenHomeWorkByCode(HomeWork, renderGivenHWByCode);
+    $.mobile.changePage("#HomeWorkPageInfo", { transition: "slide", changeHash: false });
+});
+
+function renderGivenHWByCode(results) {
+    //this is the callBackFunc 
+    results = $.parseJSON(results.d);
+    var counter = 0;
+    var IsLehagasha = "לא להגשה";
+
+    $('#DynamicHWInfo').empty();
+    if (results[counter].IsLehagasha == "true") {
+        CommentInfo = "ההגשה";
+    }
+    else {
+        CommentInfo = results[counter].Comment;
+    }
+    dynamicLy = "<h1>שיעורים ב" + results[counter].LessonName   + "</h1><p>מורה : " + results[counter].TeacherName + "</p> <p>תאריך שיעורים: " + results[counter].HWGivenDate + "</p><p>לביצוע עד:" + results[counter].HWDueDate + "</p><p>האם להגשה: " + IsLehagasha + "</p><p>פירוט השיעורים: " + results[counter].HWInfo+"</p>";
+    $('#DynamicHWInfo').append(dynamicLy);
+    $('#DynamicHWInfo').listview('refresh');
 }

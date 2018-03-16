@@ -232,10 +232,22 @@
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
-                <div data-role="content">
-                    <br /><br /><br />
-                    Notes Page is open
+                <div data-role="content" tyle="text-align:right">
                     <ul data-role="listview" id="DynamicListNotes"></ul>
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+                </div>
+            </div>
+            <div data-role="page" id="NotesPageFull" > <!--Full NotesPage Page-->
+               
+                <div data-role="header" id="head">
+                </div>
+                <!-- /header -->
+                <div data-role="content" style="text-align:right;padding-right:20px;margin-right:20px">
+                    <ul data-role="listview" id="DynamicNoteInfo"></ul>
+                    <div data-role="collapsible-set" data-theme="c" data-content-theme="d" id="attriInfo">
+                    </div>
                     <div data-role="footer" data-position="fixed" id="foot">
                         <img src="Images/Betsefer.png" id="logo" />
                     </div>
@@ -245,15 +257,26 @@
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
-                <div data-role="content">
-                    <br /><br /><br />
-                    <select id="subjectsDDL">
+                <div data-role="content"  style="text-align:right">
+                    <!--<select id="subjectsDDL">
                         
-                    </select>
-                    <table class="table" id="HWt">
+                    </select>-->
+                    <ul data-role="listview" id="DynamicListHW"></ul>
 
-                    </table>
-                    <input id="CHBottom" type="button" value="button" />
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+                </div>
+            </div>
+            <div data-role="page" id="HomeWorkPageInfo">
+                <!--HomeWork Page -->
+                <div data-role="header" id="head">
+                </div>
+                <!-- /header -->
+                <div data-role="content" style="text-align:right;padding-right:20px;margin-right:20px">
+                    <ul data-role="listview" id="DynamicHWInfo"></ul>
+                    <div data-role="collapsible-set" data-theme="c" data-content-theme="d" id="attriInfo">
+                    </div>
                     <div data-role="footer" data-position="fixed" id="foot">
                         <img src="Images/Betsefer.png" id="logo" />
                     </div>
@@ -264,7 +287,6 @@
                 </div>
                 <!-- /header -->
                 <div data-role="content">
-                    <br /><br /><br />
                     Grades Page is open
                     <input id="CHBottom" type="button" value="button" />
                     <div data-role="footer" data-position="fixed" id="foot">
