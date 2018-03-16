@@ -43,7 +43,6 @@ public class DBconnection
     public string GetUserType(string UserID, string password)
     {
         String selectSTR = "SELECT CodeUserType  FROM Users where UserID  = '" + UserID + "' and LoginPassword  = '" + password + "'";
-        SqlCommand cmd = new SqlCommand(selectSTR, con);
         string type = "";
         try
         {
@@ -57,6 +56,7 @@ public class DBconnection
 
         try
         {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             while (dr.Read())
             {
@@ -678,7 +678,7 @@ public class DBconnection
         }
         try
         {
-            SqlCommand cmd = new SqlCommand(cStr, conn);
+            SqlCommand cmd = new SqlCommand(cStr, con);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
             while (dr.Read())
