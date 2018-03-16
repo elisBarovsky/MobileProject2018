@@ -127,3 +127,23 @@ function GetUserInfo(UserFullInfo, renderFillUser) {
         }
     });
 }
+
+
+
+function FillSubject(user, FillSubjectsDDL) {
+
+    var dataString = JSON.stringify(UserFullInfo);
+    $.ajax({
+        url: 'BetseferWS.asmx/FillSubjects',
+        data: JSON.stringify({ 'Id': UserFullInfo.Id }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            renderFillUser(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}

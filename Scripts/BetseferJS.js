@@ -143,11 +143,9 @@ function renderFillSecurityQ(results) {
 }
 
 $(document).on("change", "#Q1", function (event) {
-    //$("#Q2").show();
-    //$("#LQ2").show();
     $('#Q2').empty()
     choosen = document.getElementById("Q1").value;
-    dynamicLy = "<option value='0'>בחר</option>";;
+    dynamicLy = "<option value='0'>בחר</option>";
     $('#Q2').append(dynamicLy);
     $('#Q2').selectmenu('refresh');
     $.each(res, function (i, row) {
@@ -343,3 +341,18 @@ function LoadTimeTable(results) {
     }
 }
 
+$(document).on('pageinit', '#HomeWorkPage', function () {
+    user = new Object();
+    user.UserID = localStorage.getItem("UserID");
+    user.UserType = localStorage.getItem("UserType");
+    FillSubjects(user, FillSubjectsDDL);
+    FillHW(user, LoadTimeTable);
+});
+
+function FillSubjectsDDL(results) {
+
+}
+
+function LoadTimeTable(results) {
+
+}
