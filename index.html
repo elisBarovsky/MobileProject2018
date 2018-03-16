@@ -3,24 +3,22 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"  />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>-->
 
     <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
     <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 
     <!-- Bootstrap Date-Picker Plugin -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
-
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>-->
+         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
     <script>
     $(document).ready(function () {
@@ -57,25 +55,25 @@
                 <ul class="nav navbar-nav">
                     <br /><br /><br />
                     <li > <!--class="active"-->
-                        <a href="#CalendarPage"><img src="Images/LuzUIcon.png" alt="logo" style="width:40px;"> <br />  לוח שנה</a>
+                        <a href="#CalendarPage"><img src="Images/LuzUIcon.png" alt="logo" style="width:40px;"> </a>
                     </li>
                     <li>
-                        <a href="#TimeTablePage"><img src="Images/timeTableIcon.png" alt="logo" style="width:40px;"> <br /> מערכת שעות</a>
+                        <a href="#TimeTablePage"><img src="Images/timeTableIcon.png" alt="logo" style="width:40px;"> </a>
                     </li>
                     <li>
-                        <a href="#NotesPage"><img src="Images/UnlikeIcon.png" alt="logo" style="width:40px;"> <br /> הערות משמעת</a>
+                        <a href="#NotesPage"><img src="Images/UnlikeIcon.png" alt="logo" style="width:40px;"> </a>
                     </li>
                     <li class="">
-                        <a href="#HomeWorkPage"><img src="Images/HWIcon.png" alt="logo" style="width:40px;"> <br /> שיעורי בית</a>
+                        <a href="#HomeWorkPage"><img src="Images/HWIcon.png" alt="logo" style="width:40px;"> </a>
                     </li>
                     <li>
-                        <a href="#GradesPage"><img src="Images/GradeIcon.png" alt="logo" style="width:40px;"> <br /> ציונים</a>
+                        <a href="#GradesPage"><img src="Images/GradeIcon.png" alt="logo" style="width:40px;"> </a>
                     </li>
                     <li>
-                        <a href="#MSGPage"><img src="Images/msgIcon.png" alt="logo" style="width:40px;"> <br /> הודעות</a>
+                        <a href="#MSGPage"><img src="Images/msgIcon.png" alt="logo" style="width:40px;"></a>
                     </li>
                     <li>
-                        <a href="#ContactsPage"><img src="Images/ContactIcon.png" alt="logo" style="width:40px;"> <br /> דף קשר</a>
+                        <a href="#ContactsPage"><img src="Images/ContactIcon.png" alt="logo" style="width:40px;"></a>
                     </li>
                     <li>
                         <a href="#" id="LogOut"><img src="Images/logoutIcon.png" alt="logo" style="width:40px;"></a>
@@ -137,9 +135,9 @@
                 <div data-role="content" style="text-align:right">
                     <h2 style="text-align:center">אימות אחרון ודי..</h2>
                     <br />
-                    <label for="ans1" id="Q1"></label>
+                    <label for="ans1" id="Q1L"></label>
                     <input id="ans1" type="text" />
-                    <label for="ans2" id="Q2"></label>
+                    <label for="ans2" id="Q2L"></label>
                     <input id="ans2" type="text" />
                     <br />
                     <input id="CheckMyAns" type="button" value="יאללה" style="background-color:red;border-bottom-color:black;border-bottom-width:3px" />
@@ -191,7 +189,7 @@
                             </div>
                             <!-- /header -->
                             <div data-role="content" style="text-align:right">
-                                <h3 id="UserName"> </h3>
+                                <h3 id="UserNameLBL"> </h3>
                                 <img id="UserIMG" src="" alt="" style="" />
 
                                 <div data-role="footer" data-position="fixed" id="foot">
