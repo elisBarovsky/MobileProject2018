@@ -287,7 +287,8 @@ function LoadTimeTable(results) {
     res = $.parseJSON(results.d);
 
     if (res.length > 0) {
-        var tableInfo = "";
+
+        var tableInfo = "<tr><th>שישי</th><th>חמישי</th><th>רביעי</th><th>שלישי</th><th>שני</th><th>ראשון</th><th>שיעור</th></tr>";
         var counter = 0;
 
         for (var i = 1; i < 10; i++)
@@ -300,11 +301,11 @@ function LoadTimeTable(results) {
                     counter++;
                 }
                 else {
-                    tableInfo += "<td> </td>"
+                    tableInfo += "<td> <br/> </td>"
                 }
             }
 
-            tableInfo +="</tr>";
+            tableInfo += "<td>" + i +"</td></tr>";
         }
         document.getElementById("TimeTable").innerHTML = tableInfo;
     }
