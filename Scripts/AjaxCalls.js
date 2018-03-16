@@ -124,10 +124,6 @@ function GetUserInfo(UserFullInfo, renderFillUser) {
     });
 }
 
-<<<<<<< HEAD
-function FillSubject(user, FillSubjectsDDL) {
-=======
-
 function FillSubjectByPupilId(user, FillSubjectsDDL) {
 
     var dataString = JSON.stringify(user);
@@ -145,7 +141,6 @@ function FillSubjectByPupilId(user, FillSubjectsDDL) {
         }
     });
 }
->>>>>>> d6439f497118b42482a65062ca130f1c91b0f5f7
 
 function FillHW(user, LoadHWTable) {
 
