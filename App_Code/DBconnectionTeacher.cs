@@ -442,20 +442,16 @@ public class DBconnectionTeacher
 
     public int ChangePassword(string userID, string Password)
     {
-        SqlCommand cmd;
-        String cStr = "update[dbo].[Users] set[LoginPassword] = ('" + Password + "') WHERE UserID = '" + userID + "'";
-        cmd = CreateCommand(cStr, con);             // create the command
-        return ExecuteNonQuery(cmd);
+        string cStr = "update[dbo].[Users] set[LoginPassword] = ('" + Password + "') WHERE UserID = '" + userID + "'";
+        return ExecuteNonQuery(cStr);
     }
 
     public int InsertGrade(string PupilID, string TeacherID, string CodeLesson, string ExamDate, int Grade)
     {
         //SqlConnection conGrades = new SqlConnection();
         //conGrades = connect("Betsefer");
-        SqlCommand cmd;
-        String cStr = "INSERT INTO [dbo].[Grades]  ([PupilID] ,[TeacherID],[CodeLesson],[ExamDate],[Grade])   VALUES ('"+ PupilID + "','"+ TeacherID + "','"+ CodeLesson + "' ,'"+ ExamDate + "' ,"+ Grade + ")";
-        cmd = CreateCommand(cStr, con);             // create the command
-        return ExecuteNonQuery(cmd);
+        string cStr = "INSERT INTO [dbo].[Grades]  ([PupilID] ,[TeacherID],[CodeLesson],[ExamDate],[Grade])   VALUES ('"+ PupilID + "','"+ TeacherID + "','"+ CodeLesson + "' ,'"+ ExamDate + "' ,"+ Grade + ")";
+        return ExecuteNonQuery(cStr);
     }
 
     public Dictionary<string, string> FillNotes()
@@ -501,19 +497,15 @@ public class DBconnectionTeacher
 
     public int InsertNotes(string PupilID, string CodeNoteType, string NoteDate, string TeacherID,string LessonsCode, string Comment)
     {
-        SqlCommand cmd;
-        String cStr = "INSERT INTO [dbo].[GivenNotes]  ([PupilID] ,[CodeNoteType],[NoteDate],[TeacherID],[LessonsCode],[Comment])   VALUES ('" + PupilID + "','" + CodeNoteType + "','" + NoteDate + "' ,'" + TeacherID + "' ,'" + LessonsCode + "','"+ Comment + "')";
-        cmd = CreateCommand(cStr, con);             // create the command
-        return ExecuteNonQuery(cmd);
+        string cStr = "INSERT INTO [dbo].[GivenNotes]  ([PupilID] ,[CodeNoteType],[NoteDate],[TeacherID],[LessonsCode],[Comment])   VALUES ('" + PupilID + "','" + CodeNoteType + "','" + NoteDate + "' ,'" + TeacherID + "' ,'" + LessonsCode + "','"+ Comment + "')";
+        return ExecuteNonQuery(cStr);
     }
 
     public int InserHomeWork(string LessonsCode, string HWInfo, string TeacherID, string CodeClass, string HWDate, bool IsLehagasha)
     {
-        SqlCommand cmd;
-        String cStr = "INSERT INTO [dbo].[HomeWork] ([LessonsCode] ,[HWInfo],[HWGivenDate],[TeacherID],[CodeClass],[HWDueDate],[IsLehagasha]) " +
+        string cStr = "INSERT INTO [dbo].[HomeWork] ([LessonsCode] ,[HWInfo],[HWGivenDate],[TeacherID],[CodeClass],[HWDueDate],[IsLehagasha]) " +
                    " VALUES ('" + LessonsCode + "','" + HWInfo + "','" +DateTime.Today.ToShortDateString() +"','" + TeacherID + "' ,'" + CodeClass + "' ,'" + HWDate + "','" + IsLehagasha + "')";
-        cmd = CreateCommand(cStr, con);             // create the command
-        return ExecuteNonQuery(cmd);
+        return ExecuteNonQuery(cStr);
     }
 
     public Dictionary<string, string> FillLessons()
@@ -597,8 +589,9 @@ public class DBconnectionTeacher
     //--------------------------------------------------------------------------------------------------
     // This method returns number of rows affected
     //--------------------------------------------------------------------------------------------------
-    public int ExecuteNonQuery(SqlCommand cmd)
+    public int ExecuteNonQuery(string str)
     {
+        SqlCommand cmd;
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -611,6 +604,7 @@ public class DBconnectionTeacher
 
         try
         {
+            cmd = CreateCommand(str, con);
             int numEffected = cmd.ExecuteNonQuery(); // execute the command
             return numEffected;
         }

@@ -125,8 +125,7 @@ public class DBconnection
     public int AddNewSubject(string newSubject)
     {
         String cStr = "INSERT INTO [dbo].[Lessons]  (LessonName) VALUES ('" + newSubject + "')";
-        SqlCommand cmd = CreateCommand(cStr, con);
-        return ExecuteNonQuery(cmd);
+        return ExecuteNonQuery(cStr);
     }
 
     public string GetPupilGroup(string UserID)
@@ -407,10 +406,8 @@ public class DBconnection
 
     public int ChangePassword(string userID, string Password)
     {
-        SqlCommand cmd;
-        String cStr = "update[dbo].[Users] set[LoginPassword] = ('" + Password + "') WHERE UserID = '" + userID + "'";
-        cmd = CreateCommand(cStr, con);            
-        return ExecuteNonQuery(cmd);
+        string cStr = "update[dbo].[Users] set[LoginPassword] = ('" + Password + "') WHERE UserID = '" + userID + "'";
+        return ExecuteNonQuery(cStr);
     }
 
     public List<string> GetClassesOt()
@@ -530,10 +527,8 @@ public class DBconnection
 
     public int InsertClass(string ClassOt, string ClassNum)
     {
-        SqlCommand cmd;
-        String cStr = "INSERT INTO [dbo].[Class]  ([OtClass], [NumClass], [MainTeacherID], [TotalName]) VALUES ('" + ClassOt + "', '"+ ClassNum + "',null,'" + ClassOt+ ClassNum + "')";
-        cmd = CreateCommand(cStr, con);      
-        return ExecuteNonQuery(cmd);
+        string cStr = "INSERT INTO [dbo].[Class]  ([OtClass], [NumClass], [MainTeacherID], [TotalName]) VALUES ('" + ClassOt + "', '"+ ClassNum + "',null,'" + ClassOt+ ClassNum + "')";
+        return ExecuteNonQuery(cStr);
     }
 
     public string IsAlreadyLogin(string UserID, string password)
@@ -617,30 +612,25 @@ public class DBconnection
 
     public int SaveQuestion(string id, int q1, string a1, int q2, string a2)
     {
-        SqlCommand cmd;
         String cStr = "update Users set SecurityQ1Code = " + q1 + ", SecurityQ1Answer = '" + a1 + "', SecurityQ2Code="+ q2 + ",SecurityQ2Answer='"+ a2+ "'  where UserID = '" + id + "'";
-        cmd = CreateCommand(cStr, con);             // create the command
-        return ExecuteNonQuery(cmd); // execute the command   
+        return ExecuteNonQuery(cStr); // execute the command   
     }
 
     public int AddUser(Users NewUser)
     {
-        SqlCommand cmd;
-        String cStr = "INSERT INTO [dbo].[Users] ([UserID],[UserFName],[UserLName],[BirthDate],[UserImg],[LoginName],[LoginPassword],[PhoneNumber],[CodeUserType],[SecurityQ1Code],[SecurityQ1Answer],[alreadyLogin],[SecurityQ2Code],[SecurityQ2Answer])" +
+        string cStr = "INSERT INTO [dbo].[Users] ([UserID],[UserFName],[UserLName],[BirthDate],[UserImg],[LoginName],[LoginPassword],[PhoneNumber],[CodeUserType],[SecurityQ1Code],[SecurityQ1Answer],[alreadyLogin],[SecurityQ2Code],[SecurityQ2Answer])" +
                      " VALUES('"+ NewUser.UserID1+"','"+ NewUser.UserFName1+"','"+ NewUser.UserLName1+"','"+ NewUser.BirthDate1+"','"+ NewUser.UserImg1+"','"+ NewUser.UserName1+"','"+ NewUser.UserPassword1+"','"+ NewUser.PhoneNumber1+"','"+ NewUser.CodeUserType1+ "' , null, null, 0, null, null)";
-        cmd = CreateCommand(cStr, con);           
-        return ExecuteNonQuery(cmd);   
+        return ExecuteNonQuery(cStr);   
     }
 
     public int InsertTimeTable(List<Dictionary<string, string>> matrix, string classCode)
     {
-        SqlCommand cmd; string cStr;
+        string cStr;
         int num = 0;
         //check empty cells.
 
         cStr = "INSERT INTO [dbo].[Timetable] (ClassCode) values (" + classCode + ")";
-        cmd = CreateCommand(cStr, con);
-        ExecuteNonQuery(cmd);
+        ExecuteNonQuery(cStr);
 
         for (int i = 0; i < matrix.Count; i++)
         {
@@ -653,11 +643,9 @@ public class DBconnection
                     int ClassTimeCode = int.Parse(matrix[i]["ClassTimeCode"]);
                     int CodeLesson = int.Parse(matrix[i]["CodeLesson"]);
                     string TeacherId = matrix[i]["TeacherID"];
-
                    
                     cStr = "INSERT INTO [dbo].[TimetableLesson] (TimeTableCode, CodeWeekDay, ClassTimeCode, CodeLesson, TeacherId) values (" + TimeTableCode + ", " + CodeWeekDay + ", " + ClassTimeCode + ", " + CodeLesson + ", '" + TeacherId + "')";
-                    cmd = CreateCommand(cStr, conn);
-                    num = ExecuteNonQuery(cmd);
+                    num = ExecuteNonQuery(cStr);
                  }
         }
         return num;
@@ -703,8 +691,7 @@ public class DBconnection
 
     public int UpdateUser(string userID, string userFName, string userLName, string birthDate, string userImg, string userName, string userPassword, string phoneNumber)
     {
-        SqlCommand cmd;
-        String cStr;
+        string cStr;
         if (userImg == "")
         {
             cStr = "Update Users set [UserID]='" + userID + "',[UserFName]='" + userFName + "',[UserLName]='" + userLName + "',[BirthDate]='" + birthDate + "',[LoginName]='"+ userName + "',[LoginPassword]='" + userPassword + "',[PhoneNumber]='" + phoneNumber + "' where [UserID]='" + userID + "'";
@@ -713,16 +700,13 @@ public class DBconnection
         {
              cStr = "Update Users set [UserID]='" + userID + "',[UserFName]='" + userFName + "',[UserLName]='" + userLName + "',[BirthDate]='" + birthDate + "',[UserImg]='" + userImg + "',[LoginName]='"+ userName + "',[LoginPassword]='"+ userPassword + "',[PhoneNumber]='" + phoneNumber + "' where [UserID]='" + userID + "'";
         }
-        cmd = CreateCommand(cStr, con);             // create the command
-        return ExecuteNonQuery(cmd); // execute the command   
+        return ExecuteNonQuery(cStr); // execute the command   
     }
 
     public int AddPupil(string UserID, string GroupType, int classNumber)
     {
-        SqlCommand cmd;
         String cStr = "INSERT INTO [dbo].[Pupil]([UserID] ,[CodePgroup],[CodeClass])  VALUES ('"+ UserID + "' ,'"+ GroupType + "' ,"+ classNumber + ")";
-        cmd = CreateCommand(cStr, con);          
-        return ExecuteNonQuery(cmd);  
+        return ExecuteNonQuery(cStr);  
     }
 
     public string GetNumChild(string UserID)
@@ -765,74 +749,56 @@ public class DBconnection
 
     public int UpdatePupil(string userID, string CodePgroup, string ClassOt)
     {
-        SqlCommand cmd;                                                                 
-        String cStr = "UPDATE[dbo].[Pupil] [CodePgroup]='" + CodePgroup + "',[CodeClass]='" + ClassOt + "' where [UserID]='" + userID + "'";
-        cmd = CreateCommand(cStr, con);         
-        return ExecuteNonQuery(cmd);   
+        string cStr = "UPDATE[dbo].[Pupil] [CodePgroup]='" + CodePgroup + "',[CodeClass]='" + ClassOt + "' where [UserID]='" + userID + "'";
+        return ExecuteNonQuery(cStr);   
     }
 
     public int AddTeacher(string UserID, string IsMain)
     {
-        SqlCommand cmd;
-        String cStr = "INSERT INTO [dbo].[Teachers] ([TeacherID] ,[IsMainTeacher]) VALUES ('"+ UserID + "' ,'"+ IsMain + "')";
-        cmd = CreateCommand(cStr, con);
-       return ExecuteNonQuery(cmd);
+        string cStr = "INSERT INTO [dbo].[Teachers] ([TeacherID] ,[IsMainTeacher]) VALUES ('"+ UserID + "' ,'"+ IsMain + "')";
+        return ExecuteNonQuery(cStr);
     }
 
     public int UpdateTeacher(string UserID, string IsMain, string ClassOt)
     {
-        SqlCommand cmd;
-        String cStr = "UPDATE [dbo].[Teachers]  SET [IsMainTeacher] = '" + IsMain + "' where [TeacherID]='" + UserID + "'";
-        cmd = CreateCommand(cStr, con);            
-        return ExecuteNonQuery(cmd);  
+        string cStr = "UPDATE [dbo].[Teachers]  SET [IsMainTeacher] = '" + IsMain + "' where [TeacherID]='" + UserID + "'";
+        return ExecuteNonQuery(cStr);  
     }
 
     public int UpdateClassTeacher(string UserID, string ClassOt)
     {
-        SqlCommand cmd;
-        String cStr = "UPDATE [dbo].[Class] SET [MainTeacherID] = '" + UserID + "' where [TotalName]='" + ClassOt + "'";
-        cmd = CreateCommand(cStr, con);          
-        return ExecuteNonQuery(cmd);  
+        string cStr = "UPDATE [dbo].[Class] SET [MainTeacherID] = '" + UserID + "' where [TotalName]='" + ClassOt + "'";
+        return ExecuteNonQuery(cStr);  
     }
 
     public int AddParent( string ParentID, string PupilID, string ChildCodeClass)
     {
-        SqlCommand cmd;
-        String cStr = "INSERT INTO [dbo].[PupilsParent] ([ParentID] ,[PupilID],[codeClass]) VALUES ('" + ParentID + "' ,'" + PupilID + ",'"+ ChildCodeClass + "')";
-        cmd = CreateCommand(cStr, con);
-        return ExecuteNonQuery(cmd); 
+        string cStr = "INSERT INTO [dbo].[PupilsParent] ([ParentID] ,[PupilID],[codeClass]) VALUES ('" + ParentID + "' ,'" + PupilID + ",'"+ ChildCodeClass + "')";
+        return ExecuteNonQuery(cStr); 
     }
 
     public int UpdateParent(string PupilID, string ParentID, string ChildCodeClass)
     {
-        SqlCommand cmd;
-        String cStr = "UPDATE [dbo].[PupilsParent] SET [PupilID] = '" + PupilID + "' ,[ParentID] = '" + ParentID + "',codeClass='"+ ChildCodeClass+ "' WHERE [ParentID]= '" + ParentID + "'";
-        cmd = CreateCommand(cStr, con);             
-        return ExecuteNonQuery(cmd);    
+        string cStr = "UPDATE [dbo].[PupilsParent] SET [PupilID] = '" + PupilID + "' ,[ParentID] = '" + ParentID + "',codeClass='"+ ChildCodeClass+ "' WHERE [ParentID]= '" + ParentID + "'";
+        return ExecuteNonQuery(cStr);    
     }
 
     public int ChangeFirstLogin(string id)
     {
-        SqlCommand cmd;
-        String cStr = "update Users set alreadyLogin = 1  where UserID = '" + id + "'";
-        cmd = CreateCommand(cStr, con);                   
-        return ExecuteNonQuery(cmd); 
+        string cStr = "update Users set alreadyLogin = 1  where UserID = '" + id + "'";
+        return ExecuteNonQuery(cStr); 
     }
 
     public int AddMainTeacherToClass(string id,string OtClass)
     {
-        SqlCommand cmd;     
-        String cStr= "update Class set MainTeacherID = '" + id + "'  where TotalName = '" + OtClass + "'";
-        cmd = CreateCommand(cStr, con);              
-        return ExecuteNonQuery(cmd);
+        string cStr= "update Class set MainTeacherID = '" + id + "'  where TotalName = '" + OtClass + "'";
+        return ExecuteNonQuery(cStr);
     }
 
     public int DeleteMainTeacherToClass(string TotalClassName)
     {
-        SqlCommand cmd;
-        String DeletePrevieusClassTeacher = "update Class set MainTeacherID = null where TotalName = '" + TotalClassName + "'";
-        cmd = CreateCommand(DeletePrevieusClassTeacher, con);                 
-        return ExecuteNonQuery(cmd); 
+        string DeletePrevieusClassTeacher = "update Class set MainTeacherID = null where TotalName = '" + TotalClassName + "'";
+        return ExecuteNonQuery(DeletePrevieusClassTeacher); 
     }
 
     public List<string> IsAlreadyMainTeacher(string id)
@@ -1132,8 +1098,9 @@ public class DBconnection
     //--------------------------------------------------------------------------------------------------
     // This method returns number of rows affected
     //--------------------------------------------------------------------------------------------------
-    public int ExecuteNonQuery(SqlCommand cmd)
+    public int ExecuteNonQuery(string str)
     {
+        SqlCommand cmd;
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -1145,6 +1112,7 @@ public class DBconnection
 
         try
         {
+            cmd = CreateCommand(str, con);
             int numEffected = cmd.ExecuteNonQuery(); // execute the command
             return numEffected;
         }
@@ -1394,10 +1362,8 @@ public class DBconnection
 
     public int DeleteTimeTable(string classCode)
     {
-        String selectSTR = "DELETE T2 FROM dbo.TimetableLesson as T2 INNER JOIN dbo.Timetable as T1 ON T2.TimeTableCode = T1.TimeTableCode where T1.ClassCode = " + classCode;
-        SqlCommand cmd;
-        cmd = CreateCommand(selectSTR, con);        
-        return ExecuteNonQuery(cmd);
+        String selectSTR = "DELETE T2 FROM dbo.TimetableLesson as T2 INNER JOIN dbo.Timetable as T1 ON T2.TimeTableCode = T1.TimeTableCode where T1.ClassCode = " + classCode;       
+        return ExecuteNonQuery(selectSTR);
     }
 
     public string GetLessonNameByLessonCode(string lessonCode)
