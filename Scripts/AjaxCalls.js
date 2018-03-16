@@ -129,18 +129,35 @@ function GetUserInfo(UserFullInfo, renderFillUser) {
 }
 
 
+function FillSubjectByPupilId(user, FillSubjectsDDL) {
 
-function FillSubject(user, FillSubjectsDDL) {
-
-    var dataString = JSON.stringify(UserFullInfo);
+    var dataString = JSON.stringify(user);
     $.ajax({
-        url: 'BetseferWS.asmx/FillSubjects',
-        data: JSON.stringify({ 'Id': UserFullInfo.Id }),
+        url: 'BetseferWS.asmx/getSubjectsByPupilId',
+        data: JSON.stringify({ 'UserID': user.UserID }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
-            renderFillUser(results);
+            FillSubjectsDDL(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
+function FillHW(user, LoadHWTable) {
+
+    var dataString = JSON.stringify(user);
+    $.ajax({
+        url: 'BetseferWS.asmx/FillHW',
+        data: JSON.stringify({ 'UserID': user.UserID }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            LoadHWTable(results);
         },
         error: function (request, error) {
             alert('Network error has occurred please try again!');

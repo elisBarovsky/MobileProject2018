@@ -235,6 +235,31 @@ public class BetseferWS : System.Web.Services.WebService
     }
 
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string getSubjectsByPupilId(string UserID)
+    {
+        Users PupilClass = new Users();
+        Subject s = new Subject();
+        List<string> subjects = s.getSubjectsByPupilId(UserID);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillSubjects = js.Serialize(subjects);
+        return jsonStringFillSubjects;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string FillHW(string UserID)
+    {
+        HomeWork HW = new HomeWork();
+        DataTable HWs = HW.FillAllHomeWork(UserID);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillHW = js.Serialize(HWs);
+        return jsonStringFillHW;
+    }
+
     public static string KeyByValue(Dictionary<string, string> dict, string val)
     {
         string key = null;

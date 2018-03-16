@@ -1053,6 +1053,50 @@ public class DBconnection
         }
     }
 
+    public List<string> getSubjectsByPupilId(string Id)
+    {
+        String selectSTR = "SELECT dbo.TimetableLesson.CodeLesson, dbo.Lessons.LessonName " +
+            "FROM dbo.Timetable INNER JOIN dbo.Class ON dbo.Timetable.ClassCode = dbo.Class.ClassCode INNER JOIN " +
+            "dbo.Pupil ON dbo.Class.ClassCode = dbo.Pupil.CodeClass INNER JOIN dbo.TimetableLesson ON " +
+            "dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode INNER JOIN dbo.Lessons ON " +
+            "dbo.TimetableLesson.CodeLesson = dbo.Lessons.CodeLesson where dbo.Pupil.UserID = '" + Id + "'";
+
+        List<string> l = new List<string>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                string SubjectName = dr["LessonName"].ToString();
+                l.Add(SubjectName);
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+
     public string GetTeacherNameByID(string TeacherId)
     {
         String selectSTR = "SELECT UserFName + ' ' + UserLName FROM Users where UserId = '" + TeacherId + "'";

@@ -153,10 +153,12 @@ public class DBconnectionTeacher
         }
     }
 
-    public DataTable FillAllHomeWork(string ClassCode)//WebService
+    public DataTable FillAllHomeWork(string Id)//WebService
     {
-        string selectSTR = "SELECT  HWCode,IsLehagasha , HWDueDate ,HWInfo,HWGivenDate" +
-                            " FROM dbo.HomeWork where  CodeClass = '" + ClassCode + "'";
+        string selectSTR = "SELECT dbo.HomeWork.HWCode, dbo.HomeWork.LessonsCode, dbo.HomeWork.HWInfo," +
+            "dbo.HomeWork.HWGivenDate, dbo.HomeWork.TeacherID FROM dbo.HomeWork INNER JOIN dbo.Class ON " +
+            "dbo.HomeWork.CodeClass = dbo.Class.ClassCode INNER JOIN dbo.Pupil ON dbo.Class.ClassCode =" +
+            " dbo.Pupil.CodeClass where UserID = '" + Id + "'";
         DataTable dtt = new DataTable();
         DataSet ds;
         try
