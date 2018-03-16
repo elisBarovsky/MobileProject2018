@@ -295,8 +295,8 @@ function LoadTimeTable(results) {
             tableInfo += "<tr>";
             for (var j = 1; j < 7; j++)
             {
-                if (res[counter][0] == i && res[2] == j) {
-                    tableInfo += "<td>" + res[counter][1] + "<br/>" + res[counter][3] + "</td>";
+                if (res[counter].ClassTimeCode == i && res[counter].CodeWeekDay == j) {
+                    tableInfo += "<td>" + res[counter].CodeLesson + "<br/>" + res[counter].TeacherId + "</td>";
                     counter++;
                 }
                 else {
@@ -304,11 +304,9 @@ function LoadTimeTable(results) {
                 }
             }
 
+            tableInfo +="</tr>";
         }
         document.getElementById("TimeTable").innerHTML = tableInfo;
-
-        
-
     }
     else {
         alert("לכיתה עוד לא נוצרה מערכת");
