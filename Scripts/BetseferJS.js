@@ -99,7 +99,7 @@ function renderlogin(results) {
 function renderFillUser(results) {
     //this is the callBackFunc 
     res = $.parseJSON(results.d); 
-    document.getElementById("UserName").value = res[0] + " " + res[1] + " שלום ";
+    document.getElementById("UserNameLBL").innerHTML = " שלום "+res[0] + " " + res[1] ;
     if (res[5]=="") {
         imgSRC = "Images/NoImg.png";
     }
@@ -147,12 +147,13 @@ $(document).on("change", "#Q1", function (event) {
     choosen = document.getElementById("Q1").value;
     dynamicLy = "<option value='0'>בחר</option>";
     $('#Q2').append(dynamicLy);
-    $('#Q2').selectmenu('refresh');
+    //$('#Q2').selectmenu('refresh', true);
+    $('#Q2').selectmenu().selectmenu('refresh');
     $.each(res, function (i, row) {
         if ((i + 1) != choosen) {
             dynamicLy = " <option value='" + (i + 1) + "'>" + row + "</option> ";
             $('#Q2').append(dynamicLy);
-            $('#Q2').selectmenu('refresh');
+            $('#Q2').selectmenu('refresh', true);
         }
     });
 });
