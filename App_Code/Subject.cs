@@ -24,6 +24,12 @@ public class Subject
         return db.GetSubjects();
     }
 
+    public List<string> getSubjectsByPupilId(string Id)
+    {
+
+        return db.getSubjectsByPupilId(Id);
+    }
+
     public bool IsExists(string newSubject)
     {
         return db.IsExists(newSubject);

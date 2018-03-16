@@ -329,8 +329,7 @@ $(document).on('pageinit', '#HomeWorkPage', function () {
     user = new Object();
     user.UserID = localStorage.getItem("UserID");
     user.UserType = localStorage.getItem("UserType");
-    FillSubjects(user, FillSubjectsDDL);
-    FillHW(user, LoadTimeTable);
+    FillSubjectByPupilId(user, FillSubjectsDDL);
 });
 
 $(document).on('pageinit', '#CalendarPage', function () {
@@ -357,9 +356,31 @@ function renderNotes(results) {
 }
 
 function FillSubjectsDDL(results) {
-
+    FillHW(user, LoadHWTable);
+    res = $.parseJSON(results.d);
+    $('#subjectsDDL').empty();
+    dynamicLy = "<option value='0'>סנן לפי מקצוע</option>";
+    $('#subjectsDDL').append(dynamicLy);
+    $('#subjectsDDL').selectmenu('refresh');
+    $.each(res, function (i, row) {
+        dynamicLy = " <option value='" + (i + 1) + "' style='text- align:right'>" + row + "</option> ";
+        $('#subjectsDDL').append(dynamicLy);
+        $('#subjectsDDL').selectmenu('refresh');
+    });
 }
 
-function LoadTimeTable(results) {
+function LoadHWTable(results) {
+    res = $.parseJSON(results.d);
+    var HWstring = "<tr><th>תאריך</th><th>מקצוע</th><th>שיעורי בית</th></tr><tr>";
+    for (var i = 0; i < res.length; i++) {
+        for (var j = 1; j < 4; j++) {
+            HWstring += "<td id = 'info'>" + res[i].HWInfo + "</td>";
+            HWstring += "<td id = 'subject'>" + res[i].LessonsCode + "</td>";
+            HWstring += "<td id = 'date'>" + res[i].HWDueDate + "</td>";
 
+        }
+        HWstring += "<input id = 'button" + i + "' type='button' value='button' /></tr>";
+    }
+    $('#HWt').append(dynamicLy);
+    //$('#HWt').selectmenu('refresh');
 }
