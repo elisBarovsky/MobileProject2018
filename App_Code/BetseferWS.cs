@@ -255,8 +255,22 @@ public class BetseferWS : System.Web.Services.WebService
         HomeWork HW = new HomeWork();
         DataTable HWs = HW.FillAllHomeWork(UserID);
 
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in HWs.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in HWs.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
+
         JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonStringFillHW = js.Serialize(HWs);
+        string jsonStringFillHW = js.Serialize(list);
         return jsonStringFillHW;
     }
 

@@ -376,6 +376,6 @@ function LoadHWTable(results) {
         }
         HWstring += "<input id = 'button" + i + "' type='button' value='button' /></tr>";
     }
-    $('#HWtable').append(dynamicLy);
-    $('#HWtable').selectmenu('refresh');
+    $('#HWt').append(dynamicLy);
+    //$('#HWt').selectmenu('refresh');
 }
