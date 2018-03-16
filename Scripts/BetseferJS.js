@@ -288,7 +288,7 @@ function LoadTimeTable(results) {
 
     if (res.length > 0) {
 
-        var tableInfo = "<tr><th>שישי</th><th>חמישי</th><th>רביעי</th><th>שלישי</th><th>שני</th><th>ראשון</th><th>שיעור</th></tr>";
+        var tableInfo = "<tr><th scope='col'>שישי</th><th scope='col'>חמישי</th><th scope='col'>רביעי</th><th scope='col'>שלישי</th><th scope='col'>שני</th><th scope='col'>ראשון</th><th scope='col'>שיעור</th></tr>";
         var counter = 0;
 
         for (var i = 1; i < 10; i++)
