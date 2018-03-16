@@ -1053,6 +1053,45 @@ public class DBconnection
         }
     }
 
+    public string GetTeacherNameByID(string TeacherId)
+    {
+        String selectSTR = "SELECT UserFName + ' ' + UserLName FROM Users where UserId = '" + TeacherId + "'";
+        string teacherName = "";
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                teacherName = dr[0].ToString();
+            }
+
+            return teacherName;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public Dictionary<string, string> FillClassOt()
     {
         String selectSTR = "SELECT ClassCode,TotalName FROM Class ";
