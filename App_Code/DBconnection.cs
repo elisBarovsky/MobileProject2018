@@ -1399,9 +1399,15 @@ public class DBconnection
         }
     }
 
+    public int DeleteTimeTableLessons(string classCode)
+    {
+        String selectSTR = "DELETE T2 FROM dbo.TimetableLesson as T2 INNER JOIN dbo.Timetable as T1 ON T2.TimeTableCode = T1.TimeTableCode where T1.ClassCode = " + classCode;
+        return ExecuteNonQuery(selectSTR);
+    }
+
     public int DeleteTimeTable(string classCode)
     {
-        String selectSTR = "DELETE T2 FROM dbo.TimetableLesson as T2 INNER JOIN dbo.Timetable as T1 ON T2.TimeTableCode = T1.TimeTableCode where T1.ClassCode = " + classCode;       
+        String selectSTR = "DELETE FROM dbo.Timetable where ClassCode = " + classCode;
         return ExecuteNonQuery(selectSTR);
     }
 
