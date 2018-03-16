@@ -14,7 +14,6 @@ public class DBconnectionTeacher
 {
     public SqlDataAdapter da;
     public DataTable dt;
-    public DataSet ds; 
     SqlConnection con = new SqlConnection();
 
     public DBconnectionTeacher()
@@ -48,12 +47,13 @@ public class DBconnectionTeacher
         string selectSTR = " SELECT dbo.Pupil.UserID, (dbo.Users.UserFName +' '+ dbo.Users.UserLName) as PupilName, dbo.Grades.Grade" +
                         " FROM dbo.Pupil INNER JOIN dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID Full outer JOIN dbo.Grades ON dbo.Users.UserID = dbo.Grades.PupilID where dbo.Pupil.CodeClass = '" + ClassOtID + "'";
         DataTable dtt = new DataTable();
+        DataSet ds ;
         try
         {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con);
-            DataSet ds = new DataSet("PupilsDS");
+            ds = new DataSet("PupilsDS");
             daa.Fill(ds);
-            dtt = ds.Tables[0];
+            return  dtt = ds.Tables[0];
         }
         catch (Exception ex)
         {
@@ -67,7 +67,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-        return dtt = ds.Tables[0];
     }
 
     public DataTable FilterNotes(string FilterType,string ValueFilter)
@@ -77,12 +76,13 @@ public class DBconnectionTeacher
                           "ON dbo.Users.UserID = dbo.GivenNotes.PupilID  inner JOIN dbo.NoteType ON dbo.GivenNotes.CodeNoteType = dbo.NoteType.CodeNoteType  INNER JOIN  dbo.Lessons ON dbo.GivenNotes.LessonsCode = dbo.Lessons.CodeLesson " +
                           " where "+ FilterType + "='" + ValueFilter + "'";
         DataTable dtt = new DataTable();
+        DataSet ds;
         try
         {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con);
-            DataSet ds = new DataSet("NotesDS"); daa.Fill(ds);
+            ds = new DataSet("NotesDS"); daa.Fill(ds);
             daa.Fill(ds);
-            dtt = ds.Tables[0];
+            return dtt = ds.Tables[0];
         }
         catch (Exception ex)
         {
@@ -96,7 +96,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-        return dtt = ds.Tables[0];
     }
     
     public DataTable FilterHomeWork(string TeacherID, string LessonsCode, string ClassCode)  
@@ -104,12 +103,13 @@ public class DBconnectionTeacher
         string selectSTR = "SELECT HWCode, IsLehagasha as 'האם השיעורים להגשה', HWDueDate AS 'תאריך סיום',HWInfo AS 'תוכן שיעורי הבית',HWGivenDate AS 'תאריך נתינת השיעורים'" +
                             " FROM dbo.HomeWork where  CodeClass = '"+ ClassCode  + "' and LessonsCode = '"+ LessonsCode + "' and TeacherID = '"+ TeacherID + "'";
         DataTable dtt = new DataTable();
+        DataSet ds;
         try
         {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
-            DataSet ds = new DataSet("HWDS");
+            ds = new DataSet("HWDS");
             daa.Fill(ds);
-            dtt = ds.Tables[0];
+            return dtt = ds.Tables[0];
         }
         catch (Exception ex)
         {
@@ -123,7 +123,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-        return dtt = ds.Tables[0];
     }
 
     public DataTable FillAllHomeWork(string ClassCode)//WebService
@@ -131,12 +130,13 @@ public class DBconnectionTeacher
         string selectSTR = "SELECT  HWCode,IsLehagasha , HWDueDate ,HWInfo,HWGivenDate" +
                             " FROM dbo.HomeWork where  CodeClass = '" + ClassCode + "'";
         DataTable dtt = new DataTable();
+        DataSet ds;
         try
         {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
-            DataSet ds = new DataSet("HWDS");
+            ds = new DataSet("HWDS");
             daa.Fill(ds);
-            dtt = ds.Tables[0];
+            return dtt = ds.Tables[0];
         }
         catch (Exception ex)
         {
@@ -150,7 +150,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-        return dtt = ds.Tables[0];
     }
 
     public DataTable GivenAllNotes(string PupilID) //webService
@@ -160,12 +159,13 @@ public class DBconnectionTeacher
                           "ON dbo.Users.UserID = dbo.GivenNotes.PupilID  inner JOIN dbo.NoteType ON dbo.GivenNotes.CodeNoteType = dbo.NoteType.CodeNoteType  INNER JOIN  dbo.Lessons ON dbo.GivenNotes.LessonsCode = dbo.Lessons.CodeLesson " +
                           " where dbo.Pupil.UserID='" + PupilID + "'";
         DataTable dtt = new DataTable();
+        DataSet ds;
         try
         {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
-            DataSet ds = new DataSet("ALLNotesDS");
+            ds = new DataSet("ALLNotesDS");
             daa.Fill(ds);
-            dtt = ds.Tables[0];
+            return dtt = ds.Tables[0];
         }
         catch (Exception ex)
         {
@@ -179,7 +179,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-        return dtt = ds.Tables[0];
     }
 
     public DataTable FillBySubjectHomeWork(string PupilID, string ChooseSubjectCode) //webService
@@ -189,12 +188,13 @@ public class DBconnectionTeacher
                           "ON dbo.Users.UserID = dbo.GivenNotes.PupilID  inner JOIN dbo.NoteType ON dbo.GivenNotes.CodeNoteType = dbo.NoteType.CodeNoteType  INNER JOIN  dbo.Lessons ON dbo.GivenNotes.LessonsCode = dbo.Lessons.CodeLesson " +
                           " where dbo.Pupil.UserID='" + PupilID + "' and LessonsCode = '" + ChooseSubjectCode + "'";
         DataTable dtt = new DataTable();
+        DataSet ds;
         try
         {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
-            DataSet ds = new DataSet("ALLNotesDS");
+            ds = new DataSet("ALLNotesDS");
             daa.Fill(ds);
-            dtt = ds.Tables[0];
+            return dtt = ds.Tables[0];
         }
         catch (Exception ex)
         {
@@ -208,7 +208,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-        return dtt = ds.Tables[0];
     }
 
     public DataTable GivenNotesBySubject(string PupilID, string ChooseSubjectCode) //webService
@@ -218,12 +217,13 @@ public class DBconnectionTeacher
                           "ON dbo.Users.UserID = dbo.GivenNotes.PupilID  inner JOIN dbo.NoteType ON dbo.GivenNotes.CodeNoteType = dbo.NoteType.CodeNoteType  INNER JOIN  dbo.Lessons ON dbo.GivenNotes.LessonsCode = dbo.Lessons.CodeLesson " +
                           " where dbo.Pupil.UserID='" + PupilID + "' and dbo.GivenNotes.LessonsCode ='" + ChooseSubjectCode + "'";
         DataTable dtt = new DataTable();
+        DataSet ds;
         try
         {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
-            DataSet ds = new DataSet("NotesDS");
+            ds = new DataSet("NotesDS");
             daa.Fill(ds);
-            dtt = ds.Tables[0];
+            return dtt = ds.Tables[0];
         }
         catch (Exception ex)
         {
@@ -237,7 +237,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-        return dtt = ds.Tables[0];
     }
 
     public DataTable FilterTelphoneList(string UserTypeFilterType, string ClassFilter)
@@ -257,12 +256,13 @@ public class DBconnectionTeacher
         }
 
         DataTable dtt = new DataTable();
+        DataSet ds;
         try
         {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
-            DataSet ds = new DataSet("TelephoneNumDS");
+            ds = new DataSet("TelephoneNumDS");
             daa.Fill(ds);
-            dtt = ds.Tables[0];
+            return dtt = ds.Tables[0];
         }
         catch (Exception ex)
         {
@@ -276,7 +276,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-        return dtt = ds.Tables[0];
     }
 
     public string GetUserType(string UserID, string password)
@@ -292,6 +291,7 @@ public class DBconnectionTeacher
              {
                   type = dr["CodeUserType"].ToString();
              }
+            return type;
         }
         catch (Exception ex)
         {
@@ -305,7 +305,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-        return type;
     }
 
     public List<string> GetUserInfo(string UserID)
@@ -334,8 +333,9 @@ public class DBconnectionTeacher
                 UserImg = dr["UserImg"].ToString();
                 UserInfo.Add(UserImg);
             }
-        }   
-         catch (Exception ex)
+            return UserInfo;
+        }
+        catch (Exception ex)
         {
             // write to log
             throw (ex);
@@ -347,7 +347,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-        return UserInfo;
     }
 
     public int ChangePassword(string userID, string Password)
@@ -384,8 +383,9 @@ public class DBconnectionTeacher
                     NoteName = dr["NoteName"].ToString();
                     l.Add(CodeNoteType, NoteName);
                 }
-        }   
-         catch (Exception ex)
+            return l;
+        }
+        catch (Exception ex)
         {
             // write to log
             throw (ex);
@@ -397,7 +397,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-        return l;
     }
 
     public int InsertNotes(string PupilID, string CodeNoteType, string NoteDate, string TeacherID,string LessonsCode, string Comment)
@@ -433,8 +432,9 @@ public class DBconnectionTeacher
                     LessonName = dr["LessonName"].ToString();
                     l.Add(CodeLesson, LessonName);
                 }
-        }   
-         catch (Exception ex)
+            return l;
+        }
+        catch (Exception ex)
         {
             // write to log
             throw (ex);
@@ -446,7 +446,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-        return l;
     }
 
     public int GetMainTeacherClass(string id)
@@ -461,8 +460,9 @@ public class DBconnectionTeacher
             {
                 classCode = int.Parse(dr[0].ToString());
             }
-        }   
-         catch (Exception ex)
+            return classCode;
+        }
+        catch (Exception ex)
         {
             // write to log
             throw (ex);
@@ -474,7 +474,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
         }
-        return classCode;
     }
 
     //--------------------------------------------------------------------------------------------------

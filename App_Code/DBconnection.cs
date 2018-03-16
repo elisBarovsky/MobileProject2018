@@ -48,12 +48,11 @@ public class DBconnection
         try
         {
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-            
-
             while (dr.Read())
             {
                type = dr["CodeUserType"].ToString();
             }
+            return type;
         }
         catch (Exception ex)
         {
@@ -67,8 +66,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return type;
     }
 
     public bool IsExists(string newSubject)
@@ -84,6 +81,13 @@ public class DBconnection
             {
                 countRow = int.Parse(dr[0].ToString());
             }
+
+            if (countRow > 0)
+            {
+                return true;
+            }
+
+            return false;
         }
         catch (Exception ex)
         {
@@ -97,13 +101,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        if (countRow > 0)
-        {
-            return true;
-        }
-
-        return false;
     }
 
     public int AddNewSubject(string newSubject)
@@ -123,10 +120,11 @@ public class DBconnection
         {
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
-        while (dr.Read())
-        {
-            CodePgroup = dr["CodePgroup"].ToString();
-        }
+                while (dr.Read())
+                {
+                    CodePgroup = dr["CodePgroup"].ToString();
+                }
+            return CodePgroup;
         }
         catch (Exception ex)
         {
@@ -140,8 +138,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return CodePgroup;
     }
 
     public string GetPupilOtClass(string UserID)
@@ -154,10 +150,11 @@ public class DBconnection
         {
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
-        while (dr.Read())
-        {
-            ClassCode = dr["ClassCode"].ToString();
-        }
+                while (dr.Read())
+                {
+                    ClassCode = dr["ClassCode"].ToString();
+                }
+            return ClassCode;
         }
         catch (Exception ex)
         {
@@ -171,8 +168,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return ClassCode;
     }
 
     public bool GetTeacherMain(string UserID)
@@ -189,6 +184,7 @@ public class DBconnection
             {
                 Checked = bool.Parse(dr["IsMainTeacher"].ToString());
             }
+            return Checked;
         }
         catch (Exception ex)
         {
@@ -202,8 +198,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return Checked;
     }
 
     public string GetTeacherMainClass(string UserID)
@@ -220,6 +214,7 @@ public class DBconnection
             {
                 ClassCode = dr["ClassCode"].ToString();
             }
+            return ClassCode;
         }
         catch (Exception ex)
         {
@@ -233,8 +228,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return ClassCode;
     }
 
     public List<string> GetUserInfo(string UserID)
@@ -264,6 +257,7 @@ public class DBconnection
                 UserImg = dr["UserImg"].ToString();
                 UserInfo.Add(UserImg);
             }
+            return UserInfo;
         }
         catch (Exception ex)
         {
@@ -277,15 +271,11 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return UserInfo;
     }
 
     public List<string> GetUserSecurityDetailsByuserIDandBday(string userID, string Bday) {
         List<string> l = new List<string>();
-
         l = GetSecurityInfo(1, userID, Bday).Concat(GetSecurityInfo(2, userID, Bday)).ToList();
-        
         return l;
     }
 
@@ -331,6 +321,7 @@ public class DBconnection
                     }
                     break;
             }
+            return l;
         }
         catch (Exception ex)
         {
@@ -344,8 +335,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return l;
     }
 
     public int ChangePassword(string userID, string Password)
@@ -371,6 +360,7 @@ public class DBconnection
                 Ot = dr["OtClass"].ToString();
                 l.Add(Ot);
             }
+            return l;
         }
         catch (Exception ex)
         {
@@ -384,8 +374,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return l;
     }
 
     public List<string> ClassesExites(string ClassOt, string ClassNum)
@@ -403,6 +391,7 @@ public class DBconnection
                 Ot = dr["TotalName"].ToString();
                 l.Add(Ot);
             }
+            return l;
         }
         catch (Exception ex)
         {
@@ -416,8 +405,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return l;
     }
 
     public string GetClassNameByCodeClass(int codeClass)
@@ -433,6 +420,7 @@ public class DBconnection
             {
                 className = dr[0].ToString();
             }
+            return className;
         }
         catch (Exception ex)
         {
@@ -446,8 +434,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return className;
     }
 
     public int InsertClass(string ClassOt, string ClassNum)
@@ -471,7 +457,8 @@ public class DBconnection
             {
                 isAlreadyLogin = dr["alreadyLogin"].ToString();
             }
-                }
+            return isAlreadyLogin;
+        }
         catch (Exception ex)
         {
             // write to log
@@ -484,8 +471,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return isAlreadyLogin;
     }
 
     public List<Questions> GetQuestions()
@@ -505,6 +490,7 @@ public class DBconnection
                 q.SecurityInfo = dr["SecurityQInfo"].ToString();
                 questions.Add(q);
             }
+            return questions;
         }
         catch (Exception ex)
         {
@@ -518,8 +504,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return questions;
     }
 
     public int SaveQuestion(string id, int q1, string a1, int q2, string a2)
@@ -584,6 +568,7 @@ public class DBconnection
             {
                 TTC = int.Parse(dr[0].ToString());
             }
+            return TTC;
         }
         catch (Exception ex)
         {
@@ -597,8 +582,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return TTC;
     }
 
     public int UpdateUser(string userID, string userFName, string userLName, string birthDate, string userImg, string userName, string userPassword, string phoneNumber)
@@ -639,6 +622,7 @@ public class DBconnection
             {
                 NumChilds = dr["num"].ToString();
             }
+            return NumChilds;
         }
         catch (Exception ex)
         {
@@ -652,8 +636,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return NumChilds;
     }
 
     public int UpdatePupil(string userID, string CodePgroup, string ClassOt)
@@ -744,6 +726,7 @@ public class DBconnection
                 ClassOt = dr["TotalName"].ToString();
                 l.Add(ClassOt);
             }
+            return l;
         }
         catch (Exception ex)
         {
@@ -757,8 +740,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return l;
     } 
 
     public Dictionary<string,string> getPupils(string classCode)
@@ -780,6 +761,7 @@ public class DBconnection
                 UserName = dr["PupilName"].ToString();
                 l.Add(UserID, UserName);
             }
+            return l;
         }
         catch (Exception ex)
         {
@@ -793,8 +775,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return l;
     }
 
     public List<Dictionary<string, string>> getPupilsByClassCode(string classCode)
@@ -816,6 +796,7 @@ public class DBconnection
 
                 l.Add(p);
             }
+            return l;
         }
         catch (Exception ex)
         {
@@ -829,8 +810,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return l;
     }
 
     public Dictionary<string, string> GetTeachers()
@@ -850,6 +829,7 @@ public class DBconnection
                 TeacherFullName = dr["FullName"].ToString();
                 l.Add(UserID, TeacherFullName);
             }
+            return l;
         }
         catch (Exception ex)
         {
@@ -863,8 +843,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return l;
     }
 
     public Dictionary<string, string> FillUsers(string CodeUserType)
@@ -885,6 +863,7 @@ public class DBconnection
                 UserName = dr["UserName"].ToString();
                 l.Add(UserID, UserName);
             }
+            return l;
         }
         catch (Exception ex)
         {
@@ -899,8 +878,6 @@ public class DBconnection
                 con.Close();
             }
         }
-
-        return l;
     }
 
     public Dictionary<int, string> GetSubjects()
@@ -921,6 +898,7 @@ public class DBconnection
                 SubjectName = dr["LessonName"].ToString();
                 l.Add(SubjectID, SubjectName);
             }
+            return l;
         }
         catch (Exception ex)
         {
@@ -934,7 +912,6 @@ public class DBconnection
                 con.Close();
             }
         }
-        return l;
     }
 
     public Dictionary<string, string> FillClassOt()
@@ -955,6 +932,7 @@ public class DBconnection
                     TotalName = dr["TotalName"].ToString();
                     l.Add(ClassCode, TotalName);
                 }
+            return l;
         }
         catch (Exception ex)
         {
@@ -968,7 +946,6 @@ public class DBconnection
                 con.Close();
             }
         }
-        return l;
     }
 
     //--------------------------------------------------------------------------------------------------
@@ -1019,6 +996,7 @@ public class DBconnection
 
                     TT.Add(lesson);
                 }
+            return TT;
         }
         catch (Exception ex)
         {
@@ -1032,7 +1010,6 @@ public class DBconnection
                 con.Close();
             }
         }
-        return TT;
     }
 
     public List<Dictionary<string, string>> GetTimeTableAcordingToClassCodeForMobile(int classCode) //webService
@@ -1065,6 +1042,7 @@ public class DBconnection
                 lesson.Add("TeacherId", teacherName);
                 TT.Add(lesson);
             }
+            return TT;
         }
         catch (Exception ex)
         {
@@ -1078,7 +1056,6 @@ public class DBconnection
                 con.Close();
             }
         }
-        return TT;
     }
 
     public string GetSubjectNameBySubjectCode(string subjectCode)
@@ -1095,8 +1072,9 @@ public class DBconnection
             {
                 lessonName = dr[0].ToString();
             }
-        }   
-         catch (Exception ex)
+            return lessonName;
+        }
+        catch (Exception ex)
         {
             // write to log
             throw (ex);
@@ -1108,7 +1086,6 @@ public class DBconnection
                 con.Close();
             }
         }
-        return lessonName;
     }
 
     public List<Dictionary<string, string>> GetValuesTimeTableAcordingToClassCode(int classCode)
@@ -1132,6 +1109,7 @@ public class DBconnection
 
                     TT.Add(lesson);
                 }
+            return TT;
         }
         catch (Exception ex)
         {
@@ -1145,7 +1123,6 @@ public class DBconnection
                 con.Close();
             }
         }
-        return TT;
     }
 
     public bool IsClassHasTimeTable(string classCode)
@@ -1167,6 +1144,7 @@ public class DBconnection
                 {
                       ans= true;
                 }
+            return ans;
         }
         catch (Exception ex)
         {
@@ -1180,7 +1158,6 @@ public class DBconnection
                 con.Close();
             }
         }
-        return ans;
     }
 
     public int DeleteTimeTable(string classCode)
@@ -1203,6 +1180,7 @@ public class DBconnection
             {
                 lessonName = dr[0].ToString();
             }
+            return lessonName;
         }
         catch (Exception ex)
         {
@@ -1216,7 +1194,6 @@ public class DBconnection
                 con.Close();
             }
         }
-        return lessonName;
     }
 
     public string GetUserFullNameByID(string TeacherId)
@@ -1231,6 +1208,7 @@ public class DBconnection
             {
                 Name = dr[0].ToString();
             }
+            return Name;
         }
         catch (Exception ex)
         {
@@ -1244,6 +1222,5 @@ public class DBconnection
                 con.Close();
             }
         }
-        return Name;
     }
 }
