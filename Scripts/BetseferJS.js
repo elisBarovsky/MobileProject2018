@@ -171,11 +171,13 @@ $(document).on('vclick', '#SaveQBTN', function () {
     //localStorage.setItem("PasswordTB", UserInfo.PS); //saving in localS
     SaveQuestion(SecurityQA, renderSaveQuestion);
 });
-
+UserFullInfo = new Object();
 function renderSaveQuestion(results) {
     //this is the callBackFunc 
+    UserFullInfo.Id = localStorage.getItem("UserID");
     res = $.parseJSON(results.d);
-    if (res==2) {
+    if (res == 2) {
+        GetUserInfo(UserFullInfo, renderFillUser);
         $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
     else {
@@ -184,7 +186,6 @@ function renderSaveQuestion(results) {
 }
 
 Useraouto = new Object();
-
 $(document).on('vclick', '#toQuestions', function (event) {
     Useraouto.ID = document.getElementById("UserId").value;
     Useraouto.Bday = document.getElementById("date").value;

@@ -16,8 +16,6 @@
     });
 }
 
-
-
 function FillSecurityQ(renderFillSecurityQ) {
 
     var dataString = JSON.stringify();
