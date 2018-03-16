@@ -18,7 +18,6 @@ public class DBconnectionTeacher
 
     public DBconnectionTeacher()
     {
-        con = connect("Betsefer");
     }
 
     public SqlConnection connect(String conString)  // read the connection string from the configuration file
@@ -50,6 +49,16 @@ public class DBconnectionTeacher
         DataSet ds ;
         try
         {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con);
             ds = new DataSet("PupilsDS");
             daa.Fill(ds);
@@ -79,6 +88,16 @@ public class DBconnectionTeacher
         DataSet ds;
         try
         {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con);
             ds = new DataSet("NotesDS"); daa.Fill(ds);
             daa.Fill(ds);
@@ -106,6 +125,15 @@ public class DBconnectionTeacher
         DataSet ds;
         try
         {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
             ds = new DataSet("HWDS");
             daa.Fill(ds);
@@ -131,6 +159,15 @@ public class DBconnectionTeacher
                             " FROM dbo.HomeWork where  CodeClass = '" + ClassCode + "'";
         DataTable dtt = new DataTable();
         DataSet ds;
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
         try
         {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
@@ -162,6 +199,15 @@ public class DBconnectionTeacher
         DataSet ds;
         try
         {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
             ds = new DataSet("ALLNotesDS");
             daa.Fill(ds);
@@ -191,6 +237,15 @@ public class DBconnectionTeacher
         DataSet ds;
         try
         {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
             ds = new DataSet("ALLNotesDS");
             daa.Fill(ds);
@@ -218,6 +273,15 @@ public class DBconnectionTeacher
                           " where dbo.Pupil.UserID='" + PupilID + "' and dbo.GivenNotes.LessonsCode ='" + ChooseSubjectCode + "'";
         DataTable dtt = new DataTable();
         DataSet ds;
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
         try
         {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
@@ -259,6 +323,15 @@ public class DBconnectionTeacher
         DataSet ds;
         try
         {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
             ds = new DataSet("TelephoneNumDS");
             daa.Fill(ds);
@@ -282,6 +355,15 @@ public class DBconnectionTeacher
     {
         String selectSTR = "SELECT CodeUserType  FROM Users where UserID  = '" + UserID + "' and LoginPassword  = '" + password + "'";
         string type = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
         try
         {
              SqlCommand cmd = new SqlCommand(selectSTR, con);
@@ -312,6 +394,15 @@ public class DBconnectionTeacher
         string UserFName, UserLName, BirthDate, UserImg, UserName, UserPassword, PhoneNumber;
         String selectSTR = "select * from [dbo].[Users] where UserID  = '" + UserID + "'";
         List<string> UserInfo = new List<string>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
         try
         {
             SqlCommand cmd = new SqlCommand(selectSTR, con);
@@ -374,6 +465,15 @@ public class DBconnectionTeacher
         Dictionary<string, string> l = new Dictionary<string, string>();
         try
         {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
             SqlCommand cmd = new SqlCommand(selectSTR, con);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             l.Add("0", "בחר");
@@ -423,6 +523,15 @@ public class DBconnectionTeacher
         Dictionary<string, string> l = new Dictionary<string, string>();
         try
         {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
                 SqlCommand cmd = new SqlCommand(selectSTR, con);
                 SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 l.Add("0", "בחר מקצוע");
@@ -454,6 +563,15 @@ public class DBconnectionTeacher
         int classCode = -1;
         try
         {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
             SqlCommand cmd = new SqlCommand(selectSTR, con);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             while (dr.Read())
@@ -481,6 +599,16 @@ public class DBconnectionTeacher
     //--------------------------------------------------------------------------------------------------
     public int ExecuteNonQuery(SqlCommand cmd)
     {
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
         try
         {
             int numEffected = cmd.ExecuteNonQuery(); // execute the command
