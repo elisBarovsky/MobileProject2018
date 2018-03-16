@@ -26,6 +26,11 @@ public class TimeTable
     {
         return db.GetTimeTableAcordingToClassCode(classCode);
     }
+    
+    public List<Dictionary<string, string>> GetTimeTableAcordingToClassCodeForMobile(int classCode)
+    {
+        return db.GetTimeTableAcordingToClassCodeForMobile(classCode);
+    }
 
     public bool IsClassHasTimeTable(string classCodee)
     {
@@ -40,10 +45,5 @@ public class TimeTable
     public string GetLessonNameByLessonCode(string lessonCode)
     {
         return db.GetLessonNameByLessonCode(lessonCode);
-    }
-
-    public string GetTeacherNameByID(string TeacherId)
-    {
-        return db.GetTeacherNameByID(TeacherId);
     }
 }

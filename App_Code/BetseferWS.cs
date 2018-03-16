@@ -179,7 +179,7 @@ public class BetseferWS : System.Web.Services.WebService
         string PupilClassCode = PupilClass.GetPupilOtClass(UserID);
         TimeTable TimeTableByClassCode = new TimeTable();
 
-        List<Dictionary<string, string>> ls = TimeTableByClassCode.GetTimeTableAcordingToClassCode(int.Parse(PupilClassCode));
+        List<Dictionary<string, string>> ls = TimeTableByClassCode.GetTimeTableAcordingToClassCodeForMobile(int.Parse(PupilClassCode));
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         // serialize to string

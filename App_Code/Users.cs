@@ -301,5 +301,11 @@ public class Users
         DBconnectionTeacher dbt = new DBconnectionTeacher();
         return dbt.GetMainTeacherClass(id);
     }
+
+    public string GetUserFullNameByID(string teacherId)
+    {
+        DBconnection db = new DBconnection();
+        return db.GetUserFullNameByID(teacherId);
+    }
 }
 

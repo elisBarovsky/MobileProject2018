@@ -653,6 +653,54 @@ public class DBconnection
         return TT;
     }
 
+    public List<Dictionary<string, string>> GetTimeTableAcordingToClassCodeForMobile(int classCode) //webService
+    {
+        //keep just one time table for a class. no history.
+        List<Dictionary<string, string>> TT = new List<Dictionary<string, string>>();
+
+        SqlCommand cmd; string cStr;
+
+        cStr = "select [dbo].[TimetableLesson].TimeTableCode, [dbo].[TimetableLesson].CodeWeekDay, [dbo].[TimetableLesson].ClassTimeCode, [dbo].[TimetableLesson].CodeLesson, [dbo].[TimetableLesson].TeacherId from [dbo].[TimetableLesson] inner join[dbo].[Timetable] on[dbo].[TimetableLesson].TimeTableCode = [dbo].[Timetable].TimeTableCode where[dbo].[Timetable].ClassCode = " + classCode;
+        cmd = CreateCommand(cStr, con);
+        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+        while (dr.Read())
+        {
+            Dictionary<string, string> lesson = new Dictionary<string, string>();
+            lesson.Add("TimeTableCode", dr["TimeTableCode"].ToString());
+            lesson.Add("CodeWeekDay", dr["CodeWeekDay"].ToString());
+            lesson.Add("ClassTimeCode", dr["ClassTimeCode"].ToString());
+            string subjectCode = dr["CodeLesson"].ToString();
+            Subject s = new Subject();
+            //המרה של הקוד מקצוע לשם מקצוע
+            string subjectName = s.GetSubjectNameBySubjectCode(subjectCode);
+            lesson.Add("CodeLesson", subjectName);
+            string teacherId = dr["TeacherId"].ToString();
+            Users t = new Users();
+            //המרה של הת.ז. מורה לשם מורה
+            string teacherName = t.GetUserFullNameByID(teacherId);
+            lesson.Add("TeacherId", teacherName);
+
+            TT.Add(lesson);
+        }
+        return TT;
+    }
+
+    public string GetSubjectNameBySubjectCode(string subjectCode)
+    {
+        SqlCommand cmd; string cStr, lessonName = "";
+
+        cStr = "select LessonName from Lessons where CodeLesson = " + int.Parse(subjectCode);
+        cmd = CreateCommand(cStr, con);
+        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+        while (dr.Read())
+        {
+            lessonName = dr[0].ToString();
+        }
+        return lessonName;
+    }
+
     public List<Dictionary<string, string>> GetValuesTimeTableAcordingToClassCode(int classCode)
     {
         List<Dictionary<string, string>> TT = new List<Dictionary<string, string>>();
@@ -719,17 +767,18 @@ public class DBconnection
         return lessonName;
     }
 
-    public string GetTeacherNameByID(string TeacherId)
+    public string GetUserFullNameByID(string TeacherId)
     {
         String selectSTR = "SELECT UserFName + ' ' + UserLName FROM Users where UserId = '" + TeacherId +"'";
         SqlCommand cmd = new SqlCommand(selectSTR, con);
         SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-        string teacherName = "";
+        string Name = "";
         while (dr.Read())
         {
-            teacherName = dr[0].ToString();
+            Name = dr[0].ToString();
         }
 
-        return teacherName;
+        return Name;
     }
+
 }

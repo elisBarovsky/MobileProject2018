@@ -285,6 +285,33 @@ $(document).on('pageinit', '#TimeTablePage', function () {
 
 function LoadTimeTable(results) {
     res = $.parseJSON(results.d);
-    alert("מערכת שעות");
+
+    if (res.length > 0) {
+        var tableInfo = "";
+        var counter = 0;
+
+        for (var i = 1; i < 10; i++)
+        {
+            tableInfo += "<tr>";
+            for (var j = 1; j < 7; j++)
+            {
+                if (res[counter][0] == i && res[2] == j) {
+                    tableInfo += "<td>" + res[counter][1] + "<br/>" + res[counter][3] + "</td>";
+                    counter++;
+                }
+                else {
+                    tableInfo += "<td> </td>"
+                }
+            }
+
+        }
+        document.getElementById("TimeTable").innerHTML = tableInfo;
+
+        
+
+    }
+    else {
+        alert("לכיתה עוד לא נוצרה מערכת");
+    }
 }
 

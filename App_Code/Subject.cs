@@ -33,4 +33,9 @@ public class Subject
     {
         return db.AddNewSubject(newSubject);
     }
+
+    public string GetSubjectNameBySubjectCode(string subjectCode)
+    {
+        return db.GetSubjectNameBySubjectCode(subjectCode);
+    }
 }
