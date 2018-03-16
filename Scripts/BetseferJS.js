@@ -108,22 +108,10 @@ function renderFillUser(results) {
     }
     document.getElementById("UserIMG").src = imgSRC;
     $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
-
-    //$('#Q1').empty();
-    //dynamicLy = "<option value='0'>בחר</option>";
-    //$('#Q1').append(dynamicLy);
-    //$('#Q1').selectmenu('refresh');
-    //$.each(res, function (i, row) {
-    //    dynamicLy = " <option value='" + (i + 1) + "' style='text- align:right'>" + row + "</option> ";
-    //    $('#Q1').append(dynamicLy);
-    //    $('#Q1').selectmenu('refresh');
-    //});
 }
 
 //new user login - fill questions
 $(document).on("pageinit", "#SecurityQuestionsPage", function (event) {
-    //document.getElementById("Q2").style.display = 'none'; 
-    //document.getElementById("LQ2").style.display = 'none'; 
     FillSecurityQ(renderFillSecurityQ);  
 });
 
@@ -166,9 +154,6 @@ $(document).on('vclick', '#SaveQBTN', function () {
     SecurityQA.choosenQ2 = document.getElementById("Q2").value;
     SecurityQA.choosenA1 = document.getElementById("ans1").value;
     SecurityQA.choosenA2 = document.getElementById("ans2").value;
-
-    //localStorage.setItem("UserID", UserInfo.ID); //saving in localS
-    //localStorage.setItem("PasswordTB", UserInfo.PS); //saving in localS
     SaveQuestion(SecurityQA, renderSaveQuestion);
 });
 UserFullInfo = new Object();
@@ -189,9 +174,7 @@ Useraouto = new Object();
 $(document).on('vclick', '#toQuestions', function (event) {
     Useraouto.ID = document.getElementById("UserId").value;
     Useraouto.Bday = document.getElementById("date").value;
-
     localStorage.setItem("UserID", Useraouto.ID);
-
     GetUserQuestionsByIdAndBday(Useraouto, renderMoveToQuestions);
 });
 
@@ -202,8 +185,7 @@ function renderMoveToQuestions(results) {
         document.getElementById("Q2").innerHTML = "?" + res[2];
         localStorage.setItem("ans1", res[1]);
         localStorage.setItem("ans2", res[3]);
-    $.mobile.changePage("#AnswerQuestionsBeforeLogin", { transition: "slide", changeHash: false }); // מעביר עמוד 
-
+       $.mobile.changePage("#AnswerQuestionsBeforeLogin", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
     else {
         alert("משתמש לא קיים.");
@@ -349,6 +331,14 @@ $(document).on('pageinit', '#HomeWorkPage', function () {
     user.UserType = localStorage.getItem("UserType");
     FillSubjects(user, FillSubjectsDDL);
     FillHW(user, LoadTimeTable);
+});
+
+$(document).on('pageinit', '#CalendarPage', function () {
+
+});
+
+$(document).on('pageinit', '#NotesPage', function () {
+
 });
 
 function FillSubjectsDDL(results) {

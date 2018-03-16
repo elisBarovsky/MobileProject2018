@@ -155,7 +155,7 @@ public class DBconnectionTeacher
 
     public DataTable FillAllHomeWork(string ClassCode)//WebService
     {
-        string selectSTR = "SELECT  HWCode,IsLehagasha , HWDueDate ,HWInfo,HWGivenDate" +
+        string selectSTR = "SELECT  HWCode,IsLehagasha,LessonsCode , HWDueDate ,HWInfo,HWGivenDate" +
                             " FROM dbo.HomeWork where  CodeClass = '" + ClassCode + "'";
         DataTable dtt = new DataTable();
         DataSet ds;
@@ -229,10 +229,10 @@ public class DBconnectionTeacher
 
     public DataTable FillBySubjectHomeWork(string PupilID, string ChooseSubjectCode) //webService
     {
-        string selectSTR = " SELECT  dbo.GivenNotes.Comment , dbo.GivenNotes.NoteDate , dbo.Lessons.LessonName , dbo.NoteType.NoteName" +
-                          " FROM  dbo.Users inner JOIN dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID inner JOIN dbo.GivenNotes " +
-                          "ON dbo.Users.UserID = dbo.GivenNotes.PupilID  inner JOIN dbo.NoteType ON dbo.GivenNotes.CodeNoteType = dbo.NoteType.CodeNoteType  INNER JOIN  dbo.Lessons ON dbo.GivenNotes.LessonsCode = dbo.Lessons.CodeLesson " +
-                          " where dbo.Pupil.UserID='" + PupilID + "' and LessonsCode = '" + ChooseSubjectCode + "'";
+        string selectSTR = " SELECT dbo.HomeWork.HWGivenDate,(dbo.Users.UserFName+' ' +dbo.Users.UserLName) as TeacherName, dbo.Lessons.LessonName ,dbo.HomeWork.HWInfo, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha" +
+                          " FROM  dbo.Users INNER JOIN dbo.HomeWork ON dbo.Users.UserID = dbo.HomeWork.TeacherID INNER JOIN  dbo.Lessons  " +
+                          " ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson " +
+                          " where dbo.HomeWork.CodeClass= (select [CodeClass] from [dbo].[Pupil] where [UserID]='"+ PupilID + "') and dbo.Lessons.CodeLesson='"+ ChooseSubjectCode + "'";
         DataTable dtt = new DataTable();
         DataSet ds;
         try
