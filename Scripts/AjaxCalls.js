@@ -144,10 +144,10 @@ function FillSubjectByPupilId(user, FillSubjectsDDL) {
 
 function FillHW(user, LoadHWTable) {
 
-    var dataString = JSON.stringify(user);
+    var dataString = JSON.stringify(user); 
     $.ajax({
         url: 'BetseferWS.asmx/FillHW',
-        data: JSON.stringify({ 'UserID': user.UserID }),
+        data: JSON.stringify({ 'UserID': user.PupilID }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
