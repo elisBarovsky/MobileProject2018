@@ -59,6 +59,10 @@ $(window).on("resize", function () {
 
 });
 
+function SavePupilId(results) {
+    res = $.parseJSON(results.d);
+    localStorage.setItem("PupilID", res);
+}
 
 UserInfo = new Object();
 $(document).on('vclick', '#LoginBTN', function () {
@@ -85,10 +89,16 @@ function renderlogin(results) {
         document.getElementById("PasswordTB").value = "";
     }
     else { // already login -> go to main page according the type user. 
-        alert("שלוום");
         localStorage.setItem("UserType", res[1]);
-        UserFullInfo.Id = localStorage.getItem("UserID");
-        GetUserInfo(UserFullInfo, renderFillUser);
+        var UserId = localStorage.getItem("UserID");
+        var type = localStorage.getItem("UserType");
+        user = new Object();
+        user.UserId = UserId;
+        user.type = type;
+
+        GetPupilId(user, SavePupilId);
+
+        GetUserInfo(user, renderFillUser);
     }
 }
 
@@ -435,6 +445,7 @@ function renderGivenHWByCode(results) {
     $('#DynamicHWInfo').listview('refresh');
 }
 
+
 Grade = new Object();
 $(document).on('pageinit', '#GradesPage', function () {
     Grade.ID = localStorage.getItem("UserID");
@@ -538,3 +549,41 @@ function renderGivenGradeByDate(results) {
     $("#chartContainer").CanvasJSChart(options);
 
 }
+
+User = new Object();
+
+$(document).on('vclick', '#pupilB', function (event) {
+    var PupilID = localStorage.getItem("PupilID");
+    User.PupilID = PupilID;
+    User.type = 4;
+    FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone );
+});
+
+$(document).on('vclick', '#parentB', function (event) {
+    var PupilID = localStorage.getItem("PupilID");
+    User.PupilID = PupilID;
+    User.type = 3;
+    FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
+});
+
+//$('.mySearchInputName').textinput();
+//
+
+function FillListViewCellPhone(results) {
+    res = $.parseJSON(results.d);
+    var counter = 0;
+    var phoneIcon = "Images/PhoneIcon.png";
+
+    $('#contactsLV').empty();
+
+    for (var i = 0; i < res.length; i++) {
+
+        dynamicLy = "<li><p><center><input id='" + res[counter].PhoneNumber +
+            "' src='" + phoneIcon + "' type='image'  height='25' style='float: left' /> &nbsp;" +
+            res[counter].PhoneNumber + " &nbsp;&nbsp; " + res[counter].FullName + "  </p> </li>";
+        counter++;
+        $('#contactsLV').append(dynamicLy);
+        $('#contactsLV').listview('refresh');
+    }
+}
+

@@ -113,8 +113,8 @@ public class BetseferWS : System.Web.Services.WebService
         }
         
         JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonStringTelephoneList = js.Serialize(Qestions);
-        return jsonStringTelephoneList;
+        string jsonStringQ = js.Serialize(Qestions);
+        return jsonStringQ;
     }
 
     [WebMethod]
@@ -128,23 +128,55 @@ public class BetseferWS : System.Web.Services.WebService
         int anssss = ans + ans2;
 
         JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonStringTelephoneList = js.Serialize(anssss);
-        return jsonStringTelephoneList;
+        string jsonStringQ = js.Serialize(anssss);
+        return jsonStringQ;
     }
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string TelephoneList(string UserTypeFilter,string PupilID)
+    public string TelephoneList(string type, string PupilID)
     {
         Users PupilClass = new Users();
         string PupilClassCode = PupilClass.GetPupilOtClass(PupilID);
 
         TelphoneList TL = new TelphoneList();
-        DataTable DT =  TL.FilterTelphoneList(UserTypeFilter, PupilClassCode);
-        
+        DataTable DT =  TL.FilterTelphoneList(type, PupilClassCode);
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in DT.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in DT.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
         JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonStringTelephoneList = js.Serialize(DT);
+        string jsonStringTelephoneList = js.Serialize(list);
         return jsonStringTelephoneList;
+    }
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetPupilIdByUserTypeAndId(string UserId, string type)
+    {
+        Users u = new Users();
+        string PupilId = "";
+        if (type == "Pupil")
+        {
+            PupilId = UserId;
+        }
+        else
+        {
+            PupilId = u.GetPupilIdByUserTypeAndId(UserId);
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillHW = js.Serialize(PupilId);
+        return jsonStringFillHW;
     }
 
     [WebMethod]
