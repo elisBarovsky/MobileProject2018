@@ -59,10 +59,10 @@ $(window).on("resize", function () {
 
 });
 
-//function SavePupilId(results) {
-//    res = $.parseJSON(results.d);
-//    localStorage.setItem("PupilID", res);
-//}
+function SavePupilId(results) {
+    res = $.parseJSON(results.d);
+    localStorage.setItem("PupilID", res);
+}
 
 UserInfo = new Object();
 $(document).on('vclick', '#LoginBTN', function () {
@@ -84,7 +84,10 @@ function renderlogin(results) {
         $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false });
     }
     else if (res[0] == "wrongDetails") { //wrong details
-        alert("פרטים לא קיימים במערכת, בדוק שהקלדת פרטי זיהוי נכון.");
+        $.alert({
+            title: 'שגיאה',
+            content: 'פרטים לא קיימים במערכת, בדוק שהקלדת פרטי זיהוי נכון',
+        });
         document.getElementById("IDTB").value = "";
         document.getElementById("PasswordTB").value = "";
     }
@@ -96,14 +99,21 @@ function renderlogin(results) {
         user.UserId = UserId;
         user.type = type;
 
-     //   GetPupilId(user, SavePupilId);
-
         GetUserInfo(user, renderFillUser);
     }
 }
 
 function renderFillUser(results) {
-    //this is the callBackFunc 
+    //Save pupil in localstorage
+    var UserId = localStorage.getItem("UserID");
+    var type = localStorage.getItem("UserType");
+    user = new Object();
+    user.UserId = UserId;
+    user.type = type;
+
+    GetPupilId(user, SavePupilId);
+//****************************************************
+
     res = $.parseJSON(results.d); 
     document.getElementById("UserNameLBL").innerHTML = " שלום "+res[0] + " " + res[1] ;
     if (res[5]=="") {
@@ -172,7 +182,10 @@ function renderSaveQuestion(results) {
         $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
     else {
-        alert("הייתה בעיה בשמירת נתונים, פנה לשירות לקוחות");
+        $.alert({
+            title: 'שגיאה',
+            content: 'הייתה בעיה בשמירת נתונים, פנה לשירות לקוחות',
+        });
     }
 }
 
@@ -194,7 +207,10 @@ function renderMoveToQuestions(results) {
        $.mobile.changePage("#AnswerQuestionsBeforeLogin", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
     else {
-        alert("משתמש לא קיים.");
+        $.alert({
+            title: 'שגיאה',
+            content: 'משתמש לא קיים',
+        });
         document.getElementById("UserId").value = "";
         document.getElementById("bDay").value = "";
     }
@@ -207,7 +223,11 @@ $(document).on('vclick', '#CheckMyAns', function (event) {
     q2 = localStorage.getItem("ans2");
 
     if (ans1 == "" || ans2 == "") {
-        alert("עליך לענות על שתי השאלות");
+
+        $.alert({
+            title: 'שגיאה',
+            content: 'עליך לענות על שתי השאלות',
+        });
     }
     else if (q1 == ans1 && q2 == ans2) {
 
@@ -220,7 +240,11 @@ $(document).on('vclick', '#CheckThePasswords', function (event) {
     pas2 = document.getElementById("pas2").value;
 
     if (pas1 == "" || pas2 == "") {
-        alert("יש להזין את הסיסמא פעמיים");
+
+        $.alert({
+            title: 'שגיאה',
+            content: 'יש להזין את הסיסמא פעמיים',
+        });
     }
     else if (pas1 == pas2) {
         user = new Object();
@@ -229,7 +253,10 @@ $(document).on('vclick', '#CheckThePasswords', function (event) {
         SaveNewPassword(user, tellMeItsOk);
     }
     else {
-        alert("הסיסמאות שהוזנו אינן תואמות");
+        $.alert({
+            title: 'שגיאה',
+            content: 'הסיסמאות שהוזנו אינן תואמות',
+        });
         document.getElementById("pas1").value = "";
         document.getElementById("pas2").value = "";
     }
@@ -238,11 +265,17 @@ $(document).on('vclick', '#CheckThePasswords', function (event) {
 function tellMeItsOk(results) {
     res = $.parseJSON(results.d);
     if (res > 0) {
-        alert("סיסמתך נשמרה בהצלחה");
+        $.alert({
+            title: ':)',
+            content: 'סיסמתך נשמרה בהצלחה',
+        });
         window.location.href = "index.html"
     }
     else {
-        alert("ארעה תקלה בעת שמירת הסיסמא. נא פנה לשירות הלקוחות");
+        $.alert({
+            title: 'תקלה',
+            content: 'ארעה תקלה בעת שמירת הסיסמא. נא פנה לשירות הלקוחות',
+        });
     }
 }
 
@@ -292,17 +325,15 @@ $(document).on('vclick', '#LogOut', function () {
 });
 
 $(document).on('pageinit', '#TimeTablePage', function () {
-    userTT = new Object();
-    userTT.UserID = localStorage.getItem("UserID");
-    userTT.UserType = localStorage.getItem("UserType");
-    LoadTimeTableByTypeAndId(userTT, LoadTimeTable);
+    PupilID = localStorage.getItem("PupilID");
+    LoadTimeTableByTypeAndId(PupilID, LoadTimeTable);
 });
 
 function LoadTimeTable(results) {
     res = $.parseJSON(results.d);
 
     if (res.length > 0) {
-
+        document.getElementById("noTT").style.visibility = "hidden";
         var tableInfo = "<tr><th scope='col'>שישי</th><th scope='col'>חמישי</th><th scope='col'>רביעי</th><th scope='col'>שלישי</th><th scope='col'>שני</th><th scope='col'>ראשון</th><th scope='col'>שיעור</th></tr>";
         var counter = 0;
 
@@ -324,13 +355,13 @@ function LoadTimeTable(results) {
         document.getElementById("TimeTable").innerHTML = tableInfo;
     }
     else {
-        alert("לכיתה עוד לא נוצרה מערכת");
+        document.getElementById("noTT").style.visibility = "visibile";
     }
 }
 
 $(document).on('pageinit', '#HomeWorkPage', function () {
     user = new Object();
-    user.UserID = localStorage.getItem("UserID");
+    user.PupilID = localStorage.getItem("PupilID");
     user.UserType = localStorage.getItem("UserType");
     FillSubjectByPupilId(user, FillSubjectsDDL);
 });
@@ -341,7 +372,7 @@ $(document).on('pageinit', '#CalendarPage', function () {    ///////////////////
 
 UserInfoNote = new Object();
 $(document).on('pageinit', '#NotesPage', function () {
-    UserInfoNote.ID = localStorage.getItem("UserID");
+    UserInfoNote.ID = localStorage.getItem("PupilID");
     GetUserNotes(UserInfoNote, renderNotes);
 });
 
@@ -365,6 +396,7 @@ function renderNotes(results) {
 }
 
 Note = new Object();
+
 $(document).on('vclick', '#DynamicListNotes li a', function () { // on the pageinit of info about Product page
     Note.Code = $(this).attr("data-id");
     GivenNoteByCode(Note, renderGivenNoteByCode);
@@ -421,6 +453,7 @@ function LoadHWTable(results) {
 }
 
 HomeWork = new Object();
+
 $(document).on('vclick', '#DynamicListHW li a', function () { // on the pageinit of info about Product page
     HomeWork.Code = $(this).attr("data-id");
     GivenHomeWorkByCode(HomeWork, renderGivenHWByCode);
@@ -445,10 +478,10 @@ function renderGivenHWByCode(results) {
     $('#DynamicHWInfo').listview('refresh');
 }
 
-
 Grade = new Object();
+
 $(document).on('pageinit', '#GradesPage', function () {
-    Grade.ID = localStorage.getItem("UserID");
+    Grade.ID = localStorage.getItem("PupilID");
     GetUserGrades(Grade, renderGrades);
 });
 
@@ -472,6 +505,7 @@ function renderGrades(results) {
 }
 
 GradeDate = new Object();
+
 $(document).on('vclick', '#DynamicListGrades li a', function () { // on the pageinit of info about Product page
     GradeDate.Date = $(this).attr("data-id");
     PupilGrade = $(this).attr("id");
@@ -480,14 +514,14 @@ $(document).on('vclick', '#DynamicListGrades li a', function () { // on the page
     $.mobile.changePage("#GradeInfoPage", { transition: "slide", changeHash: false });
 });
 
-
+//graff
 function renderGivenGradeByDate(results) {
     //this is the callBackFunc 
     results = $.parseJSON(results.d);
     var counter = 0;
     var counter1 = 0;
     var GradeAvg = 0;
-    var  PupilGradeThis = localStorage.getItem("PupilGrade");
+    var PupilGradeThis = localStorage.getItem("PupilGrade");
     var GradePos = 0;
     for (var i = 0; i < results.length; i++) {
         if (results[counter1].Grade == PupilGradeThis) {
@@ -553,14 +587,14 @@ function renderGivenGradeByDate(results) {
 
 User = new Object();
 
-$(document).on('vclick', '#pupilB', function (event) {
+$(document).on('vclick', '#pupilBphone', function (event) {
     var PupilID = localStorage.getItem("PupilID");
     User.PupilID = PupilID;
     User.type = 4;
     FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone );
 });
 
-$(document).on('vclick', '#parentB', function (event) {
+$(document).on('vclick', '#parentBphone', function (event) {
     var PupilID = localStorage.getItem("PupilID");
     User.PupilID = PupilID;
     User.type = 3;
@@ -581,7 +615,7 @@ function FillListViewCellPhone(results) {
 
         dynamicLy = "<li><p><center><input id='" + res[counter].PhoneNumber +
             "' src='" + phoneIcon + "' type='image'  height='25' style='float: left' /> &nbsp;" +
-            res[counter].PhoneNumber + " &nbsp;&nbsp; " + res[counter].FullName + "  </p> </li>";
+            res[counter].PhoneNumber + " &nbsp;&nbsp; " + res[counter].FullName + " </center> </p> </li>";
         counter++;
         $('#contactsLV').append(dynamicLy);
         $('#contactsLV').listview('refresh');

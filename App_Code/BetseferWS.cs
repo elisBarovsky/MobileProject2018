@@ -140,7 +140,7 @@ public class BetseferWS : System.Web.Services.WebService
         string PupilClassCode = PupilClass.GetPupilOtClass(PupilID);
 
         TelphoneList TL = new TelphoneList();
-        DataTable DT =  TL.FilterTelphoneList(type, PupilClassCode);
+        DataTable DT =  TL.FilterTelphoneListForMobile(type, PupilClassCode);
 
         var list = new List<Dictionary<string, object>>();
 
@@ -248,17 +248,10 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string GivenTimeTableByPupilID(string UserID, string UserType)
+    public string GivenTimeTableByPupilID(string PupilID)
     {
-        switch (UserType)
-        {
-            case "teacher":
-                break;
-            case "Child":
-                break;
-        }
         Users PupilClass = new Users();
-        string PupilClassCode = PupilClass.GetPupilOtClass(UserID);
+        string PupilClassCode = PupilClass.GetPupilOtClass(PupilID);
         TimeTable TimeTableByClassCode = new TimeTable();
 
         List<Dictionary<string, string>> ls = TimeTableByClassCode.GetTimeTableAcordingToClassCodeForMobile(int.Parse(PupilClassCode));
@@ -331,11 +324,11 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string getSubjectsByPupilId(string UserID)
+    public string getSubjectsByPupilId(string PupilID)
     {
         Users PupilClass = new Users();
         Subject s = new Subject();
-        List<string> subjects = s.getSubjectsByPupilId(UserID);
+        List<string> subjects = s.getSubjectsByPupilId(PupilID);
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringFillSubjects = js.Serialize(subjects);

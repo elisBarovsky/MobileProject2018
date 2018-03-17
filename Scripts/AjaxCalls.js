@@ -88,12 +88,12 @@ function SaveNewPassword(user, tellMeItsOk) {
     });
 }
 
-function LoadTimeTableByTypeAndId(userTT, LoadTimeTable) {
+function LoadTimeTableByTypeAndId(PupilID, LoadTimeTable) {
 
-    var dataString = JSON.stringify(userTT);
+    var dataString = JSON.stringify(PupilID);
     $.ajax({
         url: 'BetseferWS.asmx/GivenTimeTableByPupilID',
-        data: JSON.stringify({ 'UserID': userTT.UserID, 'UserType': userTT.UserType }),
+        data: JSON.stringify({ 'PupilID': PupilID}),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
@@ -129,7 +129,7 @@ function FillSubjectByPupilId(user, FillSubjectsDDL) {
     var dataString = JSON.stringify(user);
     $.ajax({
         url: 'BetseferWS.asmx/getSubjectsByPupilId',
-        data: JSON.stringify({ 'UserID': user.UserID }),
+        data: JSON.stringify({ 'PupilID': user.PupilID }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
