@@ -455,16 +455,16 @@ function renderGivenNoteByCode(results) {
 
 function FillSubjectsDDL(results) {
     FillHW(user, LoadHWTable);
-    res = $.parseJSON(results.d);
-    $('#subjectsDDL').empty();
-    dynamicLy = "<option value='0'>סנן לפי מקצוע</option>";
-    $('#subjectsDDL').append(dynamicLy);
-    $('#subjectsDDL').selectmenu('refresh');
-    $.each(res, function (i, row) {
-        dynamicLy = " <option value='" + (i + 1) + "' style='text- align:right'>" + row + "</option> ";
-        $('#subjectsDDL').append(dynamicLy);
-        $('#subjectsDDL').selectmenu('refresh');
-    });
+    //res = $.parseJSON(results.d);
+    //$('#subjectsDDL').empty();
+    //dynamicLy = "<option value='0'>סנן לפי מקצוע</option>";
+    //$('#subjectsDDL').append(dynamicLy);
+    //$('#subjectsDDL').selectmenu('refresh');
+    //$.each(res, function (i, row) {
+    //    dynamicLy = " <option value='" + (i + 1) + "' style='text- align:right'>" + row + "</option> ";
+    //    $('#subjectsDDL').append(dynamicLy);
+    //    $('#subjectsDDL').selectmenu('refresh');
+    //});
 }
 
 function LoadHWTable(results) {
@@ -549,7 +549,7 @@ $(document).on('vclick', '#DynamicListGrades li a', function () { // on the page
     $.mobile.changePage("#GradeInfoPage", { transition: "slide", changeHash: false });
 });
 
-//graff
+//graph
 function renderGivenGradeByDate(results) {
     //this is the callBackFunc 
     results = $.parseJSON(results.d);
