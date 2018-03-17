@@ -461,17 +461,65 @@ public class DBconnectionTeacher
     public DataTable FilterTelphoneList(string UserTypeFilterType, string ClassFilter)
     {
         string selectSTR = "";
-        if (UserTypeFilterType=="4")
+        if (UserTypeFilterType=="4") //pupil
         {
              selectSTR = "  SELECT  dbo.Users.PhoneNumber as 'מספר סלולרי', (dbo.Users.UserFName +' '+ dbo.Users.UserLName) as 'שם מלא' " +
                      " FROM dbo.Users full JOIN dbo.PupilsParent ON dbo.Users.UserID = dbo.PupilsParent.PupilID  AND dbo.Users.UserID = dbo.PupilsParent.ParentID Full JOIN" +
                      " dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID   where dbo.Users.CodeUserType='" + UserTypeFilterType + "'and dbo.Pupil.CodeClass='" + ClassFilter + "'";
         }
-        else
+        else //parent -> 3
         {
              selectSTR = "SELECT dbo.Users.PhoneNumber,( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'שם הורה'"+
                                 " FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID"+
                                 " where dbo.PupilsParent.codeClass = '"+ ClassFilter + "'";
+        }
+
+        DataTable dtt = new DataTable();
+        DataSet ds;
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
+            ds = new DataSet("TelephoneNumDS");
+            daa.Fill(ds);
+            return dtt = ds.Tables[0];
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public DataTable FilterTelphoneListForMobile(string UserTypeFilterType, string ClassFilter) //newwwwwwwwww
+    {
+        string selectSTR = "";
+        if (UserTypeFilterType == "4") //pupil
+        {
+            selectSTR = "  SELECT  dbo.Users.PhoneNumber, (dbo.Users.UserFName +' '+ dbo.Users.UserLName) as 'FullName' " +
+                    " FROM dbo.Users full JOIN dbo.PupilsParent ON dbo.Users.UserID = dbo.PupilsParent.PupilID  AND dbo.Users.UserID = dbo.PupilsParent.ParentID Full JOIN" +
+                    " dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID   where dbo.Users.CodeUserType='" + UserTypeFilterType + "'and dbo.Pupil.CodeClass='" + ClassFilter + "'";
+        }
+        else //parent -> 3
+        {
+            selectSTR = "SELECT dbo.Users.PhoneNumber,( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'FullName'" +
+                               " FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID" +
+                               " where dbo.PupilsParent.codeClass = '" + ClassFilter + "'";
         }
 
         DataTable dtt = new DataTable();

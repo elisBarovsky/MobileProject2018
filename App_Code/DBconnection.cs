@@ -1569,4 +1569,44 @@ public class DBconnection
             }
         }
     }
+
+    public string GetPupilIdByParentId(string UserId)
+    {
+        String selectSTR = "SELECT dbo.PupilsParent.PupilID FROM dbo.UserType INNER JOIN " +
+                         "dbo.Users ON dbo.UserType.CodeUserType = dbo.Users.CodeUserType INNER JOIN " +
+                         "dbo.PupilsParent ON dbo.Users.UserID = dbo.PupilsParent.ParentID " +
+                         "where dbo.PupilsParent.ParentID ='"+ UserId + "'";
+        string PupilId = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                PupilId = dr[0].ToString();
+            }
+            return PupilId;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
 }

@@ -332,5 +332,11 @@ public class Users
         }
         return true;
     }
+
+    public string GetPupilIdByUserTypeAndId(string UserId)
+    {
+        DBconnection db = new DBconnection();
+        return db.GetPupilIdByParentId(UserId);
+    }
 }
 

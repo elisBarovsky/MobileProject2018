@@ -201,3 +201,9 @@
         right: 0 !important
     }
 }
+
+.sideBySide {
+    float: left;
+    position: relative;
+    width: 20%;
+}
