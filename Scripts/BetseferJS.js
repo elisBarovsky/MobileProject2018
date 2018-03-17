@@ -3,6 +3,7 @@ $(document).on("pageinit", "#LoginPage", function (event) {
     $(".navbar-header").hide();
 });
 
+//menu things
 $(document).on("pageinit", "#DashBordPage", function (event) {
     $(".navbar-header").show();
 
@@ -64,6 +65,7 @@ function SavePupilId(results) {
 }
 
 UserInfo = new Object();
+
 $(document).on('vclick', '#LoginBTN', function () {
 
     UserInfo.ID = document.getElementById("IDTB").value;
@@ -76,6 +78,7 @@ $(document).on('vclick', '#LoginBTN', function () {
 
 //check login details and decide which page to go.
 UserFullInfo = new Object();
+
 function renderlogin(results) {
     res = $.parseJSON(results.d);
     if (res[0] == "openSeqQestion") { // go to fill identity questions page
@@ -85,7 +88,7 @@ function renderlogin(results) {
     else if (res[0] == "wrongDetails") { //wrong details
         $.alert({
             title: 'שגיאה',
-            content: 'פרטים לא קיימים במערכת, בדוק שהקלדת פרטי זיהוי נכון',
+            content: 'לנתונים שהוזנו אין הרשאת כניסה למערכת'
         });
         document.getElementById("IDTB").value = "";
         document.getElementById("PasswordTB").value = "";

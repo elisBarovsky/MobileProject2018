@@ -54,7 +54,7 @@ public class BetseferWS : System.Web.Services.WebService
         string UserType = UserLogin.GetUserType(UserID, password);
         string isvalid = "";
 
-        if (UserType == "")
+        if (UserType == "" || UserType == "1" || UserType == "2")
         {
             isvalid = "wrongDetails";
         }
