@@ -13,15 +13,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
     <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 
-
     <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
     <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 
     <!-- Bootstrap Date-Picker Plugin -->
          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
-
-
 
     <script>
     $(document).ready(function () {
@@ -243,6 +240,7 @@
             <div data-role="page" id="NotesPageFull" data-add-back-btn="true"> <!--Full NotesPage Page-->
                
                 <div data-role="header" id="head">
+                    <a href="#NotesPage" class="ui-btn-left" data-theme="c" data-transition="slide" data-direction="reverse" data-icon="back" style="color:cornflowerblue">חזור</a>
                 </div>
                 <!-- /header -->
                 <div data-role="content" style="text-align:right;padding-right:20px;margin-right:20px">
@@ -273,8 +271,6 @@
                 </div>
                 <!-- /header -->
                 <div data-role="content" style="text-align:right;padding-right:20px;margin-right:20px">
-                    <input type="button" value="Go Back From Whence You Came!" onclick="history.back(-1)" />
-
                     <ul data-role="listview" id="DynamicHWInfo"></ul>
                     <div data-role="collapsible-set" data-theme="c" data-content-theme="d" id="attriInfo">
                     </div>
@@ -297,7 +293,7 @@
             </div>
             <div data-role="page" id="GradeInfoPage" data-add-back-btn="true"> <!--Grade Info Page  -->             
                 <div data-role="header" id="head" >
-                    <a href="#GradesPage" class="ui-btn-left" data-theme="b" data-transition="slide" data-direction="reverse" data-icon="back" style="color:white">חזור</a>
+                    <a href="#GradesPage" class="ui-btn-left" data-theme="c" data-transition="slide" data-direction="reverse" data-icon="back" style="color:white">חזור</a>
                 </div>
                 <!-- /header -->
                 <div data-role="content" style="text-align:right;padding-right:20px;margin-right:20px" >
@@ -329,7 +325,7 @@
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
-                <div data-role="content">
+                <div data-role="content" style="text-align:right;">
                     <h2>דף קשר</h2>
                     <br />
                     <center>
@@ -345,7 +341,7 @@
                         <div data-role="footer" data-position="fixed" id="foot">
                             <img src="Images/Betsefer.png" id="logo" />
                         </div>
-</div>
+                </div>
             </div>
          </div>
      </div>

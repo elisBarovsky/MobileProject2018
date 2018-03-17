@@ -6,57 +6,56 @@ $(document).on("pageinit", "#LoginPage", function (event) {
 $(document).on("pageinit", "#DashBordPage", function (event) {
     $(".navbar-header").show();
 
-$('#slide-nav.navbar-inverse').after($('<div class="inverse" id="navbar-height-col"></div>'));
-$('#slide-nav.navbar-default').after($('<div id="navbar-height-col"></div>'));
+    $('#slide-nav.navbar-inverse').after($('<div class="inverse" id="navbar-height-col"></div>'));
+    $('#slide-nav.navbar-default').after($('<div id="navbar-height-col"></div>'));
 
-var slidewidth = '20%';
-var navbarneg = '-' + slidewidth;
+    var slidewidth = '20%';
+    var navbarneg = '-' + slidewidth;
 
-if ($(window).width() < 767) {
-    $('#navbar-height-col').css("width", slidewidth);
-    $('#navbar-height-col').css("right", navbarneg);
-    $('#slide-nav #slidemenu').css("width", slidewidth);
-}
-
-$("#slide-nav").on("click", '.navbar-toggle', function (e) {
-
-    // slider is active
-    var selected = $(this).hasClass('slide-active');
-
-    // set slidemenu width
-    $('#slidemenu').stop().animate({
-        right: selected ? navbarneg : '0px'
-    });
-
-    // set navbar width
-    $('#navbar-height-col').stop().animate({
-        right: selected ? navbarneg : '0px'
-    });
-
-    // set content right
-    $('#page-content').stop().animate({
-        right: selected ? '0px' : slidewidth
-    });
-
-    // set navbar right
-    $('.navbar-header').stop().animate({
-        right: selected ? '0px' : slidewidth
-    });
-
-    $(this).toggleClass('slide-active', !selected);
-    $('#slidemenu').toggleClass('slide-active');
-
-    $('#page-content, .navbar, body, .navbar-header').toggleClass('slide-active');
-});
-
-var selected = '#slidemenu, #page-content, body, .navbar, .navbar-header';
-
-$(window).on("resize", function () {
-    if ($(window).width() > 767 && $('.navbar-toggle').is(':hidden')) {
-        $(selected).removeClass('slide-active');
+    if ($(window).width() < 767) {
+        $('#navbar-height-col').css("width", slidewidth);
+        $('#navbar-height-col').css("right", navbarneg);
+        $('#slide-nav #slidemenu').css("width", slidewidth);
     }
-});
 
+    $("#slide-nav").on("click", '.navbar-toggle', function (e) {
+
+        // slider is active
+        var selected = $(this).hasClass('slide-active');
+
+        // set slidemenu width
+        $('#slidemenu').stop().animate({
+            right: selected ? navbarneg : '0px'
+        });
+
+        // set navbar width
+        $('#navbar-height-col').stop().animate({
+            right: selected ? navbarneg : '0px'
+        });
+
+        // set content right
+        $('#page-content').stop().animate({
+            right: selected ? '0px' : slidewidth
+        });
+
+        // set navbar right
+        $('.navbar-header').stop().animate({
+            right: selected ? '0px' : slidewidth
+        });
+
+        $(this).toggleClass('slide-active', !selected);
+        $('#slidemenu').toggleClass('slide-active');
+
+        $('#page-content, .navbar, body, .navbar-header').toggleClass('slide-active');
+    });
+
+     var selected = '#slidemenu, #page-content, body, .navbar, .navbar-header';
+
+    $(window).on("resize", function () {
+        if ($(window).width() > 767 && $('.navbar-toggle').is(':hidden')) {
+            $(selected).removeClass('slide-active');
+        }
+    });
 });
 
 function SavePupilId(results) {
@@ -394,13 +393,44 @@ function renderNotes(results) {
         $('#DynamicListNotes').listview('refresh');
     }
 }
+function CloseNavigation() {
+    var slidewidth = '20%';
+    var navbarneg = '-' + slidewidth;
+    var selected = true;
+
+    // set slidemenu width
+    $('#slidemenu').stop().animate({
+        right: selected ? navbarneg : '0px'
+    });
+
+    // set navbar width
+    $('#navbar-height-col').stop().animate({
+        right: selected ? navbarneg : '0px'
+    });
+
+    // set content right
+    $('#page-content').stop().animate({
+        right: selected ? '0px' : slidewidth
+    });
+
+    // set navbar right
+    $('.navbar-header').stop().animate({
+        right: selected ? '0px' : slidewidth
+    });
+
+    $(this).toggleClass('slide-active', !selected);
+    $('#slidemenu').toggleClass('slide-active');
+
+    $('#page-content, .navbar, body, .navbar-header').toggleClass('slide-active');
+}
 
 Note = new Object();
 
 $(document).on('vclick', '#DynamicListNotes li a', function () { // on the pageinit of info about Product page
     Note.Code = $(this).attr("data-id");
     GivenNoteByCode(Note, renderGivenNoteByCode);
-    $.mobile.changePage("#NotesPageFull", { transition: "slide", changeHash: false });
+    CloseNavigation();   
+    $.mobile.changePage("#NotesPageFull", { transition: "slide", changeHash: false });  
 });
 
 function renderGivenNoteByCode(results) {
@@ -457,6 +487,7 @@ HomeWork = new Object();
 $(document).on('vclick', '#DynamicListHW li a', function () { // on the pageinit of info about Product page
     HomeWork.Code = $(this).attr("data-id");
     GivenHomeWorkByCode(HomeWork, renderGivenHWByCode);
+    CloseNavigation();
     $.mobile.changePage("#HomeWorkPageInfo", { transition: "slide", changeHash: false });
 });
 
@@ -511,6 +542,7 @@ $(document).on('vclick', '#DynamicListGrades li a', function () { // on the page
     PupilGrade = $(this).attr("id");
     localStorage.setItem("PupilGrade", PupilGrade);
     GivenGradeByCode(GradeDate, renderGivenGradeByDate);
+    CloseNavigation();
     $.mobile.changePage("#GradeInfoPage", { transition: "slide", changeHash: false });
 });
 
