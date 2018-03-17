@@ -213,3 +213,37 @@ function GivenHomeWorkByCode(HomeWork, renderGivenNoteByCode) {
         }
     });
 }
+
+function FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone) {
+    var dataString = JSON.stringify(User);
+    $.ajax({
+        url: 'BetseferWS.asmx/TelephoneList',
+        data: JSON.stringify({ 'type': User.type, 'PupilID': User.PupilID}),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            FillListViewCellPhone(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
+function GetPupilId(user, SavePupilId) {
+    var dataString = JSON.stringify(User);
+    $.ajax({
+        url: 'BetseferWS.asmx/GetPupilIdByUserTypeAndId',
+        data: JSON.stringify({ 'UserId': user.UserId, 'type': user.type }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            SavePupilId(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}

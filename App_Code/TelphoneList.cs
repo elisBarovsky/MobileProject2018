@@ -22,6 +22,10 @@ public class TelphoneList
     {
         return dbT.FilterTelphoneList(UserTypeFilterType, ClassFilter);
     }
+    
 
-
+    public DataTable FilterTelphoneListForMobile(string UserTypeFilterType, string ClassFilter)
+    {
+        return dbT.FilterTelphoneListForMobile(UserTypeFilterType, ClassFilter);
+    }
 }
