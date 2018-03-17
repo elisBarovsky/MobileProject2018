@@ -148,9 +148,9 @@ public class Users
         CodeUserType = codeUserType;
     }
    
-    public int AddPupil(string UserID, string GroupType, int classNumber)
+    public int AddPupil(string UserID, int classNumber)
     {
-        return db.AddPupil(UserID, GroupType, classNumber);
+        return db.AddPupil(UserID, classNumber);
     }
 
     public string GetNumChild(string UserID)
@@ -158,9 +158,9 @@ public class Users
         return db.GetNumChild(UserID);
     }
 
-    public int UpdatePupil(string userID, string CodePgroup, string CodeClass)
+    public int UpdatePupil(string userID, string CodeClass)
     {
-        return db.UpdatePupil(userID, CodePgroup, CodeClass);
+        return db.UpdatePupil(userID, CodeClass);
     }
 
     public int AddTeacher(string UserID, string IsMain )

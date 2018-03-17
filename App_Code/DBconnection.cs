@@ -703,9 +703,9 @@ public class DBconnection
         return ExecuteNonQuery(cStr); // execute the command   
     }
 
-    public int AddPupil(string UserID, string GroupType, int classNumber)
+    public int AddPupil(string UserID, int classNumber)
     {
-        String cStr = "INSERT INTO [dbo].[Pupil]([UserID] ,[CodePgroup],[CodeClass])  VALUES ('"+ UserID + "' ,'"+ GroupType + "' ,"+ classNumber + ")";
+        String cStr = "INSERT INTO [dbo].[Pupil]([UserID],[CodeClass])  VALUES ('"+ UserID + "',"+ classNumber + ")";
         return ExecuteNonQuery(cStr);  
     }
 
@@ -747,9 +747,9 @@ public class DBconnection
         }
     }
 
-    public int UpdatePupil(string userID, string CodePgroup, string ClassOt)
+    public int UpdatePupil(string userID, string ClassOt)
     {
-        string cStr = "UPDATE[dbo].[Pupil] [CodePgroup]='" + CodePgroup + "',[CodeClass]='" + ClassOt + "' where [UserID]='" + userID + "'";
+        string cStr = "UPDATE[dbo].[Pupil] [CodeClass]='" + ClassOt + "' where [UserID]='" + userID + "'";
         return ExecuteNonQuery(cStr);   
     }
 
@@ -1095,7 +1095,6 @@ public class DBconnection
             }
         }
     }
-
 
     public string GetTeacherNameByID(string TeacherId)
     {
@@ -1477,6 +1476,48 @@ public class DBconnection
                 lessonName = dr[0].ToString();
             }
             return lessonName;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+    public Dictionary<string, string> GetSubjectsByClassCode(string classCode)
+    {
+        String selectSTR = "SELECT distinct dbo.Lessons.CodeLesson, dbo.Lessons.LessonName FROM dbo.Timetable " +
+            "INNER JOIN dbo.Class ON dbo.Timetable.ClassCode = dbo.Class.ClassCode AND " +
+            "dbo.Timetable.ClassCode = dbo.Class.ClassCode INNER JOIN dbo.TimetableLesson ON " +
+            "dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode INNER JOIN dbo.Lessons " +
+            "ON dbo.TimetableLesson.CodeLesson = dbo.Lessons.CodeLesson where dbo.Class.ClassCode = " + classCode;
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            Dictionary<string, string> d = new Dictionary<string, string>();
+            while (dr.Read())
+            {
+                string lessonCode = dr["CodeLesson"].ToString();
+                string lessonName = dr["LessonName"].ToString();
+                d.Add(lessonCode, lessonName);
+            }
+            return d;
         }
         catch (Exception ex)
         {

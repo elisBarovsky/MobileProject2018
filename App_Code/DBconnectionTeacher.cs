@@ -698,4 +698,41 @@ public class DBconnectionTeacher
             }
         }
     }
+
+    public string GetSubjectCodeBySubjectName(string subjectName)
+    {
+        String selectSTR = "SELECT CodeLesson FROM Lessons where LessonName  = '" + subjectName + "'";
+        string subjectCode = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                subjectCode = dr[0].ToString();
+            }
+            return subjectCode;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
 }

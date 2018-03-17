@@ -14,19 +14,16 @@ public class Subject
 
     public Subject()
     {
-        //
-        // TODO: Add constructor logic here
-        //
+
     }
 
-    public Dictionary<int, string> getSubjects() {
-
+    public Dictionary<int, string> getSubjects()
+    {
         return db.GetSubjects();
     }
 
     public List<string> getSubjectsByPupilId(string Id)
     {
-
         return db.getSubjectsByPupilId(Id);
     }
 
@@ -43,5 +40,16 @@ public class Subject
     public string GetSubjectNameBySubjectCode(string subjectCode)
     {
         return db.GetSubjectNameBySubjectCode(subjectCode);
+    }
+
+    public string GetSubjectCodeBySubjectName(string subjectName)
+    {
+        DBconnectionTeacher dbt = new DBconnectionTeacher();
+        return dbt.GetSubjectCodeBySubjectName(subjectName);
+    }
+
+    public Dictionary<string, string> GetSubjectsByClassCode(string classCode)
+    {
+        return db.GetSubjectsByClassCode(classCode);
     }
 }
