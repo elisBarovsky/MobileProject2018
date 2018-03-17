@@ -239,7 +239,7 @@
                     </div>
                 </div>
             </div>
-            <div data-role="page" id="NotesPageFull" > <!--Full NotesPage Page-->
+            <div data-role="page" id="NotesPageFull" data-add-back-btn="true"> <!--Full NotesPage Page-->
                
                 <div data-role="header" id="head">
                 </div>
@@ -253,14 +253,11 @@
                     </div>
                 </div>
             </div>
-                        <div data-role="page" id="HomeWorkPage">   <!--HomeWork Page -->
+                        <div data-role="page" id="HomeWorkPage" data-add-back-btn="true">   <!--HomeWork Page -->
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
                 <div data-role="content"  style="text-align:right">
-                    <!--<select id="subjectsDDL">
-                        
-                    </select>-->
                     <ul data-role="listview" id="DynamicListHW"></ul>
 
                     <div data-role="footer" data-position="fixed" id="foot">
@@ -268,12 +265,15 @@
                     </div>
                 </div>
             </div>
-            <div data-role="page" id="HomeWorkPageInfo">
-                <!--HomeWork Page -->
+            <div data-role="page" id="HomeWorkPageInfo" data-add-back-btn="true">
+                                                                 <!--HomeWork Page -->
                 <div data-role="header" id="head">
+                    <a href="#HomeWorkPage" class="ui-btn-left" data-theme="c" data-transition="slide" data-direction="reverse" data-icon="back" style="color:cornflowerblue">חזור</a>
                 </div>
                 <!-- /header -->
                 <div data-role="content" style="text-align:right;padding-right:20px;margin-right:20px">
+                    <input type="button" value="Go Back From Whence You Came!" onclick="history.back(-1)" />
+
                     <ul data-role="listview" id="DynamicHWInfo"></ul>
                     <div data-role="collapsible-set" data-theme="c" data-content-theme="d" id="attriInfo">
                     </div>
@@ -282,7 +282,7 @@
                     </div>
                 </div>
             </div>
-            <div data-role="page" id="GradesPage"> <!--Grades Page  -->               
+            <div data-role="page" id="GradesPage" > <!--Grades Page  -->               
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
@@ -294,15 +294,17 @@
                     </div>
                 </div>
             </div>
-            <div data-role="page" id="GradeInfoPage"> <!--Grade Info Page  -->             
-                <div data-role="header" id="head">
+            <div data-role="page" id="GradeInfoPage" data-add-back-btn="true"> <!--Grade Info Page  -->             
+                <div data-role="header" id="head" >
+                    <a href="#GradesPage" class="ui-btn-left" data-theme="b" data-transition="slide" data-direction="reverse" data-icon="back" style="color:white">חזור</a>
                 </div>
                 <!-- /header -->
-                <div data-role="content" style="text-align:right;padding-right:20px;margin-right:20px">
+                <div data-role="content" style="text-align:right;padding-right:20px;margin-right:20px" >
                     <ul data-role="listview" id="DynamicGradesInfo"></ul>
                     <div data-role="collapsible-set" data-theme="c" data-content-theme="d" id="attriInfo">
                     </div>
-                    <br />
+                    <br /><br />
+
                     <div id="chartContainer" style="height: 300px; width: 100%;"></div>
 
                     <div data-role="footer" data-position="fixed" id="foot">
@@ -317,7 +319,6 @@
                 <div data-role="content">
                     <br /><br /><br />
                     הודעות בבנייה
-                    <input id="CHBottom" type="button" value="button" />
                     <div data-role="footer" data-position="fixed" id="foot">
                         <img src="Images/Betsefer.png" id="logo" />
                     </div>

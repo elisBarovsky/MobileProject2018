@@ -165,7 +165,7 @@ public class BetseferWS : System.Web.Services.WebService
     {
         Users u = new Users();
         string PupilId = "";
-        if (type == "Pupil")
+        if (type == "Child")
         {
             PupilId = UserId;
         }

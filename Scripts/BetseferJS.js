@@ -59,10 +59,10 @@ $(window).on("resize", function () {
 
 });
 
-function SavePupilId(results) {
-    res = $.parseJSON(results.d);
-    localStorage.setItem("PupilID", res);
-}
+//function SavePupilId(results) {
+//    res = $.parseJSON(results.d);
+//    localStorage.setItem("PupilID", res);
+//}
 
 UserInfo = new Object();
 $(document).on('vclick', '#LoginBTN', function () {
@@ -96,7 +96,7 @@ function renderlogin(results) {
         user.UserId = UserId;
         user.type = type;
 
-        GetPupilId(user, SavePupilId);
+     //   GetPupilId(user, SavePupilId);
 
         GetUserInfo(user, renderFillUser);
     }
@@ -517,6 +517,7 @@ function renderGivenGradeByDate(results) {
               valueFormatString: "#"
         },
         axisY: {
+            maximum: 100,
             title: "ציונים",
             includeZero: true
         },
