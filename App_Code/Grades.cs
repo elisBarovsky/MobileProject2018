@@ -37,4 +37,14 @@ public class Grades
     {
         return dbT.InsertGrade(PupilID, TeacherID, CodeLesson, ExamDate, Grade);
     }
+
+    public DataTable PupilGrades(string PupilID) // NEW !!!!
+    {
+        return dbT.PupilGrades(PupilID);
+    }
+
+    public DataTable FilterGrade(string GradeDate)  // NEW !
+    {
+        return dbT.FilterGrade(GradeDate);
+    }
 }

@@ -78,6 +78,85 @@ public class DBconnectionTeacher
         }
     }
 
+    public DataTable PupilGrades(string PupilID)  //New !! 
+    {
+        string selectSTR = " SELECT dbo.Grades.GradeCode, dbo.Lessons.LessonName, dbo.Grades.ExamDate, dbo.Grades.Grade,dbo.Grades.PupilID " +
+                        " FROM  dbo.Grades INNER JOIN dbo.Users ON dbo.Grades.PupilID = dbo.Users.UserID  INNER JOIN " +
+                        "  dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID INNER JOIN  dbo.Lessons ON dbo.Grades.CodeLesson = dbo.Lessons.CodeLesson " +
+                        " where dbo.Grades.PupilID = '"+ PupilID + "'";
+        DataTable dtt = new DataTable();
+        DataSet ds;
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con);
+            ds = new DataSet("GradesDS");
+            daa.Fill(ds);
+            return dtt = ds.Tables[0];
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+            
+        }
+    }
+
+    public DataTable FilterGrade(string GradeDate) //NEW
+    {
+        string selectSTR = " SELECT  dbo.Lessons.LessonName, dbo.Grades.ExamDate, dbo.Grades.Grade ,( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as TeacherName " +
+                            " FROM   dbo.Grades INNER JOIN dbo.Lessons ON dbo.Grades.CodeLesson = dbo.Lessons.CodeLesson INNER JOIN " +
+                            "                          dbo.Users ON  dbo.Grades.TeacherID = dbo.Users.UserID where dbo.Grades.ExamDate='" + GradeDate + "'" +
+                            " group by dbo.Lessons.LessonName,dbo.Grades.ExamDate,dbo.Users.UserFName,dbo.Users.UserLName ,dbo.Grades.Grade";
+        DataTable dtt = new DataTable();
+        DataSet ds;
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con);
+            ds = new DataSet("GradeAvgDS");
+            daa.Fill(ds);
+            return dtt = ds.Tables[0];
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public DataTable FilterNotes(string FilterType,string ValueFilter)
     {
         string selectSTR = " SELECT  dbo.GivenNotes.Comment AS 'הערת מורה', dbo.GivenNotes.NoteDate AS 'תאריך', dbo.Lessons.LessonName AS 'שיעור', dbo.NoteType.NoteName AS 'הערת משמעת', (dbo.Users.UserFName +' '+ dbo.Users.UserLName) as 'שם תלמיד' ,dbo.Pupil.UserID as 'תעודת זהות תלמיד'" +

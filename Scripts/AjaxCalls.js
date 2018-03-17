@@ -213,3 +213,38 @@ function GivenHomeWorkByCode(HomeWork, renderGivenNoteByCode) {
         }
     });
 }
+
+function GetUserGrades(Grade, renderGrades) { 
+    var dataString = JSON.stringify(Grade);
+    $.ajax({
+        url: 'BetseferWS.asmx/FillGrades',
+        data: JSON.stringify({ 'UserID': Grade.ID }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            renderGrades(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
+function GivenGradeByCode(GradeDate, renderGrades) {
+ 
+    var dataString = JSON.stringify(GradeDate);
+    $.ajax({
+        url: 'BetseferWS.asmx/FillGradeInfoByCode',
+        data: JSON.stringify({ 'GradeDate': GradeDate.Date }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            renderGivenGradeByDate(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}

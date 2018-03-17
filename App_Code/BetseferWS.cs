@@ -330,12 +330,60 @@ public class BetseferWS : System.Web.Services.WebService
             list.Add(dict);
         }
 
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillHW = js.Serialize(list);
+        return jsonStringFillHW;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string FillGrades(string UserID)
+    {
+        Grades UserGrades = new Grades();
+        DataTable Grades = UserGrades.PupilGrades(UserID);
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in Grades.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in Grades.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringFillHW = js.Serialize(list);
         return jsonStringFillHW;
     }
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string FillGradeInfoByCode(string GradeDate)
+    {
+        Grades Grade = new Grades();
+        DataTable Grades = Grade.FilterGrade(GradeDate);
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in Grades.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in Grades.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillHW = js.Serialize(list);
+        return jsonStringFillHW;
+    }
     public static string KeyByValue(Dictionary<string, string> dict, string val)
     {
         string key = null;
@@ -349,7 +397,5 @@ public class BetseferWS : System.Web.Services.WebService
         }
         return key;
     }
-
- 
 }
 

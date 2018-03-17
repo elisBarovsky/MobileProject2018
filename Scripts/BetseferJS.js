@@ -434,3 +434,107 @@ function renderGivenHWByCode(results) {
     $('#DynamicHWInfo').append(dynamicLy);
     $('#DynamicHWInfo').listview('refresh');
 }
+
+Grade = new Object();
+$(document).on('pageinit', '#GradesPage', function () {
+    Grade.ID = localStorage.getItem("UserID");
+    GetUserGrades(Grade, renderGrades);
+});
+
+function renderGrades(results) {
+    res = $.parseJSON(results.d);
+    var counter = 0;
+    $('#DynamicListGrades').empty();
+    var ImgIcon;
+    for (var i = 0; i < res.length; i++) {
+        if (res[counter].Grade >"50") {
+            ImgIcon = "Images/happy.png";
+        }
+        else {
+            ImgIcon = "Images/sad.png";
+        }
+        dynamicLy = "<li> <a href='#'id=" + res[counter].Grade+" data-id=" + res[counter].ExamDate + "><img src='" + ImgIcon + "'/> <p>תאריך:" + res[counter].ExamDate + "</p><p>מקצוע:" + res[counter].LessonName + "</p><p>ציון:" + res[counter].Grade + "</p> </li>";
+        counter++;
+        $('#DynamicListGrades').append(dynamicLy);
+        $('#DynamicListGrades').listview('refresh');
+    }
+}
+
+GradeDate = new Object();
+$(document).on('vclick', '#DynamicListGrades li a', function () { // on the pageinit of info about Product page
+    GradeDate.Date = $(this).attr("data-id");
+    PupilGrade = $(this).attr("id");
+    localStorage.setItem("PupilGrade", PupilGrade);
+    GivenGradeByCode(GradeDate, renderGivenGradeByDate);
+    $.mobile.changePage("#GradeInfoPage", { transition: "slide", changeHash: false });
+});
+
+
+function renderGivenGradeByDate(results) {
+    //this is the callBackFunc 
+    results = $.parseJSON(results.d);
+    var counter = 0;
+    var counter1 = 0;
+    var GradeAvg = 0;
+    var  PupilGradeThis = localStorage.getItem("PupilGrade");
+    var GradePos = 0;
+    for (var i = 0; i < results.length; i++) {
+        if (results[counter1].Grade == PupilGradeThis) {
+            GradePos = i + 1;
+        }
+        GradeAvg += results[counter1].Grade;
+        counter1++;
+    }
+    GradeAvg = (GradeAvg / results.length);
+
+    var PupilGrades = [];
+    var PupilGradesAVG = [];
+    var GradeThisPupil = [];
+    GradeThisPupil.push({ x: GradePos, y: parseInt(PupilGradeThis) });
+
+    for (var i = 0; i < results.length; i++) {
+        PupilGrades.push({ x: i + 1, y: results[counter++].Grade });   
+        PupilGradesAVG.push({ x: i + 1, y: GradeAvg }); 
+    }
+
+    var options = {
+        animationEnabled: true,
+        title: {
+            text: "בחינה ב" + results[0].LessonName + " בתאריך " + results[0].ExamDate +" "+ results[0].TeacherName 
+        },
+        axisX: {
+              valueFormatString: "#"
+        },
+        axisY: {
+            title: "ציונים",
+            includeZero: true
+        },
+        data: [
+            {
+                markerColor: "blue",
+                markerType: "cross", 
+                markerSize: 20,
+              type: "line",              
+              showInLegend: true,
+              legendText: "הציון שלי",
+              dataPoints: GradeThisPupil
+            },
+            {
+              type: "area",
+              legendText: "ממוצע כיתתי",
+              showInLegend: true,
+              fillOpacity: .3,
+              lineThickness: 7,   
+              dataPoints: PupilGradesAVG
+        },
+        {
+            type: "spline",
+            legendText: "ציוני הכיתה",
+            showInLegend: true,
+            dataPoints: PupilGrades
+        }
+        ]
+    };
+    $("#chartContainer").CanvasJSChart(options);
+
+}

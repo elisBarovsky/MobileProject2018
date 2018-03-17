@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
-
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 
 
     <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
@@ -86,7 +86,7 @@
     </div>
     <div id="page-content">
         <div class="container">
-                        <div data-role="page" data-theme="d" id="LoginPage" style="color:cadetblue">    <!--Login page-->
+                        <div data-role="page" id="LoginPage" style="color:cadetblue">    <!--Login page-->
                             <br /><br />
                             <div data-role="header" id="head">
                             </div>
@@ -286,9 +286,25 @@
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
-                <div data-role="content">
-                    Grades Page is open
-                    <input id="CHBottom" type="button" value="button" />
+                <div data-role="content" style="text-align:right">
+                    <ul data-role="listview" id="DynamicListGrades"></ul>
+
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+                </div>
+            </div>
+            <div data-role="page" id="GradeInfoPage"> <!--Grade Info Page  -->             
+                <div data-role="header" id="head">
+                </div>
+                <!-- /header -->
+                <div data-role="content" style="text-align:right;padding-right:20px;margin-right:20px">
+                    <ul data-role="listview" id="DynamicGradesInfo"></ul>
+                    <div data-role="collapsible-set" data-theme="c" data-content-theme="d" id="attriInfo">
+                    </div>
+                    <br />
+                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
                     <div data-role="footer" data-position="fixed" id="foot">
                         <img src="Images/Betsefer.png" id="logo" />
                     </div>
