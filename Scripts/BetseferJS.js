@@ -1,5 +1,4 @@
-﻿
-$(document).on("pageinit", "#LoginPage", function (event) {
+﻿$(document).on("pageinit", "#LoginPage", function (event) {
     $(".navbar-header").hide();
 });
 
@@ -97,11 +96,11 @@ function renderlogin(results) {
         localStorage.setItem("UserType", res[1]);
         var UserId = localStorage.getItem("UserID");
         var type = localStorage.getItem("UserType");
-        user = new Object();
-        user.UserId = UserId;
-        user.type = type;
+        UserFullInfo = new Object();
+        UserFullInfo.Id = UserId;
+        UserFullInfo.type = type;
 
-        GetUserInfo(user, renderFillUser);
+        GetUserInfo(UserFullInfo, renderFillUser);
     }
 }
 
@@ -174,6 +173,7 @@ $(document).on('vclick', '#SaveQBTN', function () {
     SecurityQA.choosenA2 = document.getElementById("ans2").value;
     SaveQuestion(SecurityQA, renderSaveQuestion);
 });
+
 UserFullInfo = new Object();
 function renderSaveQuestion(results) {
     //this is the callBackFunc 
@@ -202,10 +202,10 @@ $(document).on('vclick', '#toQuestions', function (event) {
 function renderMoveToQuestions(results) {
     res = $.parseJSON(results.d);
     if (res.length > 0) {
-        document.getElementById("Q1").innerHTML = "?" + res[0];
-        document.getElementById("Q2").innerHTML = "?" + res[2];
-        localStorage.setItem("ans1", res[1]);
-        localStorage.setItem("ans2", res[3]);
+        document.getElementById("Q1L").innerHTML = "?" + res[0];
+        document.getElementById("Q2L").innerHTML = "?" + res[2];
+        localStorage.setItem("Fans1", res[1]);
+        localStorage.setItem("Fans2", res[3]);
        $.mobile.changePage("#AnswerQuestionsBeforeLogin", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
     else {
@@ -219,10 +219,10 @@ function renderMoveToQuestions(results) {
 }
 
 $(document).on('vclick', '#CheckMyAns', function (event) {
-    ans1 = document.getElementById("ans1").value;
-    ans2 = document.getElementById("ans2").value;
-    q1 = localStorage.getItem("ans1");
-    q2 = localStorage.getItem("ans2");
+    ans1 = document.getElementById("Fans1").value;
+    ans2 = document.getElementById("Fans2").value;
+    q1 = localStorage.getItem("Fans1");
+    q2 = localStorage.getItem("Fans2");
 
     if (ans1 == "" || ans2 == "") {
 
@@ -648,8 +648,8 @@ function FillListViewCellPhone(results) {
 
     for (var i = 0; i < res.length; i++) {
 
-        dynamicLy = "<li><p><center><input id='" + res[counter].PhoneNumber +
-            "' src='" + phoneIcon + "' type='image'  height='25' style='float: left' /> &nbsp;" +
+        dynamicLy = "<li><p><center><a href='tel:+972" + res[counter].PhoneNumber + "'>" +
+            "<img src='"+phoneIcon+"' height='25' style='float: left' > </a>"+
             res[counter].PhoneNumber + " &nbsp;&nbsp; " + res[counter].FullName + " </center> </p> </li>";
         counter++;
         $('#contactsLV').append(dynamicLy);

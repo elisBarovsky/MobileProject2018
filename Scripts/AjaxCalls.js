@@ -106,12 +106,12 @@ function LoadTimeTableByTypeAndId(PupilID, LoadTimeTable) {
     });
 }
 
-function GetUserInfo(user, renderFillUser) {
+function GetUserInfo(UserFullInfo, renderFillUser) {
 
-    var dataString = JSON.stringify(user);
+    var dataString = JSON.stringify(UserFullInfo);
     $.ajax({
         url: 'BetseferWS.asmx/GetUserInfo',
-        data: JSON.stringify({ 'Id': user.UserId }),
+        data: JSON.stringify({ 'Id': UserFullInfo.Id }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',

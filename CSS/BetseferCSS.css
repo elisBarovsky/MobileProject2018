@@ -13,14 +13,14 @@
 
 #Forget {
     height: 75px;
-    position: absolute;
+    /*position: absolute;*/
     padding-left: 35%;
 }
 
 #UserIMG {
     height: 170px;
-    position: absolute;
-    padding-left: 5%;
+    /*position: absolute;*/
+    padding-right: 50px;
 }
 
 #foot {
