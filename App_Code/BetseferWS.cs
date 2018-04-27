@@ -112,6 +112,7 @@ public class BetseferWS : System.Web.Services.WebService
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(res);
         return jsonString;
+        //לדאוג למלא לתלמיד את כל הפרטים
     }
 
     [WebMethod]

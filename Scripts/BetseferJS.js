@@ -80,23 +80,21 @@ $(document).on("pageinit", "#ParentChooseChild", function (event) {//הזנת ר
 
     var ID = localStorage.getItem("UserID");
     ParentChooseChild(ID, getChildrenArray);
+});
 
 
-    //function renderFillSecurityQ(results) {
-    //    //this is the callBackFunc 
-    //    res = $.parseJSON(results.d);
+$(document).on("vclick", "#continueLogin", function (event) {
+    var childName = $('#ChooseChild').val();
+    var children = JSON.parse(localStorage.getItem("allParentChildren"));
 
-    //    $('#Q1').empty();
-    //    dynamicLy = "<option value='0'>בחר</option>";
-    //    $('#Q1').append(dynamicLy);
-    //    $('#Q1').selectmenu('refresh');
-    //    $.each(res, function (i, row) {
-    //        dynamicLy = " <option value='" + (i + 1) + "' style='text- align:right'>" + row + "</option> ";
-    //        $('#Q1').append(dynamicLy);
-    //        $('#Q1').selectmenu('refresh');
-    //    });
-    //}
+    for (var i = 0; i < children.length; i++) {
+        if (children[i].UserID1 === childName) {
+            localStorage.setItem("child", JSON.stringify(children[i])); //saving in localS
+            break;
+        }
+    }
 
+    $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false });
 });
 
 function getChildrenArray(results) {//return string[].
@@ -106,18 +104,19 @@ function getChildrenArray(results) {//return string[].
         $.mobile.changePage("#LoginPage", { transition: "slide", changeHash: false });
     }
     else if (res.length === 1) {
-        localStorage.setItem("child", res[0]); //saving in localS
+        localStorage.setItem("child", JSON.stringify(res[0])); //saving in localS
         $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false });
     }
     else {
+        localStorage.setItem("allParentChildren", JSON.stringify(res));
         var x = $('#ChooseChild');
         var option = document.createElement("option");
         option.text = 'בחר ילד';
         x.append(option);
 
         for (var i = 0; i < res.length; i++) { //ממלא את הרשימה בילדים של ההורה
-            var option = document.createElement("option");
-            option.key = res[i].UserID1;
+            option = document.createElement("option");
+            option.value = res[i].UserID1;
             option.text = res[i].UserFName1 + ' ' + res[i].UserLName1;
             x.append(option);
         } 
