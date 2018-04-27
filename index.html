@@ -3,8 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"  />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 
@@ -18,30 +17,30 @@
     <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 
     <!-- Bootstrap Date-Picker Plugin -->
-         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
     <script>
-    $(document).ready(function () {
-        var date_input = $('input[name="date"]'); //our date input has the name "date"
-        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
-        var options = {
-            format: 'dd/mm/yyyy',
-            container: container,
-            todayHighlight: true,
-            autoclose: true,
-        };
-        date_input.datepicker(options);
-    })
+        $(document).ready(function () {
+            var date_input = $('input[name="date"]'); //our date input has the name "date"
+            var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+            var options = {
+                format: 'dd/mm/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+            };
+            date_input.datepicker(options);
+        })
     </script>
-     <link href="CSS/BetseferCSS.css" rel="stylesheet" />
+    <link href="CSS/BetseferCSS.css" rel="stylesheet" />
     <link href="CSS/StyleSheet.css" rel="stylesheet" />
 
     <script src="Scripts/BetseferJS.js"></script>
     <script src="Scripts/AjaxCalls.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="slide-nav" >
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="slide-nav">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-toggle">
@@ -53,8 +52,11 @@
             </div>
             <div id="slidemenu" style="text-align:center">
                 <ul class="nav navbar-nav">
-                    <br /><br /><br />
-                    <li > <!--class="active"-->
+                    <br />
+                    <br />
+                    <br />
+                    <li>
+                        <!--class="active"-->
                         <a href="#CalendarPage"><img src="Images/LuzUIcon.png" alt="logo" style="width:40px;"> </a>
                     </li>
                     <li>
@@ -84,47 +86,84 @@
     </div>
     <div id="page-content">
         <div class="container">
-                        <div data-role="page" id="LoginPage" style="color:cadetblue">    <!--Login page-->
-                            <br /><br />
-                            <div data-role="header" id="head">
-                            </div>
-                            <div data-role="content" style="text-align:right">
-                                <img src="Images/Betsefer.png" class="center" />
-                                <label for="IDLBL" style="">תעודת זהות</label>
-                                <input id="IDTB" type="text" />
-                                <label for="PasswordLBL">סיסמה</label>
-                                <input id="PasswordTB" type="password" />
-                                <br />
-                                <input id="LoginBTN" type="button" value="התחבר" />
+            <div data-role="page" id="LoginPage" style="color:cadetblue">
+                <!--Login page-->
+                <br /><br />
+                <div data-role="header" id="head">
+                </div>
+                <div data-role="content" style="text-align:right">
+                    <img src="Images/Betsefer.png" class="center" />
+                    <label for="IDLBL" style="">תעודת זהות</label>
+                    <input id="IDTB" type="text" />
+                    <label for="PasswordLBL">סיסמה</label>
+                    <input id="PasswordTB" type="password" />
+                    <br />
+                    <input id="LoginBTN" type="button" value="התחבר" />
 
-                                <input id="Forget" type="image" src="Images/5897a7cfcba9841eabab6152.png" onclick="window.location='#ForgetMyPassword'" height="75">
-                                <div data-role="footer" data-position="fixed" id="foot">
-                                    <img src="Images/Betsefer.png" id="logo" style="visibility:hidden" />
-                                </div>
-                            </div>
-                        </div>
-                        <div data-role="page" id="ForgetMyPassword"><!--Forget My Password page -->
-                            <div data-role="header" id="head">
-                            </div>
-                            <!-- /header -->
-                            <div data-role="content" style="text-align:right">                             
-                                <label for="UserId">ת.ז.</label>
-                                <input id="UserId" type="text" />
-                                <label for="bDay">יומולדת</label>
+                    <input id="Forget" type="image" src="Images/5897a7cfcba9841eabab6152.png" onclick="window.location='#ForgetMyPassword'" height="75">
 
-                                <form method="post">
-                                    <div class="form-group">
-                                        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
-                                    </div>
-                                </form>
-                                <input id="toQuestions" type="button" value="בדוקותי" />
-                                <br /><br />
-                                <div data-role="footer" data-position="fixed" id="foot">
-                                    <img src="Images/Betsefer.png" id="logo" />
-                                </div>
-                            </div>
+                    <input id="Forget" type="image" src="Images/5897a7cfcba9841eabab6152.png">
+
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" style="visibility:hidden" />
+                    </div>
+                </div>
+            </div>
+            <!-- ******************************************************************************************************************************************************************** הוספתי עמוד *************** -->
+            <div data-role="page" id="ParentChooseChild">       <!--Parent Choose Child -->
+                <div data-role="header" id="head">
+                </div>
+                <div data-role="content" style="text-align:right">
+                        <label for="ChooseChild">בחר תלמיד</label>
+                        <select id="ChooseChild">
+                            
+                        </select>
+                        <input id="continueLogin" type="button" value="התחבר" />
+                        <br /><br />
+                        <div data-role="footer" data-position="fixed" id="foot">
+                            <img src="Images/Betsefer.png" id="logo" />
                         </div>
-                        <div data-role="page" id="AnswerQuestionsBeforeLogin">
+                </div>
+            </div>
+            <!-- ******************************************************************************************************************************************************************** הוספתי עמוד *************** -->
+            <div data-role="page" id="ForgetMyPassword">         <!--Forget My Password page -->
+                <div data-role="header" id="head">
+                </div>
+            <div data-role="content" style="text-align:right">
+                    <label for="UserId">ת.ז.</label>
+                    <input id="UserId" type="text" />
+                    <label for="bDay">יומולדת</label>
+
+                    <form method="post">
+                        <div class="form-group">
+                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
+                        </div>
+                    </form>
+                    <input id="toQuestions" type="button" value="בדוקותי" />
+                    <br /><br />
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+                </div>
+                <!-- /header -->
+                <div data-role="content" style="text-align:right">
+                    <label for="UserId">ת.ז.</label>
+                    <input id="UserId" type="text" />
+                    <label for="bDay">יומולדת</label>
+
+                    <form method="post">
+                        <div class="form-group">
+                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
+                        </div>
+                    </form>
+                    <input id="toQuestions" type="button" value="בדוקותי" />
+                    <br /><br />
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+                </div>
+            </div>
+            <div data-role="page" id="AnswerQuestionsBeforeLogin">
                 <!--Answer questions before login page - forget your password-->
                 <div data-role="header" id="head">
                 </div>
@@ -133,9 +172,9 @@
                     <h2 style="text-align:center">אימות אחרון ודי..</h2>
                     <br />
                     <label for="ans1" id="Q1L"></label>
-                    <input id="Fans1" type="text" />
+                    <input id="ans12" type="text" />
                     <label for="ans2" id="Q2L"></label>
-                    <input id="Fans2" type="text" />
+                    <input id="ans22" type="text" />
                     <br />
                     <input id="CheckMyAns" type="button" value="יאללה" style="background-color:red;border-bottom-color:black;border-bottom-width:3px" />
                     <div data-role="footer" data-position="fixed" id="foot">
@@ -143,7 +182,7 @@
                     </div>
                 </div>
             </div>
-                        <div data-role="page" id="ChangePassword">
+            <div data-role="page" id="ChangePassword">
                 <!--Answer questions before login page - forget your password-->
                 <div data-role="header" id="head">
                 </div>
@@ -161,53 +200,57 @@
                     </div>
                 </div>
             </div>
-                        <div data-role="page" id="SecurityQuestionsPage">       <!--Sequrity question page - first login-->
-                            <div data-role="header" id="head">
-                            </div>
-                            <!-- /header -->
-                            <div data-role="content" style="text-align:right">
-                                <h2 style="text-align:center">התחברות ראשונה- שאלות זיהוי</h2>
-                                <br />
-                                <label for="Q1">בחר שאלת הזדהות</label>
-                                <select name="Q1" id="Q1"> </select>
-                                <input id="ans1" type="text" />
-                                <label for="Q2" id="LQ2">בחר שאלת הזדהות נוספת</label>
-                                <select name="Q2" id="Q2"> </select>
-                                <input id="ans2" type="text" />
-                                <br />
-                                <input id="SaveQBTN" type="button" value="עדכן" style="background-color:red;border-bottom-color:black;border-bottom-width:3px" />
-                                <div data-role="footer" data-position="fixed" id="foot">
-                                    <img src="Images/Betsefer.png" id="logo" />
-                                </div>
-                            </div>
-                        </div>
-                        <div data-role="page" id="DashBordPage">             <!--DashBordPage-->
-                            <div data-role="header" id="head">
-                            </div>
-                            <!-- /header -->
-                            <div data-role="content" style="text-align:right">
-                                <h3 id="UserNameLBL"> </h3>
-                                <img id="UserIMG" src="" alt="" style="" />
+            <div data-role="page" id="SecurityQuestionsPage">
+                <!--Sequrity question page - first login-->
+                <div data-role="header" id="head">
+                </div>
+                <!-- /header -->
+                <div data-role="content" style="text-align:right">
+                    <h2 style="text-align:center">התחברות ראשונה- שאלות זיהוי</h2>
+                    <br />
+                    <label for="Q1">בחר שאלת הזדהות</label>
+                    <select name="Q1" id="Q1"> </select>
+                    <input id="ans11" type="text" />
+                    <label for="Q2" id="LQ2">בחר שאלת הזדהות נוספת</label>
+                    <select name="Q2" id="Q2"> </select>
+                    <input id="ans21" type="text" />
+                    <br />
+                    <input id="SaveQBTN" type="button" value="עדכן" style="background-color:red;border-bottom-color:black;border-bottom-width:3px" />
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+                </div>
+            </div>
+            <div data-role="page" id="DashBordPage">
+                <!--DashBordPage-->
+                <div data-role="header" id="head">
+                </div>
+                <!-- /header -->
+                <div data-role="content" style="text-align:right">
+                    <h3 id="UserNameLBL"> </h3>
+                    <img id="UserIMG" src="" alt="" style="" />
 
-                                <div data-role="footer" data-position="fixed" id="foot">
-                                    <img src="Images/Betsefer.png" id="logo" style="position:center" />
-                                </div>
-                            </div>
-                        </div>
-                        <div data-role="page" id="CalendarPage">  <!--Calendar Page-->
-                            <div data-role="header" id="head">
-                            </div>
-                            <!-- /header -->
-                            <div data-role="content">
-                                <br /><br /><br />
-                               בבנייה
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" style="position:center" />
+                    </div>
+                </div>
+            </div>
+            <div data-role="page" id="CalendarPage">
+                <!--Calendar Page-->
+                <div data-role="header" id="head">
+                </div>
+                <!-- /header -->
+                <div data-role="content">
+                    <br /><br /><br />
+                    בבנייה
 
-                                <div data-role="footer" data-position="fixed" id="foot">
-                                    <img src="Images/Betsefer.png" id="logo" />
-                                </div>
-                            </div>
-                        </div>
-                        <div data-role="page" id="TimeTablePage"> <!--TimeTablePage Page-->
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
+                </div>
+            </div>
+            <div data-role="page" id="TimeTablePage">
+                <!--TimeTablePage Page-->
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
@@ -215,16 +258,15 @@
                     <br /><br />
                     <h3 id="noTT">לכיתה זו לא נוצרה מערכת</h3>
                     <div class="table-responsive" style="width:100%">
-                        <table class="table" id="TimeTable">
-                            
-                        </table>
+                        <table class="table" id="TimeTable"></table>
                     </div>
                     <div data-role="footer" data-position="fixed" id="foot">
                         <img src="Images/Betsefer.png" id="logo" />
                     </div>
                 </div>
             </div>
-                <div data-role="page" id="NotesPage">    <!--NotesPage Page-->
+            <div data-role="page" id="NotesPage">
+                <!--NotesPage Page-->
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
@@ -235,8 +277,9 @@
                     </div>
                 </div>
             </div>
-            <div data-role="page" id="NotesPageFull" data-add-back-btn="true"> <!--Full NotesPage Page-->
-               
+            <div data-role="page" id="NotesPageFull" data-add-back-btn="true">
+                <!--Full NotesPage Page-->
+
                 <div data-role="header" id="head">
                     <a href="#NotesPage" class="ui-btn-left" data-theme="c" data-transition="slide" data-direction="reverse" data-icon="back" style="color:cornflowerblue">חזור</a>
                 </div>
@@ -250,21 +293,22 @@
                     </div>
                 </div>
             </div>
-                        <div data-role="page" id="HomeWorkPage" data-add-back-btn="true">   <!--HomeWork Page -->
+            <div data-role="page" id="HomeWorkPage" data-add-back-btn="true">
+                <!--HomeWork Page -->
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
-                <div data-role="content"  style="text-align:right">
+                <div data-role="content" style="text-align:right">
                     <ul data-role="listview" id="DynamicListHW"></ul>
                     <!--<select id="subjectsDDL">
-                  </select>-->
+                    </select>-->
                     <div data-role="footer" data-position="fixed" id="foot">
                         <img src="Images/Betsefer.png" id="logo" />
                     </div>
                 </div>
             </div>
             <div data-role="page" id="HomeWorkPageInfo" data-add-back-btn="true">
-                                                                 <!--HomeWork Page -->
+                <!--HomeWork Page -->
                 <div data-role="header" id="head">
                     <a href="#HomeWorkPage" class="ui-btn-left" data-theme="c" data-transition="slide" data-direction="reverse" data-icon="back" style="color:cornflowerblue">חזור</a>
                 </div>
@@ -278,7 +322,8 @@
                     </div>
                 </div>
             </div>
-            <div data-role="page" id="GradesPage" > <!--Grades Page  -->               
+            <div data-role="page" id="GradesPage">
+                <!--Grades Page  -->
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
@@ -290,12 +335,13 @@
                     </div>
                 </div>
             </div>
-            <div data-role="page" id="GradeInfoPage" data-add-back-btn="true"> <!--Grade Info Page  -->             
-                <div data-role="header" id="head" >
+            <div data-role="page" id="GradeInfoPage" data-add-back-btn="true">
+                <!--Grade Info Page  -->
+                <div data-role="header" id="head">
                     <a href="#GradesPage" class="ui-btn-left" data-theme="c" data-transition="slide" data-direction="reverse" data-icon="back" style="color:white">חזור</a>
                 </div>
                 <!-- /header -->
-                <div data-role="content" style="text-align:right;padding-right:20px;margin-right:20px" >
+                <div data-role="content" style="text-align:right;padding-right:20px;margin-right:20px">
                     <ul data-role="listview" id="DynamicGradesInfo"></ul>
                     <div data-role="collapsible-set" data-theme="c" data-content-theme="d" id="attriInfo">
                     </div>
@@ -308,7 +354,8 @@
                     </div>
                 </div>
             </div>
-                        <div data-role="page" id="MSGPage">   <!--MSG Page -->
+            <div data-role="page" id="MSGPage">
+                <!--MSG Page -->
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
@@ -320,7 +367,8 @@
                     </div>
                 </div>
             </div>
-                <div data-role="page" id="ContactsPage"> <!--Contacts Page  -->
+            <div data-role="page" id="ContactsPage">
+                <!--Contacts Page  -->
                 <div data-role="header" id="head">
                 </div>
                 <!-- /header -->
@@ -333,15 +381,14 @@
                     </center>
                     <br />
                     <!--<input type="search" name="mySearchInputName" id="search" value="" />-->
-                    <br/>
-                    <ul data-role="listview" id="contactsLV">
-                    </ul>
-                        <div data-role="footer" data-position="fixed" id="foot">
-                            <img src="Images/Betsefer.png" id="logo" />
-                        </div>
+                    <br />
+                    <ul data-role="listview" id="contactsLV"></ul>
+                    <div data-role="footer" data-position="fixed" id="foot">
+                        <img src="Images/Betsefer.png" id="logo" />
+                    </div>
                 </div>
             </div>
-         </div>
-     </div>
+        </div>
+    </div>
 </body>
 </html>

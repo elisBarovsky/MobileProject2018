@@ -16,6 +16,24 @@
     });
 }
 
+function ParentChooseChild(ID, afterChildChoosen) {
+
+    var dataString = JSON.stringify(ID);
+    $.ajax({
+        url: 'BetseferWS.asmx/ParentChooseChild',
+        data: JSON.stringify({ 'ParentID': ID}),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            getChildrenArray(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
 function FillSecurityQ(renderFillSecurityQ) {
 
     var dataString = JSON.stringify();
@@ -106,12 +124,12 @@ function LoadTimeTableByTypeAndId(PupilID, LoadTimeTable) {
     });
 }
 
-function GetUserInfo(UserFullInfo, renderFillUser) {
+function GetUserInfo(user, renderFillUser) {
 
-    var dataString = JSON.stringify(UserFullInfo);
+    var dataString = JSON.stringify(user);
     $.ajax({
         url: 'BetseferWS.asmx/GetUserInfo',
-        data: JSON.stringify({ 'Id': UserFullInfo.Id }),
+        data: JSON.stringify({ 'Id': user.UserId }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',

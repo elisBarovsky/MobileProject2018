@@ -1,4 +1,5 @@
-﻿$(document).on("pageinit", "#LoginPage", function (event) {
+﻿
+$(document).on("pageinit", "#LoginPage", function (event) {
     $(".navbar-header").hide();
 });
 
@@ -75,16 +76,65 @@ $(document).on('vclick', '#LoginBTN', function () {
 
 }); 
 
+$(document).on("pageinit", "#ParentChooseChild", function (event) {//הזנת רשימת תלמידים
+
+    var ID = localStorage.getItem("UserID");
+    ParentChooseChild(ID, getChildrenArray);
+
+
+    //function renderFillSecurityQ(results) {
+    //    //this is the callBackFunc 
+    //    res = $.parseJSON(results.d);
+
+    //    $('#Q1').empty();
+    //    dynamicLy = "<option value='0'>בחר</option>";
+    //    $('#Q1').append(dynamicLy);
+    //    $('#Q1').selectmenu('refresh');
+    //    $.each(res, function (i, row) {
+    //        dynamicLy = " <option value='" + (i + 1) + "' style='text- align:right'>" + row + "</option> ";
+    //        $('#Q1').append(dynamicLy);
+    //        $('#Q1').selectmenu('refresh');
+    //    });
+    //}
+
+});
+
+function getChildrenArray(results) {//return string[].
+    res = $.parseJSON(results.d);
+    if (res.length === 0) {
+        alert("לא רשומים ילדים המשוייכים אליך במערכת. במידה ומדובר בשגיאה צור קשר עם שירות הלקוחות במספר: 052-5382634");
+        $.mobile.changePage("#LoginPage", { transition: "slide", changeHash: false });
+    }
+    else if (res.length === 1) {
+        localStorage.setItem("child", res[0]); //saving in localS
+        $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false });
+    }
+    else {
+        var x = $('#ChooseChild');
+        var option = document.createElement("option");
+        option.text = 'בחר ילד';
+        x.append(option);
+
+        for (var i = 0; i < res.length; i++) { //ממלא את הרשימה בילדים של ההורה
+            var option = document.createElement("option");
+            option.key = res[i].UserID1;
+            option.text = res[i].UserFName1 + ' ' + res[i].UserLName1;
+            x.append(option);
+        } 
+            $('#ChooseChild').selectmenu('refresh');
+    }
+    }
+
 //check login details and decide which page to go.
 UserFullInfo = new Object();
 
 function renderlogin(results) {
     res = $.parseJSON(results.d);
-    if (res[0] == "openSeqQestion") { // go to fill identity questions page
+    if (res[0] === "openSeqQestion") { // go to fill identity questions page
         localStorage.setItem("UserType", res[1]);
         $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false });
     }
-    else if (res[0] == "wrongDetails") { //wrong details
+    else if (res[0] === "wrongDetails") { //wrong details
         $.alert({
             title: 'שגיאה',
             content: 'לנתונים שהוזנו אין הרשאת כניסה למערכת'
@@ -92,15 +142,23 @@ function renderlogin(results) {
         document.getElementById("IDTB").value = "";
         document.getElementById("PasswordTB").value = "";
     }
-    else { // already login -> go to main page according the type user. 
+    else {
         localStorage.setItem("UserType", res[1]);
-        var UserId = localStorage.getItem("UserID");
-        var type = localStorage.getItem("UserType");
-        UserFullInfo = new Object();
-        UserFullInfo.Id = UserId;
-        UserFullInfo.type = type;
 
-        GetUserInfo(UserFullInfo, renderFillUser);
+        if (res[1] === 'Parent') {
+
+            $.mobile.changePage("#ParentChooseChild", { transition: "slide", changeHash: false }); // מעביר עמוד 
+
+        }
+        else { // already login -> go to main page according the type user. 
+            var UserId = localStorage.getItem("UserID");
+            var type = localStorage.getItem("UserType");
+            user = new Object();
+            user.UserId = UserId;
+            user.type = type;
+
+            GetUserInfo(user, renderFillUser);
+        }
     }
 }
 
@@ -117,7 +175,7 @@ function renderFillUser(results) {
 
     res = $.parseJSON(results.d); 
     document.getElementById("UserNameLBL").innerHTML = " שלום "+res[0] + " " + res[1] ;
-    if (res[5]=="") {
+    if (res[5]==="") {
         imgSRC = "Images/NoImg.png";
     }
     else {
@@ -155,7 +213,7 @@ $(document).on("change", "#Q1", function (event) {
     //$('#Q2').selectmenu('refresh', true);
     $('#Q2').selectmenu().selectmenu('refresh');
     $.each(res, function (i, row) {
-        if ((i + 1) != choosen) {
+        if ((i + 1) !== choosen) {
             dynamicLy = " <option value='" + (i + 1) + "'>" + row + "</option> ";
             $('#Q2').append(dynamicLy);
             $('#Q2').selectmenu('refresh', true);
@@ -169,17 +227,16 @@ $(document).on('vclick', '#SaveQBTN', function () {
     SecurityQA.UserID = localStorage.getItem("UserID");
     SecurityQA.choosenQ1 = document.getElementById("Q1").value;
     SecurityQA.choosenQ2 = document.getElementById("Q2").value;
-    SecurityQA.choosenA1 = document.getElementById("ans1").value;
-    SecurityQA.choosenA2 = document.getElementById("ans2").value;
+    SecurityQA.choosenA1 = document.getElementById("ans11").value;
+    SecurityQA.choosenA2 = document.getElementById("ans21").value;
     SaveQuestion(SecurityQA, renderSaveQuestion);
 });
-
 UserFullInfo = new Object();
 function renderSaveQuestion(results) {
     //this is the callBackFunc 
     UserFullInfo.Id = localStorage.getItem("UserID");
     res = $.parseJSON(results.d);
-    if (res == 2) {
+    if (res === 2) {
         GetUserInfo(UserFullInfo, renderFillUser);
         $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
@@ -202,10 +259,10 @@ $(document).on('vclick', '#toQuestions', function (event) {
 function renderMoveToQuestions(results) {
     res = $.parseJSON(results.d);
     if (res.length > 0) {
-        document.getElementById("Q1L").innerHTML = "?" + res[0];
-        document.getElementById("Q2L").innerHTML = "?" + res[2];
-        localStorage.setItem("Fans1", res[1]);
-        localStorage.setItem("Fans2", res[3]);
+        document.getElementById("Q1").innerHTML = "?" + res[0];
+        document.getElementById("Q2").innerHTML = "?" + res[2];
+        localStorage.setItem("ans1", res[1]);
+        localStorage.setItem("ans2", res[3]);
        $.mobile.changePage("#AnswerQuestionsBeforeLogin", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
     else {
@@ -219,19 +276,19 @@ function renderMoveToQuestions(results) {
 }
 
 $(document).on('vclick', '#CheckMyAns', function (event) {
-    ans1 = document.getElementById("Fans1").value;
-    ans2 = document.getElementById("Fans2").value;
-    q1 = localStorage.getItem("Fans1");
-    q2 = localStorage.getItem("Fans2");
+    ans1 = document.getElementById("ans11").value;
+    ans2 = document.getElementById("ans21").value;
+    q1 = localStorage.getItem("ans1");
+    q2 = localStorage.getItem("ans2");
 
-    if (ans1 == "" || ans2 == "") {
+    if (ans1 === "" || ans2 === "") {
 
         $.alert({
             title: 'שגיאה',
             content: 'עליך לענות על שתי השאלות',
         });
     }
-    else if (q1 == ans1 && q2 == ans2) {
+    else if (q1 === ans1 && q2 === ans2) {
 
         $.mobile.changePage("#ChangePassword", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
@@ -241,14 +298,14 @@ $(document).on('vclick', '#CheckThePasswords', function (event) {
     pas1 = document.getElementById("pas1").value;
     pas2 = document.getElementById("pas2").value;
 
-    if (pas1 == "" || pas2 == "") {
+    if (pas1 === "" || pas2 === "") {
 
         $.alert({
             title: 'שגיאה',
             content: 'יש להזין את הסיסמא פעמיים',
         });
     }
-    else if (pas1 == pas2) {
+    else if (pas1 === pas2) {
         user = new Object();
         user.Id = localStorage.getItem("UserID");
         user.password = pas1;
@@ -344,7 +401,7 @@ function LoadTimeTable(results) {
             tableInfo += "<tr>";
             for (var j = 1; j < 7; j++)
             {
-                if (res[counter].ClassTimeCode == i && res[counter].CodeWeekDay == j) {
+                if (res[counter].ClassTimeCode === i && res[counter].CodeWeekDay === j) {
                     tableInfo += "<td>" + res[counter].CodeLesson + "<br/>" + res[counter].TeacherId + "</td>";
                     counter++;
                 }
@@ -384,7 +441,7 @@ function renderNotes(results) {
     $('#DynamicListNotes').empty();
     var ImgIcon;
     for (var i = 0; i < res.length; i++) {
-        if (res[counter].NoteName =="הצטיינות") {
+        if (res[counter].NoteName ==="הצטיינות") {
             ImgIcon ="Images/happy.png";
         }
         else {
@@ -442,7 +499,7 @@ function renderGivenNoteByCode(results) {
     var counter = 0;
     var CommentInfo;
     $('#DynamicNoteInfo').empty();
-    if (results[counter].Comment=="") {
+    if (results[counter].Comment==="") {
         CommentInfo = "אין תיאור";
     }
     else {
@@ -475,7 +532,7 @@ function LoadHWTable(results) {
     $('#DynamicListHW').empty();
     var ImgIcon;
     for (var i = 0; i < res.length; i++) {
-        if (res[counter].IsLehagasha=="true") {
+        if (res[counter].IsLehagasha==="true") {
             IsLehagasha = "להגשה";
         }
         dynamicLy = "<li> <a href='#' data-id=" + res[counter].HWCode + "><img src='Images/HW.png'/> <p>מקצוע:" + res[counter].LessonName + "</p><p>נתנו בתאריך:" + res[counter].HWGivenDate + "</p><p>עד לתאריך:" + res[counter].HWDueDate + "</p><p>האם להגשה:" + IsLehagasha+" </li>";
@@ -501,7 +558,7 @@ function renderGivenHWByCode(results) {
     var IsLehagasha = "לא להגשה";
 
     $('#DynamicHWInfo').empty();
-    if (results[counter].IsLehagasha == "true") {
+    if (results[counter].IsLehagasha === "true") {
         CommentInfo = "ההגשה";
     }
     else {
@@ -559,7 +616,7 @@ function renderGivenGradeByDate(results) {
     var PupilGradeThis = localStorage.getItem("PupilGrade");
     var GradePos = 0;
     for (var i = 0; i < results.length; i++) {
-        if (results[counter1].Grade == PupilGradeThis) {
+        if (results[counter1].Grade === PupilGradeThis) {
             GradePos = i + 1;
         }
         GradeAvg += results[counter1].Grade;
@@ -648,8 +705,8 @@ function FillListViewCellPhone(results) {
 
     for (var i = 0; i < res.length; i++) {
 
-        dynamicLy = "<li><p><center><a href='tel:+972" + res[counter].PhoneNumber + "'>" +
-            "<img src='"+phoneIcon+"' height='25' style='float: left' > </a>"+
+        dynamicLy = "<li><p><center><input id='" + res[counter].PhoneNumber +
+            "' src='" + phoneIcon + "' type='image'  height='25' style='float: left' /> &nbsp;" +
             res[counter].PhoneNumber + " &nbsp;&nbsp; " + res[counter].FullName + " </center> </p> </li>";
         counter++;
         $('#contactsLV').append(dynamicLy);

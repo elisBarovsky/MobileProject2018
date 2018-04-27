@@ -88,6 +88,20 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonStringCategory;
     }
 
+    
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string ParentChooseChild(string ParentID)
+    {
+        Parent parent = new Parent(ParentID);
+        Student[] children = parent.children.ToArray();
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringCategory = js.Serialize(children);
+        return jsonStringCategory;
+    }
+
+
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetUserInfo(string Id)
@@ -171,7 +185,7 @@ public class BetseferWS : System.Web.Services.WebService
         }
         else
         {
-            PupilId = u.GetPupilIdByUserTypeAndId(UserId);
+            PupilId = u.GetPupilIdByUserTypeAndId(UserId).FirstOrDefault(); /////לתקןןןןןן כמה ילדים להורה
         }
 
         JavaScriptSerializer js = new JavaScriptSerializer();
