@@ -1615,6 +1615,50 @@ public class DBconnection
         }
     }
 
+    public List<string> GetParentsIdsByPupilId(string pupilID)
+    {
+        List<string> parents = new List<string>();
+
+        String selectSTR = "SELECT dbo.PupilsParent.ParentID FROM dbo.UserType INNER JOIN " +
+                            "dbo.Users ON dbo.UserType.CodeUserType = dbo.Users.CodeUserType INNER JOIN " +
+                            "dbo.PupilsParent ON dbo.Users.UserID = dbo.PupilsParent.ParentID " +
+                            "where dbo.PupilsParent.PupilID = '" + pupilID + "'";
+
+
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                parents.Add(dr[0].ToString());
+            }
+            return parents;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     //public List<Dictionary<string, string>> GetPupilsByParentId(string parentID)
     //{
     //    List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();

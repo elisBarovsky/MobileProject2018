@@ -54,7 +54,7 @@ public class BetseferWS : System.Web.Services.WebService
         string UserType = UserLogin.GetUserType(UserID, password);
         string isvalid = "";
 
-        if (UserType == "" || UserType == "1" || UserType == "2")
+        if (UserType == "" || UserType == "1")
         {
             isvalid = "wrongDetails";
         }
@@ -184,9 +184,12 @@ public class BetseferWS : System.Web.Services.WebService
         {
             PupilId = UserId;
         }
-        else
+        else if (type == "parent")
         {
             PupilId = u.GetPupilIdByUserTypeAndId(UserId).FirstOrDefault(); /////לתקןןןןןן כמה ילדים להורה
+
+        }
+        {
         }
 
         JavaScriptSerializer js = new JavaScriptSerializer();

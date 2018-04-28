@@ -59,10 +59,10 @@ $(document).on("pageinit", "#DashBordPage", function (event) {
     });
 });
 
-function SavePupilId(results) {
-    res = $.parseJSON(results.d);
-    localStorage.setItem("PupilID", res);
-}
+//function SavePupilId(results) {
+//    res = $.parseJSON(results.d);
+//    localStorage.setItem("PupilID", res);
+//}
 
 UserInfo = new Object();
 
@@ -84,17 +84,24 @@ $(document).on("pageinit", "#ParentChooseChild", function (event) {//הזנת ר
 
 
 $(document).on("vclick", "#continueLogin", function (event) {
-    var childName = $('#ChooseChild').val();
+    var childId = $('#ChooseChild').val();
     var children = JSON.parse(localStorage.getItem("allParentChildren"));
 
     for (var i = 0; i < children.length; i++) {
-        if (children[i].UserID1 === childName) {
+        if (children[i].UserID1 === childId) {
             localStorage.setItem("child", JSON.stringify(children[i])); //saving in localS
             break;
         }
     }
 
-    $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false });
+    var UserId = localStorage.getItem("UserID");
+    var type = localStorage.getItem("UserType");
+
+    var user = new Object();
+    user.UserId = UserId;
+    user.type = type;
+    GetUserInfo(user, renderFillUser);
+
 });
 
 function getChildrenArray(results) {//return string[].
@@ -141,7 +148,7 @@ function renderlogin(results) {
         document.getElementById("IDTB").value = "";
         document.getElementById("PasswordTB").value = "";
     }
-    else {
+    else { // already login -> go to main page according the type user. 
         localStorage.setItem("UserType", res[1]);
 
         if (res[1] === 'Parent') {
@@ -149,7 +156,7 @@ function renderlogin(results) {
             $.mobile.changePage("#ParentChooseChild", { transition: "slide", changeHash: false }); // מעביר עמוד 
 
         }
-        else { // already login -> go to main page according the type user. 
+        else {
             var UserId = localStorage.getItem("UserID");
             var type = localStorage.getItem("UserType");
             user = new Object();
@@ -168,13 +175,13 @@ function renderFillUser(results) {
     user = new Object();
     user.UserId = UserId;
     user.type = type;
-
-    GetPupilId(user, SavePupilId);
-//****************************************************
+    //if (type !== 'Teacher') {
+    //    //GetPupilId(user, SavePupilId);
+    //}
 
     res = $.parseJSON(results.d); 
-    document.getElementById("UserNameLBL").innerHTML = " שלום "+res[0] + " " + res[1] ;
-    if (res[5]==="") {
+    document.getElementById("UserNameLBL").innerHTML = " שלום "+res[1] + " " + res[2] ;
+    if (res[6]==="") {
         imgSRC = "Images/NoImg.png";
     }
     else {
@@ -231,13 +238,22 @@ $(document).on('vclick', '#SaveQBTN', function () {
     SaveQuestion(SecurityQA, renderSaveQuestion);
 });
 UserFullInfo = new Object();
+
 function renderSaveQuestion(results) {
     //this is the callBackFunc 
     UserFullInfo.Id = localStorage.getItem("UserID");
     res = $.parseJSON(results.d);
     if (res === 2) {
         GetUserInfo(UserFullInfo, renderFillUser);
-        $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+        
+        var userType = localStorage.getItem("UserType");
+
+        if (userType === "Parent") {
+            $.mobile.changePage("#ParentChooseChild", { transition: "slide", changeHash: false }); // מעביר עמוד 
+        }
+        else {
+            $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
+        }
     }
     else {
         $.alert({
@@ -383,15 +399,23 @@ $(document).on('vclick', '#LogOut', function () {
 });
 
 $(document).on('pageinit', '#TimeTablePage', function () {
-    PupilID = localStorage.getItem("PupilID");
-    LoadTimeTableByTypeAndId(PupilID, LoadTimeTable);
+    if (localStorage.getItem("UserType") !== "Teacher") {
+        Pupil = JSON.parse(localStorage.getItem("child"));
+        LoadTimeTableByTypeAndId(Pupil.UserID1, LoadTimeTable);
+    }
+    else {
+        document.getElementById("teacherTT").style.visibility = 'visible';
+        document.getElementById("noTT").style.visibility = 'hidden';
+    }
 });
 
 function LoadTimeTable(results) {
     res = $.parseJSON(results.d);
 
     if (res.length > 0) {
-        document.getElementById("noTT").style.visibility = "hidden";
+        
+        document.getElementById("noTT").style.visibility = 'hidden';
+        document.getElementById("teacherTT").style.visibility = 'hidden';
         var tableInfo = "<tr><th scope='col'>שישי</th><th scope='col'>חמישי</th><th scope='col'>רביעי</th><th scope='col'>שלישי</th><th scope='col'>שני</th><th scope='col'>ראשון</th><th scope='col'>שיעור</th></tr>";
         var counter = 0;
 
@@ -413,14 +437,15 @@ function LoadTimeTable(results) {
         document.getElementById("TimeTable").innerHTML = tableInfo;
     }
     else {
-        document.getElementById("noTT").style.visibility = "visibile";
+       
+        document.getElementById("noTT").style.visibility = 'visible';
     }
 }
 
 $(document).on('pageinit', '#HomeWorkPage', function () {
     user = new Object();
-    user.PupilID = localStorage.getItem("PupilID");
-    user.UserType = localStorage.getItem("UserType");
+    user.PupilID = JSON.parse(localStorage.getItem("child")).UserID1;
+    user.UserType = "Pupil";
     FillSubjectByPupilId(user, FillSubjectsDDL);
 });
 
@@ -430,7 +455,7 @@ $(document).on('pageinit', '#CalendarPage', function () {    ///////////////////
 
 UserInfoNote = new Object();
 $(document).on('pageinit', '#NotesPage', function () {
-    UserInfoNote.ID = localStorage.getItem("PupilID");
+    UserInfoNote.ID = JSON.parse(localStorage.getItem("child")).UserID1;
     GetUserNotes(UserInfoNote, renderNotes);
 });
 
@@ -571,7 +596,7 @@ function renderGivenHWByCode(results) {
 Grade = new Object();
 
 $(document).on('pageinit', '#GradesPage', function () {
-    Grade.ID = localStorage.getItem("PupilID");
+    Grade.ID = JSON.parse(localStorage.getItem("child")).UserID1;
     GetUserGrades(Grade, renderGrades);
 });
 
@@ -628,7 +653,7 @@ function renderGivenGradeByDate(results) {
     var GradeThisPupil = [];
     GradeThisPupil.push({ x: GradePos, y: parseInt(PupilGradeThis) });
 
-    for (var i = 0; i < results.length; i++) {
+    for (i = 0; i < results.length; i++) {
         PupilGrades.push({ x: i + 1, y: results[counter++].Grade });   
         PupilGradesAVG.push({ x: i + 1, y: GradeAvg }); 
     }
@@ -679,14 +704,14 @@ function renderGivenGradeByDate(results) {
 User = new Object();
 
 $(document).on('vclick', '#pupilBphone', function (event) {
-    var PupilID = localStorage.getItem("PupilID");
+    var PupilID = JSON.parse(localStorage.getItem("child")).UserID1;
     User.PupilID = PupilID;
     User.type = 4;
     FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone );
 });
 
 $(document).on('vclick', '#parentBphone', function (event) {
-    var PupilID = localStorage.getItem("PupilID");
+    var PupilID = JSON.parse(localStorage.getItem("child")).UserID1;
     User.PupilID = PupilID;
     User.type = 3;
     FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
