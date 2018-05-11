@@ -54,7 +54,7 @@ function FillSecurityQ(renderFillSecurityQ) {
 
 function SaveQuestion(SecurityQA, renderlogin) {
 
-    var dataString = JSON.stringify(UserInfo);
+    var dataString = JSON.stringify(SecurityQA);
     $.ajax({
         url: 'BetseferWS.asmx/SaveQuestion',
         data: JSON.stringify({ 'ID': SecurityQA.UserID, 'Q1': SecurityQA.choosenQ1, 'A1': SecurityQA.choosenA1, 'Q2': SecurityQA.choosenQ2, 'A2': SecurityQA.choosenA2 }),
@@ -65,7 +65,7 @@ function SaveQuestion(SecurityQA, renderlogin) {
             renderSaveQuestion(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
+            //alert('Network error has occurred please try again!');
         }
     });
 }
@@ -90,7 +90,7 @@ function GetUserQuestionsByIdAndBday(Useraouto, renderMoveToQuestions) {
 
 function SaveNewPassword(user, tellMeItsOk) {
 
-    var dataString = JSON.stringify(Useraouto);
+    var dataString = JSON.stringify(user);
     $.ajax({
         url: 'BetseferWS.asmx/SaveNewPassword',
         data: JSON.stringify({ 'Id': user.Id, 'password': user.password }),
