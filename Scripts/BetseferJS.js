@@ -1,28 +1,5 @@
 ﻿
 
-$(document).on('vclick', '#LogOut', function () {
-    $.confirm({
-        title: 'התנתקות',
-        content: 'בחרת להתנתק, ההתנתקות תתרחש תוך 10 שניות',
-        rtl: true,
-        autoClose: 'logoutUser|10000',
-        buttons: {
-            logoutUser: {
-                text: 'התנתק עכשיו',
-                action: function () {
-                    window.location.href = "index.html"
-                }
-            },
-            cancel: {
-                text: 'לא',
-                action:  function() {
-
-                }
-            }
-        }
-    });
-});
-
 $(document).on('pageinit', '#TimeTablePage', function () {
     if (localStorage.getItem("UserType") !== "Teacher") {
         Pupil = JSON.parse(localStorage.getItem("child"));
