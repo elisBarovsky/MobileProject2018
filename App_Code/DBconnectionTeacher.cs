@@ -275,7 +275,7 @@ public class DBconnectionTeacher
         string selectSTR = " SELECT dbo.GivenNotes.CodeGivenNote, dbo.GivenNotes.Comment , dbo.GivenNotes.NoteDate , dbo.Lessons.LessonName , dbo.NoteType.NoteName ,(select ( UserFName+ ' '+ UserLName)  from dbo.Users where [UserID]= dbo.GivenNotes.TeacherID) as Teacher_FullName" +
                           " FROM  dbo.Users inner JOIN dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID inner JOIN dbo.GivenNotes " +
                           "ON dbo.Users.UserID = dbo.GivenNotes.PupilID  inner JOIN dbo.NoteType ON dbo.GivenNotes.CodeNoteType = dbo.NoteType.CodeNoteType  INNER JOIN  dbo.Lessons ON dbo.GivenNotes.LessonsCode = dbo.Lessons.CodeLesson " +
-                          " where dbo.Pupil.UserID='" + PupilID + "'";
+                          " where dbo.Pupil.UserID='" + PupilID + "'order by dbo.GivenNotes.NoteDate desc";
         DataTable dtt = new DataTable();
         DataSet ds;
         try
