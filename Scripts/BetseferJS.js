@@ -47,32 +47,6 @@ function LoadTimeTable(results) {
 
 
 
-Grade = new Object();
-
-$(document).on('pageinit', '#GradesPage', function () {
-    Grade.ID = JSON.parse(localStorage.getItem("child")).UserID1;
-    GetUserGrades(Grade, renderGrades);
-});
-
-function renderGrades(results) {
-    res = $.parseJSON(results.d);
-    var counter = 0;
-    $('#DynamicListGrades').empty();
-    var ImgIcon;
-    for (var i = 0; i < res.length; i++) {
-        if (res[counter].Grade >"50") {
-            ImgIcon = "Images/happy.png";
-        }
-        else {
-            ImgIcon = "Images/sad.png";
-        }
-        dynamicLy = "<li> <a href='#'id=" + res[counter].Grade+" data-id=" + res[counter].ExamDate + "><img src='" + ImgIcon + "'/> <p>תאריך:" + res[counter].ExamDate + "</p><p>מקצוע:" + res[counter].LessonName + "</p><p>ציון:" + res[counter].Grade + "</p> </li>";
-        counter++;
-        $('#DynamicListGrades').append(dynamicLy);
-        $('#DynamicListGrades').listview('refresh');
-    }
-}
-
 GradeDate = new Object();
 
 $(document).on('vclick', '#DynamicListGrades li a', function () { // on the pageinit of info about Product page

@@ -80,10 +80,10 @@ public class DBconnectionTeacher
 
     public DataTable PupilGrades(string PupilID)  //New !! 
     {
-        string selectSTR = " SELECT dbo.Grades.GradeCode, dbo.Lessons.LessonName, dbo.Grades.ExamDate, dbo.Grades.Grade,dbo.Grades.PupilID " +
+        string selectSTR = " SELECT dbo.Grades.GradeCode, dbo.Lessons.LessonName, dbo.Grades.ExamDate, dbo.Grades.Grade,dbo.Grades.PupilID , (select [UserFName]+' '+[UserLName]  from [dbo].[Users] where [UserID]= dbo.Grades.TeacherID) as Teacher_FullName" +
                         " FROM  dbo.Grades INNER JOIN dbo.Users ON dbo.Grades.PupilID = dbo.Users.UserID  INNER JOIN " +
                         "  dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID INNER JOIN  dbo.Lessons ON dbo.Grades.CodeLesson = dbo.Lessons.CodeLesson " +
-                        " where dbo.Grades.PupilID = '"+ PupilID + "'";
+                        " where dbo.Grades.PupilID = '"+ PupilID + "' order by dbo.Grades.ExamDate desc";
         DataTable dtt = new DataTable();
         DataSet ds;
         try
@@ -115,45 +115,6 @@ public class DBconnectionTeacher
                 con.Close();
             }
             
-        }
-    }
-
-    public DataTable FilterGrade(string GradeDate) //NEW
-    {
-        string selectSTR = " SELECT  dbo.Lessons.LessonName, dbo.Grades.ExamDate, dbo.Grades.Grade ,( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as TeacherName " +
-                            " FROM   dbo.Grades INNER JOIN dbo.Lessons ON dbo.Grades.CodeLesson = dbo.Lessons.CodeLesson INNER JOIN " +
-                            "                          dbo.Users ON  dbo.Grades.TeacherID = dbo.Users.UserID where dbo.Grades.ExamDate='" + GradeDate + "'" +
-                            " group by dbo.Lessons.LessonName,dbo.Grades.ExamDate,dbo.Users.UserFName,dbo.Users.UserLName ,dbo.Grades.Grade";
-        DataTable dtt = new DataTable();
-        DataSet ds;
-        try
-        {
-            con = connect("Betsefer"); // create the connection
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-        }
-
-        try
-        {
-            SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con);
-            ds = new DataSet("GradeAvgDS");
-            daa.Fill(ds);
-            return dtt = ds.Tables[0];
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-        }
-        finally
-        {
-            if (con != null)
-            {
-                con.Close();
-            }
         }
     }
 

@@ -58,9 +58,6 @@ function LoadHWTable(results) {
         newP0.innerText = 'מורה: ' + res[counter].Teacher_FullName;
         newDiv.appendChild(newP0);
 
-        //newP1.innerText = 'מקצוע: ' + res[counter].LessonName;
-        //newDiv.appendChild(newP1);
-
         newP2.innerText = 'ניתנו בתאריך: ' + res[counter].HWGivenDate;
         newDiv.appendChild(newP2);
 

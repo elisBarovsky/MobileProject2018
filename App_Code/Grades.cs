@@ -43,8 +43,4 @@ public class Grades
         return dbT.PupilGrades(PupilID);
     }
 
-    public DataTable FilterGrade(string GradeDate)  // NEW !
-    {
-        return dbT.FilterGrade(GradeDate);
-    }
 }
