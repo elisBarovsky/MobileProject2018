@@ -196,24 +196,6 @@ function GetUserNotes(UserInfoNote, renderNotes) {
     });
 }
 
-function GivenNoteByCode(Note, renderGivenNoteByCode) {
-
-    var dataString = JSON.stringify(Note);
-    $.ajax({
-        url: 'BetseferWS.asmx/GivenNoteByCode',
-        data: JSON.stringify({ 'NoteCode': Note.Code }),
-        type: 'POST',
-        dataType: "json",
-        contentType: 'application/json; charset = utf-8',
-        success: function (results) {
-            renderGivenNoteByCode(results);
-        },
-        error: function (request, error) {
-            alert('Network error has occurred please try again!');
-        }
-    });
-}
-
 function GivenHomeWorkByCode(HomeWork, renderGivenNoteByCode) {
 
     var dataString = JSON.stringify(HomeWork);

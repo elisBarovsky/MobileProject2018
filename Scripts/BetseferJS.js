@@ -57,63 +57,6 @@ $(document).on('pageinit', '#CalendarPage', function () {    ///////////////////
 
 
 
-function CloseNavigation() {
-    var slidewidth = '20%';
-    var navbarneg = '-' + slidewidth;
-    var selected = true;
-
-    // set slidemenu width
-    $('#slidemenu').stop().animate({
-        right: selected ? navbarneg : '0px'
-    });
-
-    // set navbar width
-    $('#navbar-height-col').stop().animate({
-        right: selected ? navbarneg : '0px'
-    });
-
-    // set content right
-    $('#page-content').stop().animate({
-        right: selected ? '0px' : slidewidth
-    });
-
-    // set navbar right
-    $('.navbar-header').stop().animate({
-        right: selected ? '0px' : slidewidth
-    });
-
-    $(this).toggleClass('slide-active', !selected);
-    $('#slidemenu').toggleClass('slide-active');
-
-    $('#page-content, .navbar, body, .navbar-header').toggleClass('slide-active');
-}
-
-Note = new Object();
-
-$(document).on('vclick', '#DynamicListNotes li a', function () { // on the pageinit of info about Product page
-    Note.Code = $(this).attr("data-id");
-    GivenNoteByCode(Note, renderGivenNoteByCode);
-    CloseNavigation();   
-    $.mobile.changePage("#NotesPageFull", { transition: "slide", changeHash: false });  
-});
-
-function renderGivenNoteByCode(results) {
-    //this is the callBackFunc 
-    results = $.parseJSON(results.d);
-    var counter = 0;
-    var CommentInfo;
-    $('#DynamicNoteInfo').empty();
-    if (results[counter].Comment==="") {
-        CommentInfo = "אין תיאור";
-    }
-    else {
-        CommentInfo = results[counter].Comment;
-    }
-    dynamicLy = "<h1>" + results[counter].NoteName + "</h1><p>מקצוע : " + results[counter].LessonName + "</p> <p>תאריך ההערה: " + results[counter].NoteDate + "</p><p>המורה:" + results[counter].TeacherName + "</p><p>תיאור ההערה: " + CommentInfo+"</p>";
-    $('#DynamicNoteInfo').append(dynamicLy);
-    $('#DynamicNoteInfo').listview('refresh');
-}
-
 function FillSubjectsDDL(results) {
     FillHW(user, LoadHWTable);
     //res = $.parseJSON(results.d);

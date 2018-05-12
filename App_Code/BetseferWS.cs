@@ -222,30 +222,30 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonStringGivenAllNotes;
     }
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string GivenNoteByCode(string NoteCode)
-    {
-        Notes AllNotesByID = new Notes();
-        DataTable DT = AllNotesByID.GivenNoteByCode(NoteCode);
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public string GivenNoteByCode(string NoteCode)
+    //{
+    //    Notes AllNotesByID = new Notes();
+    //    DataTable DT = AllNotesByID.GivenNoteByCode(NoteCode);
 
-        var list = new List<Dictionary<string, object>>();
+    //    var list = new List<Dictionary<string, object>>();
 
-        foreach (DataRow row in DT.Rows)
-        {
-            var dict = new Dictionary<string, object>();
+    //    foreach (DataRow row in DT.Rows)
+    //    {
+    //        var dict = new Dictionary<string, object>();
 
-            foreach (DataColumn col in DT.Columns)
-            {
-                dict[col.ColumnName] = row[col];
-            }
-            list.Add(dict);
-        }
+    //        foreach (DataColumn col in DT.Columns)
+    //        {
+    //            dict[col.ColumnName] = row[col];
+    //        }
+    //        list.Add(dict);
+    //    }
 
-        JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonStringGivenAllNotes = js.Serialize(list);
-        return jsonStringGivenAllNotes;
-    }
+    //    JavaScriptSerializer js = new JavaScriptSerializer();
+    //    string jsonStringGivenAllNotes = js.Serialize(list);
+    //    return jsonStringGivenAllNotes;
+    //}
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
