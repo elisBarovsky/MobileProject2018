@@ -31,8 +31,8 @@ function renderNotes(results) {
 
         var newIMG = document.createElement("img");
         newIMG.setAttribute('src', ImgIcon);
-        newIMG.setAttribute('height', '70px');
-       // newIMG.setAttribute('style', 'float: left'); 
+        newIMG.setAttribute('height', '55px');
+        newIMG.setAttribute('style', 'padding-right:38%');
 
         var newH3 = document.createElement('h3');
 

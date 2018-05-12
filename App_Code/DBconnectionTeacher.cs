@@ -232,43 +232,6 @@ public class DBconnectionTeacher
         }
     }
 
-    public DataTable FillAllHomeWork(string Id)//WebService
-    {
-        string selectSTR = "SELECT dbo.HomeWork.HWCode,  dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha " +
-            "FROM   dbo.HomeWork INNER JOIN  dbo.Class ON dbo.HomeWork.CodeClass = dbo.Class.ClassCode INNER JOIN " +
-            "  dbo.Pupil ON dbo.Class.ClassCode = dbo.Pupil.CodeClass INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson " +
-            "  where UserID = '" + Id + "'";
-        DataTable dtt = new DataTable();
-        DataSet ds;
-        try
-        {
-            con = connect("Betsefer"); // create the connection
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-        }
-        try
-        {
-            SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
-            ds = new DataSet("HWDS");
-            daa.Fill(ds);
-            return dtt = ds.Tables[0];
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-        }
-        finally
-        {
-            if (con != null)
-            {
-                con.Close();
-            }
-        }
-    }
 
     public DataTable GivenAllNotes(string PupilID) //webService
     {
@@ -308,11 +271,12 @@ public class DBconnectionTeacher
         }
     }
 
-    public DataTable GivenHTByCode(string HWID) //webService
+    public DataTable FillAllHomeWork(string Id)//WebService
     {
-        string selectSTR = " SELECT dbo.HomeWork.HWCode, dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha, (dbo.Users.UserFName+' '+ dbo.Users.UserLName) as TeacherName " +
-                          " FROM  dbo.HomeWork INNER JOIN dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson INNER JOIN " +
-                          " dbo.Users ON dbo.HomeWork.TeacherID = dbo.Users.UserID where dbo.HomeWork.HWCode='" + HWID + "'";
+        string selectSTR = "SELECT dbo.HomeWork.HWCode,  dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha ,(select ( UserFName+ ' '+ UserLName)  from dbo.Users where [UserID]= dbo.HomeWork.TeacherID) as Teacher_FullName " +
+            "FROM   dbo.HomeWork INNER JOIN  dbo.Class ON dbo.HomeWork.CodeClass = dbo.Class.ClassCode INNER JOIN " +
+            "  dbo.Pupil ON dbo.Class.ClassCode = dbo.Pupil.CodeClass INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson " +
+            "  where UserID = '" + Id + "' order by dbo.HomeWork.HWGivenDate desc";
         DataTable dtt = new DataTable();
         DataSet ds;
         try
@@ -327,7 +291,7 @@ public class DBconnectionTeacher
         try
         {
             SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
-            ds = new DataSet("OneNoteDS");
+            ds = new DataSet("HWDS");
             daa.Fill(ds);
             return dtt = ds.Tables[0];
         }
@@ -344,6 +308,7 @@ public class DBconnectionTeacher
             }
         }
     }
+
     public DataTable FillBySubjectHomeWork(string PupilID, string ChooseSubjectCode) //webService
     {
         string selectSTR = " SELECT dbo.HomeWork.HWGivenDate,(dbo.Users.UserFName+' ' +dbo.Users.UserLName) as TeacherName, dbo.Lessons.LessonName ,dbo.HomeWork.HWInfo, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha" +

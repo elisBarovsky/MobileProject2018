@@ -38,11 +38,6 @@ public class Notes
         return dbT.GivenAllNotes(PupilID);
     }
 
-    public DataTable GivenHTByCode(string HWID)
-    {
-        return dbT.GivenHTByCode(HWID);
-    }
-
     public DataTable GivenNotesBySubject(string PupilID, string ChooseSubjectCode)
     {
         return dbT.GivenNotesBySubject(PupilID, ChooseSubjectCode);

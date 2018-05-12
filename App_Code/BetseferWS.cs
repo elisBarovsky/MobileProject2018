@@ -272,31 +272,6 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string GivenHWByCode(string HWCode)
-    {
-        Notes AllHWByID = new Notes();
-        DataTable DT = AllHWByID.GivenHTByCode(HWCode);
-
-        var list = new List<Dictionary<string, object>>();
-
-        foreach (DataRow row in DT.Rows)
-        {
-            var dict = new Dictionary<string, object>();
-
-            foreach (DataColumn col in DT.Columns)
-            {
-                dict[col.ColumnName] = row[col];
-            }
-            list.Add(dict);
-        }
-
-        JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonStringGivenAllNotes = js.Serialize(list);
-        return jsonStringGivenAllNotes;
-    }
-
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string FillBySubjectHomeWork(string PupilID, string ChooseSubjectCode)
     {
         Users PupilClass = new Users();

@@ -196,24 +196,6 @@ function GetUserNotes(UserInfoNote, renderNotes) {
     });
 }
 
-function GivenHomeWorkByCode(HomeWork, renderGivenNoteByCode) {
-
-    var dataString = JSON.stringify(HomeWork);
-    $.ajax({
-        url: 'BetseferWS.asmx/GivenHWByCode',
-        data: JSON.stringify({ 'HWCode': HomeWork.Code }),
-        type: 'POST',
-        dataType: "json",
-        contentType: 'application/json; charset = utf-8',
-        success: function (results) {
-            renderGivenHWByCode(results);
-        },
-        error: function (request, error) {
-            alert('Network error has occurred please try again!');
-        }
-    });
-}
-
 function GetUserGrades(Grade, renderGrades) { 
     var dataString = JSON.stringify(Grade);
     $.ajax({

@@ -44,77 +44,8 @@ function LoadTimeTable(results) {
     }
 }
 
-$(document).on('pageinit', '#HomeWorkPage', function () {
-    user = new Object();
-    user.PupilID = JSON.parse(localStorage.getItem("child")).UserID1;
-    user.UserType = "Pupil";
-    FillSubjectByPupilId(user, FillSubjectsDDL);
-});
-
-$(document).on('pageinit', '#CalendarPage', function () {    /////////////////////////////////////////////////not finished
-
-});
 
 
-
-function FillSubjectsDDL(results) {
-    FillHW(user, LoadHWTable);
-    //res = $.parseJSON(results.d);
-    //$('#subjectsDDL').empty();
-    //dynamicLy = "<option value='0'>סנן לפי מקצוע</option>";
-    //$('#subjectsDDL').append(dynamicLy);
-    //$('#subjectsDDL').selectmenu('refresh');
-    //$.each(res, function (i, row) {
-    //    dynamicLy = " <option value='" + (i + 1) + "' style='text- align:right'>" + row + "</option> ";
-    //    $('#subjectsDDL').append(dynamicLy);
-    //    $('#subjectsDDL').selectmenu('refresh');
-    //});
-}
-
-function LoadHWTable(results) {
-    res = $.parseJSON(results.d);
-
-    var counter = 0;
-    var IsLehagasha = "לא להגשה";
-    $('#DynamicListHW').empty();
-    var ImgIcon;
-    for (var i = 0; i < res.length; i++) {
-        if (res[counter].IsLehagasha==="true") {
-            IsLehagasha = "להגשה";
-        }
-        dynamicLy = "<li> <a href='#' data-id=" + res[counter].HWCode + "><img src='Images/HW.png'/> <p>מקצוע:" + res[counter].LessonName + "</p><p>נתנו בתאריך:" + res[counter].HWGivenDate + "</p><p>עד לתאריך:" + res[counter].HWDueDate + "</p><p>האם להגשה:" + IsLehagasha+" </li>";
-        counter++;
-        $('#DynamicListHW').append(dynamicLy);
-        $('#DynamicListHW').listview('refresh');
-    }
-}
-
-HomeWork = new Object();
-
-$(document).on('vclick', '#DynamicListHW li a', function () { // on the pageinit of info about Product page
-    HomeWork.Code = $(this).attr("data-id");
-    GivenHomeWorkByCode(HomeWork, renderGivenHWByCode);
-    CloseNavigation();
-    $.mobile.changePage("#HomeWorkPageInfo", { transition: "slide", changeHash: false });
-});
-
-function renderGivenHWByCode(results) {
-    //this is the callBackFunc 
-    results = $.parseJSON(results.d);
-    var counter = 0;
-    var IsLehagasha = "לא להגשה";
-
-    $('#DynamicHWInfo').empty();
-    if (results[counter].IsLehagasha === "true") {
-        CommentInfo = "ההגשה";
-    }
-    else {
-        CommentInfo = results[counter].Comment;
-    }
-    dynamicLy = "<h1>שיעורים ב" + results[counter].LessonName   + "</h1><p>מורה : " + results[counter].TeacherName + "</p> <p>תאריך שיעורים: " + results[counter].HWGivenDate + "</p><p>לביצוע עד:" + results[counter].HWDueDate + "</p><p>האם להגשה: " + IsLehagasha + "</p><p>פירוט השיעורים: " + results[counter].HWInfo+"</p>";
-    $('#DynamicHWInfo').append(dynamicLy);
-    $('#DynamicHWInfo').listview('refresh');
-}
 
 Grade = new Object();
 
@@ -224,40 +155,4 @@ function renderGivenGradeByDate(results) {
 
 }
 
-User = new Object();
-
-$(document).on('vclick', '#pupilBphone', function (event) {
-    var PupilID = JSON.parse(localStorage.getItem("child")).UserID1;
-    User.PupilID = PupilID;
-    User.type = 4;
-    FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone );
-});
-
-$(document).on('vclick', '#parentBphone', function (event) {
-    var PupilID = JSON.parse(localStorage.getItem("child")).UserID1;
-    User.PupilID = PupilID;
-    User.type = 3;
-    FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
-});
-
-//$('.mySearchInputName').textinput();
-//
-
-function FillListViewCellPhone(results) {
-    res = $.parseJSON(results.d);
-    var counter = 0;
-    var phoneIcon = "Images/PhoneIcon.png";
-
-    $('#contactsLV').empty();
-
-    for (var i = 0; i < res.length; i++) {
-
-        dynamicLy = "<li><p><center><input id='" + res[counter].PhoneNumber +
-            "' src='" + phoneIcon + "' type='image'  height='25' style='float: left' /> &nbsp;" +
-            res[counter].PhoneNumber + " &nbsp;&nbsp; " + res[counter].FullName + " </center> </p> </li>";
-        counter++;
-        $('#contactsLV').append(dynamicLy);
-        $('#contactsLV').listview('refresh');
-    }
-}
 
