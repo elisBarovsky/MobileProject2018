@@ -180,7 +180,7 @@ function FillHW(user, LoadHWTable) {
 
 function GetUserNotes(UserInfoNote, renderNotes) {
 
-    var dataString = JSON.stringify(UserInfo);
+    var dataString = JSON.stringify(UserInfoNote);
     $.ajax({
         url: 'BetseferWS.asmx/GivenAllNotes',
         data: JSON.stringify({ 'PupilID': UserInfoNote.ID }),
