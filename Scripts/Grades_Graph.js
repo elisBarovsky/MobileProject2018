@@ -7,7 +7,7 @@ function onDeviceReady() {
  //   Grade.ID = localStorage.getItem("UserID");
     alert(3);
     var queryString = decodeURIComponent(window.location.search);
-    queryString = queryString.substring(1);
+    queryString = queryString.substring(4);
  
     //var text = window.location.hash.substring(1)
  //העליון במידה והעברת משתנים דרך הקישור תעבוד אז זה יעזור להוציא את מה שנשלח
