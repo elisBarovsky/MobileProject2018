@@ -14,9 +14,9 @@ function onDeviceReady() {
 
     GetUserGrades(Grade, renderGrades);
 
-    function LetsClick(getID) {
-        alert(getID);
-    }
+    //function LetsClick(getID) {
+    //    alert(getID);
+    //}
     //$('.btn btn-success').click(function () {
     //    alert('נלחץ על הגרף'); 
     //});
@@ -41,9 +41,10 @@ function renderGrades(results) {
         newIMG.setAttribute('style', 'padding-right:41%');
 
         var GraphButton = document.createElement('button');
-        GraphButton.id = res[counter].ExamDate;
-      //  GraphButton.onclick =LetsClick(this.id);
-            //function () { window.location = 'Grades_Graph.html'; };
+      //GraphButton.id = res[counter].ExamDate;
+        var queryString = "?id=" + res[counter].ExamDate;
+
+        GraphButton.onclick = function () { window.location.href = 'Grades_Graph.html' + queryString };
 
       //  GraphButton.className = 'btn btn-success';
         GraphButton.innerText = 'צפייה בפילוח';
