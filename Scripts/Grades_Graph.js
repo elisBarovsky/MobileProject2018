@@ -9,9 +9,5 @@ function onDeviceReady() {
     var queryString = decodeURIComponent(window.location.search);
     queryString = queryString.substring(4);
  
-    //var text = window.location.hash.substring(1)
- //העליון במידה והעברת משתנים דרך הקישור תעבוד אז זה יעזור להוציא את מה שנשלח
-    //$('.btn btn-success').click(function () {
-    //    alert('נלחץ על הגרף'); 
-    //});
+ 
 }
