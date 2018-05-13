@@ -42,7 +42,7 @@ function renderGrades(results) {
 
         var GraphButton = document.createElement('button');
       //GraphButton.id = res[counter].ExamDate;
-        var queryString = "?id=" + res[counter].ExamDate;
+        var queryString = "?id=" + res[counter].ExamDate + "?grade=" + res[counter].Grade;
 
         GraphButton.onclick = function () { window.location.href = 'Grades_Graph.html' + queryString };
 
