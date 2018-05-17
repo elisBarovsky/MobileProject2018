@@ -41,10 +41,11 @@ function renderGrades(results) {
         newIMG.setAttribute('style', 'padding-right:41%');
 
         var GraphButton = document.createElement('button');
-      //GraphButton.id = res[counter].ExamDate;
-        var queryString = "?id=" + res[counter].ExamDate + "?grade=" + res[counter].Grade;
 
-        GraphButton.onclick = function () { window.location.href = 'Grades_Graph.html' + queryString };
+        GraphButton.setAttribute("id", (i + 1));
+
+
+        GraphButton.onclick = function () { window.location.href = 'Grades_Graph.html' };
 
       //  GraphButton.className = 'btn btn-success';
         GraphButton.innerText = 'צפייה בפילוח';

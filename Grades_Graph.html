@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
 
     <!-- v4.0.0-alpha.6 -->
-    <link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css">-->
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
@@ -19,9 +19,6 @@
     <link rel="stylesheet" href="dist/css/et-line-font/et-line-font.css">
     <link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
-    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
     <!-- jQuery 3 -->
     <script src="dist/js/jquery.min.js"></script>
@@ -36,10 +33,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <style>
         .container {
             display: inline-block;
@@ -55,29 +49,35 @@
         }
     </style>
 
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body class="hold-transition login-page">
 
-    <div class="container" onclick="window.location='Grades.html'">
+    <div class="container" style="float:right" onclick="window.location='Grades.html'">
         <div class="col-xs-4 m-t-1" style="float:left;position:relative;background-color:white;height:45px;border-radius:50px ">
             <a href="#Back"><img src="Images/backIcon.png" alt="logo" style="width:46px;"> </a>
         </div>
     </div>
-    <div class="login-box">
-        <div div class="login-box" style="height:20px;color:white">
-            <h3>גרףףףף</h3>
-        </div>
-        <!-- <div class="login-box-body" >-->
-        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
+    <div div class="login-box" style="height:20px;color:white;text-align:right">
+        <h3><!--גרףףףף--></h3>
 
     </div>
-    <!-- /.login-box-body -->
-    <!--</div>-->
+    <div class="container" style="width:100%;position:relative">
+
+        <div id="chartContainer" style="height: 370px; width: 100%"></div>
+
+    </div>
+
+
     <!-- /.login-box -->
     <!-- v4.0.0-alpha.6 -->
     <script src="dist/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- template -->
     <script src="dist/js/niche.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
 </body>
 </html>

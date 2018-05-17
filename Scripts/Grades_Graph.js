@@ -7,15 +7,17 @@ function onDeviceReady() {
  //   Grade.ID = localStorage.getItem("UserID");
 
     var queryString = decodeURIComponent(window.location.search);
-    queryString = queryString.substring(4);
     var queryString2 = decodeURIComponent(window.location.search);
-    queryString = queryString.substring(17);
-    localStorage.setItem("PupilGrade", queryString);
+    queryString = queryString.substring(4,14);
+    queryString2 = queryString2.substring(21);
+    localStorage.setItem("PupilGrade", queryString2);
     GradeDate = new Object();
     GradeDate.Date = queryString;
     GivenGradeByCode(GradeDate, renderGivenGradeByDate);
 
 }
+
+
 
 function renderGivenGradeByDate(results) {
     //this is the callBackFunc 
@@ -43,46 +45,64 @@ function renderGivenGradeByDate(results) {
         PupilGrades.push({ x: i + 1, y: results[counter++].Grade });
         PupilGradesAVG.push({ x: i + 1, y: GradeAvg });
     }
+    PupilGrades = PupilGrades.sort();
 
-    var options = {
+    var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
         title: {
-            text: "בחינה ב" + results[0].LessonName + " בתאריך " + results[0].ExamDate + " " + results[0].TeacherName
+            text: "בחינה ב" + results[0].LessonName + ". המורה: " + results[0].TeacherName 
         },
         axisX: {
             valueFormatString: "#"
         },
         axisY: {
-            maximum: 100,
+            maximum: 120,
             title: "ציונים",
             includeZero: true
         },
-        data: [
-            {
-                markerColor: "blue",
-                markerType: "cross",
-                markerSize: 20,
-                type: "line",
-                showInLegend: true,
-                legendText: "הציון שלי",
-                dataPoints: GradeThisPupil
-            },
-            {
-                type: "area",
-                legendText: "ממוצע כיתתי",
-                showInLegend: true,
-                fillOpacity: .3,
-                lineThickness: 7,
-                dataPoints: PupilGradesAVG
-            },
-            {
-                type: "spline",
-                legendText: "ציוני הכיתה",
-                showInLegend: true,
-                dataPoints: PupilGrades
-            }
-        ]
-    };
-    $("#chartContainer").CanvasJSChart(options);
+        legend: {
+            cursor: "pointer",
+            fontSize: 14,
+            itemclick: toggleDataSeries
+        },
+        toolTip: {
+            shared: true
+        },
+        data: [{
+            markerColor: "blue",
+            markerType: "cross",
+            markerSize: 15,
+            type: "line",
+            showInLegend: true,
+            legendText: "הציון שלי",
+            dataPoints: GradeThisPupil
+        },
+        {
+            type: "area",
+            legendText: "ממוצע כיתתי",
+            showInLegend: true,
+            fillOpacity: .3,
+            lineThickness: 7,
+            dataPoints: PupilGradesAVG
+        },
+        {
+            type: "spline",
+            legendText: "ציוני הכיתה",
+            showInLegend: true,
+            dataPoints: PupilGrades
+        }]
+    });
+    chart.render();
+
+    function toggleDataSeries(e) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        }
+        else {
+            e.dataSeries.visible = true;
+        }
+        chart.render();
+    }
+ 
 
 }
