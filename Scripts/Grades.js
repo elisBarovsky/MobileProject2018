@@ -12,15 +12,23 @@ function onDeviceReady() {
         });
     });
 
+   
     GetUserGrades(Grade, renderGrades);
 
     //function LetsClick(getID) {
     //    alert(getID);
     //}
-    //$('.btn btn-success').click(function () {
-    //    alert('נלחץ על הגרף'); 
-    //});
+   
 }
+
+
+$(document).ready('#button').click(function () {
+    //localStorage.setItem("ChoosenExamID", this.id); //saving in localS
+  //  var id = $(this).attr('id');
+ //   alert($(this).prop("value"));
+
+ //   alert('נלחץ על הגרף');
+});
 
 function renderGrades(results) {
     res = $.parseJSON(results.d);
@@ -44,7 +52,7 @@ function renderGrades(results) {
 
         GraphButton.setAttribute("id", (i + 1));
 
-
+        GraphButton.value = (i + 1);
         GraphButton.onclick = function () { window.location.href = 'Grades_Graph.html' };
 
       //  GraphButton.className = 'btn btn-success';
