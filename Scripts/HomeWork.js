@@ -5,7 +5,7 @@ user = new Object();
 function onDeviceReady() {
 
     localStorage.setItem("LastVisit", "HomeWork.html"); //saving in localS
-    user.PupilID = localStorage.getItem("UserID");
+    user.PupilID = localStorage.getItem("PupilID");
 
     $(function () {
         $("#accordion").accordion({
@@ -16,7 +16,7 @@ function onDeviceReady() {
 }
 
 function FillSubjectsDDL(results) {
-    user.PupilID = localStorage.getItem("UserID");
+    user.PupilID = localStorage.getItem("PupilID");
     FillHW(user, LoadHWTable);
 }
 

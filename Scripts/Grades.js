@@ -4,7 +4,7 @@ Grade = new Object();
 function onDeviceReady() {
 
     localStorage.setItem("LastVisit", "Grades.html"); //saving in localS
-    Grade.ID = localStorage.getItem("UserID");
+    Grade.ID = localStorage.getItem("PupilID");
 
     $(function () {
         $("#accordion").accordion({

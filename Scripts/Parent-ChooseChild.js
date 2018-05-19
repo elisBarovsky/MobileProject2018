@@ -4,6 +4,29 @@ function onDeviceReady() {
     //alert(2);
     var ID = localStorage.getItem("UserID");
     ParentChooseChild(ID, getChildrenArray);
+
+
+    $('#continueLogin').click(function () {
+        var childId = $('#ChooseChild').val();
+        var children = JSON.parse(localStorage.getItem("allParentChildren"));
+
+        for (var i = 0; i < children.length; i++) {
+            if (children[i].UserID1 === childId) {
+                localStorage.setItem("child", JSON.stringify(children[i])); //saving in localS
+                localStorage.setItem("PupilID", childId);
+                break;
+            }
+        }
+
+        var UserId = localStorage.getItem("PupilID");
+        var type = localStorage.getItem("UserType");
+
+        var user = new Object();
+        user.UserId = UserId;
+        user.type = type;
+        GetUserInfo(user, renderFillUser);
+
+    });
 }
 
 function getChildrenArray(results) {//return string[].
@@ -13,12 +36,12 @@ function getChildrenArray(results) {//return string[].
         document.location.href = "index.html";
     }
     else if (res.length === 1) {
-        localStorage.setItem("child", JSON.stringify(res[0])); //saving in localS
+        localStorage.setItem("PupilID", JSON.stringify(res[0])); //saving in localS
      //   $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false });
     }
     else {
         localStorage.setItem("allParentChildren", JSON.stringify(res));
-        var x = $('#ChooseChild');
+       var x = $('#ChooseChild');
         var option = document.createElement("option");
         option.text = 'בחר ';
         x.append(option);
@@ -34,35 +57,16 @@ function getChildrenArray(results) {//return string[].
 }
 
 
-$('#continueLogin').click(function () {
-    var childId = $('#ChooseChild').val();
-    var children = JSON.parse(localStorage.getItem("allParentChildren"));
 
-    for (var i = 0; i < children.length; i++) {
-        if (children[i].UserID1 === childId) {
-            localStorage.setItem("child", JSON.stringify(children[i])); //saving in localS
-            break;
-        }
-    }
-
-    var UserId = localStorage.getItem("UserID");
-    var type = localStorage.getItem("UserType");
-
-    var user = new Object();
-    user.UserId = UserId;
-    user.type = type;
-    GetUserInfo(user, renderFillUser);
-
-});
 
 //צריך לוודא שאם זה הורה, אז אחרי שהוא בוחר ילד וזה טוען לו את הנתנונים של הילד, שזה רק יציג לו את היום הורים בתור הורה
 function renderFillUser(results) {
     //Save pupil in localstorage
-    var UserId = localStorage.getItem("UserID");
-    var type = localStorage.getItem("UserType");
-    user = new Object();
-    user.UserId = UserId;
-    user.type = type;
+ //   var UserId = localStorage.getItem("UserID");
+  //  var type = localStorage.getItem("UserType");
+  //  user = new Object();
+  //  user.UserId = UserId;
+ //   user.type = type;
     //if (type !== 'Teacher') {
     //    //GetPupilId(user, SavePupilId);
     //}
@@ -76,6 +80,6 @@ function renderFillUser(results) {
     //    imgSRC = res[5];
     //}
 
-        document.location.href = "Parent_Dashboard.html";
+    document.location.href = "Parent_MainManu.html";
     //   document.getElementById("UserIMG").src = imgSRC;
 }

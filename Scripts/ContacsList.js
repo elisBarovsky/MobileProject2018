@@ -7,13 +7,13 @@ function onDeviceReady() {
     localStorage.setItem("LastVisit", "ContacsList.html"); //saving in localS
 
     $('#pupilBphone').click(function () {
-        User.PupilID = localStorage.getItem("UserID");
+        User.PupilID = localStorage.getItem("PupilID");
         User.type = 4;
         FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
     }); 
 
     $('#parentBphone').click(function () {
-        User.PupilID = localStorage.getItem("UserID");
+        User.PupilID = localStorage.getItem("PupilID");
         User.type = 3;
         FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
     });

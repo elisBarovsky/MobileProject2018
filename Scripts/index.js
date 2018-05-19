@@ -21,7 +21,6 @@ function renderlogin(results) {
     if (res[0] === "openSeqQestion") { // go to fill identity questions page
         localStorage.setItem("UserType", res[1]);
         window.location.href = "pages-security.html";
-        //     $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false });
     }
     else if (res[0] === "wrongDetails") { //wrong details
         //$.alert({
@@ -38,11 +37,9 @@ function renderlogin(results) {
         if (res[1] === 'Parent') {
             document.location.href = "Parent-ChooseChild.html";
 
-            //$.mobile.changePage("#ParentChooseChild", { transition: "slide", changeHash: false }); // מעביר עמוד 
-
         }
         else {
-            var UserId = localStorage.getItem("UserID");
+            var UserId = localStorage.getItem("PupilID");
             var type = localStorage.getItem("UserType");
             user = new Object();
             user.UserId = UserId;
@@ -60,26 +57,14 @@ function renderFillUser(results) {
     user = new Object();
     user.UserId = UserId;
     user.type = type;
-    //if (type !== 'Teacher') {
-    //    //GetPupilId(user, SavePupilId);
-    //}
 
     res = $.parseJSON(results.d);
-    //document.getElementById("UserNameLBL").innerHTML = " שלום " + res[1] + " " + res[2];
-    //if (res[6] === "") {
-    //    imgSRC = "Images/NoImg.png";
-    //}
-    //else {
-    //    imgSRC = res[5];
-    //}
-
+ 
     if (type == 'Child') {
         document.location.href = "Pupil_MainManu.html";
     }
-    else if (type == 'Parent') {
-        document.location.href = "Parent-ChooseChild.html";
-    }
+    //else if (type == 'Parent') {
+    //    document.location.href = "Parent_MainManu.html";
+    //}
 
- //   document.getElementById("UserIMG").src = imgSRC;
-    //$.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
 }

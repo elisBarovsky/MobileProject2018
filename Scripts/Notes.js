@@ -5,7 +5,7 @@ UserInfoNote = new Object();
 function onDeviceReady() {
 
     localStorage.setItem("LastVisit", "Notes.html"); //saving in localS
-    UserInfoNote.ID = localStorage.getItem("UserID");
+    UserInfoNote.ID = localStorage.getItem("PupilID");
     $(function () {
         $("#accordion").accordion({
             collapsible: true
