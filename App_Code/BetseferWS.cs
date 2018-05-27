@@ -36,6 +36,116 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetUserFullName(string Id)
+    {
+        Users u = new Users();
+        string res = u.GetUserFullName(Id);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetPupilsByClassTotalName(string classTotalName)
+    {
+        Classes c = new Classes();
+        string classCode = c.GetClassCodeAccordingToClassFullName(classTotalName);
+        Users u = new Users();
+        List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
+        s = u.getPupilsByClassCode(classCode);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(s);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetUserImg(string UserID)
+    {
+        Users u = new Users();
+        string UserImg = u.GetUserImgByUserID(UserID);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(UserImg);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetParentsByClassTotalName(string classTotalName)
+    {
+        Classes c = new Classes();
+        string classCode = c.GetClassCodeAccordingToClassFullName(classTotalName);
+        Users u = new Users();
+        List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
+        s = u.getParentsByClassCode(classCode);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(s);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetClassesByTeacherId(string TeacherID)
+    {
+        Teacher t = new Teacher();
+        List<string> classes = t.FillClassOtAccordingTeacherId_List(TeacherID);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(classes);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetMessagesByUserId(string userId)
+    {
+        Messages u = new Messages();
+        List<Dictionary<string, string>> m = u.GetMessagesByUserId(userId);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(m);
+        return jsonString;
+    }
+
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetAllConversation(string SenderID, string RecipientID)
+    {
+        Messages u = new Messages();
+        List<Messages> m = u.GetAllConversation(SenderID, RecipientID);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(m);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetTeachers2()
+    {
+        Users u = new Users();
+        List<Dictionary<string, string>> t = new List<Dictionary<string, string>>();
+        t = u.GetTeachers2();
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(t);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetUserQuestionsByIdAndBday(string userID, string BDay)
+    {
+        Users UserLogin = new Users();
+        List<string> questionsDetails = UserLogin.GetUserSecurityDetailsByuserIDandBday(userID, BDay);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(questionsDetails);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetUserQuestionsByIdAndBday(string userID, string BDay)
     {
         Users UserLogin = new Users();
@@ -100,7 +210,6 @@ public class BetseferWS : System.Web.Services.WebService
         string jsonStringCategory = js.Serialize(children);
         return jsonStringCategory;
     }
-
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -376,6 +485,44 @@ public class BetseferWS : System.Web.Services.WebService
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringFillHW = js.Serialize(list);
         return jsonStringFillHW;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetClassesFullName()
+    {
+        Classes classesOt = new Classes();
+        List<string> classes = classesOt.GetClassesFullName();
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillSubjects = js.Serialize(classes);
+        return jsonStringFillSubjects;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string SubmitMessage(Messages m)
+    {
+        Messages message = new Messages();
+        int answer; string stringAnswer = "bad";
+        Classes c = new Classes();
+        string classCode = c.GetClassCodeAccordingToClassFullName(m.UserClass);
+        m.UserClass = classCode;
+        if (m.MessageType == "private")
+        {
+            answer = message.SendPrivateMessage(m);
+        }
+        else
+        {
+            answer = message.SendKolektiveMessage(m);
+        }
+
+        if (answer > 0)
+        {
+            stringAnswer = "good";
+        }
+
+        return stringAnswer;
     }
 
     public static string KeyByValue(Dictionary<string, string> dict, string val)

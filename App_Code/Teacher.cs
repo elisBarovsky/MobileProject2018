@@ -21,4 +21,45 @@ public class Teacher : Users
         if (classMainTeacher != null) isMainTeacher = true;
         else isMainTeacher = false;
     }
+
+    public Dictionary<string, string> FillClassOtAccordingTeacherIdAndSubjectCode(string teacherID, string LessonCode)
+    {
+        Dictionary<string, string> d = new Dictionary<string, string>();
+        DBconnectionTeacher dbt = new DBconnectionTeacher();
+
+        return dbt.FillClassOtAccordingTeacherIdAndSubjectCode(teacherID, LessonCode);
+    }
+
+    public Dictionary<string, string> FillLessonsAccordingTeacherIdAndClassCode(string teacherID, string classCode)
+    {
+        Dictionary<string, string> d = new Dictionary<string, string>();
+        DBconnectionTeacher dbt = new DBconnectionTeacher();
+
+        return dbt.FillLessonsAccordingTeacherIdAndClassCode(teacherID, classCode);
+    }
+
+    public Dictionary<string, string> FillLessonsAccordingTeacherId(string teacherID)
+    {
+        Dictionary<string, string> d = new Dictionary<string, string>();
+        DBconnectionTeacher dbt = new DBconnectionTeacher();
+
+        return dbt.FillLessonsAccordingTeacherId(teacherID);
+    }
+
+
+    public Dictionary<string, string> FillClassOtAccordingTeacherId(string teacherID)
+    {
+        Dictionary<string, string> d = new Dictionary<string, string>();
+        DBconnectionTeacher dbt = new DBconnectionTeacher();
+
+        return dbt.FillClassOtAccordingTeacherId(teacherID);
+    }
+
+    public List<string> FillClassOtAccordingTeacherId_List(string teacherID)
+    {
+        Dictionary<string, string> d = new Dictionary<string, string>();
+        DBconnectionTeacher dbt = new DBconnectionTeacher();
+
+        return dbt.FillClassOtAccordingTeacherId_List(teacherID);
+    }
 }

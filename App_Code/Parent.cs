@@ -46,13 +46,35 @@ public class Parent : Users
         }
     }
 
-    public Student[] ChildrenToArray()
+    public string[] ChildrenToArray()
     {
-        Student[] pupils = new Student[children.Count * 2];
-        for (int i = 0; i < children.Count; i++)
+        string[] pupils = new string[children.Count * 2];
+        for (int i = 0, j = 0; i < children.Count; i++, j++)
         {
-            pupils[i] = children[i];
+            pupils[j] = children[i].UserID1;
+            j++;
+            pupils[j] = children[i].UserLName1 + " " + children[i].UserFName1;
         }
         return pupils;
+    }
+
+    public Dictionary<string, string> ChildrenToDictionary()
+    {
+        Dictionary<string, string> pupils = new Dictionary<string, string>();
+        for (int i = 0; i < children.Count; i++)
+        {
+            pupils.Add(children[i].UserID1, children[i].UserLName1 + " " + children[i].UserFName1);
+        }
+        return pupils;
+    }
+
+    public int DeleteChild(string parentID, string childID)
+    {
+        return db.DeleteChild(parentID, childID);
+    }
+
+    public int SaveChildAndParent(string parentID, string childID)
+    {
+        return db.SaveChildAndParent(parentID, childID);
     }
 }

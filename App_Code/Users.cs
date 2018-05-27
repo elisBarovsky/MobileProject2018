@@ -146,7 +146,6 @@ public class Users
         UserPassword = userDetails[6];
         PhoneNumber = userDetails[7];
         CodeUserType = userDetails[8];
-
     }
 
     public Users(string userID, string userFName, string userLName, string birthDate, string userImg, string userName, string userPassword, string phoneNumber, string codeUserType)
@@ -163,7 +162,6 @@ public class Users
         PhoneNumber = phoneNumber;
         CodeUserType = codeUserType;
     }
-
 
     //public int AddPupil(string UserID, int classNumber)
     //{
@@ -203,6 +201,11 @@ public class Users
     public List<Dictionary<string, string>> getPupilsByClassCode(string classCode)
     {
         return db.getPupilsByClassCode(classCode);
+    }
+
+    public List<Dictionary<string, string>> getParentsByClassCode(string classCode)
+    {
+        return db.getParentsByClassCode(classCode);
     }
 
     public Dictionary<string, string> FillUsers(string CodeUserType)
@@ -308,6 +311,11 @@ public class Users
         return db.ChangeFirstLogin(id);
     }
 
+    public List<Dictionary<string, string>> GetTeachers2()
+    {
+        return db.GetTeachers2();
+    }
+
     public Dictionary<string, string> GetTeachers()
     {
         return db.GetTeachers();
@@ -354,6 +362,21 @@ public class Users
     {
         DBconnection db = new DBconnection();
         return db.GetPupilIdByParentId(UserId);
+    }
+
+    public string IsStudentUserNotThisParentYet(string childID, string parentID)
+    {
+        return db.IsStudentUserNotThisParentYet(childID, parentID);
+    }
+
+    public string GetUserImgByUserID(string UserID)
+    {
+        return db.GetUserImgByUserID(UserID);
+    }
+
+    public string GetUserFullName(string Id)
+    {
+        return db.GetUserFullName(Id);
     }
 }
 

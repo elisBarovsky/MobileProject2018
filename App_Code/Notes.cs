@@ -28,14 +28,24 @@ public class Notes
         return dbT.InsertNotes(PupilID, CodeNoteType, NoteDate, TeacherID, LessonsCode, Comment);
     }
 
-    public DataTable FilterNotes(string FilterType,string ValueFilter)
+    public DataTable FilterNotes(string FilterType, string ValueFilter, string teacherID)
     {
-        return dbT.FilterNotes(FilterType, ValueFilter);
+        return dbT.FilterNotes(FilterType, ValueFilter, teacherID);
     }
 
     public DataTable GivenAllNotes(string PupilID)
     {
         return dbT.GivenAllNotes(PupilID);
+    }
+
+    public DataTable GivenNoteByCode(string NoteID)
+    {
+        return dbT.GivenNoteByCode(NoteID);
+    }
+
+    public DataTable GivenHTByCode(string HWID)
+    {
+        return dbT.GivenHTByCode(HWID);
     }
 
     public DataTable GivenNotesBySubject(string PupilID, string ChooseSubjectCode)

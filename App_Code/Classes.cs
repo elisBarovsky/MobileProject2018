@@ -20,6 +20,11 @@ public class Classes
         return db.GetClassesOt();
     }
 
+    public List<string> GetClassesFullName()
+    {
+        return db.GetClassesFullName();
+    }
+
     public int InsertClass(string ClassOt, string ClassNum)
     {
         return db.InsertClass(ClassOt, ClassNum);
@@ -33,5 +38,10 @@ public class Classes
     public List<string> ClassesExites(string ClassOt, string ClassNum)
     {
         return db.ClassesExites(ClassOt, ClassNum);
+    }
+
+    public string GetClassCodeAccordingToClassFullName(string classTotalName)
+    {
+        return db.GetClassCodeAccordingToClassFullName(classTotalName);
     }
 }
