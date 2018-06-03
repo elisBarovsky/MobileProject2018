@@ -57,11 +57,14 @@
     <script>
         function Dashbord() {
             var type = localStorage.getItem("UserType");
-            if (type=='Parent') {
-                window.location ='Parent_Dashboard.html';
+            if (type == 'Parent') {
+                window.location = 'Parent_Dashboard.html';
+            }
+            else if (type == 'Teacher') {
+                window.location = 'Teacher_Dashboard.html';
             }
             else {
-               window.location='Pupil_Dashboard.html';
+                window.location = 'Pupil_Dashboard.html';
             }
         }
     </script>

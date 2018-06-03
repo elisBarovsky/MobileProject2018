@@ -1,11 +1,11 @@
 ﻿<!DOCTYPE html>
 <html lang="en" dir="rtl">
-<head>
+<head runat="server">
+    <title></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
     <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <!-- v4.0.0-alpha.6 -->
     <link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css">
@@ -19,16 +19,6 @@
     <link rel="stylesheet" href="dist/css/et-line-font/et-line-font.css">
     <link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
-    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-    <!-- jQuery 3 -->
-    <script src="dist/js/jquery.min.js"></script>
-    <script src="Scripts/Grades.js"></script>
-    <script src="Scripts/AjaxCalls.js"></script>>
-
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -36,10 +26,17 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
+    <script src="dist/js/jquery.min.js"></script>
+
+    <script src="Scripts/Teacher_History_Messages_JS.js"></script>
+    <script src="Scripts/Teacher_History_Messages_AJAX.js"></script>
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <style>
         .container {
             display: inline-block;
@@ -78,20 +75,35 @@
     </div>
     <div class="login-box">
         <div div class="login-box" style="height:20px;color:white">
-            <h3>ציונים</h3>
+            <h3> הודעות נכנסות
+                <!--<div class="col-xs-4 m-t-1" style="float:left;position:relative;background-color:white;height:45px;width:46px;border-radius:50px">-->
+                    <a href="Teacher_Add_Messages.html"><img src="Images/NewMSGIcon.png" alt="logo" style="width:40px;padding-top:0%;margin-right:3%;float:left;background-color:white;border-radius:50px"></a>
+                <!--</div>-->
+            </h3>
+            
         </div>
         <!-- <div class="login-box-body" >-->
-        <div id="accordion">
-
-        </div>
+        <!-- Main content -->
+        <section class="content" >
+            <div class="info-box" >
+                <table style="width:80%;padding-right:25px" id="messagesTable" class="table table-hover no-wrap table-striped">
+                    <tbody>
+                        <tr ></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </div>
-    <!-- /.login-box-body -->
-    <!--</div>-->
-    <!-- /.login-box -->
+   
+
+    <!-- jQuery 3 -->
     <!-- v4.0.0-alpha.6 -->
     <script src="dist/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- template -->
     <script src="dist/js/niche.js"></script>
+
+
+
 </body>
 </html>

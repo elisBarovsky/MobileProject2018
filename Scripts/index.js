@@ -63,8 +63,13 @@ function renderFillUser(results) {
     if (type == 'Child') {
         document.location.href = "Pupil_MainManu.html";
     }
-    //else if (type == 'Parent') {
-    //    document.location.href = "Parent_MainManu.html";
-    //}
+    else if (type == 'Teacher') {
+        document.location.href = "Teacher_MainManu.html";
+    }
+    else {
+        alert('לנתונים שהוזנו אין הרשאת כניסה למערכת');
+        document.getElementById("IDTB").value = "";
+        document.getElementById("PasswordTB").value = "";
+    }
 
 }

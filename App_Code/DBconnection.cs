@@ -275,7 +275,7 @@ public class DBconnection
         string selectSTR = "SELECT MessageCode, MessageDate, SenderID, " +
          " recipientID, (select UserFName + ' ' + UserLName from Users where UserID = '" + RecipientID + "') as RecipientName, " +
          " TheMessage, SubjectMessage FROM Messages where SenderID  = '" + SenderID + "' and recipientID = '" + RecipientID +
-         "' or SenderID  = '" + RecipientID + "' and recipientID = '" + SenderID + "' order by MessageDate"; ;
+         "' or SenderID  = '" + RecipientID + "' and recipientID = '" + SenderID + "' order by MessageCode"; ;
 
         List<Messages> messages = new List<Messages>();
 

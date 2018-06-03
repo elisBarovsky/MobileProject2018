@@ -146,18 +146,6 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string GetUserQuestionsByIdAndBday(string userID, string BDay)
-    {
-        Users UserLogin = new Users();
-        List<string> questionsDetails = UserLogin.GetUserSecurityDetailsByuserIDandBday(userID, BDay);
-
-        JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonString = js.Serialize(questionsDetails);
-        return jsonString;
-    }
-
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string Login(string UserID, string password)
     {
         Users UserLogin = new Users();

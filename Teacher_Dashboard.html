@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+
+    <!-- v4.0.0-alpha.6 -->
+    <link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/style.css">
+    <link rel="stylesheet" href="dist/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="dist/css/et-line-font/et-line-font.css">
+    <link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <!-- jQuery 3 -->
+    <script src="dist/js/jquery.min.js"></script>
+    <script src="Scripts/Teacher_Dashboard.js"></script>
+    <script src="Scripts/AjaxCalls.js"></script>>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .container {
+            display: inline-block;
+            cursor: pointer;
+            float:left;
+        }
+
+    </style>
+</head>
+<body class="hold-transition login-page">
+    <div class="container" onclick="window.location=localStorage.getItem('LastVisit');">
+        <div class="col-xs-4 m-t-1" style="float:left;position:relative;background-color:white;height:45px;border-radius:50px ">
+            <a href="#Back"><img src="Images/backIcon.png" alt="logo" style="width:46px;"> </a>
+        </div>
+    </div>
+    <br /> <br />
+    <div class="login-box">
+        <div class="login-box-body">
+            <h3 class="login-box-msg m-b-3" id="UserName">אהלן מורה</h3>
+        </div>
+        <div>
+            <form action="#" style="position:center;padding-left:10%;Opacity:1">
+                <br />
+                <div class="col-xs-4 m-t-1" style="float:left;position:relative;height:80px;width:80px;margin-right:7px;border-radius:50px ">
+                    <a href="#CalendarPage"><img src="Images/LuzUIcon.png" alt="logo" style="width:80px;"> </a>
+                </div>
+                <div class="col-xs-4 m-t-1" style="float:left;position:relative;background-color:white;height:80px;width:80px;margin-right:7px;border-radius:50px">
+                     <a href="Notes.html"><img src="Images/UnlikeIcon.png" alt="logo" style="width:85px;padding-top:5%;padding-left:5%"> </a>
+                </div>
+                <div class="col-xs-4 m-t-1" style="float:left;position:relative;height:80px;width:80px;border-radius:50px">
+                    <a href="TimeTable.html"><img src="Images/timeTableIcon.png" alt="logo" style="width:80px;padding-top:1%;margin-right:1%"> </a>
+                </div>
+                <div class="col-xs-4 m-t-1" style="float:left;position:relative;height:80px;width:80px;margin-right:7px;border-radius:50px">
+                    <a href="HomeWork.html"><img src="Images/HWIcon.png" alt="logo" style="width:80px;border-radius:55px;padding-top:1%;margin-right:1%"> </a>
+                </div>
+                <!--<div class="col-xs-4 m-t-1" style="float:left;position:relative;height:80px;width:80px;margin-right:7px;border-radius:50px">
+                    <a href="Grades.html"><img src="Images/GradeIcon.png" alt="logo" style="width:80px;padding-top:1%;margin-right:1%"> </a>
+                </div>-->
+                <div class="col-xs-4 m-t-1" style="float:left;position:relative;height:80px;width:80px;border-radius:50px">
+                    <a href="Teacher_History_Messages.html"><img src="Images/msgIcon.png" alt="logo" style="width:81px;padding-top:1%;margin-right:0%"></a>
+                </div>
+                <div class="col-xs-4 m-t-1" style="float:left;position:relative;background-color:white;height:80px;width:80px;margin-left:5px;border-radius:50px">
+                    <a href="ContacsList.html"><img src="Images/ContactIcon.png" alt="logo" style="width:60px;padding-top:12%;margin-right:10%"></a>
+                </div>
+                <div class="col-xs-4 m-t-1" style="float:left;position:relative;height:80px;width:80px;margin-right:7px;border-radius:50px;visibility:hidden">
+                    <a href="#ParentDay"><img src="Images/ParentDayIcon.jpg" alt="logo" style="width:80px;padding-top:2%;margin-right:1%"></a>
+                </div>
+                <div class="col-xs-4 m-t-1" style="float:left;position:relative;background-color:white;height:80px;width:80px;border-radius:50px">
+                    <a href="#SettingsPage"><img src="Images/settingIcon.png" alt="logo" style="width:75px;padding-top:2%;margin-right:3%"></a>
+                </div>
+                <!-- /.col -->
+            </form>
+        </div>
+        <br /> <br />  <br /> <br />  <br /> <br />  <br /> <br />  <br /> <br />  <br /> <br />  <br /> <br />
+        <div>
+            <button id="Logout" type="button" class="btn btn-danger btn-block btn-rounded ">התנתק</button>
+        </div>
+        <!-- /.login-box-body -->
+    </div>
+    <!-- /.login-box -->
+    <!-- v4.0.0-alpha.6 -->
+    <script src="dist/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- template -->
+    <script src="dist/js/niche.js"></script>
+</body>
+</html>

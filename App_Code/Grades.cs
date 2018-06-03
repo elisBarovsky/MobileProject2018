@@ -33,7 +33,7 @@ public class Grades
         return dbT.PupilList(ClassOtID);
     }
 
-    public int InsertGrade(string PupilID,string TeacherID,string CodeLesson, string ExamDate, int Grade)
+    public int InsertGrade(string PupilID, string TeacherID, string CodeLesson, string ExamDate, int Grade)
     {
         return dbT.InsertGrade(PupilID, TeacherID, CodeLesson, ExamDate, Grade);
     }
