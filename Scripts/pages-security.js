@@ -2,7 +2,11 @@
 
 function onDeviceReady() {
     //alert(2);
-    FillSecurityQ(renderFillSecurityQ);
+
+    $('body').fadeIn(500, function () {
+
+
+ FillSecurityQ(renderFillSecurityQ);
 
 
 
@@ -16,6 +20,9 @@ function onDeviceReady() {
         SecurityQA.choosenA2 = document.getElementById("ans21").value;
         SaveQuestion(SecurityQA, renderSaveQuestion);
     });
+
+    });
+   
 }
 
 function renderFillSecurityQ(results) {

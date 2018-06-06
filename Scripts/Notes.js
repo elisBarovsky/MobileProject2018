@@ -4,6 +4,10 @@ UserInfoNote = new Object();
 
 function onDeviceReady() {
 
+
+    $('body').fadeIn(500, function () {
+
+
     localStorage.setItem("LastVisit", "Notes.html"); //saving in localS
     UserInfoNote.ID = localStorage.getItem("PupilID");
     $(function () {
@@ -12,6 +16,11 @@ function onDeviceReady() {
         });
     });
     GetUserNotes(UserInfoNote, renderNotes);
+
+
+    });
+
+
 }
 
 function renderNotes(results) {

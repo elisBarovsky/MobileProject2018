@@ -2,11 +2,14 @@
 
 function onDeviceReady() {
     //alert(2);
+
+    $('body').fadeIn(500, function () {
     var user = new Object();
     user.UserId = localStorage.getItem("PupilID");
     localStorage.setItem("LastVisit","Parent_MainManu.html"); //saving in localS
     GetUserInfo(user, renderFillUser);
-
+                
+    });
 }
 
 function renderFillUser(results) {

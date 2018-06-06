@@ -3,23 +3,26 @@
 Grade = new Object();
 function onDeviceReady() {
 
-    localStorage.setItem("LastVisit", "TimeTable.html"); //saving in localS
-  //  Grade.ID = localStorage.getItem("PupilID");
+    $('body').fadeIn(500, function () {
+        localStorage.setItem("LastVisit", "TimeTable.html"); //saving in localS
+        //  Grade.ID = localStorage.getItem("PupilID");
 
- 
-    if (localStorage.getItem("UserType") !== "Teacher") {
-        Pupil = JSON.parse(localStorage.getItem("child"));
-        LoadTimeTableByTypeAndId(Pupil.UserID1, LoadTimeTable);
-    }
-    else {
-        document.getElementById("teacherTT").style.visibility = 'visible';
-        document.getElementById("noTT").style.visibility = 'hidden';
-    }
-   
+
+        if (localStorage.getItem("UserType") !== "Teacher") {
+            Pupil = JSON.parse(localStorage.getItem("child"));
+            LoadTimeTableByTypeAndId(Pupil.UserID1, LoadTimeTable);
+        }
+        else {
+            document.getElementById("teacherTT").style.visibility = 'visible';
+            document.getElementById("noTT").style.visibility = 'hidden';
+        }
+
 
     //function LetsClick(getID) {
     //    alert(getID);
     //}
+    });
+   
    
 }
 

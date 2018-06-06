@@ -1,6 +1,12 @@
 ﻿$(document).ready(function () {
-    var teacherId = localStorage.getItem("UserID");
+
+    $('body').fadeIn(500, function () {
+       
+ var teacherId = localStorage.getItem("UserID");
     LoadAllMessagesById(teacherId, DisplayMessages);
+ 
+    });
+   
 });
 
 function DisplayMessages(results) {

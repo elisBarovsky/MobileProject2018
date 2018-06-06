@@ -1,6 +1,8 @@
 ﻿$(window).on('load', function () {
 
-    var messageDetails = JSON.parse(localStorage.getItem("messageDetails"));
+    $('body').fadeIn(500, function () {
+
+var messageDetails = JSON.parse(localStorage.getItem("messageDetails"));
     var sender = messageDetails.SenderID;
     var me = localStorage.getItem("UserID");
 
@@ -8,6 +10,11 @@
     GetAllConversation(sender, me, ShowAllConversation);
 
     $('#senderTytle').text(messageDetails.SenderName);
+
+
+    });
+
+    
 
 });
 

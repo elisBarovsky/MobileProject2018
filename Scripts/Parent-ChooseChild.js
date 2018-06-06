@@ -2,7 +2,9 @@
 
 function onDeviceReady() {
     //alert(2);
-    var ID = localStorage.getItem("UserID");
+
+    $('body').fadeIn(500, function () {
+  var ID = localStorage.getItem("UserID");
     ParentChooseChild(ID, getChildrenArray);
 
 
@@ -27,6 +29,12 @@ function onDeviceReady() {
         GetUserInfo(user, renderFillUser);
 
     });
+
+
+
+
+    });
+  
 }
 
 function getChildrenArray(results) {//return string[].

@@ -5,8 +5,9 @@ $(document).ready(onDeviceReady);
 
 function onDeviceReady() {
 
+    $('body').fadeIn(500, function () {
 
-    Useraouto = new Object();
+  Useraouto = new Object();
 
     $('#toQuestions').click(function () {
         Useraouto.ID = document.getElementById("UserId").value;
@@ -15,6 +16,10 @@ function onDeviceReady() {
         localStorage.setItem("UserID", Useraouto.ID);
         GetUserQuestionsByIdAndBday(Useraouto, renderMoveToQuestions);
     });
+
+
+    });
+  
 }
 
 function renderMoveToQuestions(results) {

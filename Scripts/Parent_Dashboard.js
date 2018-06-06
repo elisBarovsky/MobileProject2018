@@ -2,7 +2,10 @@
 
 function onDeviceReady() {
 
-    $('#Logout').click(function () {
+
+    $('body').fadeIn(500, function () {
+
+ $('#Logout').click(function () {
         alert('תחזור בקרוב!');
         window.location.href = "index.html"
 
@@ -27,6 +30,9 @@ function onDeviceReady() {
         //    }
         //});
     });
+
+    });
+   
 }
 
 

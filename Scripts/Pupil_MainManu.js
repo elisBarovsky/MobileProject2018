@@ -2,11 +2,19 @@
 
 function onDeviceReady() {
     //alert(2);
-    var user = new Object();
-    user.UserId = localStorage.getItem("UserID");
-    localStorage.setItem("LastVisit","Pupil_MainManu.html"); //saving in localS
-    GetUserInfo(user, renderFillUser);
+ 
 
+    $('body').fadeIn(200, function () {
+        var user = new Object();
+        user.UserId = localStorage.getItem("UserID");
+        localStorage.setItem("LastVisit", "Pupil_MainManu.html"); //saving in localS
+        GetUserInfo(user, renderFillUser);
+    });
+
+}
+
+function redirectPage() {
+    window.location = "Pupil_MainManu.html";
 }
 
 function renderFillUser(results) {

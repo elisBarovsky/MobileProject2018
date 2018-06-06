@@ -2,8 +2,10 @@
 
 
 function onDeviceReady() {
-  
-    $('#CheckThePasswords').click(function () {
+
+
+    $('body').fadeIn(500, function () {
+ $('#CheckThePasswords').click(function () {
         pas1 = document.getElementById("pas1").value;
         pas2 = document.getElementById("pas2").value;
 
@@ -32,6 +34,13 @@ function onDeviceReady() {
             document.getElementById("pas2").value = "";
         }
     });
+
+
+
+    });
+
+
+   
 }
 
 function tellMeItsOk(results) {

@@ -2,7 +2,10 @@
 
 
 function onDeviceReady() {
-    document.getElementById("Q1").innerHTML = localStorage.getItem("QQ1") + "?";
+
+    $('body').fadeIn(500, function () {
+
+document.getElementById("Q1").innerHTML = localStorage.getItem("QQ1") + "?";
 
     document.getElementById("Q2").innerHTML = localStorage.getItem("QQ2") + "?";
 
@@ -26,5 +29,11 @@ function onDeviceReady() {
             document.location.href = "pages-recover-changePass.html";
         }
     });
+
+
+
+    });
+
+    
 
 }

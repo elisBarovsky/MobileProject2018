@@ -1,6 +1,9 @@
 ﻿
 
 $(document).ready(function () {
+
+    $('body').fadeIn(500, function () {
+
     var userID = localStorage.getItem("UserID");
     $("#childrenDDL").hide();
     $("#parentsDDL").hide();
@@ -9,6 +12,10 @@ $(document).ready(function () {
 
     LoadClasses(userID, FillClassesInDDL);
     FillTeachers(FillTeachersInDDL);
+
+
+    });
+
 });
 
 

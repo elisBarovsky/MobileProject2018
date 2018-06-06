@@ -4,7 +4,9 @@ user = new Object();
 
 function onDeviceReady() {
 
-    localStorage.setItem("LastVisit", "HomeWork.html"); //saving in localS
+    $('body').fadeIn(500, function () {
+
+localStorage.setItem("LastVisit", "HomeWork.html"); //saving in localS
     user.PupilID = localStorage.getItem("PupilID");
 
     $(function () {
@@ -13,6 +15,13 @@ function onDeviceReady() {
         });
     });
     FillSubjectsDDL(user, FillSubjectsDDL);
+
+
+
+    });
+
+
+    
 }
 
 function FillSubjectsDDL(results) {
