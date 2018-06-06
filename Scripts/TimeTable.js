@@ -34,21 +34,24 @@ function LoadTimeTable(results) {
 
         document.getElementById("noTT").style.visibility = 'hidden';
         document.getElementById("teacherTT").style.visibility = 'hidden';
-        var tableInfo = "<tr><th scope='col'>שישי</th><th scope='col'>חמישי</th><th scope='col'>רביעי</th><th scope='col'>שלישי</th><th scope='col'>שני</th><th scope='col'>ראשון</th><th scope='col'>שיעור</th></tr>";
+        var tableInfo = "<tr><th scope='col'>ראשון</th><th scope='col'>שני</th><th scope='col'>שלישי</th><th scope='col'>רביעי</th><th scope='col'>חמישי</th><th scope='col'>שישי</th><th scope='col'>שיעור</th></tr>";
         var counter = 0;
 
         for (var i = 1; i < 10; i++) {
             tableInfo += "<tr>";
             for (var j = 1; j < 7; j++) {
-                if (res[counter].ClassTimeCode === i && res[counter].CodeWeekDay === j) {
+                if (res[counter].ClassTimeCode == i && res[counter].CodeWeekDay == j) {
                     tableInfo += "<td>" + res[counter].CodeLesson + "<br/>" + res[counter].TeacherId + "</td>";
                     counter++;
                 }
                 else {
                     tableInfo += "<td> <br/> </td>"
                 }
+
             }
             tableInfo += "<td>" + i + "</td></tr>";
+
+          //  tableInfo +=""
         }
         document.getElementById("TimeTable").innerHTML = tableInfo;
     }

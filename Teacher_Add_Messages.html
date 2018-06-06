@@ -30,308 +30,127 @@
     <script src="dist/js/jquery.min.js"></script>
     <script src="Scripts/Teacher_Add_Messages_JS.js"></script>
     <script src="Scripts/Teacher_Add_Messages_AJAX.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <style>
+        .container {
+            display: inline-block;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .bar1, .bar2, .bar3 {
+            width: 35px;
+            height: 5px;
+            margin: 6px 2px;
+            transition: 0.4s;
+        }
+    </style>
+    <script>
+        function Dashbord() {
+            var type = localStorage.getItem("UserType");
+            if (type == 'Parent') {
+                window.location = 'Parent_Dashboard.html';
+            }
+            else if (type == 'Teacher') {
+                window.location = 'Teacher_Dashboard.html';
+            }
+            else {
+                window.location = 'Pupil_Dashboard.html';
+            }
+        }
+    </script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper boxed-wrapper">
-        <header class="main-header">
-            <!-- Logo -->
-            <a href="login.aspx" class="logo blue-bg">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini">
-                    <img src="Images/BetseferLogo-n.png" alt="">
-                </span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg">
-                    <img src="Images/BetseferLogo_NN.png" alt="">
-                </span>
-            </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar blue-bg navbar-static-top">
-                <!-- Sidebar toggle button-->
-                <ul class="nav navbar-nav pull-left">
-                    <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a></li>
-                </ul>
-                <div class="navbar-custom-menu" runat="server">
-                    <ul class="nav navbar-nav">
-                        <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-envelope-o"></i>
-                                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 new messages</li>
-                                <li>
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left" runat="server">
-                                                    <asp:Image ID="UserImg" runat="server" class="img-circle" />
-                                                    <span class="profile-status online pull-right"></span>
-                                                </div>
-                                                <h4 id="UserNameplace">Alex C. Patton</h4>
-                                                <p>I've finished it! See you so...</p>
-                                                <p><span class="time">9:30 AM</span></p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="dist/img/img3.jpg" class="img-circle" alt="User Image">
-                                                    <span class="profile-status offline pull-right"></span>
-                                                </div>
-                                                <h4>Nikolaj S. Henriksen</h4>
-                                                <p>I've finished it! See you so...</p>
-                                                <p><span class="time">10:15 AM</span></p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="dist/img/img2.jpg" class="img-circle" alt="User Image">
-                                                    <span class="profile-status away pull-right"></span>
-                                                </div>
-                                                <h4>Kasper S. Jessen</h4>
-                                                <p>I've finished it! See you so...</p>
-                                                <p><span class="time">8:45 AM</span></p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="dist/img/img4.jpg" class="img-circle" alt="User Image">
-                                                    <span class="profile-status busy pull-right"></span>
-                                                </div>
-                                                <h4>Florence S. Kasper</h4>
-                                                <p>I've finished it! See you so...</p>
-                                                <p><span class="time">12:15 AM</span></p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View All Messages</a></li>
-                            </ul>
-                        </li>
-                        <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o"></i>
-                                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">התראות</li>
-                                <li>
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left icon-circle red"><i class="icon-lightbulb"></i></div>
-                                                <h4>Alex C. Patton</h4>
-                                                <p>I've finished it! See you so...</p>
-                                                <p><span class="time">9:30 AM</span></p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left icon-circle blue"><i class="fa fa-coffee"></i></div>
-                                                <h4>Nikolaj S. Henriksen</h4>
-                                                <p>I've finished it! See you so...</p>
-                                                <p><span class="time">1:30 AM</span></p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left icon-circle green"><i class="fa fa-paperclip"></i></div>
-                                                <h4>Kasper S. Jessen</h4>
-                                                <p>I've finished it! See you so...</p>
-                                                <p><span class="time">9:30 AM</span></p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left icon-circle yellow"><i class="fa  fa-plane"></i></div>
-                                                <h4>Florence S. Kasper</h4>
-                                                <p>I've finished it! See you so...</p>
-                                                <p><span class="time">11:10 AM</span></p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">ראיתי את כל ההתראות</a></li>
-                            </ul>
-                        </li>
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu p-ph-res">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <asp:Image ID="UserImg1" runat="server" class="user-image" />
-                                <span class="hidden-xs"></span>
-                            </a>
-                            <ul class="dropdown-menu right">
-                                <li class="user-header right">
-                                    <div class="pull-left user-img" runat="server">
-                                        <asp:Image ID="UserImgimg" runat="server" class="img-responsive" />
+<body class="hold-transition login-page">
+
+    <div class="container" onclick="Dashbord()">
+        <div class="bar1" style="background-color:palevioletred"></div>
+        <div class="bar2" style="background-color:fuchsia"></div>
+        <div class="bar3" style="background-color:deepskyblue"></div>
+    </div>
+    <div class="login-box">
+        <div div class="login-box" style="height:10px;color:white">
+            <h3>
+                הודעה חדשה
+            </h3>
+        </div>
+
+        <!-- Main content -->
+        <section class="content" style="width:110%; position:center;margin-right:-10px;">
+            <div class="info-box" style="width:95%">
+                    <div class="row">
+                        <Table ID="Table1" class="table" style="width:95%">
+                            <tr style="width:95%">
+                                <td style="width:95%">
+                                    <div style="float:right;margin-left:40px">
+                                        <div style="float:right">
+                                            <Label ID="sugLBL">סוג הודעה:</Label>
+                                        </div>
+                                        <div style="padding-right:80px">
+
+                                            <fieldset id="messageTypeRBL">
+                                                <input type="radio" value="private" name="msgType" id="private" checked="checked" onclick="MessageType('private')" /> אישי
+                                                <br />
+                                                <input type="radio" value="kolektive" name="msgType" id="kolektive" onclick="MessageType('kolektive')" /> קולקטיבי
+                                            </fieldset>
+                                        </div>
                                     </div>
-                                    <p class="text-left" id="UserName" runat="server"><small>some mail</small> </p>
-                                    <div class="view-link text-right"><a href="#">צפה בפרופיל</a> </div>
-                                </li>
-                                <li><a href="#" class="view-link text-right">הגדרות משתמש  <i class="icon-gears"></i></a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="login.aspx" class="view-link text-right">התנתק  <i class="fa fa-power-off"></i></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+                                    <div>
+                                        <div style="float:right;margin-left:10px">
+                                            <Label ID="classLBL">כיתה: </Label>
+                                        </div>
+                                        <div style="padding-right:140px">
+                                            <select ID="classDDL" CssClass="form-control" data-toggle="dropdown" onchange="FillUsers()">
+                                                <option value="0">בחר</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </td>
+                               
+                            </tr>
+                            <tr >
+                                <td style="width:95%">
+                                    <div style="float:right;margin-left:40px; ">
+                                        <div style="float:right">
+                                            <Label ID="groupTypeLBL">נמענים:</Label>
+                                        </div>
+                                        <div style="padding-right:80px">
+                                            <fieldset id="userTypeRBL">
+                                                <input type="radio" value="pupils" name="users" id="pupils" onclick="ChooseDDL('pupils')"> תלמידים
+                                                <br />
+                                                <input type="radio" value="parents" name="users" id="parents" onclick="ChooseDDL('parents')"> הורים
+                                                <br />
+                                                <input type="radio" value="teachers" name="users" id="teachers" onclick="ChooseDDL('teachers')"> מורים
+                                            </fieldset>
+                                        </div>
+                                    </div>
 
-        <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <div class="user-panel">
-                    <div class="image text-center"></div>
-                    <div class="info">
-                        <a href="#">ברוך הבא ☺</a>
-                    </div>
-                </div>
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu" data-widget="tree">
-                    <li class="treeview">
-                        <a href="Teacher_Dashbord.aspx"><i class="fa fa-home"></i><span>דף הבית</span> </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-table"></i><span>מערכת שעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                        <ul class="treeview-menu">
-                            <li><a href="Teacher_TimeTable.aspx"><i class="fa fa-plus"></i><span>צפייה</span> </a>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-briefcase"></i><span>הערות משמעת</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                        <ul class="treeview-menu">
-                            <li><a href="Teacher_Notes_Insert.aspx"><i class="fa fa-plus"></i><span>הוספת הערה</span> </a>
-                            <li><a href="Teacher_Notes_History.aspx"><i class="fa fa-edit"></i><span>צפייה</span> </a>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-briefcase"></i><span>שיעורי בית</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                        <ul class="treeview-menu">
-                            <li><a href="Teacher_HW_Insert.aspx"><i class="fa fa-plus"></i><span>הוספת שיעורים</span> </a>
-                            <li><a href="Teacher_HW_History.aspx"><i class="fa fa-plus"></i><span>צפייה ועדכון</span> </a>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-briefcase"></i><span>ציונים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                        <ul class="treeview-menu">
-                            <li><a href="Teacher_Grades_Insert.aspx"><i class="fa fa-plus"></i><span>הוספת ציונים</span> </a>
-                            <li><a href="#.aspx"><i class="fa fa-plus"></i><span>עדכון</span> </a>
-                        </ul>
-                    </li>
-                    <li class=" treeview">
-                        <a href="#"><i class="fa fa-briefcase"></i><span>דף קשר</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                        <ul class="treeview-menu">
-                            <li ><a href="Teacher_ContactsList.aspx"><i class="fa fa-plus"></i><span>צפייה</span> </a>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-briefcase"></i><span>לוח שנה</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-briefcase"></i><span>יום הורים</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                        <ul class="treeview-menu">
-                            <li><a href="#.aspx"><i class="fa fa-plus"></i><span>יצירה</span> </a>
-                            <li><a href="#.aspx"><i class="fa fa-plus"></i><span>צפייה ועדכון</span> </a>
-                        </ul>
-                    </li>
-                    <li class="active treeview">
-                        <a href="#"><i class="fa fa-envelope-o "></i><span>הודעות</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-                        <ul class="treeview-menu">
-                            <li><a href="Teacher_History_Messages.html">הודעות נכנסות</a></li>
-                            <li class="active"> <a href="Teacher_Add_Messages.html">הודעה חדשה</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </section>
-            <!-- /.sidebar -->
-        </aside>
+                                    <div>
+                                        <div style="float:right;">
+                                            <Label ID="forLBL">נמען:</Label>
+                                        </div>
+                                        <div style="padding-right:150px">
+                                            <select ID="childrenDDL" CssClass="form-control"></select>
+                                            <select ID="parentsDDL" CssClass="form-control"></select>
+                                            <select ID="teachersDDL" CssClass="form-control"></select>
+                                        </div>
+                                    </div>
+                                </td>
+                            
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="form-group">
+                                        <input class="form-control" placeholder="נושא" id="messageSubject" style=" width:95%">
+                                    </div>
+                                    <div class="form-group">
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header sty-one">
-                <h1>יצירת הודעה</h1>
-            </section>
+                                        <textarea id="messageContent" class="form-control" style="height: 150px; width:95%"></textarea>
 
-            <!-- Main content -->
-            <section class="content">
-                <div class="info-box">
-                    <div class="card-body">
-                        <div class="row">
-                            <Table ID="Table1" class="table">
-                                <tr>
-                                    <td>
-                                        <div style="float:right;margin-left:40px">
-                                            <div style="float:right">
-                                                <Label ID="sugLBL">סוג הודעה:</Label>
-                                            </div>
-                                            <div style="padding-right:80px">
-
-                                                <fieldset id="messageTypeRBL">
-                                                    <input type="radio" value="private" name="msgType" id="private" checked="checked" onclick="MessageType('private')" /> אישי
-                                                    <br />
-                                                    <input type="radio" value="kolektive" name="msgType" id="kolektive" onclick="MessageType('kolektive')" /> קולקטיבי
-                                                </fieldset>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div style="float:right;margin-left:20px">
-                                                <Label ID="classLBL">כיתה: </Label>
-                                            </div>
-                                            <div style="padding-right:150px">
-                                                <select ID="classDDL" CssClass="form-control" data-toggle="dropdown" onchange="FillUsers()">
-                                                    <option value="0">בחר</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="float:right;margin-left:40px">
-                                            <div style="float:right">
-                                                <Label ID="groupTypeLBL">נמענים:</Label>
-                                            </div>
-                                            <div style="padding-right:80px">
-                                                <fieldset id="userTypeRBL">
-                                                    <input type="radio" value="pupils" name="users" id="pupils" onclick="ChooseDDL('pupils')"> תלמידים
-                                                    <br />
-                                                    <input type="radio" value="parents" name="users" id="parents" onclick="ChooseDDL('parents')"> הורים
-                                                    <br />
-                                                    <input type="radio" value="teachers" name="users" id="teachers" onclick="ChooseDDL('teachers')"> מורים
-                                                </fieldset>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div style="float:right;margin-left:20px">
-                                                <Label ID="forLBL">נמען:</Label>
-                                            </div>
-                                            <div style="padding-right:150px">
-                                                <select ID="childrenDDL" CssClass="form-control"></select>
-                                                <select ID="parentsDDL" CssClass="form-control"></select>
-                                                <select ID="teachersDDL" CssClass="form-control"></select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="form-group">
-                                            <input class="form-control" placeholder="נושא" id="messageSubject">
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea id="messageContent" class="form-control" style="height: 250px"></textarea>
-                                        </div>
                                         <div style="float:right;margin-left:20px">
                                             <h6><i class="fa fa-paperclip"></i> נספחים</h6>
                                         </div>
@@ -343,20 +162,21 @@
                                             </div>
                                         </div>
                                         <div style="float:left">
-                                            <button type="button" ID="paperPlaneButton" onclick="SubmitMessage(this)"><img src="Images/paperPlane.png" Height="50" /></button>
+                                            <br />
+                                            <button type="button" ID="paperPlaneButton" onclick="SubmitMessage(this)" style="margin-left:10px"><img src="Images/paperPlane.png" Height="50" /></button>
                                         </div>
-                                    </td>
-                                </tr>
+                                    </div>
+                                   
+                                </td>
+                            </tr>
 
-                            </Table>
-                        </div>
+                        </Table>
                     </div>
-                </div>
-            </section>
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
+            </div>
+        </section>
+        <!-- /.content -->
     </div>
+    <!-- /.content-wrapper -->
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
     <!-- v4.0.0-alpha.6 -->
