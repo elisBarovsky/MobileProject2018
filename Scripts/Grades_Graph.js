@@ -2,17 +2,12 @@
 $(document).ready(onDeviceReady);
 
 function onDeviceReady() {
-    alert(sessionStorage['dateExam']);
+  //  alert(sessionStorage['dateExam']);
  localStorage.setItem("LastVisit", "Grades.html"); //saving in localS
  //   Grade.ID = localStorage.getItem("UserID");
 
-    var queryString = decodeURIComponent(window.location.search);
-    var queryString2 = decodeURIComponent(window.location.search);
-    queryString = queryString.substring(4,14);
-    queryString2 = queryString2.substring(21);
-    localStorage.setItem("PupilGrade", queryString2);
     GradeDate = new Object();
-    GradeDate.Date = sessionStorage['dateExam'];
+    GradeDate.Date =   sessionStorage['dateExam'];
     GivenGradeByCode(GradeDate, renderGivenGradeByDate);
 
 }
@@ -25,11 +20,18 @@ function renderGivenGradeByDate(results) {
     var counter = 0;
     var counter1 = 0;
     var GradeAvg = 0;
-    var PupilGradeThis = localStorage.getItem("PupilGrade");
+    var GradeThisPupil = [];
+    var PupilGradeThis = sessionStorage['ExamGrade'];
     var GradePos = 0;
+
     for (var i = 0; i < results.length; i++) {
-        if (results[counter1].Grade === PupilGradeThis) {
+        if (results[counter1].Grade == PupilGradeThis) {
             GradePos = i + 1;
+            GradeThisPupil.push({ x: GradePos, y: parseInt(PupilGradeThis) });
+        }
+        else {
+           // GradeThisPupil.push({ x: GradePos, y: parseInt(PupilGradeThis) });
+
         }
         GradeAvg += results[counter1].Grade;
         counter1++;
@@ -38,22 +40,30 @@ function renderGivenGradeByDate(results) {
 
     var PupilGrades = [];
     var PupilGradesAVG = [];
-    var GradeThisPupil = [];
-    GradeThisPupil.push({ x: GradePos, y: parseInt(PupilGradeThis) });
+    
+    //, indexLabel:"10m"
 
     for (i = 0; i < results.length; i++) {
+        //if (results[counter1].Grade === PupilGradeThis) {
+        //    PupilGrades.push({ x: i + 1, y: results[counter++].Grade});
+        //}
+        //else {
+        //    PupilGrades.push({ x: i + 1, y: results[counter++].Grade });
+        //}
         PupilGrades.push({ x: i + 1, y: results[counter++].Grade });
-        PupilGradesAVG.push({ x: i + 1, y: GradeAvg });
+        PupilGradesAVG.push({ x: i+1 , y: GradeAvg });
     }
     PupilGrades = PupilGrades.sort();
 
     var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
         title: {
-            text: "בחינה ב" + results[0].LessonName + ". המורה: " + results[0].TeacherName 
+            text:  results[0].LessonName + " \ " + results[0].ExamDate
         },
         axisX: {
-            valueFormatString: "#"
+           // labelAngle: -30,
+            valueFormatString: "#",
+            interval: 1
         },
         axisY: {
             maximum: 120,
