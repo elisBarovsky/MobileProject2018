@@ -112,18 +112,28 @@ public class DBconnection
         {
             SqlCommand cmd = new SqlCommand(selectSTR, con);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            Dictionary<string, string> messagesSenders = new Dictionary<string, string>(); // keep the ids of the senders
+
             while (dr.Read())
             {
-                Dictionary<string, string> d = new Dictionary<string, string>();
+                string value = "";
+                messagesSenders.TryGetValue(dr["SenderID"].ToString(), out value);
+                if (value != "exists") // the sender not exists yet
+                {
+                    messagesSenders.Add(dr["SenderID"].ToString(), "exists");
 
-                d.Add("MessageCode", dr["MessageCode"].ToString());
-                d.Add("MessageDate", dr["MessageDate"].ToString());
-                d.Add("SenderID", dr["SenderID"].ToString());
-                //d.Add("SenderName", dr["SenderName"].ToString());
-                d.Add("SubjectMessage", dr["SubjectMessage"].ToString());
-                d.Add("TheMessage", dr["TheMessage"].ToString());
+                    Dictionary<string, string> d = new Dictionary<string, string>();
 
-                messages.Add(d);
+                    d.Add("MessageCode", dr["MessageCode"].ToString());
+                    d.Add("MessageDate", dr["MessageDate"].ToString());
+                    d.Add("SenderID", dr["SenderID"].ToString());
+                    d.Add("SubjectMessage", dr["SubjectMessage"].ToString());
+                    d.Add("TheMessage", dr["TheMessage"].ToString());
+
+                    messages.Add(d);
+                }
+                
             }
             string SenderName;
 
@@ -1382,10 +1392,14 @@ public class DBconnection
         }
     }
 
-    public List<Dictionary<string, string>> getPupilsByClassCode(string classCode)
+    public List<Dictionary<string, string>> getPupilsByClassCode(string TeacherID)
     {
         String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName)AS PupilName" +
-           "  FROM dbo.Pupil INNER JOIN   dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID   where dbo.Pupil.CodeClass='" + classCode + "'";
+           "  FROM dbo.Pupil INNER JOIN    dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID  where CodeClass=(select ClassCode from Class where MainTeacherID= '" + TeacherID + "')" +
+           " union " +
+           " SELECT UserID, (dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'FullName'" + 
+             "  FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID "+
+            " where CodeClass = (select ClassCode from Class where MainTeacherID = '"+ TeacherID + "')";
         List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
         try
         {
@@ -2351,48 +2365,48 @@ public class DBconnection
         }
     }
 
-    public List<Dictionary<string, string>> getParentsByClassCode(string classCode)
-    {
-        List<Dictionary<string, string>> parents = new List<Dictionary<string, string>>();
+    //public List<Dictionary<string, string>> getParentsByClassCode(string TeacherID)
+    //{
+    //    List<Dictionary<string, string>> parents = new List<Dictionary<string, string>>();
 
-        String selectSTR = "SELECT UserID, (dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'FullName'" +
-                               " FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID" +
-                               " where dbo.PupilsParent.codeClass = '" + classCode + "'";
-        try
-        {
-            con = connect("Betsefer"); // create the connection
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-        }
-        try
-        {
-            SqlCommand cmd = new SqlCommand(selectSTR, con);
-            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-            while (dr.Read())
-            {
-                Dictionary<string, string> d = new Dictionary<string, string>();
-                d.Add("UserId", dr["UserID"].ToString());
-                d.Add("FullName", dr["FullName"].ToString());
-                parents.Add(d);
-            }
-            return parents;
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-        }
-        finally
-        {
-            if (con != null)
-            {
-                con.Close();
-            }
-        }
-    }
+    //    String selectSTR = "SELECT UserID, (dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'FullName'" +
+    //                           " FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID" +
+    //                           " where CodeClass=(select ClassCode from Class where MainTeacherID= '"+ TeacherID + "')";
+    //    try
+    //    {
+    //        con = connect("Betsefer"); // create the connection
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        // write to log
+    //        throw (ex);
+    //    }
+    //    try
+    //    {
+    //        SqlCommand cmd = new SqlCommand(selectSTR, con);
+    //        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+    //        while (dr.Read())
+    //        {
+    //            Dictionary<string, string> d = new Dictionary<string, string>();
+    //            d.Add("UserId", dr["UserID"].ToString());
+    //            d.Add("FullName", dr["FullName"].ToString());
+    //            parents.Add(d);
+    //        }
+    //        return parents;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        // write to log
+    //        throw (ex);
+    //    }
+    //    finally
+    //    {
+    //        if (con != null)
+    //        {
+    //            con.Close();
+    //        }
+    //    }
+    //}
 
     public List<string> getParentsIdByClassCode(string classCode)
     {
@@ -2580,5 +2594,12 @@ public class DBconnection
                 con.Close();
             }
         }
+    }
+
+    public string UpdateMessageAsRead(string MessageCode)
+    {
+        String cStr = "UPDATE Messages SET IsReadByRecipient = 1 WHERE MessageCode = '" + MessageCode + "'";
+        string answer = ExecuteNonQuery(cStr).ToString();
+        return answer;
     }
 }

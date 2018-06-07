@@ -72,4 +72,9 @@ public class Messages
     {
         return db.GetAllConversation(SenderID, RecipientID);
     }
+
+    public string UpdateMessageAsRead(string MessageCode)
+    {
+        return db.UpdateMessageAsRead(MessageCode);
+    }
 }

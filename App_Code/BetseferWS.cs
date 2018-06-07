@@ -48,13 +48,13 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string GetPupilsByClassTotalName(string classTotalName)
+    public string GetPupilsByClassTotalName(string TeacherID)
     {
-        Classes c = new Classes();
-        string classCode = c.GetClassCodeAccordingToClassFullName(classTotalName);
+       // Classes c = new Classes();
+        //string classCode = c.GetClassCodeAccordingToClassFullName(TeacherID);
         Users u = new Users();
         List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
-        s = u.getPupilsByClassCode(classCode);
+        s = u.getPupilsByClassCode(TeacherID);
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(s);
         return jsonString;
@@ -72,19 +72,19 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonString;
     }
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string GetParentsByClassTotalName(string classTotalName)
-    {
-        Classes c = new Classes();
-        string classCode = c.GetClassCodeAccordingToClassFullName(classTotalName);
-        Users u = new Users();
-        List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
-        s = u.getParentsByClassCode(classCode);
-        JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonString = js.Serialize(s);
-        return jsonString;
-    }
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public string GetParentsByClassTotalName(string TeacherID)
+    //{
+    //   // Classes c = new Classes();
+    // //   string classCode = c.GetClassCodeAccordingToClassFullName(classTotalName);
+    //    Users u = new Users();
+    //    List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
+    //    s = u.getParentsByClassCode(TeacherID);
+    //    JavaScriptSerializer js = new JavaScriptSerializer();
+    //    string jsonString = js.Serialize(s);
+    //    return jsonString;
+    //}
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -525,6 +525,17 @@ public class BetseferWS : System.Web.Services.WebService
             }
         }
         return key;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string SetMessageAsRead(string MessageCode)
+    {
+        Messages m = new Messages();
+
+
+        //   string bla = m.UpdateMessageAsRead(MessageCode);
+        return m.UpdateMessageAsRead(MessageCode);
     }
 }
 

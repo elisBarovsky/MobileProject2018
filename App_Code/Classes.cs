@@ -40,8 +40,8 @@ public class Classes
         return db.ClassesExites(ClassOt, ClassNum);
     }
 
-    public string GetClassCodeAccordingToClassFullName(string classTotalName)
+    public string GetClassCodeAccordingToClassFullName(string TeacherID)
     {
-        return db.GetClassCodeAccordingToClassFullName(classTotalName);
+        return db.GetClassCodeAccordingToClassFullName(TeacherID);
     }
 }
