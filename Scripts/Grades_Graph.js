@@ -2,7 +2,7 @@
 $(document).ready(onDeviceReady);
 
 function onDeviceReady() {
-
+    alert(sessionStorage['dateExam']);
  localStorage.setItem("LastVisit", "Grades.html"); //saving in localS
  //   Grade.ID = localStorage.getItem("UserID");
 
@@ -12,7 +12,7 @@ function onDeviceReady() {
     queryString2 = queryString2.substring(21);
     localStorage.setItem("PupilGrade", queryString2);
     GradeDate = new Object();
-    GradeDate.Date = queryString;
+    GradeDate.Date = sessionStorage['dateExam'];
     GivenGradeByCode(GradeDate, renderGivenGradeByDate);
 
 }

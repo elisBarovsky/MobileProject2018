@@ -51,9 +51,14 @@ function renderGrades(results) {
         var GraphButton = document.createElement('button');
 
         GraphButton.setAttribute("id", (i + 1));
+        GraphButton.setAttribute("dateExam", res[counter].ExamDate);
 
         GraphButton.value = (i + 1);
-        GraphButton.onclick = function () { window.location.href = 'Grades_Graph.html' };
+        GraphButton.onclick = function () {
+            debugger;
+            sessionStorage['dateExam']=  $(this).attr('dateExam');            
+            window.location.href = 'Grades_Graph.html'
+        };
 
       //  GraphButton.className = 'btn btn-success';
         GraphButton.innerText = 'צפייה בפילוח';
