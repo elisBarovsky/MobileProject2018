@@ -15,9 +15,8 @@
     });
 }
 
-function FillPupils(TeacherID, FillUsersInDDL) {
+function FillPupils(TeacherID, FillTeachersInDDL) {
 
-    var dataString = JSON.stringify(userID);
     $.ajax({
         url: 'BetseferWS.asmx/GetPupilsByClassTotalName',
         data: JSON.stringify({ 'TeacherID': TeacherID }),
@@ -25,7 +24,7 @@ function FillPupils(TeacherID, FillUsersInDDL) {
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
-            FillPupilInDDL(results);
+            FillTeachersInDDL(results);
         },
         error: function (request, error) {
             alert('Network error has occurred please try again!');
@@ -51,22 +50,22 @@ function FillPupils(TeacherID, FillUsersInDDL) {
 //    });
 //}
 
-function FillTeachers(FillTeachersInDDL) {
+//function FillTeachers(FillTeachersInDDL) {
 
-    $.ajax({
-        url: 'BetseferWS.asmx/GetTeachers2',
-        data: JSON.stringify(),
-        type: 'POST',
-        dataType: "json",
-        contentType: 'application/json; charset = utf-8',
-        success: function (results) {
-            FillTeachersInDDL(results);
-        },
-        error: function (request, error) {
-            alert('Network error has occurred please try again!');
-        }
-    });
-}
+//    $.ajax({
+//        url: 'BetseferWS.asmx/GetTeachers2',
+//        data: JSON.stringify(),
+//        type: 'POST',
+//        dataType: "json",
+//        contentType: 'application/json; charset = utf-8',
+//        success: function (results) {
+//            FillTeachersInDDL(results);
+//        },
+//        error: function (request, error) {
+//            alert('Network error has occurred please try again!');
+//        }
+//    });
+//}
 
 function SubmitMessageAjax(message, AfterMessageSent) {
     var dataString = JSON.stringify(message);

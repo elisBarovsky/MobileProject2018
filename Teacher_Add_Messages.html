@@ -78,7 +78,6 @@
                 הודעה חדשה
             </h3>
         </div>
-
         <!-- Main content -->
         <section class="content" style="width:110%; position:center;margin-right:-10px;">
             <div class="info-box" style="width:95%">
@@ -93,10 +92,12 @@
                                         <div style="padding-right:80px">
 
                                             <fieldset id="messageTypeRBL">
-                                                <input type="radio" value="private" name="msgType" id="private" checked="checked" onclick="MessageType('private')" /> אישי
-                                                <br />
-                                                <input type="radio" value="kolektive" name="msgType" id="kolektive" onclick="MessageType('kolektive')" /> קולקטיבי
+                                                <button type="button" value="private" name="msgType" id="private" onclick="MessageType('private')" style="margin-left:5px;border-radius:40px;width:70px;background-color:transparent"><img src="Images/alone.png" Height="35" /></button>
+
+                                                <button type="button" value="kolektive" name="msgType" id="kolektive" onclick="MessageType('kolektive')" style="margin-left:5px;border-radius:40px;background-color:transparent"><img src="Images/kolektive.gif" Height="35" /></button>
+
                                             </fieldset>
+                                            <br />
                                         </div>
                                     </div>
                                     <div>
@@ -113,41 +114,11 @@
                                
                             </tr>
                             <tr >
-                                <!--<td style="width:95%">
-                                    <div style="float:right;margin-left:40px; ">
-                                        <div style="float:right">
-                                            <Label ID="groupTypeLBL">נמענים:</Label>
-                                        </div>-->
-                                        <!--<div style="padding-right:80px">
-            <fieldset id="userTypeRBL">
-                <input type="radio" value="pupils" name="users" id="pupils" onclick="ChooseDDL('pupils')"> תלמידים
-                <br />
-                <input type="radio" value="parents" name="users" id="parents" onclick="ChooseDDL('parents')"> הורים
-                <br />
-                <input type="radio" value="teachers" name="users" id="teachers" onclick="ChooseDDL('teachers')"> מורים
-            </fieldset>
-        </div>-->
-
-                                    </div>
-                                    
-                                    <div>
-                                        <!--<div style="float:right;">
-                                            <Label ID="forLBL">נמען:</Label>
-                                        </div>-->
-                                        <!--<div style="padding-right:150px">
-                                            <select ID="childrenDDL" CssClass="form-control"></select>
-                                            <select ID="parentsDDL" CssClass="form-control"></select>
-                                            <select ID="teachersDDL" CssClass="form-control"></select>
-                                        </div>
-                                    </div>
-                                </td>-->
-                            
                             </tr>
                             <tr>
                                 <td colspan="2">
                                     <div class="form-group">
                                         <div class="ui-widget" style="width:100%">
-                                        <!--<label for="tags">נמען </label>-->
                                         <input id="tags" class="form-control" placeholder="נמען">
                                             <br />
                                     </div>
@@ -170,7 +141,7 @@
                                         </div>
                                         <div style="float:left">
                                             <br />
-                                            <button type="button" ID="paperPlaneButton" onclick="SubmitMessage(this)" style="margin-left:5px"><img src="Images/paperPlane.png" Height="35" /></button>
+                                            <button type="button" ID="paperPlaneButton" onclick="SubmitMessage(this)" style="margin-left:5px;border-radius:50px;width:90px;background-color:coral"><img src="Images/paperPlane.png" Height="35" /></button>
                                         </div>
                                     </div>
                                    

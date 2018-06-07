@@ -1395,12 +1395,14 @@ public class DBconnection
     public List<Dictionary<string, string>> getPupilsByClassCode(string TeacherID)
     {
         String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName)AS PupilName" +
-           "  FROM dbo.Pupil INNER JOIN    dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID  where CodeClass=(select ClassCode from Class where MainTeacherID= '" + TeacherID + "')" +
+           "  FROM dbo.Pupil INNER JOIN    dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID  where CodeClass in (SELECT distinct dbo.Timetable.ClassCode FROM  dbo.Timetable INNER JOIN " +
+           "  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where dbo.TimetableLesson.TeacherId='" + TeacherID + "')" +
            " union " +
-           " SELECT UserID, (dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'FullName'" + 
-             "  FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID "+
-            " where CodeClass = (select ClassCode from Class where MainTeacherID = '"+ TeacherID + "')";
-        List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
+           " SELECT UserID, (dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'FullName'" +
+             "  FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID where CodeClass in (SELECT distinct dbo.Timetable.ClassCode FROM  dbo.Timetable INNER JOIN " +
+            "  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where dbo.TimetableLesson.TeacherId='" + TeacherID + "')";
+
+        List < Dictionary<string, string>> l = new List<Dictionary<string, string>>();
         try
         {
             con = connect("Betsefer"); // create the connection

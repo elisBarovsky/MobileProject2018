@@ -44,7 +44,9 @@ function renderlogin(results) {
 
         }
         else {
-            var UserId = localStorage.getItem("PupilID");
+            var UserId = localStorage.getItem("UserID");
+            localStorage.setItem("PupilID", UserId); //saving in localS
+
             var type = localStorage.getItem("UserType");
             user = new Object();
             user.UserId = UserId;

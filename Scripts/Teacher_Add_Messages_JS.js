@@ -1,19 +1,20 @@
 ﻿var availableTags = [];
-
+var MSGType = "private";
 $(document).ready(function () {
 
     $('body').fadeIn(500, function () {
 
-            var userID = localStorage.getItem("UserID");
+        var userID = localStorage.getItem("UserID");
+        var TeacherID = userID;    
             $("#childrenDDL").hide();
             $("#parentsDDL").hide();
             $("#teachersDDL").hide();
             $('#forLBL').hide();
             $("#classDDL").hide();
             $('#classLBL').hide();
-        var TeacherID = userID;      
+        
         LoadClasses(userID, FillClassesInDDL);
-        FillPupils(TeacherID, FillPupilInDDL);
+        FillPupils(TeacherID, FillTeachersInDDL);
        // FillParents(userID, FillParentsInDDL);
             //FillTeachers(FillTeachersInDDL);
     });
@@ -33,15 +34,12 @@ function FillClassesInDDL(results) {
         dynamicLy = " <option value='" + res[i] + "' style='text- align:right'>" + res[i] + "</option> ";
         $('#classDDL').append(dynamicLy);
     }
+
+    var userID = localStorage.getItem("UserID");
+    var TeacherID = userID;      
+    
 }
 
-function FillUsers() {
-    var classTotalName = $('#classDDL').val();
-    if (classTotalName !== "בחר") {
-        FillPupils(classTotalName, FillPupilInDDL);
-        FillParents(classTotalName, FillParentsInDDL);
-    }
-}
 
 function FillPupilInDDL(results) {
     res1 = $.parseJSON(results.d);
@@ -55,10 +53,7 @@ function FillPupilInDDL(results) {
         dynamicLy = " <option value='" + res1[i].UserId + "' style='text- align:right'>" + res1[i].UserName + "</option> ";
       //  $('#childrenDDL').append(dynamicLy);
 
-        availableTags.push({
-            key: res1[i].UserId,
-            value: res1[i].UserName
-        });
+      
     }
 }
 
@@ -72,13 +67,8 @@ function FillParentsInDDL(results) {
 
         for (var i = 0; i < res2.length; i++) {
             dynamicLy = " <option value='" + res2[i].UserId + "' style='text- align:right'>" + res2[i].FullName + "</option> ";
-        //    $('#parentsDDL').append(dynamicLy);
 
-
-            availableTags.push({
-                key: res2[i].UserId,
-                value: res2[i].FullName
-            });
+            
         }
 }
 
@@ -86,31 +76,24 @@ function FillTeachersInDDL(results) {
     res3 = $.parseJSON(results.d);
     var myID = localStorage.getItem("UserID");
 
-  //  $('#teachersDDL').empty();
-
     var dynamicLy = "<option value='0'>בחר</option>";
-//    $('#teachersDDL').append(dynamicLy);
-   
 
     for (var i = 0; i < res3.length; i++) {
-        if (res3[i].UserId !== myID) {
-            dynamicLy = " <option value='" + res3[i].UserId + "' style='text- align:right'>" + res3[i].FullName + "</option> ";
-            $('#teachersDDL').append(dynamicLy);
+        dynamicLy = " <option value='" + res3[i].UserId + "' style='text- align:right'>" + res3[i].UserName + "</option> ";
 
-            //availableTags.push({
-            //    key: res3[i].UserId ,
-            //    value: res3[i].FullName
-            //});
-              
-        }
+            availableTags.push({
+                key: res3[i].UserId ,
+                value: res3[i].UserName
+            });
     }
-
 
     $("#tags").autocomplete({
         source: availableTags
     });
 
 }
+
+
 $(function () {
 
     var resultt = GetUserType();
@@ -144,62 +127,6 @@ $(function () {
     });
 });
 
-//function ChooseDDL(userType) {
-//    if (userType === "fromMessageType") {
-//        userType = GetUserType();
-//    }
-    
-//    if (GetMessageType() === "private") {
-//        $('#forLBL').show();
-//        $('#classDDL').hide();
-
-//        switch (userType) {
-//            case "pupils":
-//                $('#childrenDDL').show();
-//                $('#parentsDDL').hide();
-//                $('#teachersDDL').hide();
-//                $('#classLBL').show();
-//              //  $('#classDDL').show();
-
-//                break;
-//            case "parents":
-//                $('#childrenDDL').hide();
-//                $('#parentsDDL').show();
-//                $('#teachersDDL').hide();
-//                $('#classLBL').show();
-//              //  $('#classDDL').show();
-
-//                break;
-//            case "teachers":
-//                $('#childrenDDL').hide();
-//                $('#parentsDDL').hide();
-//                $('#teachersDDL').show();
-//                $('#classLBL').hide();
-//              //  $('#classDDL').val('0');
-//                //$('#classDDL').hide();
-//                break;
-
-//        }
-//    }
-//    else {
-//        $('#childrenDDL').hide();
-//        $('#parentsDDL').hide();
-//        $('#teachersDDL').hide();
-//        $('#forLBL').hide();
-//        $('#classDDL').show();
-
-//        if (userType === 'teachers') {
-//            $('#classDDL').val('0');
-//          //  $('#classDDL').hide();
-//        }
-//        else {
-//            $('#classDDL').val('0');
-//         //   $('#classDDL').show();
-//        }
-//    }
-    
-//}
-
 function MessageType(messageType) {
     switch (messageType) {
         case "kolektive":
@@ -211,16 +138,15 @@ function MessageType(messageType) {
             $('#classLBL').show();
             $("#classDDL").show();
             $('#tags').hide();
-
+            MSGType = "kolektive";
             break;
 
         default:
             $('#classLBL').hide();
             $("#classDDL").hide();
+            MSGType = "private";
             $('#tags').show();
-
-    }
-    ChooseDDL("fromMessageType");
+     }
 }
 
 function SubmitMessage() {
@@ -228,24 +154,23 @@ function SubmitMessage() {
         subject = $('#messageSubject').val(),
         content = $('#messageContent').val();
    var usrererer = $('#tags').val();
-
-
    
-    if (userType !== "notSelected" && subject !== "" && content !== "") {
+    if ( subject !== "" && content !== "") {
         var message = new Object();
 
         message.RecipientID = KeyByValue(availableTags, usrererer);
 
-        message.MessageType = GetMessageType();
-        message.UserType = userType;
+        message.MessageType = MSGType;
+            //GetMessageType();
+       // message.UserType = userType;
         message.SenderID = localStorage.getItem("UserID");
         message.Subject = subject;
         message.Content = content;
 
-        if (message.UserType !== "teachers") {
-            message.UserClass = $('#classDDL').val();
-        }
-        else message.UserClass = "null";
+        //if (message.UserType !== "teachers") {
+        //    message.UserClass = $('#classDDL').val();
+        //}
+        //else message.UserClass = "null";
 
         //if (message.MessageType === "private") {
         //    switch (message.UserType) {
@@ -289,21 +214,22 @@ function SubmitMessage() {
 
 function AfterMessageSent(results) {
     alert("נשלח");
-    $('#childrenDDL').val('0');
-    $('#childrenDDL').hide();
-    $('#parentsDDL').val('0');
-    $('#parentsDDL').hide();
-    $('#teachersDDL').val('0');
-    $('#teachersDDL').hide();
+  //  $('#childrenDDL').val('0');
+  //  $('#childrenDDL').hide();
+   // $('#parentsDDL').val('0');
+   // $('#parentsDDL').hide();
+   // $('#teachersDDL').val('0');
+  //  $('#teachersDDL').hide();
     $('#classLBL').hide();
     $('#classDDL').val('0');
     $('#messageSubject').val('');
     $('#messageContent').val('');
     $('#forLBL').hide();
     $('#private').select();
-    $('#pupils').val([]);
-    $('#parents').val([]);
-    $('#teachers').val([]);
+  //  $('#pupils').val([]);
+   // $('#parents').val([]);
+  //  $('#teachers').val([]);
+    $('#tags').val('');
 
 }
 
