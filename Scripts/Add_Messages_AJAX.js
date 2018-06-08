@@ -1,7 +1,16 @@
-﻿function LoadClasses(TeacherID ,FillClassesInDDL) {
+﻿var path = "";
+var isCordovaApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+if (isCordovaApp) {
+    path = "https://proj.ruppin.ac.il/bgroup52/Test2/tar4/";
+}
+else
+    path = "";
+
+
+function LoadClasses(TeacherID, FillClassesInDDL) {
 
     $.ajax({
-        url: 'BetseferWS.asmx/GetClassesByTeacherId',
+        url: path+'BetseferWS.asmx/GetClassesByTeacherId',
         data: JSON.stringify({ 'TeacherID': TeacherID}),
         type: 'POST',
         dataType: "json",
@@ -18,8 +27,8 @@
 function FillPupils(TeacherID, FillTeachersInDDL) {
 
     $.ajax({
-        url: 'BetseferWS.asmx/GetPupilsByClassTotalName',
-        data: JSON.stringify({ 'TeacherID': TeacherID }),
+        url: path + 'BetseferWS.asmx/GetPupilsByClassTotalName',
+        data:  JSON.stringify({ 'TeacherID': TeacherID }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
@@ -35,7 +44,7 @@ function FillPupils(TeacherID, FillTeachersInDDL) {
 function FillPupilsAndTeacher(TeacherID, FillTeachersInDDL) {
 
     $.ajax({
-        url: 'BetseferWS.asmx/GetPupilsByAndTeachers',
+        url: path +'BetseferWS.asmx/GetPupilsByAndTeachers',
         data: JSON.stringify({ 'TeacherID': TeacherID }),
         type: 'POST',
         dataType: "json",
@@ -52,7 +61,7 @@ function FillPupilsAndTeacher(TeacherID, FillTeachersInDDL) {
 function FillParentsAndTeacher(TeacherID, FillTeachersInDDL) {
 
     $.ajax({
-        url: 'BetseferWS.asmx/GetParentsByAndTeachers',
+        url: path + 'BetseferWS.asmx/GetParentsByAndTeachers',
         data: JSON.stringify({ 'TeacherID': TeacherID }),
         type: 'POST',
         dataType: "json",
@@ -69,7 +78,7 @@ function FillParentsAndTeacher(TeacherID, FillTeachersInDDL) {
 function SubmitMessageAjax(message, AfterMessageSent) {
     var dataString = JSON.stringify(message);
     $.ajax({
-        url: 'BetseferWS.asmx/SubmitMessage',
+        url: path +'BetseferWS.asmx/SubmitMessage',
         data: JSON.stringify({ 'm': message }),
         type: 'POST',
         dataType: "json",

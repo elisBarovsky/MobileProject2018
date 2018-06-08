@@ -1,8 +1,17 @@
-﻿function Login(UserInfo, renderlogin) {
+﻿var path = "";
+var isCordovaApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+if (isCordovaApp) {
+    path = "https://proj.ruppin.ac.il/bgroup52/Test2/tar4/";
+}
+else
+    path = "";
 
+
+function Login(UserInfo, renderlogin) {
+   
     var dataString = JSON.stringify(UserInfo);
     $.ajax({
-        url: 'BetseferWS.asmx/Login',
+        url: path + 'BetseferWS.asmx/Login',
         data: JSON.stringify({ 'UserID': UserInfo.ID, 'password': UserInfo.PS }),
         type: 'POST',
         dataType: "json",
@@ -20,7 +29,7 @@ function ParentChooseChild(ID, afterChildChoosen) {
 
     var dataString = JSON.stringify(ID);
     $.ajax({
-        url: 'BetseferWS.asmx/ParentChooseChild',
+        url: path+'BetseferWS.asmx/ParentChooseChild',
         data: JSON.stringify({ 'ParentID': ID}),
         type: 'POST',
         dataType: "json",
@@ -38,7 +47,7 @@ function FillSecurityQ(renderFillSecurityQ) {
 
     var dataString = JSON.stringify();
     $.ajax({
-        url: 'BetseferWS.asmx/FillSecurityQ',
+        url: path+'BetseferWS.asmx/FillSecurityQ',
         //data: JSON.stringify(),
         type: 'POST',
         dataType: "json",
@@ -56,7 +65,7 @@ function SaveQuestion(SecurityQA, renderlogin) {
 
     var dataString = JSON.stringify(SecurityQA);
     $.ajax({
-        url: 'BetseferWS.asmx/SaveQuestion',
+        url: path+'BetseferWS.asmx/SaveQuestion',
         data: JSON.stringify({ 'ID': SecurityQA.UserID, 'Q1': SecurityQA.choosenQ1, 'A1': SecurityQA.choosenA1, 'Q2': SecurityQA.choosenQ2, 'A2': SecurityQA.choosenA2 }),
         type: 'POST',
         dataType: "json",
@@ -74,7 +83,7 @@ function GetUserQuestionsByIdAndBday(Useraouto, renderMoveToQuestions) {
 
     var dataString = JSON.stringify(Useraouto);
     $.ajax({
-        url: 'BetseferWS.asmx/GetUserQuestionsByIdAndBday',
+        url: path+'BetseferWS.asmx/GetUserQuestionsByIdAndBday',
         data: JSON.stringify({ 'userID': Useraouto.ID, 'BDay': Useraouto.Bday }),
         type: 'POST',
         dataType: "json",
@@ -92,7 +101,7 @@ function SaveNewPassword(user, tellMeItsOk) {
 
     var dataString = JSON.stringify(user);
     $.ajax({
-        url: 'BetseferWS.asmx/SaveNewPassword',
+        url: path+ 'BetseferWS.asmx/SaveNewPassword',
         data: JSON.stringify({ 'Id': user.Id, 'password': user.password }),
         type: 'POST',
         dataType: "json",
@@ -110,7 +119,7 @@ function LoadTimeTableByTypeAndId(PupilID, LoadTimeTable) {
 
     var dataString = JSON.stringify(PupilID);
     $.ajax({
-        url: 'BetseferWS.asmx/GivenTimeTableByPupilID',
+        url: path+ 'BetseferWS.asmx/GivenTimeTableByPupilID',
         data: JSON.stringify({ 'PupilID': PupilID}),
         type: 'POST',
         dataType: "json",
@@ -128,7 +137,7 @@ function GetUserInfo(user, renderFillUser) {
 
     var dataString = JSON.stringify(user);
     $.ajax({
-        url: 'BetseferWS.asmx/GetUserInfo',
+        url: path+'BetseferWS.asmx/GetUserInfo',
         data: JSON.stringify({ 'Id': user.UserId }),
         type: 'POST',
         dataType: "json",
@@ -146,7 +155,7 @@ function FillSubjectByPupilId(user, FillSubjectsDDL) {
 
     var dataString = JSON.stringify(user);
     $.ajax({
-        url: 'BetseferWS.asmx/getSubjectsByPupilId',
+        url: path+ 'BetseferWS.asmx/getSubjectsByPupilId',
         data: JSON.stringify({ 'PupilID': user.PupilID }),
         type: 'POST',
         dataType: "json",
@@ -164,7 +173,7 @@ function FillHW(user, LoadHWTable) {
 
     var dataString = JSON.stringify(user); 
     $.ajax({
-        url: 'BetseferWS.asmx/FillHW',
+        url: path+ 'BetseferWS.asmx/FillHW',
         data: JSON.stringify({ 'UserID': user.PupilID }),
         type: 'POST',
         dataType: "json",
@@ -182,7 +191,7 @@ function GetUserNotes(UserInfoNote, renderNotes) {
 
     var dataString = JSON.stringify(UserInfoNote);
     $.ajax({
-        url: 'BetseferWS.asmx/GivenAllNotes',
+        url: path+ 'BetseferWS.asmx/GivenAllNotes',
         data: JSON.stringify({ 'PupilID': UserInfoNote.ID }),
         type: 'POST',
         dataType: "json",
@@ -200,7 +209,7 @@ function GivenNoteByCode(Note, renderGivenNoteByCode) {
 
     var dataString = JSON.stringify(Note);
     $.ajax({
-        url: 'BetseferWS.asmx/GivenNoteByCode',
+        url: path+ 'BetseferWS.asmx/GivenNoteByCode',
         data: JSON.stringify({ 'NoteCode': Note.Code }),
         type: 'POST',
         dataType: "json",
@@ -218,7 +227,7 @@ function GivenHomeWorkByCode(HomeWork, renderGivenNoteByCode) {
 
     var dataString = JSON.stringify(HomeWork);
     $.ajax({
-        url: 'BetseferWS.asmx/GivenHWByCode',
+        url: path+ 'BetseferWS.asmx/GivenHWByCode',
         data: JSON.stringify({ 'HWCode': HomeWork.Code }),
         type: 'POST',
         dataType: "json",
@@ -235,7 +244,7 @@ function GivenHomeWorkByCode(HomeWork, renderGivenNoteByCode) {
 function GetUserGrades(Grade, renderGrades) { 
     var dataString = JSON.stringify(Grade);
     $.ajax({
-        url: 'BetseferWS.asmx/FillGrades',
+        url: path+ 'BetseferWS.asmx/FillGrades',
         data: JSON.stringify({ 'UserID': Grade.ID }),
         type: 'POST',
         dataType: "json",
@@ -253,7 +262,7 @@ function GivenGradeByCode(GradeDate, renderGrades) {
  
     var dataString = JSON.stringify(GradeDate);
     $.ajax({
-        url: 'BetseferWS.asmx/FillGradeInfoByCode',
+        url: path+ 'BetseferWS.asmx/FillGradeInfoByCode',
         data: JSON.stringify({ 'GradeDate': GradeDate.Date }),
         type: 'POST',
         dataType: "json",
@@ -270,7 +279,7 @@ function GivenGradeByCode(GradeDate, renderGrades) {
 function FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone) {
     var dataString = JSON.stringify(User);
     $.ajax({
-        url: 'BetseferWS.asmx/TelephoneList',
+        url: path+ 'BetseferWS.asmx/TelephoneList',
         data: JSON.stringify({ 'type': User.type, 'PupilID': User.PupilID }),
         type: 'POST',
         dataType: "json",
@@ -287,7 +296,7 @@ function FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone) {
 function GetPupilId(user, SavePupilId) {
     var dataString = JSON.stringify(User);
     $.ajax({
-        url: 'BetseferWS.asmx/GetPupilIdByUserTypeAndId',
+        url: path+ 'BetseferWS.asmx/GetPupilIdByUserTypeAndId',
         data: JSON.stringify({ 'UserId': user.UserId, 'type': user.type }),
         type: 'POST',
         dataType: "json",

@@ -1,7 +1,15 @@
-﻿function GetUserImg(id, SaveUserImg) {
+﻿var path = "";
+var isCordovaApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+if (isCordovaApp) {
+    path = "https://proj.ruppin.ac.il/bgroup52/Test2/tar4/";
+}
+else
+    path = "";
+
+function GetUserImg(id, SaveUserImg) {
 
     $.ajax({
-        url: 'BetseferWS.asmx/GetUserImg',
+        url: path+'BetseferWS.asmx/GetUserImg',
         data: JSON.stringify({"UserID": id}),
         type: 'POST',
         dataType: "json",
@@ -17,7 +25,7 @@
 
 function GetUserFullName(id, SaveUserFullName) {
     $.ajax({
-        url: 'BetseferWS.asmx/GetUserFullName',
+        url: path+'BetseferWS.asmx/GetUserFullName',
         data: JSON.stringify({ "Id": id }),
         type: 'POST',
         dataType: "json",

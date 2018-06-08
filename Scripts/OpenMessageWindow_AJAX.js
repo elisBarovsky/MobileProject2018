@@ -1,6 +1,16 @@
-﻿function GetAllConversation(sender, me, ShowAllConversation){
+﻿var path = "";
+var isCordovaApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+if (isCordovaApp) {
+    path = "https://proj.ruppin.ac.il/bgroup52/Test2/tar4/";
+}
+else
+    path = "";
+
+
+
+function GetAllConversation(sender, me, ShowAllConversation) {
     $.ajax({
-        url: 'BetseferWS.asmx/GetAllConversation',
+        url: path+ 'BetseferWS.asmx/GetAllConversation',
         data: JSON.stringify({ 'SenderID': sender, 'RecipientID': me }),
         type: 'POST',
         dataType: "json",
@@ -16,7 +26,7 @@
 
 function SubmitMessageAjax(message, AfterMessageSent) {
     $.ajax({
-        url: 'BetseferWS.asmx/SubmitMessage',
+        url: path+'BetseferWS.asmx/SubmitMessage',
         data: JSON.stringify({ 'm': message }),
         type: 'POST',
         dataType: "json",

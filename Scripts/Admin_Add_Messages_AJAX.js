@@ -1,7 +1,15 @@
-﻿function LoadClasses(FillClassesInDDL) {
+﻿var path = "";
+var isCordovaApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+if (isCordovaApp) {
+    path = "https://proj.ruppin.ac.il/bgroup52/Test2/tar4/";
+}
+else
+    path = "";
+
+function LoadClasses(FillClassesInDDL) {
 
     $.ajax({
-        url: 'BetseferWS.asmx/GetClassesFullName',
+        url: path+'BetseferWS.asmx/GetClassesFullName',
         data: JSON.stringify(),
         type: 'POST',
         dataType: "json",
@@ -19,7 +27,7 @@ function FillPupils(classTotalName, FillUsersInDDL) {
 
     var dataString = JSON.stringify(classTotalName);
     $.ajax({
-        url: 'BetseferWS.asmx/GetPupilsByClassTotalName',
+        url: path+'BetseferWS.asmx/GetPupilsByClassTotalName',
         data: JSON.stringify({ 'classTotalName': classTotalName }),
         type: 'POST',
         dataType: "json",
@@ -37,7 +45,7 @@ function FillParents(classTotalName, FillUsersInDDL) {
 
     var dataString = JSON.stringify(classTotalName);
     $.ajax({
-        url: 'BetseferWS.asmx/GetParentsByClassTotalName',
+        url: path+'BetseferWS.asmx/GetParentsByClassTotalName',
         data: JSON.stringify({ 'classTotalName': classTotalName }),
         type: 'POST',
         dataType: "json",
@@ -54,7 +62,7 @@ function FillParents(classTotalName, FillUsersInDDL) {
 function FillTeachers(FillTeachersInDDL) {
 
     $.ajax({
-        url: 'BetseferWS.asmx/GetTeachers2',
+        url: path+'BetseferWS.asmx/GetTeachers2',
         data: JSON.stringify(),
         type: 'POST',
         dataType: "json",
@@ -71,7 +79,7 @@ function FillTeachers(FillTeachersInDDL) {
 function SubmitMessageAjax(message, AfterMessageSent) {
     var dataString = JSON.stringify(message);
     $.ajax({
-        url: 'BetseferWS.asmx/SubmitMessage',
+        url: path+'BetseferWS.asmx/SubmitMessage',
         data: JSON.stringify({ 'm': message }),
         type: 'POST',
         dataType: "json",
