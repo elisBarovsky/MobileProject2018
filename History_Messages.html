@@ -82,33 +82,38 @@
 </head>
 <body class="hold-transition login-page">
 
-    <div class="container" onclick="Dashbord()">
+    <div class="container" onclick="Dashbord()" >
         <div class="bar1" style="background-color:palevioletred"></div>
         <div class="bar2" style="background-color:fuchsia"></div>
         <div class="bar3" style="background-color:deepskyblue"></div>
     </div>
+    <div class="container" style="float:left">
+        <div class="col-xs-4 m-t-1" style="float:left;position:relative; ">
+            <button id="Logout" class="btn btn-danger btn-flat" type="button" style="border-radius:50px;height:50px;width:50px;"> <i class="fa fa-plus" style="float:right"> </i> </button>
+        </div>
+    </div>
     <div class="login-box">
         <div div class="login-box" style="height:20px;color:white">
-            <h3> הודעות נכנסות
+            <h3>
+                הודעות נכנסות
                 <!--<div class="col-xs-4 m-t-1" style="float:left;position:relative;background-color:white;height:45px;width:46px;border-radius:50px">-->
-                    <a href="#click"><img src="Images/NewMSGIcon.png" alt="logo" onclick="NewMSG()" style="width:40px;padding-top:0%;margin-right:3%;float:left;background-color:white;border-radius:50px"></a>
                 <!--</div>-->
             </h3>
-            
+
         </div>
         <!-- <div class="login-box-body" >-->
         <!-- Main content -->
-        <section class="content" >
-            <div class="info-box" >
+        <section class="content">
+            <div class="info-box">
                 <table style="width:80%;padding-right:25px" id="messagesTable" class="table table-hover no-wrap table-striped">
                     <tbody>
-                        <tr ></tr>
+                        <tr></tr>
                     </tbody>
                 </table>
             </div>
         </section>
     </div>
-   
+
 
     <!-- jQuery 3 -->
     <!-- v4.0.0-alpha.6 -->
