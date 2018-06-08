@@ -47,8 +47,25 @@ function FillPupilsAndTeacher(TeacherID, FillTeachersInDDL) {
             alert('Network error has occurred please try again!');
         }
     });
-
 }
+
+function FillParentsAndTeacher(TeacherID, FillTeachersInDDL) {
+
+    $.ajax({
+        url: 'BetseferWS.asmx/GetParentsByAndTeachers',
+        data: JSON.stringify({ 'TeacherID': TeacherID }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            FillTeachersInDDL(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
 function SubmitMessageAjax(message, AfterMessageSent) {
     var dataString = JSON.stringify(message);
     $.ajax({

@@ -208,10 +208,10 @@ public class Users
         return db.getPupilsAndTeachers(TeacherID);
     }
 
-    //public List<Dictionary<string, string>> getParentsByClassCode(string TeacherID)
-    //{
-    //    return db.getParentsByClassCode(TeacherID);
-    //}
+    public List<Dictionary<string, string>> getParentsAndTeachers(string TeacherID)
+    {
+        return db.getParentsAndTeachers(TeacherID);
+    }
 
     public Dictionary<string, string> FillUsers(string CodeUserType)
     {
