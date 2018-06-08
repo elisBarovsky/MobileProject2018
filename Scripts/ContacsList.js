@@ -28,9 +28,11 @@ function FillListViewCellPhone(results) {  //contactList
 //    dynamicLy = "<ul style='list-style-type:none'>";
     for (var i = 0; i < res.length; i++) { //ממלא את הרשימה בילדים של ההורה
 
-        dynamicLy = "<li ><p style='margin-left:100px'><center><input id='" + res[counter].PhoneNumber +
-            "' src='" + phoneIcon + "' type='image'  height='25' style='float: right' /> &nbsp;" +
-                res[counter].FullName + " &nbsp;&nbsp; " +  res[counter].PhoneNumber+ " </center> </p> </li>";
+        //<input id="2" src="Images/PhoneIcon.png" onclick="window.open('tel:0525382634', '_system', 'location=yes')" type='image' height='25' style='float: right' />
+
+        dynamicLy = "<li ><p style='margin-left:100px'><center><input id='" + i +
+            "' src='" + phoneIcon + "' onclick='window.open('tel:" + res[counter].PhoneNumber + "', '_system', 'location=yes')' type='image'  height='25' style='float: right' /> &nbsp;" +
+            res[counter].FullName + " &nbsp;&nbsp;" + res[counter].PhoneNumber + "</center> </p> </li>";
         counter++;
         $('#contactList').append(dynamicLy);
     }
