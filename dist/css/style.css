@@ -26,7 +26,9 @@ Designed By: UXLiner
 5. Footer
 	+ copyrights
 --------------------------------------------------------*/
-
+.ui-autocomplete {
+    z-index: 9999 !important;
+}
 /* Layout */
 html, body {
 	height: 100%

@@ -56,7 +56,8 @@ function FillTeachersInDDL(results) {
     }
 
     $("#tags").autocomplete({
-        source: availableTags
+        source: availableTags,
+
     });
 
 }
