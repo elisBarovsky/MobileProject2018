@@ -203,6 +203,11 @@ public class Users
         return db.getPupilsByClassCode(TeacherID);
     }
 
+    public List<Dictionary<string, string>> getPupilsAndTeachers(string TeacherID)
+    {
+        return db.getPupilsAndTeachers(TeacherID);
+    }
+
     //public List<Dictionary<string, string>> getParentsByClassCode(string TeacherID)
     //{
     //    return db.getParentsByClassCode(TeacherID);

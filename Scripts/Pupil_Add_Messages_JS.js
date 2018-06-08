@@ -13,10 +13,8 @@ $(document).ready(function () {
             $("#classDDL").hide();
             $('#classLBL').hide();
         
-        LoadClasses(userID, FillClassesInDDL);
-        FillPupils(TeacherID, FillTeachersInDDL);
-       // FillParents(userID, FillParentsInDDL);
-            //FillTeachers(FillTeachersInDDL);
+         FillPupilsAndTeacher(TeacherID, FillTeachersInDDL);
+           //FillTeachers(FillTeachersInDDL);
     });
 
 });

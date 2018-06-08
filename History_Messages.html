@@ -64,6 +64,20 @@
                 window.location = 'Pupil_Dashboard.html';
             }
         }
+
+
+        function NewMSG() {
+            var type = localStorage.getItem("UserType");
+            if (type == 'Parent') {
+                window.location = 'Paretnt_Add_Messages.html';
+            }
+            else if (type == 'Teacher') {
+                window.location = 'Teacher_Add_Messages.html';
+            }
+            else {
+                window.location = 'Pupil_Add_Messages.html';
+            }
+        }
     </script>
 </head>
 <body class="hold-transition login-page">
@@ -77,7 +91,7 @@
         <div div class="login-box" style="height:20px;color:white">
             <h3> הודעות נכנסות
                 <!--<div class="col-xs-4 m-t-1" style="float:left;position:relative;background-color:white;height:45px;width:46px;border-radius:50px">-->
-                    <a href="Teacher_Add_Messages.html"><img src="Images/NewMSGIcon.png" alt="logo" style="width:40px;padding-top:0%;margin-right:3%;float:left;background-color:white;border-radius:50px"></a>
+                    <a href="#click"><img src="Images/NewMSGIcon.png" alt="logo" onclick="NewMSG()" style="width:40px;padding-top:0%;margin-right:3%;float:left;background-color:white;border-radius:50px"></a>
                 <!--</div>-->
             </h3>
             
