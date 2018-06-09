@@ -54,7 +54,9 @@ function FillTeachersInDDL(results) {
     }
 
     $("#tags").autocomplete({
-        source: availableTags
+        source: availableTags,
+        autoFocus: true,
+        position: { my: "center top", at: "center bottom" },
     });
 
 }
