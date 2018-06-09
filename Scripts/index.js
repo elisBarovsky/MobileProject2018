@@ -21,6 +21,8 @@ function onDeviceReady() {
    
 }
 
+
+
 function renderlogin(results) {
     res = $.parseJSON(results.d);
     if (res[0] === "openSeqQestion") { // go to fill identity questions page
@@ -57,6 +59,9 @@ function renderlogin(results) {
     }
 }
 
+
+
+
 function renderFillUser(results) {
     //Save pupil in localstorage
     var UserId = localStorage.getItem("UserID");
@@ -64,6 +69,11 @@ function renderFillUser(results) {
     user = new Object();
     user.UserId = UserId;
     user.type = type;
+
+    var id = UserId;
+
+    GetUserImg(id, SaveUserImg);
+    GetUserFullName(id, SaveUserFullName)
 
     res = $.parseJSON(results.d);
  
@@ -101,7 +111,8 @@ function renderFillUser(results) {
         //});
     }
     else if (type == 'Teacher') {
-        document.location.href = "Teacher_MainManu.html";
+        $("body").fadeOut(500, redirectPage1);
+        
     }
     else {
         alert('לנתונים שהוזנו אין הרשאת כניסה למערכת');
@@ -111,6 +122,22 @@ function renderFillUser(results) {
 
 }
 
+function redirectPage1() {
+
+    document.location.href = "Teacher_MainManu.html";
+}
+
 function redirectPage() {
     window.location = "Pupil_MainManu.html";
+
+}
+
+function SaveUserImg(results) {
+    res = $.parseJSON(results.d);
+    localStorage.setItem("UserImg", res);
+};
+
+function SaveUserFullName(results) {
+    res = $.parseJSON(results.d);
+    localStorage.setItem("UserFullName", res);
 }

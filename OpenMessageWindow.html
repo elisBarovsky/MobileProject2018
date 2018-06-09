@@ -35,25 +35,19 @@
     <script src="Scripts/OpenMessageWindow_JS.js"></script>
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition login-page">
     <div class="wrapper boxed-wrapper">
-        <header class="main-header">
-            <!-- Logo -->
-            <a href="login.aspx" class="logo blue-bg">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini">
-                    <img src="Images/BetseferLogo-n.png" alt="">
-                </span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg">
-                    <img src="Images/BetseferLogo_NN.png" alt="">
-                </span>
-            </a>
-        </header>
+
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="container" style="float:left">
+            <div class="col-xs-4 m-t-1" style="float:left;position:relative;height:45px;border-radius:50px ">
+                <button class="btn btn-info btn-flat" type="button" style="border-radius:50px;height:50px;width:50px;" onclick="window.location='History_Messages.html';"> <i class="fa fa-arrow-left" style="float:right;color:white"> </i> </button>
+            </div>
+        </div>
+        <br /> <br /> <br />
+        <div class="login-box">
             <div class="col-lg-6">
-                <div class="info-box" >
+                <div class="info-box">
                     <div class="box box-warning direct-chat direct-chat-warning">
                         <div class="box-header with-border">
                             <center><h3 class="box-title text-black" id="senderTytle"></h3></center>
@@ -65,7 +59,7 @@
                     <div class="box-footer">
                         <div action="#" method="post">
                             <div class="input-group">
-                               
+
 
                                 <input name="subject" id="newSubject" class="form-control" type="text" placeholder="נושא" style="width:25px;float:right;">
                             </div>
@@ -77,14 +71,14 @@
                             </div>
                             <span class="input-group-btn" style="width:100px;padding-top:10px;position:center">
                                 <button class="btn btn-warning btn-flat" type="button" onclick="SubmitMessage()"><img src="Images/paperPlane.png" height="30" /></button>
-                             
+
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
 
 </body>
 </html>
