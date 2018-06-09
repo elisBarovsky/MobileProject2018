@@ -25,10 +25,12 @@ function renderFillUser(results) {
     document.getElementById("UserNameLBL").innerHTML = " שלום " + res[1] + " " + res[2];
     if (res[6] === "") {
         document.getElementById("UserIMG").src = "Images/NoImg.png";
+        localStorage.setItem("UserImg", "Images/NoImg.png");
     }
     else {
         document.getElementById("UserIMG").src = res[6];
+        localStorage.setItem("UserImg", res[6]);
     }
     document.getElementById("UserIMG").src = "Images/NoImg.png";
-
+    localStorage.setItem("UserFullName", res[1] + " " + res[2]);
 }

@@ -108,6 +108,6 @@ function AfterMessageSent(results) {
   
     subject = document.getElementById('newSubject').value="";
     content = document.getElementById('newMessage').value = "";
-    alert("נשלח");
+   // alert("נשלח");
 };
 

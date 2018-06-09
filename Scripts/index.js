@@ -72,11 +72,11 @@ function renderFillUser(results) {
 
     var id = UserId;
 
-    GetUserImg(id, SaveUserImg);
-    GetUserFullName(id, SaveUserFullName)
+    
 
     res = $.parseJSON(results.d);
- 
+   
+
     if (type == 'Child') {
 
         //$("body").slideDown("slow", function () {
@@ -119,7 +119,7 @@ function renderFillUser(results) {
         document.getElementById("IDTB").value = "";
         document.getElementById("PasswordTB").value = "";
     }
-
+   
 }
 
 function redirectPage1() {
@@ -130,14 +130,4 @@ function redirectPage1() {
 function redirectPage() {
     window.location = "Pupil_MainManu.html";
 
-}
-
-function SaveUserImg(results) {
-    res = $.parseJSON(results.d);
-    localStorage.setItem("UserImg", res);
-};
-
-function SaveUserFullName(results) {
-    res = $.parseJSON(results.d);
-    localStorage.setItem("UserFullName", res);
 }

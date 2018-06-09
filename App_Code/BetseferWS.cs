@@ -34,17 +34,17 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonString;
     }
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string GetUserFullName(string Id)
-    {
-        Users u = new Users();
-        string res = u.GetUserFullName(Id);
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //public string GetUserFullName(string Id)
+    //{
+    //    Users u = new Users();
+    //    string res = u.GetUserFullName(Id);
 
-        JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonString = js.Serialize(res);
-        return jsonString;
-    }
+    //    JavaScriptSerializer js = new JavaScriptSerializer();
+    //    string jsonString = js.Serialize(res);
+    //    return jsonString;
+    //}
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -93,10 +93,10 @@ public class BetseferWS : System.Web.Services.WebService
     public string GetUserImg(string UserID)
     {
         Users u = new Users();
-        string UserImg = u.GetUserImgByUserID(UserID);
+        List<string> res = u.GetUserImgAndFullNameByUserID(UserID);
 
         JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonString = js.Serialize(UserImg);
+        string jsonString = js.Serialize(res);
         return jsonString;
     }
 

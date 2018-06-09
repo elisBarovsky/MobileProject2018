@@ -374,14 +374,14 @@ public class Users
         return db.IsStudentUserNotThisParentYet(childID, parentID);
     }
 
-    public string GetUserImgByUserID(string UserID)
+    public List<string> GetUserImgAndFullNameByUserID(string UserID)
     {
-        return db.GetUserImgByUserID(UserID);
+        return db.GetUserImgAndFullNameByUserID(UserID);
     }
 
-    public string GetUserFullName(string Id)
-    {
-        return db.GetUserFullName(Id);
-    }
+    //public string GetUserFullName(string Id)
+    //{
+    //    return db.GetUserFullName(Id);
+    //}
 }
 

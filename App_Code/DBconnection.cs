@@ -232,47 +232,6 @@ public class DBconnection
         }
     }
 
-    public string GetUserFullName(string Id)
-    {
-        string selectSTR = "SELECT UserFName + ' ' + UserLName as UserName " +
-            " FROM Users where UserID  = '" + Id + "'",
-            UserName = "";
-
-        try
-        {
-            con = connect("Betsefer"); // create the connection
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-        }
-
-        try
-        {
-            SqlCommand cmd = new SqlCommand(selectSTR, con);
-            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-            while (dr.Read())
-            {
-                UserName = dr["UserName"].ToString();
-            }
-
-            return UserName;
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-        }
-        finally
-        {
-            if (con != null)
-            {
-                con.Close();
-            }
-        }
-    }
-
     public string GetSenderNameBySenderID(string SenderID)
     {
         string selectSTR = "select UserFName + ' ' + UserLName as SenderName from Users where UserID = '" + SenderID + "'";
@@ -2729,10 +2688,13 @@ public class DBconnection
         return ExecuteNonQuery(cStr);
     }
 
-    public string GetUserImgByUserID(string UserID)
+    public List<string> GetUserImgAndFullNameByUserID(string UserID)
     {
-        String selectSTR = "SELECT UserImg FROM dbo.Users where UserID = '" + UserID + "'";
-        string UserImg = "";
+
+         List<string> UserInfo = new List<string>();
+        String selectSTR = "SELECT UserFName + ' ' + UserLName as UserName, UserImg FROM dbo.Users where UserID = '" + UserID + "'";
+      // string UserImg = "";
+       // string UserName = "";
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -2748,9 +2710,10 @@ public class DBconnection
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             while (dr.Read())
             {
-                UserImg = dr["UserImg"].ToString();
+                UserInfo.Add(dr["UserName"].ToString());
+                UserInfo.Add(dr["UserImg"].ToString());
             }
-            return UserImg;
+            return UserInfo;
         }
         catch (Exception ex)
         {
@@ -2765,6 +2728,47 @@ public class DBconnection
             }
         }
     }
+
+    //public string GetUserFullName(string Id)
+    //{
+    //    string selectSTR = "SELECT UserFName + ' ' + UserLName as UserName " +
+    //        " FROM Users where UserID  = '" + Id + "'",
+    //        UserName = "";
+
+    //    try
+    //    {
+    //        con = connect("Betsefer"); // create the connection
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        // write to log
+    //        throw (ex);
+    //    }
+
+    //    try
+    //    {
+    //        SqlCommand cmd = new SqlCommand(selectSTR, con);
+    //        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+    //        while (dr.Read())
+    //        {
+    //            UserName = dr["UserName"].ToString();
+    //        }
+
+    //        return UserName;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        // write to log
+    //        throw (ex);
+    //    }
+    //    finally
+    //    {
+    //        if (con != null)
+    //        {
+    //            con.Close();
+    //        }
+    //    }
+    //}
 
     public string UpdateMessageAsRead(string MessageCode)
     {
