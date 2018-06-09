@@ -11,7 +11,7 @@
 
 function DisplayMessages(results) {
 
-    res = $.parseJSON(results.d);
+      res = $.parseJSON(results.d);
 
     $('#messagesTable').empty();
 
@@ -26,7 +26,7 @@ function DisplayMessages(results) {
         objMessage.SubjectMessage = res[i].SubjectMessage;
         objMessage.TheMessage = res[i].TheMessage;
 
-        tableString += "<tr onclick = 'OpenMessage(" + JSON.stringify(objMessage) + ")'><td id = '" + res[i].MessageCode + "' style='visibility: hidden'></td><td class='mailbox-star'><a href='#'><i class='fa fa-star text-yellow'></i></a></td><td>" +
+        tableString += "<tr onclick = 'OpenMessage(" + JSON.stringify(objMessage) + ")'><td id = '" + res[i].MessageCode + "'></td><td class='mailbox-star'><a href='#'><i class='fa fa-star text-yellow'></i></a></td><td>" +
             res[i].MessageDate + "</td><td>" + res[i].SubjectMessage + "</td><td>" + res[i].SenderName + "</td></tr>";
     }
     $('#messagesTable').append(tableString);
@@ -34,7 +34,13 @@ function DisplayMessages(results) {
 
 function OpenMessage(obj) {
     localStorage.setItem("messageDetails", JSON.stringify(obj));
-    //var a = window.open("OpenMessageWindow.html", "", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
-    window.location.href = "OpenMessageWindow.html";
+    var i = obj.MessageCode;
+    UpdateMessageAsRead(i);
+    var a = window.open("OpenMessageWindow.html", "", "toolbar=no,scrollbars=yes,resizable=yes,top=50%,left=25%,width=500,height=600");
+    //window.open.href = "OpenMessageWindow.html";
+  //  window.location.href = "OpenMessageWindow.html";
 };
 
+//function SuccsiedUpdateMessage(results) {
+//    var res = results.d;
+//};

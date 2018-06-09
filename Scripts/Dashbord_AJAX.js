@@ -1,21 +1,12 @@
-﻿var path = "";
-var isCordovaApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
-if (isCordovaApp) {
-    path = "https://proj.ruppin.ac.il/bgroup52/Test2/tar4/";
-}
-else
-    path = "";
-
-function GetUserImg(id, SaveUserImg) {
-
+﻿function LoadAllMessagesById(Id, DisplayMessages) {
     $.ajax({
-        url: path+'BetseferWS.asmx/GetUserImg',
-        data: JSON.stringify({"UserID": id}),
+        url: 'BetseferWS.asmx/GetMessagesByUserIdUnread',
+        data: JSON.stringify({ 'userId': Id }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
-            SaveUserImg(results);
+            DisplayMessages(results);
         },
         error: function (request, error) {
             alert('Network error has occurred please try again!');
@@ -23,15 +14,15 @@ function GetUserImg(id, SaveUserImg) {
     });
 }
 
-function GetUserFullName(id, SaveUserFullName) {
+function UpdateMessageAsRead(i) {
     $.ajax({
-        url: path+'BetseferWS.asmx/GetUserFullName',
-        data: JSON.stringify({ "Id": id }),
+        url: 'BetseferWS.asmx/SetMessageAsRead',
+        data: JSON.stringify({ 'MessageCode': i }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
-            SaveUserFullName(results);
+
         },
         error: function (request, error) {
             alert('Network error has occurred please try again!');
@@ -39,15 +30,15 @@ function GetUserFullName(id, SaveUserFullName) {
     });
 }
 
-function GetUserType(id, SaveUserType) {
+function LoadScheduleForToday(obj, DisplaySchedule) {
     $.ajax({
-        url: 'BetseferWS.asmx/GetUserTypeById',
-        data: JSON.stringify({ "Id": id }),
+        url: 'BetseferWS.asmx/LoadScheduleForToday',
+        data: JSON.stringify({ 'Id': obj.Id, 'userType': obj.userType }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
-            SaveUserType(results);
+            DisplaySchedule(results);
         },
         error: function (request, error) {
             alert('Network error has occurred please try again!');

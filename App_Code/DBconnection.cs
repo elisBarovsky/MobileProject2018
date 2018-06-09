@@ -133,7 +133,7 @@ public class DBconnection
 
                     messages.Add(d);
                 }
-                
+
             }
             string SenderName;
 
@@ -217,6 +217,47 @@ public class DBconnection
             }
 
             return messages;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public string GetUserFullName(string Id)
+    {
+        string selectSTR = "SELECT UserFName + ' ' + UserLName as UserName " +
+            " FROM Users where UserID  = '" + Id + "'",
+            UserName = "";
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                UserName = dr["UserName"].ToString();
+            }
+
+            return UserName;
         }
         catch (Exception ex)
         {
@@ -2494,48 +2535,48 @@ public class DBconnection
         }
     }
 
-    //public List<Dictionary<string, string>> getParentsByClassCode(string TeacherID)
-    //{
-    //    List<Dictionary<string, string>> parents = new List<Dictionary<string, string>>();
+    public List<Dictionary<string, string>> getParentsByClassCode(string classCode)
+    {
+        List<Dictionary<string, string>> parents = new List<Dictionary<string, string>>();
 
-    //    String selectSTR = "SELECT UserID, (dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'FullName'" +
-    //                           " FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID" +
-    //                           " where CodeClass=(select ClassCode from Class where MainTeacherID= '"+ TeacherID + "')";
-    //    try
-    //    {
-    //        con = connect("Betsefer"); // create the connection
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        // write to log
-    //        throw (ex);
-    //    }
-    //    try
-    //    {
-    //        SqlCommand cmd = new SqlCommand(selectSTR, con);
-    //        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-    //        while (dr.Read())
-    //        {
-    //            Dictionary<string, string> d = new Dictionary<string, string>();
-    //            d.Add("UserId", dr["UserID"].ToString());
-    //            d.Add("FullName", dr["FullName"].ToString());
-    //            parents.Add(d);
-    //        }
-    //        return parents;
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        // write to log
-    //        throw (ex);
-    //    }
-    //    finally
-    //    {
-    //        if (con != null)
-    //        {
-    //            con.Close();
-    //        }
-    //    }
-    //}
+        String selectSTR = "SELECT UserID, (dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'FullName'" +
+                               " FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID" +
+                               " where dbo.PupilsParent.codeClass = '" + classCode + "'";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                Dictionary<string, string> d = new Dictionary<string, string>();
+                d.Add("UserId", dr["UserID"].ToString());
+                d.Add("FullName", dr["FullName"].ToString());
+                parents.Add(d);
+            }
+            return parents;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
 
     public List<string> getParentsIdByClassCode(string classCode)
     {
@@ -2729,51 +2770,212 @@ public class DBconnection
         }
     }
 
-    //public string GetUserFullName(string Id)
-    //{
-    //    string selectSTR = "SELECT UserFName + ' ' + UserLName as UserName " +
-    //        " FROM Users where UserID  = '" + Id + "'",
-    //        UserName = "";
-
-    //    try
-    //    {
-    //        con = connect("Betsefer"); // create the connection
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        // write to log
-    //        throw (ex);
-    //    }
-
-    //    try
-    //    {
-    //        SqlCommand cmd = new SqlCommand(selectSTR, con);
-    //        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-    //        while (dr.Read())
-    //        {
-    //            UserName = dr["UserName"].ToString();
-    //        }
-
-    //        return UserName;
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        // write to log
-    //        throw (ex);
-    //    }
-    //    finally
-    //    {
-    //        if (con != null)
-    //        {
-    //            con.Close();
-    //        }
-    //    }
-    //}
-
     public string UpdateMessageAsRead(string MessageCode)
     {
         String cStr = "UPDATE Messages SET IsReadByRecipient = 1 WHERE MessageCode = '" + MessageCode + "'";
         string answer = ExecuteNonQuery(cStr).ToString();
         return answer;
+    }
+
+    //********************** add to application **********************************
+
+    public List<Dictionary<string, string>> LoadScheduleForToday(string Id, string userType)
+    {
+        //keep just one time table for a class. no history.
+        List<Dictionary<string, string>> TT = new List<Dictionary<string, string>>();
+        SqlCommand cmd; string cStr = "";
+       // var weekDayCode = DateTime.Now.DayOfWeek;
+        int day = (int)DateTime.Now.DayOfWeek + 1; //check that it is work ok!! ****************************************************************************
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        switch (int.Parse(userType))
+        {
+            case 1: // admin
+                break;
+            case 2: // teacher
+                cStr = "select TimeTableCode, (select WeekDayName from WeekDays where CodeWeekDay = '"+ day + "') as WeekDay, ClassTimeCode, CodeLesson, TeacherId from TimetableLesson where CodeWeekDay = "+ day +" and TeacherId = '" + Id + "'";
+                break;
+            case 3: // parent
+                cStr = "";
+                break;
+            case 4: // pupil
+                var classCode = GetClassCodeByPupilId(Id);
+                cStr = "select TimetableLesson.TimeTableCode, (select WeekDayName from WeekDays where CodeWeekDay = '" + day + "') as WeekDay, TimetableLesson.ClassTimeCode, TimetableLesson.CodeLesson, TimetableLesson.TeacherId " +
+                    "from TimetableLesson inner join Timetable on TimetableLesson.TimeTableCode = Timetable.TimeTableCode and TimetableLesson.CodeWeekDay = '"+ day +"'";
+                break;
+        }
+        try
+        {
+            cmd = CreateCommand(cStr, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            string lessonName, lessonHours, className, teacherName;
+
+            while (dr.Read())
+            {
+                Dictionary<string, string> lesson = new Dictionary<string, string>();
+                lesson.Add("TimeTableCode", dr["TimeTableCode"].ToString());
+                className = GetClassNameByTimeTableCode(dr["TimeTableCode"].ToString());
+                lesson.Add("ClassName", className);
+
+                lesson.Add("WeekDay", dr["WeekDay"].ToString());
+                lesson.Add("ClassTimeCode", dr["ClassTimeCode"].ToString());
+
+                lessonHours = GetLessonHoursByCode(dr["ClassTimeCode"].ToString());
+                lesson.Add("lessonHours", lessonHours);
+                lessonName = GetLessonNameByLessonCode(dr["CodeLesson"].ToString());
+                lesson.Add("LessonName", lessonName);
+                lesson.Add("TeacherId", dr["TeacherId"].ToString());
+
+                teacherName = GetUserFullNameByID(dr["TeacherId"].ToString());
+                lesson.Add("TeacherName", teacherName);
+
+                TT.Add(lesson);
+            }
+            return TT;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public string GetLessonHoursByCode(string code)
+    {
+        SqlCommand cmd; string cStr = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        cStr = "select CONVERT(varchar, StartClassTime, 108) + ' - ' + CONVERT(varchar, EndClassTime, 108) as LessonHours from ClassTime where ClassTimeCode = '" + code +"'";
+
+        try
+        {
+            cmd = CreateCommand(cStr, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            string hours = "";
+
+            while (dr.Read())
+            {
+                hours = dr["LessonHours"].ToString();
+            }
+            return hours;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public string GetClassNameByTimeTableCode(string TTC)
+    {
+        SqlCommand cmd; string cStr = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        cStr = "select ClassCode from TimeTable where TimeTableCode = '"+ TTC +"'";
+
+        try
+        {
+            cmd = CreateCommand(cStr, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            string className = "";
+
+            while (dr.Read())
+            {
+                className = GetClassNameByCodeClass(int.Parse(dr["ClassCode"].ToString()));
+            }
+            return className;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public string GetClassCodeByPupilId(string Id)
+    {
+        SqlCommand cmd; string cStr = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        cStr = "select CodeClass from Pupil where UserID = '" + Id + "'";
+
+        try
+        {
+            cmd = CreateCommand(cStr, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            string classCode = "";
+
+            while (dr.Read())
+            {
+                classCode = dr["CodeClass"].ToString();
+            }
+            return classCode;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
     }
 }
