@@ -527,7 +527,14 @@ public class BetseferWS : System.Web.Services.WebService
             m.UserClass = c.GetClassCodeByUserID(m.SenderID);
             //m.UserClass = classCode;
         }
-       
+        else if (m.UserClass == "null" & m.UserType == "parents")
+        {
+            Dictionary<string, string> ClassAndParent =c.GetClassCodeAndParentIDByPupilID(m.SenderID);
+
+            m.SenderID = ClassAndParent["ParentID"]; 
+            m.UserClass = ClassAndParent["codeClass"];
+        }
+
         if (m.MessageType == "private")
         {
             answer = message.SendPrivateMessage(m);

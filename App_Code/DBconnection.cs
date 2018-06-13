@@ -85,6 +85,45 @@ public class DBconnection
         }
     }
 
+    public Dictionary<string, string> GetClassCodeAndParentIDByPupilID(string UserID) 
+    {
+        String selectSTR = "select ParentID,codeClass from PupilsParent where PupilID='"+ UserID + "'";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            Dictionary<string, string> ClassAndParent = new Dictionary<string, string>(); // keep the ids of the senders
+
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                ClassAndParent.Add("ParentID", dr["ParentID"].ToString());
+                ClassAndParent.Add("codeClass", dr["codeClass"].ToString());
+            }
+            return ClassAndParent;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
     public string GetClassCodeAccordingToClassFullName(string classTotalName)
     {
         String selectSTR = "SELECT ClassCode FROM Class where TotalName  = '" + classTotalName + "'";

@@ -49,4 +49,9 @@ public class Classes
     {
         return db.GetClassCodeByUserID(UserID);
     }
+
+    public Dictionary<string, string> GetClassCodeAndParentIDByPupilID(string UserID)
+    {
+        return db.GetClassCodeAndParentIDByPupilID(UserID);
+    }
 }

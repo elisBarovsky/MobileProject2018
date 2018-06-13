@@ -10,13 +10,9 @@ $(document).ready(function () {
             $("#parentsDDL").hide();
             $("#teachersDDL").hide();
             $('#forLBL').hide();
-         //   $("#classDDL").hide();
-        //    $('#classLBL').hide();
         
          FillPupilsAndTeacher(TeacherID, FillTeachersInDDL);
-           //FillTeachers(FillTeachersInDDL);
     });
-
 });
 
 function FillTeachersInDDL(results) {
@@ -85,22 +81,17 @@ function MessageType(messageType) {
             $('#teachersDDL').hide();
             $('#forLBL').hide();
             $('#teachersDDL').hide();
-     //       $('#classLBL').show();
-         //   $("#classDDL").show();
             $('#tags').hide();
             MSGType = "kolektive";
             break;
 
         default:
-        //    $('#classLBL').hide();
-       //     $("#classDDL").hide();
             MSGType = "private";
             $('#tags').show();
      }
 }
 
 function SubmitMessage() {
-  //  var userType = GetUserType(),
         subject = $('#messageSubject').val(),
         content = $('#messageContent').val();
    var usrererer = $('#tags').val();
@@ -116,25 +107,7 @@ function SubmitMessage() {
         message.Subject = subject;
         message.Content = content;
         message.UserClass = "null";
-        //if (message.UserType !== "teachers") {
-        //    message.UserClass = $('#classDDL').val();
-        //}
-        //else message.UserClass = "null";
-
-        //if (message.MessageType === "private") {
-        //    switch (message.UserType) {
-        //        case "pupils":
-        //            message.RecipientID = $('#childrenDDL').val();
-        //            break;
-        //        case "parents":
-        //            message.RecipientID = $('#parentsDDL').val();
-        //            break;
-        //        case "teachers":
-        //            message.RecipientID = $('#teachersDDL').val();
-        //            break;
-        //    }
-        //}
-
+     
         SubmitMessageAjax(message, AfterMessageSent);
     }
 }
