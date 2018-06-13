@@ -47,6 +47,43 @@ public class DBconnection
 
     }
 
+    public string GetClassCodeByUserID(string UserID) 
+    {
+        String selectSTR = "select CodeClass from Pupil where UserID='"+ UserID + "'";
+        string CodeClass = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                CodeClass = dr["CodeClass"].ToString();
+            }
+            return CodeClass;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
 
     public string GetClassCodeAccordingToClassFullName(string classTotalName)
     {

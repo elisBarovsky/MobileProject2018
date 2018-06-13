@@ -111,11 +111,11 @@ function SubmitMessage() {
         message.RecipientID = KeyByValue(availableTags, usrererer);
 
         message.MessageType = MSGType;
-        message.UserType = pupils;
+        message.UserType = "pupils";
         message.SenderID = localStorage.getItem("UserID");
         message.Subject = subject;
         message.Content = content;
-
+        message.UserClass = "null";
         //if (message.UserType !== "teachers") {
         //    message.UserClass = $('#classDDL').val();
         //}

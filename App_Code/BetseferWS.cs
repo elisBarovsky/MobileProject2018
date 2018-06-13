@@ -522,8 +522,12 @@ public class BetseferWS : System.Web.Services.WebService
         Messages message = new Messages();
         int answer; string stringAnswer = "bad";
         Classes c = new Classes();
-       // string classCode = c.GetClassCodeAccordingToClassFullName(m.UserClass);
-        //m.UserClass = classCode;
+        if (m.UserClass=="null" & m.UserType== "pupils")
+        {
+            m.UserClass = c.GetClassCodeByUserID(m.SenderID);
+            //m.UserClass = classCode;
+        }
+       
         if (m.MessageType == "private")
         {
             answer = message.SendPrivateMessage(m);

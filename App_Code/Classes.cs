@@ -44,4 +44,9 @@ public class Classes
     {
         return db.GetClassCodeAccordingToClassFullName(TeacherID);
     }
+
+    public string GetClassCodeByUserID(string UserID)
+    {
+        return db.GetClassCodeByUserID(UserID);
+    }
 }
