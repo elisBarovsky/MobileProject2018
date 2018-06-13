@@ -10,33 +10,14 @@ $(document).ready(function () {
             $("#parentsDDL").hide();
             $("#teachersDDL").hide();
             $('#forLBL').hide();
-            $("#classDDL").hide();
-            $('#classLBL').hide();
+         //   $("#classDDL").hide();
+        //    $('#classLBL').hide();
         
          FillPupilsAndTeacher(TeacherID, FillTeachersInDDL);
            //FillTeachers(FillTeachersInDDL);
     });
 
 });
-
-
-function FillClassesInDDL(results) {
-    res = $.parseJSON(results.d);
-
-    $('#classDDL').empty();
-
-    var dynamicLy = "<option value='0'>בחר</option>";
-    $('#classDDL').append(dynamicLy);
-
-    for (var i = 0; i < res.length; i++) {
-        dynamicLy = " <option value='" + res[i] + "' style='text- align:right'>" + res[i] + "</option> ";
-        $('#classDDL').append(dynamicLy);
-    }
-
-    var userID = localStorage.getItem("UserID");
-    var TeacherID = userID;      
-    
-}
 
 function FillTeachersInDDL(results) {
     res3 = $.parseJSON(results.d);
@@ -96,6 +77,7 @@ $(function () {
 });
 
 function MessageType(messageType) {
+   
     switch (messageType) {
         case "kolektive":
             $('#childrenDDL').hide();
@@ -103,15 +85,15 @@ function MessageType(messageType) {
             $('#teachersDDL').hide();
             $('#forLBL').hide();
             $('#teachersDDL').hide();
-            $('#classLBL').show();
-            $("#classDDL").show();
+     //       $('#classLBL').show();
+         //   $("#classDDL").show();
             $('#tags').hide();
             MSGType = "kolektive";
             break;
 
         default:
-            $('#classLBL').hide();
-            $("#classDDL").hide();
+        //    $('#classLBL').hide();
+       //     $("#classDDL").hide();
             MSGType = "private";
             $('#tags').show();
      }
@@ -129,8 +111,7 @@ function SubmitMessage() {
         message.RecipientID = KeyByValue(availableTags, usrererer);
 
         message.MessageType = MSGType;
-            //GetMessageType();
-       // message.UserType = userType;
+        message.UserType = pupils;
         message.SenderID = localStorage.getItem("UserID");
         message.Subject = subject;
         message.Content = content;
@@ -158,7 +139,6 @@ function SubmitMessage() {
     }
 }
 
-
   function KeyByValue(dict, val)
 {
       var key = null;
@@ -180,8 +160,8 @@ function AfterMessageSent(results) {
    // $('#parentsDDL').hide();
    // $('#teachersDDL').val('0');
   //  $('#teachersDDL').hide();
-    $('#classLBL').hide();
-    $('#classDDL').val('0');
+  //  $('#classLBL').hide();
+ //   $('#classDDL').val('0');
     $('#messageSubject').val('');
     $('#messageContent').val('');
     $('#forLBL').hide();
@@ -190,7 +170,6 @@ function AfterMessageSent(results) {
    // $('#parents').val([]);
   //  $('#teachers').val([]);
     $('#tags').val('');
-
 }
 
 function GetMessageType() {
@@ -201,18 +180,3 @@ function GetMessageType() {
         else return "kolektive";
 }
 
-//function GetUserType() {
-//    var pupil = document.getElementById('pupils').checked;
-//    var parent = document.getElementById('parents').checked;
-//    var teacher = document.getElementById('teachers').checked;
-//    if (pupil) {
-//        return "pupils";
-//    }
-//    else if (parent) {
-//        return "parents";
-//    }
-//    else if (teacher) {
-//        return "teachers";
-//    }
-//    else return "notSelected";
-//}
