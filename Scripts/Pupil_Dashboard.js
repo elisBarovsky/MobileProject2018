@@ -2,7 +2,7 @@
 
 function onDeviceReady() {
 
-    $('body').fadeIn(200, function () {
+    $('body').fadeIn(500, function () {
 
  $('#Logout').click(function () {
         alert('תחזור בקרוב!');

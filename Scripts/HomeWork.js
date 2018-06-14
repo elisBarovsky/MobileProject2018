@@ -62,7 +62,7 @@ function LoadHWTable(results) {
 
         newH3.innerText = 'מקצוע: ' + res[counter].LessonName ;
 
-        newH3.appendChild(newIMG);
+       // newH3.appendChild(newIMG);
 
         newP0.innerText = 'מורה: ' + res[counter].Teacher_FullName;
         newDiv.appendChild(newP0);

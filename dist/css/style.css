@@ -26,7 +26,43 @@ Designed By: UXLiner
 5. Footer
 	+ copyrights!
 --------------------------------------------------------*/
+#accordion {
+    width: 600px;
+    margin: 20px auto;
+}
 
+    #accordion .ui-accordion-content {
+        background-color: #f3f3f3;
+        width: 100%;
+        color: #777;
+        font-size: 0.875em;
+        line-height: 1;
+    }
+
+        #accordion .ui-accordion-content > * {
+            margin: 0;
+            padding: 20px;
+        }
+
+    #accordion .ui-accordion-header {
+        color: white;
+        line-height: 2.625;
+        display: block;
+        font-size: 0.8125em;
+        width: 100%;
+        text-indent: 10px;
+    }
+
+    #accordion .ui-accordion-header {
+        background-color: #389abe;
+        background-image: -moz-linear-gradient(top, #a26bf9 0%, #dc621e 100%);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a26bf9), color-stop(100%m #dc621e));
+        background-image: -webkit-linear-gradient(top, #fa9300 0%, #dc631e 100%);
+        background-image: -o-linear-gradient(top, #a26bf9 0%,#dc621e 100%);
+        background-image: -ms-linear-gradient(top, #a26bf9 0%,#dc621e 100%);
+        background-image: linear-gradient(to bottom, #a26bf9 0%,#dc621e 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a26bf9', endColorstr='#dc621e',GradientType=0 );
+    }
 
 .ui-autocomplete {
     position: absolute;
