@@ -17,6 +17,22 @@ function onDeviceReady() {
         User.type = 3;
         FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
     });
+
+    //$('.tele').click(function () {
+    //    alert(123);
+    //    debugger;
+    //    var tele = $(this).attr('tele');
+    //    //var tele = '0525382634';
+    //    window.open('tel:' + tele, '_system', 'location=yes');
+    //});
+}
+
+function func1(tele) {
+    debugger;
+   
+    alert(tele);
+    
+    window.open('tel:' + tele, '_system', 'location=yes');
 }
 
 function FillListViewCellPhone(results) {  //contactList
@@ -30,8 +46,8 @@ function FillListViewCellPhone(results) {  //contactList
 
         //<input id="2" src="Images/PhoneIcon.png" onclick="window.open('tel:0525382634', '_system', 'location=yes')" type='image' height='25' style='float: right' />
 
-        dynamicLy = "<li ><p style='margin-left:100px'><center><input id='" + i +
-            "' src='" + phoneIcon + "' onclick='window.open('tel:" + res[counter].PhoneNumber + "', '_system', 'location=yes')' type='image'  height='25' style='float: right' /> &nbsp;" +
+        dynamicLy = "<li  class='tele' onclick='func1(" + String('0-1234567') + ")' ><p style='margin-left:100px'><center><input id='" + i +
+            "' src='" + phoneIcon + "' tele=" + res[counter].PhoneNumber  + " type='image'  height='25' style='float: right' /> &nbsp;" +
             res[counter].FullName + " &nbsp;&nbsp;" + res[counter].PhoneNumber + "</center> </p> </li>";
         counter++;
         $('#contactList').append(dynamicLy);
