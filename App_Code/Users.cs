@@ -379,9 +379,9 @@ public class Users
         return db.GetUserImgAndFullNameByUserID(UserID);
     }
 
-    //public string GetUserFullName(string Id)
-    //{
-    //    return db.GetUserFullName(Id);
-    //}
+    public string GetUserFullName(string Id)
+    {
+        return db.GetUserFullName(Id);
+    }
 }
 
