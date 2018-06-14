@@ -24,10 +24,13 @@ function FillTeachersInDDL(results) {
     for (var i = 0; i < res3.length; i++) {
         dynamicLy = " <option value='" + res3[i].UserId + "' style='text- align:right'>" + res3[i].UserName + "</option> ";
 
+        if (res3[i].UserId != localStorage.getItem("UserID")) {
             availableTags.push({
-                key: res3[i].UserId ,
+                key: res3[i].UserId,
                 value: res3[i].UserName
             });
+        }
+           
     }
 
     $("#tags").autocomplete({
