@@ -41,7 +41,7 @@ function GetUserFullName(id, SaveUserFullName) {
 
 function GetUserType(id, SaveUserType) {
     $.ajax({
-        url: 'BetseferWS.asmx/GetUserTypeById',
+        url: path+'BetseferWS.asmx/GetUserTypeById',
         data: JSON.stringify({ "Id": id }),
         type: 'POST',
         dataType: "json",

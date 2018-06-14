@@ -34,17 +34,17 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonString;
     }
 
-    //[WebMethod]
-    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    //public string GetUserFullName(string Id)
-    //{
-    //    Users u = new Users();
-    //    string res = u.GetUserFullName(Id);
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetUserFullName(string Id)
+    {
+        Users u = new Users();
+        string res = u.GetUserFullName(Id);
 
-    //    JavaScriptSerializer js = new JavaScriptSerializer();
-    //    string jsonString = js.Serialize(res);
-    //    return jsonString;
-    //}
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
