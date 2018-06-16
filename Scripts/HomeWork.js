@@ -3,25 +3,52 @@
 user = new Object();
 
 function onDeviceReady() {
-
     $('body').fadeIn(500, function () {
 
-localStorage.setItem("LastVisit", "HomeWork.html"); //saving in localS
+            localStorage.setItem("LastVisit", "HomeWork.html"); //saving in localS
+            user.PupilID = localStorage.getItem("PupilID");
+
+            $(function () {
+                $("#accordion").accordion({
+                    collapsible: true
+                });
+            });
+            FillSubjectsDDL(user, FillSubjectsDDL);
+    });   
+}
+
+user = new Object();
+function HWDone(checkB) {
+    var StatusHW = false;
+
+    if (checkB.checked) {
+        StatusHW=true;
+    }
+    else {
+        StatusHW = false;
+    }
+
     user.PupilID = localStorage.getItem("PupilID");
+    user.HWID = checkB.id;
+    user.IsChecked = StatusHW;
+    CheckedHW(user, CheckedDB);
+}
 
-    $(function () {
-        $("#accordion").accordion({
-            collapsible: true
-        });
-    });
-    FillSubjectsDDL(user, FillSubjectsDDL);
+function CheckedDB(results) {
+    res = $.parseJSON(results.d);
 
+    if (res == "well done!") {
 
-
-    });
-
-
-    
+        //$('#myModal').modal('show');
+        swal("עבודה טובה!", "סיימת שיעורים", "success");
+    }
+    else if (res == "something went wrong") {
+        //alert("res");
+    }
+    else if (res == "updated") {
+       // alert("עודכן");
+    }
+   
 }
 
 function FillSubjectsDDL(results) {
@@ -57,6 +84,8 @@ function LoadHWTable(results) {
         var newP2 = document.createElement('p');
         var newP3 = document.createElement('p');
         var newP4 = document.createElement('p');
+        var newP5 = document.createElement('p');
+
         var acc = document.getElementById('accordion');
         var div = document.getElementById("Div1");
 
@@ -75,6 +104,24 @@ function LoadHWTable(results) {
 
         newP4.innerText = 'האם להגשה: ' + IsLehagasha;
         newDiv.appendChild(newP4);
+
+
+        var checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.name = "CBIsDone";
+        checkbox.value = "value";
+        checkbox.id =  res[counter].HWCode;
+        //        checkbox.setAttribute("onchange", "HWDone(" + res[counter].HWCode  + ");");
+
+        checkbox.setAttribute("onclick", "HWDone(this);");
+
+        newP5.innerText = "סיימתי  ";
+        newDiv.appendChild(newP5);
+        newP5.appendChild(checkbox)
+        checkbox.checked = res[counter].IsDone;
+
+
+       // newDiv.appendChild(checkbox);
 
         //get inside the accordion!
         acc.appendChild(newH3);

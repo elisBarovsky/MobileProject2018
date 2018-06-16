@@ -347,10 +347,9 @@ public class DBconnectionTeacher
 
     public DataTable FillAllHomeWork(string Id)//WebService
     {
-        string selectSTR = "SELECT dbo.HomeWork.HWCode,  dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha ,(select ( UserFName+ ' '+ UserLName)  from dbo.Users where [UserID]= dbo.HomeWork.TeacherID) as Teacher_FullName " +
-            "FROM   dbo.HomeWork INNER JOIN  dbo.Class ON dbo.HomeWork.CodeClass = dbo.Class.ClassCode INNER JOIN " +
-            "  dbo.Pupil ON dbo.Class.ClassCode = dbo.Pupil.CodeClass INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson " +
-            "  where UserID = '" + Id + "' order by dbo.HomeWork.HWGivenDate desc";
+        string selectSTR = "SELECT dbo.HomeWork.HWCode,  dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha ,(select ( UserFName+ ' '+ UserLName)  from dbo.Users where [UserID]= dbo.HomeWork.TeacherID) as Teacher_FullName , dbo.HWPupil.IsDone" +
+            " FROM  dbo.HomeWork INNER JOIN  dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson " +
+            "  where dbo.HWPupil.PupilID = '" + Id + "' order by dbo.HomeWork.HWGivenDate desc";
         DataTable dtt = new DataTable();
         DataSet ds;
         try
@@ -937,6 +936,17 @@ public class DBconnectionTeacher
     {
         string cStr = "INSERT INTO [dbo].[HomeWork] ([LessonsCode] ,[HWInfo],[HWGivenDate],[TeacherID],[CodeClass],[HWDueDate],[IsLehagasha]) " +
                    " VALUES ('" + LessonsCode + "','" + HWInfo + "','" + DateTime.Today.ToShortDateString() + "','" + TeacherID + "' ,'" + CodeClass + "' ,'" + HWDate + "','" + IsLehagasha + "')";
+        return ExecuteNonQuery(cStr);
+    }
+
+    public int HWDone(string PupilID, bool IsDone, string HWCode)
+    {
+        int Done = 0;
+        if (IsDone)
+        {
+            Done = 1;
+        }
+        string cStr = "UPDATE [dbo].[HWPupil] SET [IsDone] =" + Done + " where HWCode= " + HWCode + " and PupilID ='"+ PupilID+ "'";
         return ExecuteNonQuery(cStr);
     }
 

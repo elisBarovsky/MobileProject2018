@@ -455,6 +455,33 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string CheckedHW(string PupilID, bool IsDone, string HWCode)
+    {
+        HomeWork HW = new HomeWork();
+        int HWs = HW.HWDone( PupilID,  IsDone,  HWCode);
+        string result = "";
+        if (IsDone==true & HWs>0)
+        {
+            result = "well done!";
+        }
+        else if (IsDone == true & HWs < 0 || IsDone == false & HWs < 0)
+        {
+            result = "something went wrong";
+        }
+        else if (IsDone == false & HWs > 0)
+        {
+            result = "updated";
+        }
+
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillHW = js.Serialize(result);
+        return jsonStringFillHW;
+
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string FillGrades(string UserID)
     {
         Grades UserGrades = new Grades();

@@ -187,6 +187,24 @@ function FillHW(user, LoadHWTable) {
     });
 }
 
+function CheckedHW(user, CheckedDB) {
+
+    var dataString = JSON.stringify(user);
+    $.ajax({
+        url: path + 'BetseferWS.asmx/CheckedHW',
+        data: JSON.stringify({ 'PupilID': user.PupilID, 'IsDone': user.IsChecked, 'HWCode': user.HWID}),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            CheckedDB(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
 function GetUserNotes(UserInfoNote, renderNotes) {
 
     var dataString = JSON.stringify(UserInfoNote);

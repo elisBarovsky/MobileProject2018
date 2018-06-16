@@ -33,6 +33,11 @@ public class HomeWork
         return dbT.FillAllHomeWork(PupilID);
     }
 
+    public int HWDone(string PupilID, bool IsDone, string HWCode)
+    {
+        return dbT.HWDone( PupilID,IsDone, HWCode);
+    }
+
     public DataTable FillBySubjectHomeWork(string PupilID, string ChooseSubjectCode)
     {
         return dbT.FillBySubjectHomeWork(PupilID, ChooseSubjectCode);

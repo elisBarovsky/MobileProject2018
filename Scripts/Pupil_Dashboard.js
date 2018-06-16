@@ -4,30 +4,26 @@ function onDeviceReady() {
 
     $('body').fadeIn(500, function () {
 
- $('#Logout').click(function () {
-        alert('תחזור בקרוב!');
-        window.location.href = "index.html"
+        $('#Logout').click(function () {
 
-        //$.confirm({
-        //    title: 'התנתקות',
-        //    content: 'בחרת להתנתק, ההתנתקות תתרחש תוך 10 שניות',
-        //    rtl: true,
-        //    autoClose: 'logoutUser|10000',
-        //    buttons: {
-        //        logoutUser: {
-        //            text: 'התנתק עכשיו',
-        //            action: function () {
-        //                window.location.href = "index.html"
-        //            }
-        //        },
-        //        cancel: {
-        //            text: 'לא',
-        //            action: function () {
+            swal({
+                title: "כבר עוזבים? :(",
+                icon: "warning",
+                buttons: ["לא", "כן"],
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("תחזור בקרוב!", {
+                            icon: "success",
+                        });
+                        window.location.href = "index.html"
 
-        //            }
-        //        }
-        //    }
-        //});
+                    } else {
+                        swal("יש נשארת!");
+                    }
+                });
+
     });
 
     });
