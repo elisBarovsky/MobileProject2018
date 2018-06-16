@@ -33,12 +33,16 @@ function renderMoveToQuestions(results) {
         localStorage.setItem("QQ2", res[2]);
     }
     else {
-        //$.alert({
-        //title: 'שגיאה',
-        //content: 'משתמש לא קיים',
-        //});
-       alert('שגיאה\brמשתמש לא קיים');
-      //  $.alert('jqAlert is easy to use.');
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה ',
+            text: "משתמש לא קיים",
+            showConfirmButton: true,
+
+        });
+
         document.getElementById("UserId").value = "";
         document.getElementById("bDay").value = "";
     }

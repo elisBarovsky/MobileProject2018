@@ -34,7 +34,14 @@ function renderlogin(results) {
         //    title: 'שגיאה',
         //    content: 'לנתונים שהוזנו אין הרשאת כניסה למערכת'
         //});
-        alert('לנתונים שהוזנו אין הרשאת כניסה למערכת');
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'לנתונים שהוזנו אין הרשאת כניסה למערכת',
+            showConfirmButton: true,
+
+        });
         document.getElementById("IDTB").value = "";
         document.getElementById("PasswordTB").value = "";
     }
@@ -115,7 +122,14 @@ function renderFillUser(results) {
         
     }
     else {
-        alert('לנתונים שהוזנו אין הרשאת כניסה למערכת');
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'לנתונים שהוזנו אין הרשאת כניסה למערכת',
+            showConfirmButton: true,
+
+        });
         document.getElementById("IDTB").value = "";
         document.getElementById("PasswordTB").value = "";
     }

@@ -41,40 +41,6 @@ function FillTeachersInDDL(results) {
 
 }
 
-
-$(function () {
-
-    var resultt = GetUserType();
-
-    var availableTags = [
-        "ActionScript",
-        "AppleScript",
-        "Asp",
-        "BASIC",
-        "C",
-        "C++",
-        "Clojure",
-        "COBOL",
-        "ColdFusion",
-        "Erlang",
-        "Fortran",
-        "Groovy",
-        "Haskell",
-        "Java",
-        "JavaScript",
-        "Lisp",
-        "Perl",
-        "PHP",
-        "Python",
-        "Ruby",
-        "Scala",
-        "Scheme"
-    ];
-    $("#tags").autocomplete({
-        source: availableTags
-    });
-});
-
 function MessageType(messageType) {
    
     switch (messageType) {
@@ -129,22 +95,19 @@ function SubmitMessage() {
 }
 
 function AfterMessageSent(results) {
-    alert("נשלח");
-  //  $('#childrenDDL').val('0');
-  //  $('#childrenDDL').hide();
-   // $('#parentsDDL').val('0');
-   // $('#parentsDDL').hide();
-   // $('#teachersDDL').val('0');
-  //  $('#teachersDDL').hide();
-  //  $('#classLBL').hide();
- //   $('#classDDL').val('0');
+    swal({
+        position: 'top-end',
+        type: 'success',
+        icon: "success",
+        title: 'הודעתך נשלחה',
+        showConfirmButton: false,
+        timer: 1500
+    });
+
     $('#messageSubject').val('');
     $('#messageContent').val('');
     $('#forLBL').hide();
     $('#private').select();
-  //  $('#pupils').val([]);
-   // $('#parents').val([]);
-  //  $('#teachers').val([]);
     $('#tags').val('');
 }
 

@@ -182,6 +182,8 @@ function SubmitMessage() {
 
 function AfterMessageSent(results) {
     alert("נשלח");
+
+
     $('#childrenDDL').val('0');
     $('#childrenDDL').hide();
     $('#parentsDDL').val('0');

@@ -19,11 +19,15 @@ document.getElementById("Q1").innerHTML = localStorage.getItem("QQ1") + "?";
 
         if (ans1 === "" || ans2 === "") {
 
-            //$.alert({
-            //    title: 'שגיאה',
-            //    content: 'עליך לענות על שתי השאלות',
-            //});
-            alert('שגיאה- עליך לענות על שתי השאלות');
+            swal({
+                position: 'top-end',
+                type: 'error',
+                icon: "error",
+                title: 'שגיאה- עליך לענות על שתי השאלות',
+                showConfirmButton: true,
+
+            });
+         
         }
         else if (q1 === ans1 && q2 === ans2) {
             document.location.href = "pages-recover-changePass.html";

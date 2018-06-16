@@ -11,11 +11,16 @@ function onDeviceReady() {
 
         if (pas1 === "" || pas2 === "") {
 
-            //$.alert({
-            //    title: 'שגיאה',
-            //    content: 'יש להזין את הסיסמא פעמיים',
-            //});
-            alert('שגיאה- יש להזין את הסיסמה פעמיים');
+            swal({
+                position: 'top-end',
+                type: 'error',
+                icon: "error",
+                title: 'שגיאה ',
+                text: "יש להזין את הסיסמה פעמיים",
+                showConfirmButton: true,
+
+            });
+
         }
         else if (pas1 === pas2) {
             user = new Object();
@@ -24,41 +29,51 @@ function onDeviceReady() {
             SaveNewPassword(user, tellMeItsOk);
         }
         else {
-            //$.alert({
-            //    title: 'שגיאה',
-            //    content: 'הסיסמאות שהוזנו אינן תואמות',
-            //});
-            alert('שגיאה- הסיסמאות שהוזנו אינן תואמות');
+            swal({
+                position: 'top-end',
+                type: 'error',
+                icon: "error",
+                title: 'שגיאה ',
+                text: "הסיסמאות שהוזנו אינן תואמות",
+                showConfirmButton: true,
+
+            });
+
 
             document.getElementById("pas1").value = "";
             document.getElementById("pas2").value = "";
         }
     });
-
-
-
     });
-
-
-   
 }
 
 function tellMeItsOk(results) {
     res = $.parseJSON(results.d);
     if (res > 0) {
-        //$.alert({
-        //    title: ':)',
-        //    content: 'סיסמתך נשמרה בהצלחה',
-        //});
-        alert(' סיסמתך נשמרה בהצלחה');
-
-        window.location.href = "index.html"
+  
+        swal({
+            title: " סיסמתך שונתה בהצלחה!",
+            icon: "success",
+            showConfirmButton: false,
+        });
+        setTimeout(function () { ChangePage();}, 3000);
+      
     }
     else {
-        //$.alert({
-        //    title: 'תקלה',
-        //    content: 'ארעה תקלה בעת שמירת הסיסמא. נא פנה לשירות הלקוחות',
-        //});
-        alert('תקלה- ארעה תקלה בעת שמירת הסיסמא. נא פנה לשירות הלקוחות');
+        swal({
+            position: 'top-end',
+            icon: "error",
+            type: 'error',
+            title: 'תקלה ',
+            text: "ארעה תקלה בעת שמירת הסיסמא. נא פנה לשירות הלקוחות",
+            showConfirmButton: true,
+
+        });
     }
+}
+
+function ChangePage() {
+
+    window.location.href = "index.html";
+
 }

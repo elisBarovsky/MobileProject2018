@@ -79,14 +79,6 @@ $(document).on("change", "#Q1", function (event) {
     }
     $('#Q2').selectmenu('refresh');
 
-    //$.each(res, function (i, row) {
-    //    if ((i + 1) !== choosen) {
-    //        dynamicLy = " <option value='" + (i + 1) + "'>" + row + "</option> ";
-    //        $('#Q2').append(dynamicLy);
-    //        $('#Q2').selectmenu('refresh', true);
-    //    }
-    //});
-
 });
 
 UserFullInfo = new Object();
@@ -109,11 +101,15 @@ function renderSaveQuestion(results) {
         }
     }
     else {
-        //$.alert({
-        //    title: 'שגיאה',
-        //    content: 'הייתה בעיה בשמירת נתונים, פנה לשירות לקוחות',
-        //});
-        alert('הייתה בעיה בשמירת נתונים, פנה לשירות לקוחות');
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה ',
+            text: "הייתה בעיה בשמירת נתונים, פנה לשירות לקוחות",
+            showConfirmButton: true,
+
+        });
     }
 }
 
@@ -124,18 +120,9 @@ function renderFillUser(results) {
     user = new Object();
     user.UserId = UserId;
     user.type = type;
-    //if (type !== 'Teacher') {
-    //    //GetPupilId(user, SavePupilId);
-    //}
-
+   
     res = $.parseJSON(results.d);
-    //document.getElementById("UserNameLBL").innerHTML = " שלום " + res[1] + " " + res[2];
-    //if (res[6] === "") {
-    //    imgSRC = "Images/NoImg.png";
-    //}
-    //else {
-    //    imgSRC = res[5];
-    //}
+   
 
     if (type == 'Child') {
         document.location.href = "Pupil_MainManu.html";
@@ -144,6 +131,4 @@ function renderFillUser(results) {
         document.location.href = "Parent-ChooseChild.html";
     }
 
-    //   document.getElementById("UserIMG").src = imgSRC;
-    //$.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
 }

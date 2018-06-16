@@ -85,9 +85,16 @@ function renderlogin(results) {
         $.mobile.changePage("#SecurityQuestionsPage", { transition: "slide", changeHash: false });
     }
     else if (res[0] == "wrongDetails") { //wrong details
-        $.alert({
-            title: 'שגיאה',
-            content: 'לנתונים שהוזנו אין הרשאת כניסה למערכת'
+        //$.alert({
+        //    title: 'שגיאה',
+        //    content: 'לנתונים שהוזנו אין הרשאת כניסה למערכת'
+        //});
+        swal({
+            position: 'top-end',
+            type: 'error',
+            title: 'לנתונים שהוזנו אין הרשאת כניסה למערכת',
+            showConfirmButton: true,
+           
         });
         document.getElementById("IDTB").value = "";
         document.getElementById("PasswordTB").value = "";
@@ -184,10 +191,17 @@ function renderSaveQuestion(results) {
         $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
     else {
-        $.alert({
-            title: 'שגיאה',
-            content: 'הייתה בעיה בשמירת נתונים, פנה לשירות לקוחות',
+        swal({
+            position: 'top-end',
+            type: 'error',
+            title: 'הייתה בעיה בשמירת נתונים, פנה לשירות לקוחות',
+            showConfirmButton: true,
+
         });
+        //$.alert({
+        //    title: 'שגיאה',
+        //    content: 'הייתה בעיה בשמירת נתונים, פנה לשירות לקוחות',
+        //});
     }
 }
 
@@ -209,9 +223,16 @@ function renderMoveToQuestions(results) {
        $.mobile.changePage("#AnswerQuestionsBeforeLogin", { transition: "slide", changeHash: false }); // מעביר עמוד 
     }
     else {
-        $.alert({
-            title: 'שגיאה',
-            content: 'משתמש לא קיים',
+        //$.alert({
+        //    title: 'שגיאה',
+        //    content: 'משתמש לא קיים',
+        //});
+        swal({
+            position: 'top-end',
+            type: 'error',
+            title: 'משתמש לא קיים',
+            showConfirmButton: true,
+
         });
         document.getElementById("UserId").value = "";
         document.getElementById("bDay").value = "";
@@ -226,9 +247,16 @@ $(document).on('vclick', '#CheckMyAns', function (event) {
 
     if (ans1 == "" || ans2 == "") {
 
-        $.alert({
-            title: 'שגיאה',
-            content: 'עליך לענות על שתי השאלות',
+        //$.alert({
+        //    title: 'שגיאה',
+        //    content: 'עליך לענות על שתי השאלות',
+        //});
+        swal({
+            position: 'top-end',
+            type: 'error',
+            title: 'עליך לענות על שתי השאלות',
+            showConfirmButton: true,
+
         });
     }
     else if (q1 == ans1 && q2 == ans2) {
@@ -243,9 +271,16 @@ $(document).on('vclick', '#CheckThePasswords', function (event) {
 
     if (pas1 == "" || pas2 == "") {
 
-        $.alert({
-            title: 'שגיאה',
-            content: 'יש להזין את הסיסמא פעמיים',
+        //$.alert({
+        //    title: 'שגיאה',
+        //    content: 'יש להזין את הסיסמא פעמיים',
+        //});
+        swal({
+            position: 'top-end',
+            type: 'error',
+            title: 'יש להזין את הסיסמא פעמיים',
+            showConfirmButton: true,
+
         });
     }
     else if (pas1 == pas2) {
@@ -255,9 +290,16 @@ $(document).on('vclick', '#CheckThePasswords', function (event) {
         SaveNewPassword(user, tellMeItsOk);
     }
     else {
-        $.alert({
-            title: 'שגיאה',
-            content: 'הסיסמאות שהוזנו אינן תואמות',
+        //$.alert({
+        //    title: 'שגיאה',
+        //    content: 'הסיסמאות שהוזנו אינן תואמות',
+        //});
+        swal({
+            position: 'top-end',
+            type: 'error',
+            title: 'הסיסמאות שהוזנו אינן תואמות',
+            showConfirmButton: true,
+
         });
         document.getElementById("pas1").value = "";
         document.getElementById("pas2").value = "";
@@ -267,16 +309,30 @@ $(document).on('vclick', '#CheckThePasswords', function (event) {
 function tellMeItsOk(results) {
     res = $.parseJSON(results.d);
     if (res > 0) {
-        $.alert({
-            title: ':)',
-            content: 'סיסמתך נשמרה בהצלחה',
+        //$.alert({
+        //    title: ':)',
+        //    content: 'סיסמתך נשמרה בהצלחה',
+        //});
+        swal({
+            position: 'top-end',
+            type: 'info',
+            title: 'סיסמתך נשמרה בהצלחה',
+            showConfirmButton: true,
+
         });
         window.location.href = "index.html"
     }
     else {
-        $.alert({
-            title: 'תקלה',
-            content: 'ארעה תקלה בעת שמירת הסיסמא. נא פנה לשירות הלקוחות',
+        //$.alert({
+        //    title: 'תקלה',
+        //    content: 'ארעה תקלה בעת שמירת הסיסמא. נא פנה לשירות הלקוחות',
+        //});
+        swal({
+            position: 'top-end',
+            type: 'error',
+            title: 'ארעה תקלה בעת שמירת הסיסמא. נא פנה לשירות הלקוחות',
+            showConfirmButton: true,
+
         });
     }
 }
