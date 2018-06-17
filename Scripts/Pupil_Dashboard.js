@@ -17,7 +17,10 @@ function onDeviceReady() {
                         swal("תחזור בקרוב!", {
                             icon: "success",
                         });
-                        window.location.href = "index.html"
+                        setTimeout(function () {
+                            window.location.href = "index.html"
+
+                        }, 2000);
 
                     } else {
                         swal("יש נשארת!");

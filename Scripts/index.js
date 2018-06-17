@@ -1,5 +1,4 @@
-﻿/// <reference path="transition.min.js" />
-
+﻿
 //alert(5);
 $(document).ready(onDeviceReady);
 
@@ -66,9 +65,6 @@ function renderlogin(results) {
     }
 }
 
-
-
-
 function renderFillUser(results) {
     //Save pupil in localstorage
     var UserId = localStorage.getItem("UserID");
@@ -77,45 +73,12 @@ function renderFillUser(results) {
     user.UserId = UserId;
     user.type = type;
 
-    var id = UserId;
-
-    
+    var id = UserId; 
 
     res = $.parseJSON(results.d);
    
-
     if (type == 'Child') {
-
-        //$("body").slideDown("slow", function () {
-        // document.location.href = "Pupil_MainManu.html";
-
-        //});
-
        $("body").fadeOut(500, redirectPage);  
-
-
-        //$(".animsition").animsition({
-        //    inClass: 'fade-in',
-        //    outClass: 'fade-out',
-        //    inDuration: 500,
-        //    outDuration: 500,
-        //    linkElement: '.animsition-link',
-        //    // e.g. linkElement: 'a:not([target="_blank"]):not([href^="#"])'
-        //    loading: true,
-        //    loadingParentElement: 'body', //animsition wrapper element
-        //    loadingClass: 'animsition-loading',
-        //    loadingInner: '', // e.g '<img src="loading.svg" />'
-        //    timeout: false,
-        //    timeoutCountdown: 500,
-        //    onLoadEvent: true,
-        //    browser: ['animation-duration', '-webkit-animation-duration'],
-        //    // "browser" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
-        //    // The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
-        //    overlay: false,
-        //    overlayClass: 'animsition-overlay-slide',
-        //    overlayParentElement: 'body',
-        //    transition: function (url) { document.location.href = "Pupil_MainManu.html"; }
-        //});
     }
     else if (type == 'Teacher') {
         $("body").fadeOut(500, redirectPage1);
@@ -138,6 +101,7 @@ function renderFillUser(results) {
 
 function redirectPage1() {
 
+
     document.location.href = "Teacher_MainManu.html";
 }
 
@@ -145,3 +109,4 @@ function redirectPage() {
     window.location = "Pupil_MainManu.html";
 
 }
+

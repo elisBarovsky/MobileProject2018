@@ -3,8 +3,15 @@
 function onDeviceReady() {
     //alert(2);
  
+    //setTimeout(function () {
+    //    $('body').addClass('loaded');
+    //    $('h1').css('color', '#222222');
+    //    document.getElementById('loadingIMG').style.visibility = "visible";
+    //}, 3000);
 
     $('body').fadeIn(500, function () {
+       // document.getElementById('loadingIMG').style.visibility = "hidden";
+
         var user = new Object();
         user.UserId = localStorage.getItem("UserID");
         localStorage.setItem("LastVisit", "Pupil_MainManu.html"); //saving in localS

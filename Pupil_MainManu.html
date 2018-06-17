@@ -24,6 +24,10 @@
     <script src="Scripts/Pupil_MainManu.js"></script>
     <script src="Scripts/AjaxCalls.js"></script>>
 
+    <!--<link rel="stylesheet" href="CSS/normalize.css">
+    <link rel="stylesheet" href="CSS/main.css">
+
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>-->
     <!-- sweet alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
@@ -49,14 +53,27 @@
     <![endif]-->
 
 </head>
-<body class="login-page" style="display:none;">
-
+<body class="login-page">
+    <div id="fb-root"></div>
+    <script>
+    (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v3.0&appId=277654085592047';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
     <div class="container" onclick="window.location='Pupil_Dashboard.html'">
         <div class="bar1" style="background-color:palevioletred"></div>
         <div class="bar2" style="background-color:fuchsia"></div>
         <div class="bar3" style="background-color:deepskyblue"></div>
     </div>
-
+    <!--<div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+        <img src="Images/Pacman-1s-200px.svg" id="loadingIMG" style="visibility:visible;position:center;z-index:3" />
+    </div>-->
     <div class="login-box">
 
         <div class="login-box-body" style="height:150px">
@@ -67,8 +84,8 @@
         </div>
         <br />
         <div div class="login-box-body" style="height:300px">
-
-        </div>
+            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>
+        </div>                          <!--כאן שמים את העמוד שנרצה שישותף!-->
 
         <div>
         </div>
