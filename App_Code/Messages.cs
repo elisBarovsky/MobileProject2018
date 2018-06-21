@@ -77,4 +77,10 @@ public class Messages
     {
         return db.UpdateMessageAsRead(MessageCode);
     }
+
+    public List<Dictionary<string, string>> GetMessagesByUserIdUnread(string userId)
+    {
+        return db.GetMessagesByUserIdUnread(userId);
+    }
+
 }

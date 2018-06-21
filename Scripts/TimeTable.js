@@ -9,8 +9,8 @@ function onDeviceReady() {
 
 
         if (localStorage.getItem("UserType") !== "Teacher") {
-            Pupil = JSON.parse(localStorage.getItem("child"));
-            LoadTimeTableByTypeAndId(Pupil.UserID1, LoadTimeTable);
+            Pupil = JSON.parse(localStorage.getItem("PupilID"));
+            LoadTimeTableByTypeAndId(Pupil, LoadTimeTable);
         }
         else {
             document.getElementById("teacherTT").style.visibility = 'visible';
@@ -40,7 +40,7 @@ function LoadTimeTable(results) {
         for (var i = 1; i < 10; i++) {
             tableInfo += "<tr>";
             for (var j = 1; j < 7; j++) {
-                if (res[counter].ClassTimeCode == i && res[counter].CodeWeekDay == j) {
+                if (res[counter].ClassTimeCode === i.toString() && res[counter].CodeWeekDay === j.toString()) {
                     tableInfo += "<td>" + res[counter].CodeLesson + "<br/>" + res[counter].TeacherId + "</td>";
                     counter++;
                 }
