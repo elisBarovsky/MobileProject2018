@@ -1539,6 +1539,49 @@ public class DBconnection
         }
     }
 
+    public List<Dictionary<string, string>> getPupilsByClassCodeDictionary(string classCode)
+    {
+        String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName)AS PupilName" +
+           "  FROM dbo.Pupil INNER JOIN   dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID   where dbo.Pupil.CodeClass='" + classCode + "'";
+
+        List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                Dictionary<string, string> d = new Dictionary<string, string>();
+                d.Add("UserId", dr["UserID"].ToString());
+                d.Add("PupilName", dr["PupilName"].ToString());
+                l.Add(d);
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public List<Dictionary<string, string>> getPupilsByClassCode(string TeacherID)
     {
         String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName)AS PupilName" +
@@ -2771,8 +2814,9 @@ public class DBconnection
 
     public int SendPrivateMessage(string SenderID, string RecieientID, string Subject, string content)
     {
-        String cStr = "INSERT INTO [dbo].[Messages] (MessageDate, SenderID, recipientID, TheMessage, SubjectMessage)" +
-            " VALUES ('" + DateTime.Now + "', '" + SenderID + "', '" + RecieientID + "', '" + content + "', '" + Subject + "')";
+        string contentToHtml = content.Replace("\n", "<br />");
+        string cStr = "INSERT INTO [dbo].[Messages] (MessageDate, SenderID, recipientID, TheMessage, SubjectMessage)" +
+            " VALUES ('" + DateTime.Now + "', '" + SenderID + "', '" + RecieientID + "', '" + contentToHtml + "', '" + Subject + "')";
         return ExecuteNonQuery(cStr);
     }
 

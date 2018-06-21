@@ -136,7 +136,17 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonString;
     }
 
-
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetMessagesByUserIdUnread(string userId)
+    {
+        Messages u = new Messages();
+        List<Dictionary<string, string>> m = u.GetMessagesByUserIdUnread(userId);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(m);
+        return jsonString;
+    }
+    
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetAllConversation(string SenderID, string RecipientID)
@@ -602,6 +612,29 @@ public class BetseferWS : System.Web.Services.WebService
 
         //   string bla = m.UpdateMessageAsRead(MessageCode);
         return m.UpdateMessageAsRead(MessageCode);
+    }
+
+    //******************************************************************************************
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string LoadScheduleForToday(string Id, string userType)
+    {
+        TimeTable t = new TimeTable();
+
+        var schedule = t.LoadScheduleForToday(Id, userType);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringSchedule = js.Serialize(schedule);
+        return jsonStringSchedule;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetUserTypeById(string Id)
+    {
+        Users u = new Users();
+        string res = u.GetUserTypeById(Id);
+        return res;
     }
 }
 
