@@ -77,10 +77,10 @@ function renderFillUser(results) {
 
     res = $.parseJSON(results.d);
    
-    if (type == 'Child') {
+    if (type === 'Child') {
        $("body").fadeOut(500, redirectPage);  
     }
-    else if (type == 'Teacher') {
+    else if (type === 'Teacher') {
         $("body").fadeOut(500, redirectPage1);
         
     }
