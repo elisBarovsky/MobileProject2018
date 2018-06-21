@@ -115,12 +115,12 @@ function SaveNewPassword(user, tellMeItsOk) {
     });
 }
 
-function LoadTimeTableByTypeAndId(PupilID, LoadTimeTable) {
+function LoadTimeTableByTypeAndId(pupilID, LoadTimeTable) {
 
-    var dataString = JSON.stringify(PupilID);
+    var dataString = JSON.stringify(pupilID);
     $.ajax({
         url: path+ 'BetseferWS.asmx/GivenTimeTableByPupilID',
-        data: JSON.stringify({ 'PupilID': PupilID}),
+        data: JSON.stringify({ 'PupilID': pupilID}),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',

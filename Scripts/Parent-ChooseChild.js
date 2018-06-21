@@ -3,7 +3,7 @@
 function onDeviceReady() {
     //alert(2);
 
-    $('body').fadeIn(500, function () {
+    //$('body').fadeIn(500, function () {
   var ID = localStorage.getItem("UserID");
     ParentChooseChild(ID, getChildrenArray);
 
@@ -28,7 +28,7 @@ function onDeviceReady() {
         user.type = type;
         GetUserInfo(user, renderFillUser);
     });
-    });
+    //});
 
 }
 
@@ -48,6 +48,7 @@ function getChildrenArray(results) {//return string[].
     }
     else if (res.length === 1) {
         localStorage.setItem("PupilID", JSON.stringify(res[0])); //saving in localS
+        document.location.href = "Parent_Dashboard.html";
     }
     else {
         localStorage.setItem("allParentChildren", JSON.stringify(res));
