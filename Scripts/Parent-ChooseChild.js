@@ -47,7 +47,7 @@ function getChildrenArray(results) {//return string[].
         document.location.href = "index.html";
     }
     else if (res.length === 1) {
-        localStorage.setItem("PupilID", JSON.stringify(res[0])); //saving in localS
+        localStorage.setItem("PupilID", JSON.stringify(res[0].UserID1)); //saving in localS
         document.location.href = "Parent_Dashboard.html";
     }
     else {

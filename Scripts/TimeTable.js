@@ -9,11 +9,8 @@ function onDeviceReady() {
 
 
         if (localStorage.getItem("UserType") !== "Teacher") {
-            Pupil = JSON.parse(localStorage.getItem("PupilID"));
-            var pupilID = Pupil;
-            if (localStorage.getItem("UserType") === "Parent") {
-                pupilID = pupilID.UserID1;
-            }
+            var pupilID = JSON.parse(localStorage.getItem("PupilID"));
+
             LoadTimeTableByTypeAndId(pupilID, LoadTimeTable);
         }
         else {

@@ -120,7 +120,7 @@ function LoadTimeTableByTypeAndId(pupilID, LoadTimeTable) {
     var dataString = JSON.stringify(pupilID);
     $.ajax({
         url: path+ 'BetseferWS.asmx/GivenTimeTableByPupilID',
-        data: JSON.stringify({ 'PupilID': pupilID}),
+        data: JSON.stringify({ 'PupilID': dataString}),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
