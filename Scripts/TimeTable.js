@@ -7,58 +7,71 @@ function onDeviceReady() {
         localStorage.setItem("LastVisit", "TimeTable.html"); //saving in localS
         //  Grade.ID = localStorage.getItem("PupilID");
 
+        day = 0;
+        //today = moment().isoWeekday() + 1; how to make the button css on today. this function bring num day from monday - sunday
 
-        if (localStorage.getItem("UserType") !== "Teacher") {
-            var pupilID = JSON.parse(localStorage.getItem("PupilID"));
+        LoadScheduleForSpecipicDay(day);
+    })
+};
 
-            LoadTimeTableByTypeAndId(pupilID, LoadTimeTable);
-        }
-        else {
-            document.getElementById("teacherTT").style.visibility = 'visible';
-            document.getElementById("noTT").style.visibility = 'hidden';
-        }
+function LoadScheduleForSpecipicDay(day) {
 
+    if (localStorage.getItem("UserType") !== "Teacher") {
+        var pupilID = JSON.parse(localStorage.getItem("PupilID"));
+
+        LoadTimeTableByIdAndDay(pupilID, 4, day, LoadTimeTable);
+    }
+    else {
+        document.getElementById("teacherTT").style.visibility = 'visible';
+        document.getElementById("noTT").style.visibility = 'hidden';
+        LoadTimeTableByIdAndDay(localStorage.get('UserID'), 2, day, LoadTimeTable);
+
+    };
+};
 
     //function LetsClick(getID) {
     //    alert(getID);
     //}
-    });
    
-   
-}
-
 
 function LoadTimeTable(results) {
+    $('#looze').empty();
     res = $.parseJSON(results.d);
-
-    if (res.length > 0) {
-
-        document.getElementById("noTT").style.visibility = 'hidden';
-        document.getElementById("teacherTT").style.visibility = 'hidden';
-        var tableInfo = "<tr><th scope='col'>ראשון</th><th scope='col'>שני</th><th scope='col'>שלישי</th><th scope='col'>רביעי</th><th scope='col'>חמישי</th><th scope='col'>שישי</th><th scope='col'>שיעור</th></tr>";
-        var counter = 0;
-
-        for (var i = 1; i < 10; i++) {
-            tableInfo += "<tr>";
-            for (var j = 1; j < 7; j++) {
-                if (res[counter].ClassTimeCode === i.toString() && res[counter].CodeWeekDay === j.toString()) {
-                    tableInfo += "<td>" + res[counter].CodeLesson + "<br/>" + res[counter].TeacherId + "</td>";
-                    counter++;
-                }
-                else {
-                    tableInfo += "<td> <br/> </td>"
-                }
-
-            }
-            tableInfo += "<td>" + i + "</td></tr>";
-
-          //  tableInfo +=""
-        }
-        document.getElementById("TimeTable").innerHTML = tableInfo;
+    if (res.length === 0) {
+        $('#noSchedule').show();
+        $('#noScheduleBoy').show();
     }
     else {
+        $('#noSchedule').hide();
+        $('#noScheduleBoy').hide();
 
-        document.getElementById("noTT").style.visibility = 'visible';
+        var tableString = "<tr><td colspan='2'>יום " + res[0].WeekDay + "</td></tr>";
+        var day = res[0].WeekDay;
+        var counter = 0;
+        var userType = localStorage.getItem("UserType");
+
+        for (var i = 1; i < 10; i++) {
+
+            if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
+                tableString += "<tr><td> " + res[counter].lessonHours + "</td>";
+            }
+            //else tableString += "<tr><td> - </td>";
+            else tableString += "<tr>";
+
+            if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
+                if (userType === 'Teacher') {
+
+                    tableString += "<td>" + res[counter].LessonName + ", " + res[counter].ClassName + "</td>";
+                }
+                else {
+
+                    tableString += "<td>" + res[counter].LessonName + ", " + res[counter].TeacherName + "</td>";
+                }
+                counter++;
+            }
+            tableString += "</tr>";
+        }
+        $('#looze').append(tableString);
     }
 }
 

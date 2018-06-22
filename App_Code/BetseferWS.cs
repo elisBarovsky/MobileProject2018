@@ -636,5 +636,17 @@ public class BetseferWS : System.Web.Services.WebService
         string res = u.GetUserTypeById(Id);
         return res;
     }
+
+    
+            [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string LoadTimeTableByIdAndDay(string UserId, string UserType, int Day)
+    {
+        TimeTable t = new TimeTable();
+        List<Dictionary<string, string>> timeTable = t.LoadScheduleForToday(UserId, UserType, Day);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringTimeTable = js.Serialize(timeTable);
+        return jsonStringTimeTable;
+    }
 }
 
