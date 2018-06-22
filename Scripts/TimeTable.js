@@ -1,11 +1,9 @@
 ﻿$(document).ready(onDeviceReady);
 
-Grade = new Object();
 function onDeviceReady() {
 
     $('body').fadeIn(500, function () {
         localStorage.setItem("LastVisit", "TimeTable.html"); //saving in localS
-        //  Grade.ID = localStorage.getItem("PupilID");
 
         day = 0;
         //today = moment().isoWeekday() + 1; how to make the button css on today. this function bring num day from monday - sunday
@@ -22,9 +20,7 @@ function LoadScheduleForSpecipicDay(day) {
         LoadTimeTableByIdAndDay(pupilID, 4, day, LoadTimeTable);
     }
     else {
-        document.getElementById("teacherTT").style.visibility = 'visible';
-        document.getElementById("noTT").style.visibility = 'hidden';
-        LoadTimeTableByIdAndDay(localStorage.get('UserID'), 2, day, LoadTimeTable);
+        LoadTimeTableByIdAndDay(localStorage.getItem("UserID"), 2, day, LoadTimeTable);
 
     };
 };
