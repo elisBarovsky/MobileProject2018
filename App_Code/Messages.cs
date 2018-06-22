@@ -68,6 +68,11 @@ public class Messages
         return db.GetMessagesByUserId(userId);
     }
 
+    public List<Dictionary<string, string>> GetMessagesByUserIdUnread(string userId)
+    {
+        return db.GetMessagesByUserIdUnread(userId);
+    }
+
     public List<Messages> GetAllConversation(string SenderID, string RecipientID)
     {
         return db.GetAllConversation(SenderID, RecipientID);
@@ -78,9 +83,6 @@ public class Messages
         return db.UpdateMessageAsRead(MessageCode);
     }
 
-    public List<Dictionary<string, string>> GetMessagesByUserIdUnread(string userId)
-    {
-        return db.GetMessagesByUserIdUnread(userId);
-    }
+   
 
 }

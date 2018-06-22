@@ -306,6 +306,7 @@ public class Users
         return db.ChangePassword(userID, Password);
     }
 
+
     public string IsAlreadyLogin(string UserID, string password)
     {
         return db.IsAlreadyLogin(UserID, password);
@@ -388,5 +389,11 @@ public class Users
     {
         return db.GetUserFullName(Id);
     }
+
+    public List<Dictionary<string, string>> getParentsAndTeachers(string TeacherID)
+    {
+        return db.getParentsAndTeachers(TeacherID);
+    }
+
 }
 
