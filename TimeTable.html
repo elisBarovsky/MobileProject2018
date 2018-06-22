@@ -81,14 +81,30 @@
     <div class="login-box">
         <div div class="login-box" style="height:20px;color:white">
             <h3>מערכת שעות</h3>
-            <h4 id="teacherTT">מערכת שעות של המורה</h4>
-            <h3 id="noTT">לכיתה זו לא נוצרה מערכת</h3>
         </div>
         <div class="info-box">
+            <div class="col-xs-8">
+                <div>
+                    <button type="button" id="1" class="btn btn-outline-primary btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(1)">א</button>
+                    <button type="button" id="2" class="btn btn-outline-secondary btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(2)">ב</button>
+                    <button type="button" id="3" class="btn btn-outline-success btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(3)">ג</button>
+                    <button type="button" id="4" class="btn btn-outline-info btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(4)">ד</button>
+                    <button type="button" id="5" class="btn btn-outline-warning btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(5)">ה</button>
+                    <button type="button" id="6" class="btn btn-outline-danger btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(6)">ו</button>
+                </div>
+            </div>
+
             <!-- <div class="login-box-body" >-->
             <div class="table-responsive" style="width:100%">
-                <table class="table" id="TimeTable"></table>
-            </div>
+                <div class="info-box">
+                    <br/><br/>
+                         <div>
+                             <h6 id="noSchedule" style="color:gold">אין שיעורים היום</h6>
+                             <!--<img src="Images/putInGrade.gif" height="100" />-->
+                             <img id="noScheduleBoy" src="Images/yayy.gif" height="130"/>
+                             <table class="table table-hover no-wrap table-striped" style="width:100%; color: black" id="looze"></table>
+                         </div>
+                </div>
         </div>
     </div>
     <!-- /.login-box-body -->

@@ -2900,17 +2900,41 @@ public class DBconnection
 
     //********************** add to application **********************************
 
-    public List<Dictionary<string, string>> LoadScheduleForToday(string Id, string userType)
+    public List<Dictionary<string, string>> LoadScheduleForToday(string Id, string userType, int? day = null)
     {
         //keep just one time table for a class. no history.
         List<Dictionary<string, string>> TT = new List<Dictionary<string, string>>();
         SqlCommand cmd; string cStr = "";
-       // var weekDayCode = DateTime.Now.DayOfWeek;
-        int day = (int)DateTime.Now.DayOfWeek + 1; //check that it is work ok!! ****************************************************************************
+        // var weekDayCode = DateTime.Now.DayOfWeek;
+        int today;
+        if (day != null && day != 0)
+        {
+            today = day.Value;
+        }
+        else today = (int)DateTime.Now.DayOfWeek + 1; //check that it is work ok!! ****************************************************************************
+
+        switch (int.Parse(userType))
+        {
+            case 1: // admin
+                break;
+            case 2: // teacher
+                cStr = "select TimeTableCode, (select WeekDayName from WeekDays where CodeWeekDay = '"+ today + "') as WeekDay, ClassTimeCode, CodeLesson, TeacherId from TimetableLesson where CodeWeekDay = "+ today +" and TeacherId = '" + Id + "'";
+                break;
+            case 3: // parent
+                cStr = "";
+                break;
+            case 4: // pupil
+                var classCode = GetClassCodeByPupilId(Id);
+                cStr = "select TimetableLesson.TimeTableCode, (select WeekDayName from WeekDays where CodeWeekDay = '" + today + "') as WeekDay, TimetableLesson.ClassTimeCode, TimetableLesson.CodeLesson, TimetableLesson.TeacherId " +
+                    "from TimetableLesson inner join Timetable on TimetableLesson.TimeTableCode = Timetable.TimeTableCode and TimeTable.ClassCode = '"+ classCode + "' and TimetableLesson.CodeWeekDay = '"+ today +"'";
+                break;
+        }
+
+        SqlConnection con2 = new SqlConnection();
 
         try
         {
-            con = connect("Betsefer"); // create the connection
+            con2 = connect("Betsefer"); // create the connection
         }
         catch (Exception ex)
         {
@@ -2918,28 +2942,11 @@ public class DBconnection
             throw (ex);
         }
 
-        switch (int.Parse(userType))
-        {
-            case 1: // admin
-                break;
-            case 2: // teacher
-                cStr = "select TimeTableCode, (select WeekDayName from WeekDays where CodeWeekDay = '"+ day + "') as WeekDay, ClassTimeCode, CodeLesson, TeacherId from TimetableLesson where CodeWeekDay = "+ day +" and TeacherId = '" + Id + "'";
-                break;
-            case 3: // parent
-                cStr = "";
-                break;
-            case 4: // pupil
-                var classCode = GetClassCodeByPupilId(Id);
-                cStr = "select TimetableLesson.TimeTableCode, (select WeekDayName from WeekDays where CodeWeekDay = '" + day + "') as WeekDay, TimetableLesson.ClassTimeCode, TimetableLesson.CodeLesson, TimetableLesson.TeacherId " +
-                    "from TimetableLesson inner join Timetable on TimetableLesson.TimeTableCode = Timetable.TimeTableCode and TimetableLesson.CodeWeekDay = '"+ day +"'";
-                break;
-        }
         try
         {
-            cmd = CreateCommand(cStr, con);
+            cmd = new SqlCommand(cStr, con2);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             string lessonName, lessonHours, className, teacherName;
-
             while (dr.Read())
             {
                 Dictionary<string, string> lesson = new Dictionary<string, string>();
@@ -2970,9 +2977,9 @@ public class DBconnection
         }
         finally
         {
-            if (con != null)
+            if (con2 != null)
             {
-                con.Close();
+                con2.Close();
             }
         }
     }
@@ -3023,7 +3030,7 @@ public class DBconnection
         SqlCommand cmd; string cStr = "";
         try
         {
-            con = connect("Betsefer"); // create the connection
+                con = connect("Betsefer"); // create the connection
         }
         catch (Exception ex)
         {

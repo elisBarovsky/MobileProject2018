@@ -94,8 +94,9 @@ public class TimeTable
 
     //********************** add to application **********************************
 
-    public List<Dictionary<string, string>> LoadScheduleForToday(string Id, string  userType)
+    public List<Dictionary<string, string>> LoadScheduleForToday(string Id, string  userType, int? day = null)
     {
-        return db.LoadScheduleForToday(Id, userType);
+        return db.LoadScheduleForToday(Id, userType, day);
     }
+
 }

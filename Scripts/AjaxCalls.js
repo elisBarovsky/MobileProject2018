@@ -328,4 +328,20 @@ function GetPupilId(user, SavePupilId) {
     });
 }
 
+function LoadTimeTableByIdAndDay(userID, userType, day, LoadTimeTable) {
+    $.ajax({
+        url: path + 'BetseferWS.asmx/LoadTimeTableByIdAndDay',
+        data: JSON.stringify({ 'UserId': userID, 'UserType': userType, 'Day': day }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            LoadTimeTable(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
 
