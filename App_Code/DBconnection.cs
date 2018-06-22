@@ -2891,6 +2891,9 @@ public class DBconnection
         }
     }
 
+
+
+
     public string UpdateMessageAsRead(string MessageCode)
     {
         String cStr = "UPDATE Messages SET IsReadByRecipient = 1 WHERE MessageCode = '" + MessageCode + "'";

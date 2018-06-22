@@ -932,13 +932,6 @@ public class DBconnectionTeacher
         return ExecuteNonQuery(cStr);
     }
 
-    public int InserHomeWork(string LessonsCode, string HWInfo, string TeacherID, string CodeClass, string HWDate, bool IsLehagasha)
-    {
-        string cStr = "INSERT INTO [dbo].[HomeWork] ([LessonsCode] ,[HWInfo],[HWGivenDate],[TeacherID],[CodeClass],[HWDueDate],[IsLehagasha]) " +
-                   " VALUES ('" + LessonsCode + "','" + HWInfo + "','" + DateTime.Today.ToShortDateString() + "','" + TeacherID + "' ,'" + CodeClass + "' ,'" + HWDate + "','" + IsLehagasha + "')";
-        return ExecuteNonQuery(cStr);
-    }
-
     public int HWDone(string PupilID, bool IsDone, string HWCode)
     {
         int Done = 0;
@@ -946,8 +939,54 @@ public class DBconnectionTeacher
         {
             Done = 1;
         }
-        string cStr = "UPDATE [dbo].[HWPupil] SET [IsDone] =" + Done + " where HWCode= " + HWCode + " and PupilID ='"+ PupilID+ "'";
+        string cStr = "UPDATE [dbo].[HWPupil] SET [IsDone] =" + Done + " where HWCode= " + HWCode + " and PupilID ='" + PupilID + "'";
         return ExecuteNonQuery(cStr);
+    }
+
+    public int InserHomeWork(string LessonsCode, string HWInfo, string TeacherID, string CodeClass, string HWDate, bool IsLehagasha)
+    {
+        int num = 0;
+        try
+        {
+            using (var con = new SqlConnection(WebConfigurationManager.ConnectionStrings["Betsefer"].ConnectionString))
+        {
+            using (var cmd = new SqlCommand("InsertHomeWork", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@LessonsCode", LessonsCode);
+                cmd.Parameters.AddWithValue("@HWInfo", HWInfo);
+                cmd.Parameters.AddWithValue("@GivenDate", DateTime.Today.ToShortDateString());
+                cmd.Parameters.AddWithValue("@TeacherID", TeacherID);
+                cmd.Parameters.AddWithValue("@CodeClass", CodeClass);
+                cmd.Parameters.AddWithValue("@WDate", HWDate);
+                cmd.Parameters.AddWithValue("@IsLehagasha", IsLehagasha);
+
+                con.Open();
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                    }
+                    num = 1;
+                }
+            }
+        }
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+        return num;
     }
 
     public Dictionary<string, string> FillLessons()
