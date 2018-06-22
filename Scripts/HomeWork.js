@@ -85,6 +85,7 @@ function LoadHWTable(results) {
         var newP3 = document.createElement('p');
         var newP4 = document.createElement('p');
         var newP5 = document.createElement('p');
+        var newP6 = document.createElement('p');
 
         var acc = document.getElementById('accordion');
         var div = document.getElementById("Div1");
@@ -102,9 +103,11 @@ function LoadHWTable(results) {
         newP3.innerText = 'עד תאריך: ' + res[counter].HWDueDate;
         newDiv.appendChild(newP3);
 
-        newP4.innerText = 'האם להגשה: ' + IsLehagasha;
+        newP4.innerText = IsLehagasha; 
         newDiv.appendChild(newP4);
 
+        newP6.innerText = res[counter].HWInfo; 
+        newDiv.appendChild(newP6);
 
         var checkbox = document.createElement("input");
         checkbox.type = "checkbox";

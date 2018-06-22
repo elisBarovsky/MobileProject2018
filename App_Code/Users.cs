@@ -390,6 +390,14 @@ public class Users
         return db.GetUserFullName(Id);
     }
 
-    
+    public string GetUserImgByUserID(string UserID)
+    {
+        return db.GetUserImgByUserID(UserID);
+    }
+
+    public List<Dictionary<string, string>> getParentsByClassCode(string classCode)
+    {
+        return db.getParentsByClassCode(classCode);
+    }
 }
 
