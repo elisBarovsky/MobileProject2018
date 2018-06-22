@@ -390,10 +390,6 @@ public class Users
         return db.GetUserFullName(Id);
     }
 
-    public List<Dictionary<string, string>> getParentsAndTeachers(string TeacherID)
-    {
-        return db.getParentsAndTeachers(TeacherID);
-    }
-
+    
 }
 
