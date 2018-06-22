@@ -22,3 +22,20 @@ function LoadAllMessagesById(teacherId, DisplayMessages) {
         }
     });
 }
+
+function UpdateMessageAsRead(i) {
+    $.ajax({
+        url: path+ 'BetseferWS.asmx/SetMessageAsRead',
+        data: JSON.stringify({ 'MessageCode': i }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+           
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+

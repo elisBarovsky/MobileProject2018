@@ -90,6 +90,18 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetUserImgWeb(string UserID)
+    {
+        Users u = new Users();
+        string UserImg = u.GetUserImgByUserID(UserID);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(UserImg);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetUserImg(string UserID)
     {
         Users u = new Users();
@@ -100,19 +112,19 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonString;
     }
 
-    //[WebMethod]
-    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    //public string GetParentsByClassTotalName(string TeacherID)
-    //{
-    //   // Classes c = new Classes();
-    // //   string classCode = c.GetClassCodeAccordingToClassFullName(classTotalName);
-    //    Users u = new Users();
-    //    List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
-    //    s = u.getParentsByClassCode(TeacherID);
-    //    JavaScriptSerializer js = new JavaScriptSerializer();
-    //    string jsonString = js.Serialize(s);
-    //    return jsonString;
-    //}
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetParentsByClassTotalName(string classTotalName)
+    {
+        Classes c = new Classes();
+        string classCode = c.GetClassCodeAccordingToClassFullName(classTotalName);
+        Users u = new Users();
+        List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
+        s = u.getParentsByClassCode(classCode);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(s);
+        return jsonString;
+    }
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]

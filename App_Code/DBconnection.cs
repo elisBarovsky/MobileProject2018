@@ -1582,6 +1582,51 @@ public class DBconnection
         }
     }
 
+    public List<Dictionary<string, string>> getPupilsByClassCodeGrades(string ClassCode)
+    {
+        String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName)AS PupilName" +
+        "  FROM dbo.Pupil INNER JOIN   dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID   where dbo.Pupil.CodeClass='" + ClassCode + "'";
+
+
+        List< Dictionary<string, string>> l = new List<Dictionary<string, string>>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (dr.Read())
+            {
+                Dictionary<string, string> p = new Dictionary<string, string>();
+                p["UserId"] = dr["UserID"].ToString();
+                p["UserName"] = dr["PupilName"].ToString();
+
+                l.Add(p);
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+
+    }
     public List<Dictionary<string, string>> getPupilsByClassCode(string TeacherID)
     {
         String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName)AS PupilName" +
@@ -2055,7 +2100,7 @@ public class DBconnection
 
     public Dictionary<string, string> FillClassOt()
     {
-        String selectSTR = "SELECT ClassCode,TotalName FROM Class ";
+        String selectSTR = "SELECT ClassCode,TotalName FROM Class order by TotalName";
         string ClassCode, TotalName;
         Dictionary<string, string> l = new Dictionary<string, string>();
         try
@@ -2850,7 +2895,43 @@ public class DBconnection
         return ExecuteNonQuery(cStr);
     }
 
-    public List<string> GetUserImgAndFullNameByUserID(string UserID)
+    public string GetUserImgByUserID(string UserID)
+    {
+        String selectSTR = "SELECT UserImg FROM dbo.Users where UserID = '" + UserID + "'";
+        string UserImg = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                UserImg = dr["UserImg"].ToString();
+            }
+            return UserImg;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+ public List<string> GetUserImgAndFullNameByUserID(string UserID)
     {
 
          List<string> UserInfo = new List<string>();

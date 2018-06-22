@@ -388,7 +388,7 @@ public class DBconnectionTeacher
                            "JOIN dbo.Timetable ON dbo.TimetableLesson.TimeTableCode = dbo.Timetable.TimeTableCode INNER JOIN "+
                            "dbo.Class ON dbo.Timetable.ClassCode = dbo.Class.ClassCode AND dbo.Timetable.ClassCode = " +
                            "dbo.Class.ClassCode where dbo.TimetableLesson.TeacherId = '" + teacherID +
-                           "' and dbo.TimetableLesson.CodeLesson = " + LessonCode;
+                           "' and dbo.TimetableLesson.CodeLesson = " + LessonCode + " order by dbo.Class.TotalName";
 
         Dictionary<string, string> classesAccordingTeacherIdAndSubjectCode = new Dictionary<string, string>();
 
@@ -524,7 +524,7 @@ public class DBconnectionTeacher
                            "INNER JOIN dbo.Timetable ON dbo.TimetableLesson.TimeTableCode = " +
                            "dbo.Timetable.TimeTableCode INNER JOIN dbo.Class ON dbo.Timetable.ClassCode = " +
                            "dbo.Class.ClassCode AND dbo.Timetable.ClassCode = dbo.Class.ClassCode where " +
-                           "dbo.TimetableLesson.TeacherId = '" + teacherID + "'";
+                           "dbo.TimetableLesson.TeacherId = '" + teacherID + "' order by dbo.Class.TotalName";
 
         Dictionary<string, string> classesAccordingTeacherId = new Dictionary<string, string>();
 
@@ -697,7 +697,7 @@ public class DBconnectionTeacher
         }
         else //parent -> 3
         {
-             selectSTR = "SELECT dbo.Users.PhoneNumber,( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'שם הורה'"+
+             selectSTR = "SELECT dbo.Users.PhoneNumber  as 'מספר סלולרי',( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'שם הורה'" +
                                 " FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID"+
                                 " where dbo.PupilsParent.codeClass = '"+ ClassFilter + "'";
         }
