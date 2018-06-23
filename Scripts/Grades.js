@@ -47,9 +47,10 @@ function renderGrades(results) {
             window.location.href = 'Grades_Graph.html'
         };
 
-      //  GraphButton.className = 'btn btn-success';
-        GraphButton.innerText = 'צפייה בפילוח';
-        GraphButton.setAttribute('class', 'btn btn-success');
+        var graphIMG = "<img src='Images/graph.png' height='30'/ >";
+        GraphButton.innerHTML = graphIMG;
+        GraphButton.setAttribute('class', 'btn btn-rounded btn-warning');
+        GraphButton.setAttribute('style', 'float:left');
 
         var newH3 = document.createElement('h3');
 
