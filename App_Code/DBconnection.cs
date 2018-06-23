@@ -2977,7 +2977,7 @@ public class DBconnection
 
     public string UpdateMessageAsRead(string MessageCode)
     {
-        String cStr = "UPDATE Messages SET IsReadByRecipient = 1 WHERE MessageCode = '" + MessageCode + "'";
+        String cStr = "UPDATE Messages SET IsReadByRecipient = 1 WHERE SenderID = (select SenderID from Messages where MessageCode = '"+ MessageCode +"')";
         string answer = ExecuteNonQuery(cStr).ToString();
         return answer;
     }
