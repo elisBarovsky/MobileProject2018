@@ -2861,8 +2861,10 @@ public class DBconnection
     public int SendPrivateMessage(string SenderID, string RecieientID, string Subject, string content)
     {
         string contentToHtml = content.Replace("\n", "<br />");
+        string tipulBeGeresh = contentToHtml.Replace("'", "''");
+
         string cStr = "INSERT INTO [dbo].[Messages] (MessageDate, SenderID, recipientID, TheMessage, SubjectMessage)" +
-            " VALUES ('" + DateTime.Now + "', '" + SenderID + "', '" + RecieientID + "', '" + contentToHtml + "', '" + Subject + "')";
+            " VALUES ('" + DateTime.Now + "', '" + SenderID + "', '" + RecieientID + "', '" + tipulBeGeresh + "', '" + Subject + "')";
         return ExecuteNonQuery(cStr);
     }
 
