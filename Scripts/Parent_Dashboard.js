@@ -21,14 +21,14 @@ function onDeviceReady() {
                         setTimeout(function () {
                             window.location.href = "index.html"
 
-                        }, 1000);
+                        }, 700);
 
                     } else {
                         swal("יש נשארת!");
                     }
                 });
+        });
     });
-   
 }
 
 

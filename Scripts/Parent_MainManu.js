@@ -5,7 +5,7 @@ function onDeviceReady() {
 
     $('body').fadeIn(500, function () {
     var user = new Object();
-    user.UserId = localStorage.getItem("PupilID");
+    user.UserId = localStorage.getItem("UserID");
     localStorage.setItem("LastVisit","Parent_MainManu.html"); //saving in localS
     GetUserInfo(user, renderFillUser);
                 

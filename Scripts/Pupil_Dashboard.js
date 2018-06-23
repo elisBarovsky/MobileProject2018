@@ -16,11 +16,13 @@ function onDeviceReady() {
                     if (willDelete) {
                         swal("תחזור בקרוב!", {
                             icon: "success",
+                          //  timer: 3000
                         });
+                      //  window.location.href = "index.html"
                         setTimeout(function () {
                             window.location.href = "index.html"
 
-                        }, 2000);
+                        }, 700);
 
                     } else {
                         swal("יש נשארת!");
