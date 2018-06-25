@@ -76,19 +76,34 @@
     </div>-->
     <div class="login-box">
 
-        <div class="login-box-body" style="height:150px">
-            <h4 class="login-box-msg m-b-3" id="UserNameLBL" style="float:right"></h4>
+        <table class="login-box-body" style="height:500px">
+            <tr>
+                <td colspan="2" style="margin:10px">
+                    <h4 class="login-box-msg m-b-3" id="UserNameLBL" style="float:right"></h4>
 
-            <img id="UserIMG" src="" alt="" style="height:110px;float:left;position:fixed" />
+                    <img id="UserIMG" src="" alt="" style="height:110px;float:left;position:fixed" />
+                </td>
+            </tr>
+            <tr>
+                <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>-->
+                <!--כאן שמים את העמוד שנרצה שישותף!-->
 
-        </div>
-        <br />
-        <div div class="login-box-body" style="height:300px">
-            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>
-        </div>                          <!--כאן שמים את העמוד שנרצה שישותף!-->
+                <td id="todaySchedule">
+                    <img src="Images/luzeMoove.gif" height="40" />
+                    <h6 id="noSchedule" style="color:gold" hidden>אין שיעורים היום</h6>
+                    <img id="noScheduleBoy" src="Images/yayy.gif" height="50" hidden />
+                    <table font-size:10px" id="looze"></table>
+                </td>
+                <td id="winnerGrades">
+                    <p style="font-size: 12px"> מקום ראשון באנגלית!</p>
+                    <img src="Images/putInGrade.gif" height="50" />
+                </td>
+            </tr>
+        </table>                         
 
-        <div>
-        </div>
+        
+
+
         <!-- /.login-box-body -->
     </div>
     <!-- /.login-box -->

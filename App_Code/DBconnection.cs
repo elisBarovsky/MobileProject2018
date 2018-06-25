@@ -985,9 +985,10 @@ public class DBconnection
     {
         String selectSTR = "select [TotalName] from [dbo].[Class] where [ClassCode] = " + codeClass;
         string className = "";
+        SqlConnection conNameClass = new SqlConnection();
         try
         {
-            con = connect("Betsefer"); // create the connection
+            conNameClass = connect("Betsefer"); // create the connection
         }
         catch (Exception ex)
         {
@@ -1011,9 +1012,9 @@ public class DBconnection
         }
         finally
         {
-            if (con != null)
+            if (conNameClass != null)
             {
-                con.Close();
+                conNameClass.Close();
             }
         }
     }

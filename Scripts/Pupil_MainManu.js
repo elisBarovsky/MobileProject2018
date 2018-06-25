@@ -14,8 +14,11 @@ function onDeviceReady() {
 
         var user = new Object();
         user.UserId = localStorage.getItem("UserID");
+        user.userType = 4;
         localStorage.setItem("LastVisit", "Pupil_MainManu.html"); //saving in localS
         GetUserInfo(user, renderFillUser);
+
+        LoadScheduleForToday(user, DisplaySchedule);
     });
 
 }
@@ -50,3 +53,32 @@ function renderFillUser(results) {
 
 
 }
+
+function DisplaySchedule(results) {
+    res = $.parseJSON(results.d);
+    if (res.length === 0) {
+        $('#noSchedule').show();
+        $('#noScheduleBoy').show();
+    }
+    else {
+        $('#noSchedule').hide();
+
+        var tableString = "";
+        var counter = 0;
+
+        for (var i = 1; i < 10; i++) {
+
+            if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
+                tableString += "<tr><td> " + res[counter].lessonHours + "</td>";
+            }
+
+            if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
+
+                tableString += "<td>" + res[counter].LessonName + "</br>" + res[counter].TeacherName + "</td>";
+                counter++;
+            }
+            tableString += "</tr>";
+        }
+        $('#looze').append(tableString);
+    }
+};

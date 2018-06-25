@@ -344,4 +344,20 @@ function LoadTimeTableByIdAndDay(userID, userType, day, LoadTimeTable) {
     });
 }
 
+function LoadScheduleForToday(obj, DisplaySchedule) {
+    $.ajax({
+        url: 'BetseferWS.asmx/LoadScheduleForToday',
+        data: JSON.stringify({ 'Id': obj.UserId, 'userType': obj.userType }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            DisplaySchedule(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
 
