@@ -92,8 +92,6 @@ public class TimeTable
         return db.GetLessonNameByLessonCode(lessonCode);
     }
 
-    //********************** add to application **********************************
-
     public List<Dictionary<string, string>> LoadScheduleForToday(string Id, string  userType, int? day = null)
     {
         return db.LoadScheduleForToday(Id, userType, day);

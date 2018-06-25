@@ -346,7 +346,7 @@ function LoadTimeTableByIdAndDay(userID, userType, day, LoadTimeTable) {
 
 function LoadScheduleForToday(obj, DisplaySchedule) {
     $.ajax({
-        url: 'BetseferWS.asmx/LoadScheduleForToday',
+        url: path +'BetseferWS.asmx/LoadScheduleForToday',
         data: JSON.stringify({ 'Id': obj.UserId, 'userType': obj.userType }),
         type: 'POST',
         dataType: "json",

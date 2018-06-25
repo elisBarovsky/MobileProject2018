@@ -349,7 +349,7 @@ public class DBconnectionTeacher
     {
         string selectSTR = "SELECT dbo.HomeWork.HWCode,  dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha ,(select ( UserFName+ ' '+ UserLName)  from dbo.Users where [UserID]= dbo.HomeWork.TeacherID) as Teacher_FullName , dbo.HWPupil.IsDone" +
             " FROM  dbo.HomeWork INNER JOIN  dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson " +
-            "  where dbo.HWPupil.PupilID = '" + Id + "' order by dbo.HomeWork.HWGivenDate desc";
+            "  where dbo.HWPupil.PupilID = '" + Id + "' order by dbo.HomeWork.HWDueDate asc";
         DataTable dtt = new DataTable();
         DataSet ds;
         try

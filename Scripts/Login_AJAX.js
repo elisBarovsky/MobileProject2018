@@ -18,7 +18,7 @@ function GetUserImg(id, SaveUserImg) {
             SaveUserImg(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
+
         }
     });
 }
@@ -34,7 +34,7 @@ function GetUserFullName(id, SaveUserFullName) {
             SaveUserFullName(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
+            
         }
     });
 }

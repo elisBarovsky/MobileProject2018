@@ -181,8 +181,13 @@ function SubmitMessage() {
 }
 
 function AfterMessageSent(results) {
-    alert("נשלח");
 
+        swal({
+            title: 'נשלח!',
+            type: 'success',
+            icon: "success",
+            showConfirmButton: true
+        });
 
     $('#childrenDDL').val('0');
     $('#childrenDDL').hide();
