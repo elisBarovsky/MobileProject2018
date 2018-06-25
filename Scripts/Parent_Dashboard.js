@@ -17,6 +17,7 @@ function onDeviceReady() {
                     if (willDelete) {
                         swal("תחזור בקרוב!", {
                             icon: "success",
+                            showConfirmButton: false,
                         });
                         setTimeout(function () {
                             window.location.href = "index.html"

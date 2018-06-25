@@ -35,7 +35,7 @@ Designed By: UXLiner
         background-color: #f3f3f3;
         width: 100%;
         color: #777;
-        font-size: 0.875em;
+        font-size: 1.5;
         line-height: 1;
     }
 
@@ -46,22 +46,22 @@ Designed By: UXLiner
 
     #accordion .ui-accordion-header {
         color: white;
-        line-height: 2.625;
+        line-height: 3.5;
         display: block;
-        font-size: 0.8125em;
+        font-size: 1;
         width: 100%;
         text-indent: 10px;
     }
 
     #accordion .ui-accordion-header {
         background-color: #389abe;
-        background-image: -moz-linear-gradient(top, #a26bf9 0%, #dc621e 100%);
-        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a26bf9), color-stop(100%m #dc621e));
-        background-image: -webkit-linear-gradient(top, #fa9300 0%, #dc631e 100%);
-        background-image: -o-linear-gradient(top, #a26bf9 0%,#dc621e 100%);
-        background-image: -ms-linear-gradient(top, #a26bf9 0%,#dc621e 100%);
-        background-image: linear-gradient(to bottom, #a26bf9 0%,#dc621e 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a26bf9', endColorstr='#dc621e',GradientType=0 );
+        background-image: -moz-linear-gradient(top, #a26bf9 0%, #76d2fc 100%);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a26bf9), color-stop(100%m #76d2fc));
+        background-image: -webkit-linear-gradient(top, #fa9300 0%, #76d2fc 100%);
+        background-image: -o-linear-gradient(top, #a26bf9 0%,#76d2fc 100%);
+        background-image: -ms-linear-gradient(top, #a26bf9 0%,#76d2fc 100%);
+        background-image: linear-gradient(to bottom, #a26bf9 0%,#76d2fc 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a26bf9', endColorstr='#76d2fc',GradientType=0 );
     }
 
 .ui-autocomplete {

@@ -30,6 +30,10 @@
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>-->
     <!-- sweet alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link href="https://cdn.rawgit.com/t4t5/sweetalert/32bd141c/dist/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdn.rawgit.com/t4t5/sweetalert/32bd141c/dist/sweetalert.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <style>
         .container {
             display: inline-block;
@@ -56,13 +60,14 @@
 <body class="login-page">
     <div id="fb-root"></div>
     <script>
-    (function (d, s, id) {
+        (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
             js.src = 'https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v3.0&appId=277654085592047';
             fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
     <div class="container" onclick="window.location='Pupil_Dashboard.html'">
         <div class="bar1" style="background-color:palevioletred"></div>
         <div class="bar2" style="background-color:fuchsia"></div>
@@ -75,36 +80,31 @@
         <img src="Images/Pacman-1s-200px.svg" id="loadingIMG" style="visibility:visible;position:center;z-index:3" />
     </div>-->
     <div class="login-box">
+        <div class="login-box-body" style="height:150px">
+            <h4 class="login-box-msg m-b-3" id="UserNameLBL" style="float:right"></h4>
+            <img id="UserIMG" src="" alt="" style="height:110px;float:left;position:fixed" />
+        </div>
+        <br />
+        <div div class="login-box-body" >
+            <div id="todaySchedule" style="margin-left:auto;margin-right:15%">
+                <img src="Images/luzeMoove.gif" height="40" style="margin-right:35%"/>
+                <h6 id="noSchedule" style="color:gold" hidden>אין שיעורים היום</h6>
+                <img id="noScheduleBoy" src="Images/yayy.gif" height="50" hidden />
+                <table  id="looze" style="border-spacing: 20px;border-collapse: separate;"></table>
+            </div>
 
-        <table class="login-box-body" style="height:500px">
-            <tr>
-                <td colspan="2" style="margin:10px">
-                    <h4 class="login-box-msg m-b-3" id="UserNameLBL" style="float:right"></h4>
+            <!--<div id="winnerGrades" style="float:left">
+                <p style="font-size: 12px"> מקום ראשון באנגלית!</p>
+                <img src="Images/putInGrade.gif" height="50" />
+            </div>-->
 
-                    <img id="UserIMG" src="" alt="" style="height:110px;float:left;position:fixed" />
-                </td>
-            </tr>
-            <tr>
-                <!--<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>-->
-                <!--כאן שמים את העמוד שנרצה שישותף!-->
+        </div>
+        <div>
+           
 
-                <td id="todaySchedule">
-                    <img src="Images/luzeMoove.gif" height="40" />
-                    <h6 id="noSchedule" style="color:gold" hidden>אין שיעורים היום</h6>
-                    <img id="noScheduleBoy" src="Images/yayy.gif" height="50" hidden />
-                    <table font-size:10px" id="looze"></table>
-                </td>
-                <td id="winnerGrades">
-                    <p style="font-size: 12px"> מקום ראשון באנגלית!</p>
-                    <img src="Images/putInGrade.gif" height="50" />
-                </td>
-            </tr>
-        </table>                         
+        </div>
 
-        
-
-
-        <!-- /.login-box-body -->
+    <!-- /.login-box-body -->
     </div>
     <!-- /.login-box -->
     <!-- v4.0.0-alpha.6 -->

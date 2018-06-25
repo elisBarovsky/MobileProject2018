@@ -81,4 +81,15 @@ function DisplaySchedule(results) {
         }
         $('#looze').append(tableString);
     }
+
+    //swal({
+    //    title: "Esta é a imagem que pretende inserir?",
+    //    imageUrl: "/Images/putInGrade.gif",
+    //});
+    swal({
+        title: "כל הכבוד!",
+        text: "מקום ראשון באנגלית!",
+        imageUrl: "/Images/putInGrade.gif",
+        imageSize: '150x150'
+    });
 };
