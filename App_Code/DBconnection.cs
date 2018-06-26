@@ -3084,7 +3084,7 @@ public class DBconnection
             throw (ex);
         }
 
-        cStr = "select CONVERT(varchar, StartClassTime, 108) + ' - ' + CONVERT(varchar, EndClassTime, 108) as LessonHours from ClassTime where ClassTimeCode = '" + code +"'";
+        cStr = "select (EndClassTime + ' - ' + StartClassTime) as LessonHours from ClassTime where ClassTimeCode = '" + code +"'";
 
         try
         {
