@@ -18,7 +18,7 @@ function LoadAllMessagesById(teacherId, DisplayMessages) {
             DisplayMessages(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
+
         }
     });
 }
@@ -34,7 +34,7 @@ function UpdateMessageAsRead(i) {
            
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
+
         }
     });
 }

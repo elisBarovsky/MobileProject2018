@@ -19,7 +19,7 @@ function GetAllConversation(sender, me, ShowAllConversation) {
             ShowAllConversation(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
+
         }
     });
 }
@@ -35,7 +35,7 @@ function SubmitMessageAjax(message, AfterMessageSent) {
             AfterMessageSent(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
+
         }
     });
 }
