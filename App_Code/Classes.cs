@@ -54,4 +54,10 @@ public class Classes
     {
         return db.GetClassCodeAndParentIDByPupilID(UserID);
     }
+
+    public List<string> GetClassesFullName_JustClassesWithPupils()
+    {
+        return db.GetClassesFullName_JustClassesWithPupils();
+    }
+
 }

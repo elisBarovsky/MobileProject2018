@@ -649,6 +649,33 @@ public class BetseferWS : System.Web.Services.WebService
         return res;
     }
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetClassesFullName_JustClassesWithPupils()
+    {
+        Classes c = new Classes();
+        var res = c.GetClassesFullName_JustClassesWithPupils();
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringSchedule = js.Serialize(res);
+        return jsonStringSchedule;
+    }
+
+
+    //***********************************************************************************
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetPupilsByClassTotalName_TheGoodOne(string ClassTotalName)
+    {
+        Classes c = new Classes(); Users u = new Users();
+        string classCode = c.GetClassCodeAccordingToClassFullName(ClassTotalName);
+
+        List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
+        s = u.getPupilsByClassCode(classCode);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(s);
+        return jsonString;
+    }
+
     
             [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -659,6 +686,31 @@ public class BetseferWS : System.Web.Services.WebService
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringTimeTable = js.Serialize(timeTable);
         return jsonStringTimeTable;
+    }
+
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string insertNewGuard(string UserId, string RegId)
+    {
+        int cID = Convert.ToInt32(UserId);
+
+        Users newUser = new Users();
+        newUser.UserID1 = cID.ToString();
+        newUser.RegId = RegId;
+
+        int numEffected = newUser.insertUser(newUser);
+        if (numEffected == 1)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            // serialize to string
+            string jsonString = js.Serialize(newUser);
+            return jsonString;
+        }
+        else
+        {
+            throw (new Exception("error in create user"));
+        }
     }
 }
 

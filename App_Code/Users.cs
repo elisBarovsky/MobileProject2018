@@ -10,6 +10,7 @@ public class Users
 {
     DBconnection db;
     string UserID, UserFName, UserLName, BirthDate, UserImg, UserName, UserPassword, PhoneNumber, CodeUserType;
+    private string regId;
 
     public string UserID1
     {
@@ -22,6 +23,12 @@ public class Users
         {
             UserID = value;
         }
+    }
+
+    public string RegId
+    {
+        get { return regId; }
+        set { regId = value; }
     }
 
     public string UserFName1
@@ -163,11 +170,21 @@ public class Users
         CodeUserType = codeUserType;
     }
 
-    //public int AddPupil(string UserID, int classNumber)
-    //{
-    //    return db.AddPupil(UserID, classNumber);
-    //}
+    public int insertUser(Users u)
+    {
+        DBconnection dbs = new DBconnection();
+        int numAffected = dbs.SaveUser(u);
+        return numAffected;
+    }
 
+    public List<Users> getUserList()
+    {
+        DBconnection dbs = new DBconnection();
+        List<Users> listUser = new List<Users>();
+        listUser = dbs.getUserList("PushDBConnectionString", "users");
+
+        return listUser;
+    }
     public string GetNumChild(string UserID)
     {
         return db.GetNumChild(UserID);
