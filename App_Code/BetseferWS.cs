@@ -199,7 +199,12 @@ public class BetseferWS : System.Web.Services.WebService
     public string Login(string UserID, string password)
     {
         Users UserLogin = new Users();
-        string UserType = UserLogin.GetUserType(UserID, password);
+        List<string> UserInfo = UserLogin.GetUserType(UserID, password);
+        string UserType = UserInfo[0].ToString();
+
+        string UserRegID = UserInfo[1].ToString();
+
+
         string isvalid = "";
 
         if (UserType == "" || UserType == "1")
@@ -229,8 +234,10 @@ public class BetseferWS : System.Web.Services.WebService
                         UserType = "Child";
                         break;
                 }
+
+
         }
-        string[] arr = new string[] { isvalid, UserType };
+        string[] arr = new string[] { isvalid, UserType, UserRegID };
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringCategory = js.Serialize(arr);
         return jsonStringCategory;
@@ -691,7 +698,23 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string insertNewGuard(string UserId, string RegId)
+    public string IfMehanech_LoadParentDay(string UserId)
+    {
+        ParentsDay p = new ParentsDay();
+        p = p.IfMehanech_LoadParentDay(UserId);
+
+        if (p == null)
+        {
+            return "no";
+        }
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringParentsDay = js.Serialize(p);
+        return jsonStringParentsDay;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string PushInsertNewGuard(string UserId, string RegId) 
     {
         int cID = Convert.ToInt32(UserId);
 
@@ -699,11 +722,10 @@ public class BetseferWS : System.Web.Services.WebService
         newUser.UserID1 = cID.ToString();
         newUser.RegId = RegId;
 
-        int numEffected = newUser.insertUser(newUser);
+        int numEffected = newUser.PushUpdateRegId(newUser.UserID1, newUser.RegId);
         if (numEffected == 1)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
-            // serialize to string
             string jsonString = js.Serialize(newUser);
             return jsonString;
         }
@@ -711,6 +733,18 @@ public class BetseferWS : System.Web.Services.WebService
         {
             throw (new Exception("error in create user"));
         }
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string PushUpdateRegId(string Id, string RegID)
+    {
+        Users u = new Users();
+        int res = u.PushUpdateRegId(Id, RegID); 
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
     }
 }
 

@@ -492,10 +492,11 @@ public class DBconnection
         }
     }
 
-    public string GetUserType(string UserID, string password)
+    public List<string> GetUserType(string UserID, string password)
     {
-        String selectSTR = "SELECT CodeUserType  FROM Users where UserID  = '" + UserID + "' and LoginPassword  = '" + password + "'";
-        string type = "";
+        String selectSTR = "SELECT CodeUserType,PushRegID  FROM Users where UserID  = '" + UserID + "' and LoginPassword  = '" + password + "'";
+        List<string> UserInfo = new List<string>();
+        string type, RegID;
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -513,8 +514,12 @@ public class DBconnection
             while (dr.Read())
             {
                 type = dr["CodeUserType"].ToString();
+                UserInfo.Add(type);
+                RegID = dr["PushRegID"].ToString();
+                UserInfo.Add(RegID);
+
             }
-            return type;
+            return UserInfo;
         }
         catch (Exception ex)
         {
@@ -900,6 +905,12 @@ public class DBconnection
     public int ChangePassword(string userID, string Password)
     {
         string cStr = "update[dbo].[Users] set[LoginPassword] = ('" + Password + "') WHERE UserID = '" + userID + "'";
+        return ExecuteNonQuery(cStr);
+    }
+
+    public int PushUpdateRegId(string userID, string RegID)
+    {
+        string cStr = "update[dbo].[Users] set[PushRegID] = ('" + RegID + "') WHERE UserID = '" + userID + "'";
         return ExecuteNonQuery(cStr);
     }
 
@@ -3125,7 +3136,7 @@ public class DBconnection
             throw (ex);
         }
 
-        cStr = "select (EndClassTime + ' - ' + StartClassTime) as LessonHours from ClassTime where ClassTimeCode = '" + code +"'";
+        cStr = "select CONVERT(varchar, StartClassTime, 108) + ' - ' + CONVERT(varchar, EndClassTime, 108) as LessonHours from ClassTime where ClassTimeCode = '" + code +"'";
 
         try
         {
@@ -3273,62 +3284,6 @@ public class DBconnection
             }
         }
     }
-
-    public int SaveUser(Users newUser)
-    {
-        SqlConnection con;
-        SqlCommand cmd;
-
-        try
-        {
-            con = connect("PushDBConnectionString"); // create the connection
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-        }
-
-        String userStr = BuildInsertUser(newUser);      // helper method to build the insert string
-
-        cmd = CreateCommand(userStr, con);             // create the command
-
-        try
-        {
-            int numEffected = cmd.ExecuteNonQuery(); // execute the command
-            return numEffected;
-        }
-        catch (Exception ex)
-        {
-            return 0;
-            // write to log
-            throw (ex);
-        }
-
-        finally
-        {
-            if (con != null)
-            {
-                // close the db connection
-                con.Close();
-            }
-        }
-
-    }
-
-    //לתקן בהתאמה לטבלה אצלנו !!! 
-    private String BuildInsertUser(Users newUser)
-    {
-        String command;
-
-        StringBuilder sb = new StringBuilder();
-        // use a string builder to create the dynamic string
-        sb.AppendFormat("Values({0}, '{1}')", newUser.UserID1, newUser.RegId);
-        String prefix = "UPDATE [users] SET [regId] ='" + newUser.RegId + "' WHERE [userId] ='" + newUser.UserID1 + "' IF @@ROWCOUNT=0 INSERT INTO users " + "(userId, regId) ";
-        command = prefix + sb.ToString();
-        return command;
-    }
-
 
     public List<Users> getUserList(string conString, string tableName)
     {

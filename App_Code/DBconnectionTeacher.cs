@@ -1140,4 +1140,177 @@ public class DBconnectionTeacher
             }
         }
     }
+
+    public bool IfMehanech(string UserId)
+    {
+        String selectSTR = "SELECT IsMainTeacher FROM Teachers where TeacherID  = '" + UserId + "'";
+        bool mehanech = false;
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                mehanech = bool.Parse(dr[0].ToString());
+            }
+            return mehanech;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public int GetClassCodeByMainTeacherID(string teacherID)
+    {
+        String selectSTR = "SELECT ClassCode FROM TeacherClass where TeacherID  = '" + teacherID + "'";
+        int classCode = 0;
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                classCode = int.Parse(dr[0].ToString());
+            }
+            return classCode;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<Meeting> GetMeetingsByParentsDayCode(int ParentsDayCode)
+    {
+        List<Meeting> meetings = new List<Meeting>();
+
+        String selectSTR = "SELECT * FROM ParentsDayMeeting where ParentsDayCode  = " + ParentsDayCode;
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            DBconnection db = new DBconnection();
+            while (dr.Read())
+            {
+                Meeting m = new Meeting();
+                m.PupilID = dr["PupilID"].ToString();
+                m.PupilName = db.GetUserFullNameByID(m.PupilID);
+                m.StartTime = dr["StartTime"].ToString();
+                m.EndTime = dr["EndTime"].ToString();
+
+                meetings.Add(m);
+            }
+            return meetings;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public ParentsDay LoadParentDay(string UserId)
+    {
+        ParentsDay p = null;
+
+        if (!IfMehanech(UserId)) // not mehanech
+        {
+            return p;
+        }
+
+        p = new ParentsDay();
+        p.TeacherID = UserId;
+        p.ClassCode = GetClassCodeByMainTeacherID(UserId);
+
+        String selectSTR = "SELECT * FROM ParentsDay where ClassCode  = '" + p.ClassCode + "' and ParentsDayDate >= (SELECT GETDATE())";
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                p.ParentsDayCode = int.Parse(dr["ParentsDayCode"].ToString());
+                p.CodeWeekDay = int.Parse(dr["CodeWeekDay"].ToString());
+                p.ParentsDayDate = dr["ParentsDayDate"].ToString();
+                
+            }
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+
+        p.ParentsDayMeetings = GetMeetingsByParentsDayCode(p.ParentsDayCode);
+        return p;
+    }
 }

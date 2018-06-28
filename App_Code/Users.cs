@@ -172,16 +172,15 @@ public class Users
 
     public int insertUser(Users u)
     {
-        DBconnection dbs = new DBconnection();
-        int numAffected = dbs.SaveUser(u);
-        return numAffected;
+        db = new DBconnection();
+		return numAffected = db.SaveUser(u);
     }
 
     public List<Users> getUserList()
     {
-        DBconnection dbs = new DBconnection();
+        db = new DBconnection();
         List<Users> listUser = new List<Users>();
-        listUser = dbs.getUserList("PushDBConnectionString", "users");
+        listUser = db.getUserList("Betsefer", "users");
 
         return listUser;
     }
@@ -275,7 +274,7 @@ public class Users
     //    return db.UpdateUser(userID, userFName, userLName, birthDate, userImg, userName, userPassword, phoneNumber);
     //}
 
-    public string GetUserType(string UserID, string password)
+    public List<string>  GetUserType(string UserID, string password)
     {
         return db.GetUserType(UserID, password);
     }
@@ -317,12 +316,16 @@ public class Users
 
         return l;
     }
-
+    
     public int ChangePassword(string userID, string Password)
     {
         return db.ChangePassword(userID, Password);
     }
 
+    public int PushUpdateRegId(string userID, string RegID)
+    {
+        return db.PushUpdateRegId(userID, RegID);
+    }
 
     public string IsAlreadyLogin(string UserID, string password)
     {
