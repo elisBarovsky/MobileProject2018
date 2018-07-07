@@ -170,11 +170,11 @@ public class Users
         CodeUserType = codeUserType;
     }
 
-    public int insertUser(Users u)
-    {
-        db = new DBconnection();
-		return numAffected = db.SaveUser(u);
-    }
+  //  public int insertUser(Users u)
+  //  {
+  //      db = new DBconnection();
+		//return numAffected = db.SaveUser(u);
+  //  }
 
     public List<Users> getUserList()
     {

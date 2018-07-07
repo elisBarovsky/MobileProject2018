@@ -904,13 +904,13 @@ public class DBconnection
 
     public int ChangePassword(string userID, string Password)
     {
-        string cStr = "update[dbo].[Users] set[LoginPassword] = ('" + Password + "') WHERE UserID = '" + userID + "'";
+        string cStr = "update [dbo].[Users] set[LoginPassword] = ('" + Password + "') WHERE UserID = '" + userID + "'";
         return ExecuteNonQuery(cStr);
     }
 
     public int PushUpdateRegId(string userID, string RegID)
     {
-        string cStr = "update[dbo].[Users] set[PushRegID] = ('" + RegID + "') WHERE UserID = '" + userID + "'";
+        string cStr = "update [dbo].[Users] set[PushRegID] = ('" + RegID + "') WHERE UserID = '" + userID + "'";
         return ExecuteNonQuery(cStr);
     }
 
@@ -3327,3 +3327,4 @@ public class DBconnection
     }
 
 }
+

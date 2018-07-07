@@ -33,6 +33,11 @@ public class HomeWork
         return dbT.FillAllHomeWork(PupilID);
     }
 
+    public DataTable getHwInfoForProgBar(string PupilID)
+    {
+        return dbT.getHwInfoForProgBar(PupilID);
+    }
+
     public int HWDone(string PupilID, bool IsDone, string HWCode)
     {
         return dbT.HWDone( PupilID,IsDone, HWCode);

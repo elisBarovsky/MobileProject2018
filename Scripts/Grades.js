@@ -66,7 +66,7 @@ function renderGrades(results) {
 
         newH3.innerText =  res[counter].LessonName + ' ציון: ' + res[counter].Grade;
 
-        newH3.appendChild(newIMG);
+      //  newH3.appendChild(newIMG);
 
         newP0.innerText = 'מורה: ' + res[counter].Teacher_FullName;
         newDiv.appendChild(newP0);

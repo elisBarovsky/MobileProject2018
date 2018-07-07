@@ -56,7 +56,7 @@ function renderNotes(results) {
 
         newH3.innerText = 'סוג הערה: ' + res[counter].NoteName + '                         ';
 
-        newH3.appendChild(newIMG);
+       // newH3.appendChild(newIMG);
 
         newP0.innerText = 'מורה: ' + res[counter].Teacher_FullName;
         newDiv.appendChild(newP0);

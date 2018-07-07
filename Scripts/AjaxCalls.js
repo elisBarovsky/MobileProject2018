@@ -169,6 +169,24 @@ function FillSubjectByPupilId(user, FillSubjectsDDL) {
     });
 }
 
+function FillProgersBar(user, FillSubjectsDDL) {
+
+    var dataString = JSON.stringify(user);
+    $.ajax({
+        url: path + 'BetseferWS.asmx/getHwInfoForProgBar',
+        data: JSON.stringify({ 'PupilID': user.PupilID }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            FillProgersBarDLL(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
 function FillHW(user, LoadHWTable) {
 
     var dataString = JSON.stringify(user); 

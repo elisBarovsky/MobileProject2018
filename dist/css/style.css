@@ -41,16 +41,16 @@ Designed By: UXLiner
 
         #accordion .ui-accordion-content > * {
             margin: 0;
-            padding: 20px;
+            padding: 15px;
         }
 
     #accordion .ui-accordion-header {
         color: white;
-        line-height: 3.5;
+        line-height: 2;
         display: block;
         font-size: 1;
         width: 100%;
-        text-indent: 10px;
+        text-indent: 9px;
     }
 
     #accordion .ui-accordion-header {

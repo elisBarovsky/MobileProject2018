@@ -46,6 +46,7 @@ function renderlogin(results) {
     }
     else { // already login -> go to main page according the type user. 
         localStorage.setItem("UserType", res[1]);
+        localStorage.setItem("registrationId", res[2]);
 
         if (res[1] === 'Parent') {
             document.location.href = "Parent-ChooseChild.html";
