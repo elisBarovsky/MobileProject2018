@@ -303,12 +303,12 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string TelephoneList(string type, string PupilID)
+    public string TelephoneList(string type, string PupilID, bool Teacher)
     {
         string ClassCode = "";
-        if (type=="2")
+        if (Teacher)
         {
-
+            ClassCode = PupilID;
         }
         else
         {

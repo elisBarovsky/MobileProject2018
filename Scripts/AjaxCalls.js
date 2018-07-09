@@ -316,7 +316,7 @@ function FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone) {
     var dataString = JSON.stringify(User);
     $.ajax({
         url: path+ 'BetseferWS.asmx/TelephoneList',
-        data: JSON.stringify({ 'type': User.type, 'PupilID': User.PupilID }),
+        data: JSON.stringify({ 'type': User.type, 'PupilID': User.PupilID, 'Teacher': User.IsTeacher }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',

@@ -780,14 +780,38 @@ public class DBconnectionTeacher
         {
             selectSTR = "  SELECT  dbo.Users.PhoneNumber, (dbo.Users.UserFName +' '+ dbo.Users.UserLName) as 'FullName' " +
                     " FROM dbo.Users full JOIN dbo.PupilsParent ON dbo.Users.UserID = dbo.PupilsParent.PupilID  AND dbo.Users.UserID = dbo.PupilsParent.ParentID Full JOIN" +
-                    " dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID   where dbo.Users.CodeUserType='" + UserTypeFilterType + "'and dbo.Pupil.CodeClass='" + ClassFilter + "'";
+                    " dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID   where dbo.Users.CodeUserType='" + UserTypeFilterType;
+
+            if (ClassFilter.Length > 7)//teacher 
+            {
+
+                selectSTR += "' and dbo.Pupil.CodeClass in (select distinct  dbo.Timetable.ClassCode FROM  dbo.Timetable INNER JOIN "+
+                            "  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where dbo.TimetableLesson.TeacherId = '"+ ClassFilter + "')";
+            }
+            else
+            {
+                selectSTR += "and where dbo.PupilsParent.codeClass = '" + ClassFilter + "'";
+            }
+
         }
-        else //parent -> 3
+        else if (UserTypeFilterType == "3")//parent 
         {
-            selectSTR = "SELECT dbo.Users.PhoneNumber,( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'FullName'" +
-                               " FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID" +
-                               " where dbo.PupilsParent.codeClass = '" + ClassFilter + "'";
+            selectSTR = "SELECT distinct dbo.Users.PhoneNumber,( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'FullName'" +
+                               " FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID where dbo.PupilsParent.codeClass";
+
+            if(ClassFilter.Length > 7)//teacher 
+            {
+
+                selectSTR += " in (select distinct  dbo.Timetable.ClassCode FROM  dbo.Timetable INNER JOIN " +
+                            " dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where dbo.TimetableLesson.TeacherId = '"+ ClassFilter + "')";
+            }
+            else
+            {
+                selectSTR += "  = '" + ClassFilter + "'";
+            }
+           
         }
+      
 
         DataTable dtt = new DataTable();
         DataSet ds;
