@@ -107,8 +107,7 @@ function LoadHWTable(results) {
         var IsLehagasha = "";
         var ImgIcon;
 
-
-      
+     
 
         for (var i = 0; i < res.length; i++) {
             IsLehagasha = "לא להגשה";
@@ -165,13 +164,30 @@ function LoadHWTable(results) {
 
             checkbox.setAttribute("onclick", "HWDone(this);");
 
-            newP5.innerText = "סיימתי  ";
-            newDiv.appendChild(newP5);
-            newP5.appendChild(checkbox)
-            checkbox.checked = res[counter].IsDone;
+            var usertype = localStorage.getItem('UserType');
 
+            if (usertype == "Parent") {
 
-            // newDiv.appendChild(checkbox);
+                if (res[counter].IsDone) {
+                    newP5.innerText = "בוצע  ";
+                }
+                else {
+                    newP5.innerText ="  טרם בוצע  ";
+                   
+
+                }
+                 newP5.style.fontWeight = 'bold';
+                newDiv.appendChild(newP5);
+            }
+            else if (usertype == "Child") {
+
+                newP5.innerText = "סיימתי  ";
+                newDiv.appendChild(newP5);
+                newP5.appendChild(checkbox)
+                checkbox.checked = res[counter].IsDone;
+                newDiv.appendChild(checkbox);
+            }
+           
 
             //get inside the accordion!
             acc.appendChild(newH3);

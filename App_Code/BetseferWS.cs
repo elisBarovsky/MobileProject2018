@@ -305,11 +305,20 @@ public class BetseferWS : System.Web.Services.WebService
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string TelephoneList(string type, string PupilID)
     {
-        Users PupilClass = new Users();
-        string PupilClassCode = PupilClass.GetPupilOtClass(PupilID);
+        string ClassCode = "";
+        if (type=="2")
+        {
+
+        }
+        else
+        {
+            Users PupilClass = new Users();
+            ClassCode = PupilClass.GetPupilOtClass(PupilID);
+
+        }
 
         TelphoneList TL = new TelphoneList();
-        DataTable DT =  TL.FilterTelphoneListForMobile(type, PupilClassCode);
+        DataTable DT =  TL.FilterTelphoneListForMobile(type, ClassCode);
 
         var list = new List<Dictionary<string, object>>();
 

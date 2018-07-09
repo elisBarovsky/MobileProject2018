@@ -87,12 +87,16 @@ function LoadTimeTable(results) {
     $('#looze').empty();
     res = $.parseJSON(results.d);
     if (res.length === 0) {
-        $('#noSchedule').show();
-        $('#noScheduleBoy').show();
+        //$('#noSchedule').show();
+        //$('#noScheduleBoy').show();
+      
+        $('#appendStuff').append("<h6 id='noSchedule' style='color:gold;'>אין שיעורים היום!</h6><img id='noScheduleBoy' src='Images/yayy.gif' height='130'/> ");
+        
     }
     else {
-        $('#noSchedule').hide();
-        $('#noScheduleBoy').hide();
+        $('#appendStuff').empty();
+        //$('#noSchedule').hide();
+        //$('#noScheduleBoy').hide();
 
         var tableString = "<tr><td colspan='2'>יום " + res[0].WeekDay + "</td></tr>";
         var day = res[0].WeekDay;
