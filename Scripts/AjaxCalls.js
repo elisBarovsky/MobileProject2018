@@ -187,6 +187,23 @@ function FillProgersBar(user, FillSubjectsDDL) {
     });
 }
 
+function LoadStudentsClassAvgGrades(user, ClassAvgGrades) {
+
+    var dataString = JSON.stringify(user);
+    $.ajax({
+        url: path + 'BetseferWS.asmx/getClassStudentsAvgGrades',
+        data: JSON.stringify({ 'PupilID': user.PupilID }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            ClassAvgGrades(results);
+        },
+        error: function (request, error) {
+        }
+    });
+}
+
 function FillHW(user, LoadHWTable) {
 
     var dataString = JSON.stringify(user); 

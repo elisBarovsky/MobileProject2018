@@ -47,4 +47,9 @@ public class Grades
     {
         return dbT.FilterGrade(GradeDate);
     }
+
+    public DataTable PupilAvgGrades(string ClassCode) // NEW !!!!
+    {
+        return dbT.PupilAvgGrades(ClassCode);
+    }
 }

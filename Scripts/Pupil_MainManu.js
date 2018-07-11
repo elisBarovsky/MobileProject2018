@@ -26,6 +26,7 @@ function onDeviceReady() {
         localStorage.setItem("LastVisit", "Pupil_MainManu.html"); //saving in localS
         FillProgersBar(user, FillProgersBarDLL);
 
+
         LoadScheduleForToday(user, DisplaySchedule);
     });
 
@@ -33,6 +34,20 @@ function onDeviceReady() {
 
 function redirectPage() {
     window.location = "Pupil_MainManu.html";
+}
+
+function ClassAvgGrades(results) {
+    res = $.parseJSON(results.d);
+    user.PupilID = localStorage.getItem("PupilID");
+
+    for (var i = 0; i < res.length; i++) {
+        if (res[i].PupilID == user.PupilID) {
+            var place = i + 1;
+        }
+    }
+    var TotalCountHW = res[place].PupilID;
+    var TotalCountHW1 = res[place].AvgGarde;
+
 }
 
 function FillProgersBarDLL(results) {
@@ -43,6 +58,8 @@ function FillProgersBarDLL(results) {
     var CountMadeHW = res[0].Made_HW;
     TotalPresentage = (CountMadeHW / TotalCountHW) * 100;
     GetUserInfo(user, renderFillUser);
+    LoadStudentsClassAvgGrades(user, ClassAvgGrades);
+
 }
 
 function renderFillUser(results) {
@@ -127,6 +144,8 @@ function DisplaySchedule(results) {
         imageUrl: "/Images/putInGrade.gif",
         imageSize: '150x150'
     });
+
+
 };
 
 //-------------------------------------------------

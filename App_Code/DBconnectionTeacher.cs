@@ -117,6 +117,43 @@ public class DBconnectionTeacher
         }
     }
 
+    public DataTable PupilAvgGrades(string ClassCode)  //New !! 
+    {
+        string selectSTR = "  select PupilID, avg(Grade) 'AvgGarde'   from [dbo].[Grades] where classId= "+ ClassCode + " group by PupilID order by AvgGarde desc";
+        DataTable dtt = new DataTable();
+        DataSet ds;
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        try
+        {
+            SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con);
+            ds = new DataSet("AvgGradesDS");
+            daa.Fill(ds);
+            return dtt = ds.Tables[0];
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+
+        }
+    }
+
     public DataTable FilterGrade(string GradeDate) //NEW
     {
         string selectSTR = " SELECT  dbo.Lessons.LessonName, dbo.Grades.ExamDate, dbo.Grades.Grade ,( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as TeacherName " +
