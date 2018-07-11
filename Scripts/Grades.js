@@ -19,8 +19,24 @@ function onDeviceReady() {
 function renderGrades(results) {
     res = $.parseJSON(results.d);
     var counter = 0;
+    var counter2 = 0;
     $('#accordion').empty();
     var ImgIcon;
+   // var SumAvgTotal = 0;
+    var SumAvg = 0;
+
+    var ExamsCountTotal = 0 ;
+  //  for (var i = 0; i < res.length; i++) {
+      
+  //   //   SumAvgTotal += res[counter].ExamAVG;
+  //      SumAvg += res[counter].Grade;
+  //      ExamsCountTotal++;
+  //  }
+
+  ////  TotalAvg = (SumAvgTotal / ExamsCountTotal);
+  // var PupilAvg = (SumAvg / ExamsCountTotal);
+   // document.getElementById('KnobChart').value = PupilAvg;
+
     for (var i = 0; i < res.length; i++) {
         if (res[counter].Grade > "50") {
             ImgIcon = "Images/happy.png";
@@ -28,6 +44,8 @@ function renderGrades(results) {
         else {
             ImgIcon = "Images/sad.png";
         }
+
+        counter2 += res[counter].Grade;
 
         var newIMG = document.createElement("img");
         newIMG.setAttribute('src', ImgIcon);
@@ -77,12 +95,15 @@ function renderGrades(results) {
         newDiv.appendChild(GraphButton);
 
         //get inside the accordion!
-        acc.appendChild(newH3); GraphButton
+        acc.appendChild(newH3); 
         acc.appendChild(newDiv);
         $("#accordion").accordion("refresh");
 
-     //   dynamicLy = "<li> <a href='#'id=" + res[counter].Grade + " data-id=" + res[counter].ExamDate + "><img src='" + ImgIcon + "'/> <p>תאריך:" + res[counter].ExamDate + "</p><p>מקצוע:" + res[counter].LessonName + "</p><p>ציון:" + res[counter].Grade + "</p> </li>";
         counter++;
 
     }
+    var PupilAvg = (counter2 / counter);
+    document.getElementById('AvgGrades').innerText = " ממוצע הציונים שלי הוא: " + PupilAvg ;
+    //$("#KnobChart").refresh();
+
 }
