@@ -1,16 +1,29 @@
 ﻿$(document).ready(onDeviceReady);
 
 function onDeviceReady() {
-    //alert(2);
 
     //$('body').fadeIn(500, function () {
   var ID = localStorage.getItem("UserID");
-    ParentChooseChild(ID, getChildrenArray);
+   // ParentChooseChild(ID, getChildrenArray);
 
+    var children = JSON.parse(localStorage.getItem("allParentChildren"));
+
+    var x = $('#ChooseChild');
+    var option = document.createElement("option");
+    option.text = 'בחר ';
+    x.append(option);
+
+    for (var i = 0; i < children.length; i++) { //ממלא את הרשימה בילדים של ההורה
+        option = document.createElement("option");
+        option.value = children[i].UserID1;
+        option.text = children[i].UserFName1 + ' ' + children[i].UserLName1;
+        x.append(option);
+    }
+  //  $('#ChooseChild').selectmenu('refresh');
 
     $('#continueLogin').click(function () {
+      //  alert(5);
         var childId = $('#ChooseChild').val();
-        var children = JSON.parse(localStorage.getItem("allParentChildren"));
 
         for (var i = 0; i < children.length; i++) {
             if (children[i].UserID1 === childId) {
@@ -28,8 +41,6 @@ function onDeviceReady() {
         user.type = type;
         GetUserInfo(user, renderFillUser);
     });
-    //});
-
 }
 
 function getChildrenArray(results) {//return string[].
@@ -68,29 +79,9 @@ function getChildrenArray(results) {//return string[].
 }
 
 
-
-
-//צריך לוודא שאם זה הורה, אז אחרי שהוא בוחר ילד וזה טוען לו את הנתנונים של הילד, שזה רק יציג לו את היום הורים בתור הורה
 function renderFillUser(results) {
-    //Save pupil in localstorage
- //   var UserId = localStorage.getItem("UserID");
-  //  var type = localStorage.getItem("UserType");
-  //  user = new Object();
-  //  user.UserId = UserId;
- //   user.type = type;
-    //if (type !== 'Teacher') {
-    //    //GetPupilId(user, SavePupilId);
-    //}
 
     res = $.parseJSON(results.d);
-    //document.getElementById("UserNameLBL").innerHTML = " שלום " + res[1] + " " + res[2];
-    //if (res[6] === "") {
-    //    imgSRC = "Images/NoImg.png";
-    //}
-    //else {
-    //    imgSRC = res[5];
-    //}
 
     document.location.href = "Parent_MainManu.html";
-    //   document.getElementById("UserIMG").src = imgSRC;
 }

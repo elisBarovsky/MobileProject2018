@@ -49,7 +49,9 @@ function renderlogin(results) {
         localStorage.setItem("registrationId", res[2]);
 
         if (res[1] === 'Parent') {
-            document.location.href = "Parent-ChooseChild.html";
+            //document.location.href = "Parent-ChooseChild.html";
+            var ID = localStorage.getItem("UserID");
+            ParentChooseChild(ID, getChildrenArray);
 
         }
         else {
@@ -98,6 +100,31 @@ function renderFillUser(results) {
         document.getElementById("PasswordTB").value = "";
     }
    
+}
+
+function getChildrenArray(results) {//return string[].
+    res = $.parseJSON(results.d);
+    if (res.length === 0) {
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה ',
+            text: "לא רשומים ילדים המשוייכים אליך במערכת. במידה ומדובר בשגיאה צור קשר עם שירות הלקוחות במספר: 052-77777777",
+            showConfirmButton: true,
+
+        });
+        document.location.href = "index.html";
+    }
+    else if (res.length === 1) {
+        localStorage.setItem("PupilID", JSON.stringify(res[0].UserID1)); //saving in localS
+        document.location.href = "Parent_Dashboard.html";
+    }
+    else {
+        localStorage.setItem("allParentChildren", JSON.stringify(res));
+            document.location.href = "Parent-ChooseChild.html";
+
+    }
 }
 
 function redirectPage1() {

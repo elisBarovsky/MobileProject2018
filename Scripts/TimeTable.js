@@ -85,16 +85,17 @@ function LoadScheduleForSpecipicDay(day) {
 
 function LoadTimeTable(results) {
     $('#looze').empty();
+    $('#appendStuff').empty();
     res = $.parseJSON(results.d);
     if (res.length === 0) {
         //$('#noSchedule').show();
         //$('#noScheduleBoy').show();
       
-        $('#appendStuff').append("<h6 id='noSchedule' style='color:gold;'>אין שיעורים היום!</h6><img id='noScheduleBoy' src='Images/yayy.gif' height='130'/> ");
+        $('#appendStuff').append("<h6 id='noSchedule' style='color:gold;margin-right:25%'>אין שיעורים היום!</h6><img id='noScheduleBoy' src='Images/yayy.gif' style='margin-right:20%' height='130'/> ");
         
     }
     else {
-        $('#appendStuff').empty();
+      //  $('#appendStuff').empty();
         //$('#noSchedule').hide();
         //$('#noScheduleBoy').hide();
 

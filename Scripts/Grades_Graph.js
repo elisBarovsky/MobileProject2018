@@ -36,7 +36,7 @@ function renderGivenGradeByDate(results) {
         PupilGrades.push({ x: i + 1, y: results[counter++].Grade });
         PupilGradesAVG.push({ x: i+1 , y: GradeAvg });
     }
-    PupilGrades = PupilGrades.sort();
+  //  PupilGrades = PupilGrades.sort(y);
 
     var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
@@ -65,6 +65,7 @@ function renderGivenGradeByDate(results) {
             markerType: "cross",
             markerSize: 15,
             type: "line",
+            name: "הציון שלי",
             showInLegend: true,
             legendText: "הציון שלי",
             dataPoints: GradeThisPupil
@@ -74,11 +75,13 @@ function renderGivenGradeByDate(results) {
             legendText: "ממוצע כיתתי",
             showInLegend: true,
             fillOpacity: .3,
+            name: "ממוצע כיתתי",
             lineThickness: 7,
             dataPoints: PupilGradesAVG
         },
         {
             type: "spline",
+            name: "ציוני הכיתה",
             legendText: "ציוני הכיתה",
             showInLegend: true,
             dataPoints: PupilGrades
