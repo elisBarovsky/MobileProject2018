@@ -13,6 +13,7 @@ function onDeviceReady() {
                 if (willDelete) {
                     swal("תחזור בקרוב!", {
                         icon: "success",
+                        buttons: false,
                     });
                     setTimeout(function () {
                         window.location.href = "index.html"

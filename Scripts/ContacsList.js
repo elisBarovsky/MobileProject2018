@@ -13,34 +13,55 @@ function onDeviceReady() {
         //User.type = 2;
     }
     else {
+        User.IsTeacher = false;
         User.PupilID = localStorage.getItem("PupilID");
     }
 
-    if (sessionStorage.getItem('PupilList') == null && sessionStorage.getItem('ParentsList') == null) {
+    //if (sessionStorage.getItem('PupilList') == null && sessionStorage.getItem('ParentsList') == null) {
 
-        if (User.type == 4) {
-            sessionStorage.setItem("PupilList", JSON.stringify(results.d));
+    //    if (User.type == 4) {
+    //       // sessionStorage.setItem("PupilList", JSON.stringify(results.d));
 
-        }
-        else {
-            sessionStorage.setItem("ParentsList", JSON.stringify(results.d));
+    //    }
+    //    else {
+    //      //  sessionStorage.setItem("ParentsList", JSON.stringify(results.d));
 
-        }
+    //    }
 
-        res = $.parseJSON(results.d);
+    //   // res = $.parseJSON(results.d);
 
-    }
-    else {
+    //}
+    //else {
 
-    }
+    //}
+    var retrievedObject = "";
         $('#pupilBphone').click(function () {
             User.type = 4;
-            FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
+
+            if (sessionStorage.getItem('PupilList') != null) {
+                retrievedObject = JSON.parse(sessionStorage.getItem('PupilList'));
+                FillListViewCellPhone(retrievedObject);
+              //  res = JSON.parse(retrievedObject);
+
+            }
+            else {
+                FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
+
+            }
         });
 
         $('#parentBphone').click(function () {
             User.type = 3;
-            FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
+
+            if (sessionStorage.getItem('ParentsList') !=null) {
+                retrievedObject = JSON.parse(sessionStorage.getItem('ParentsList'));
+                FillListViewCellPhone(retrievedObject);
+              //  res = JSON.parse(retrievedObject);
+            }
+            else {
+                FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
+
+            }
         });
 
 }
@@ -53,34 +74,39 @@ function funcToCall(tele) {
 
 function FillListViewCellPhone(results) {  //contactList
 
+  
+
+
     if (sessionStorage.getItem('PupilList') == null || sessionStorage.getItem('ParentsList') == null ) {
-
-        if (User.type == 4) {
-            sessionStorage.setItem("PupilList", JSON.stringify(results.d));
-
-        }
-        else {
-            sessionStorage.setItem("ParentsList", JSON.stringify(results.d));
-
-        }
-
         res = $.parseJSON(results.d);
 
-    }
-    else {
-
-        if (User.type = 4) {
-            var retrievedObject = sessionStorage.getItem('PupilList');
-
-            res = JSON.parse(retrievedObject) ;
+        if (User.type == 4) {
+            sessionStorage.setItem("PupilList", JSON.stringify(res));
 
         }
         else {
-            var retrievedObject = sessionStorage.getItem('ParentsList');
+            sessionStorage.setItem("ParentsList", JSON.stringify(res));
 
-            res = JSON.parse(retrievedObject);
         }
     }
+    else {
+        res = results;
+    }
+
+    //else {
+
+    //    if (User.type == 4) {
+    //        var retrievedObject = sessionStorage.getItem('PupilList');
+
+    //        res = JSON.parse(retrievedObject) ;
+
+    //    }
+    //    else {
+    //        retrievedObject = sessionStorage.getItem('ParentsList');
+
+    //        res = JSON.parse(retrievedObject);
+    //    }
+    //}
 
     
     counter = 0;
