@@ -39,15 +39,59 @@ function redirectPage() {
 function ClassAvgGrades(results) {
     res = $.parseJSON(results.d);
     user.PupilID = localStorage.getItem("PupilID");
-
+    var ClassAvgGrades = 0;
+    var uppPresentage = 0;
+    var DownPresentage = 0;
     for (var i = 0; i < res.length; i++) {
         if (res[i].PupilID == user.PupilID) {
             var place = i + 1;
         }
+        ClassAvgGrades += res[i].AvgGarde;
     }
-    var TotalCountHW = res[place].PupilID;
-    var TotalCountHW1 = res[place].AvgGarde;
+    localStorage.setItem("StudentGradePlace", place); //saving in localS
 
+  //  var TotalCountHW = res[place-1].PupilID;
+    ClassAvgGrades = (ClassAvgGrades / res.length );
+    var MyAvgGrades = res[place-1].AvgGarde;
+
+     uppPresentage = (res.length * 0.3);
+     DownPresentage = (res.length * 0.7);
+
+    if (place < uppPresentage) {
+        //alert('אתה בעשירון העליון');
+        swal({
+            title: "כל הכבוד!",
+            text: "אתה בין החזקים בכיתה",
+            imageUrl: "/Images/putInGrade.gif",
+            imageSize: '150x150'
+        });
+
+    }
+    else if (place > uppPresentage && MyAvgGrades > ClassAvgGrades) {
+        alert('אמנם אתה לא בעשירון העליון, הממוצע שלך גבוה מהממוצע הכיתתי');
+    }
+    else if (place > DownPresentage ) {
+        alert('אתה בתחת');
+    }
+    else  {
+        alert('אמנם אתה לא בטופ ולא באחרונים, אבל הממוצע שלך על הפנים');
+    }
+
+   // localStorage.setItem("UserFullName", res[1] + " " + res[2]);
+
+    var PupilIFullName = localStorage.getItem("UserFullName");
+    if (place == 1) {
+        document.getElementById("UserNameLBL").innerHTML = " שלום " + PupilIFullName + " <img src='Images/gold.png' height='50' />";
+
+    }
+    else if (place == 2) {
+        document.getElementById("UserNameLBL").innerHTML = " שלום " + PupilIFullName + " <img src='Images/Silver.png' height='50' />";
+
+    }
+    else if (place == 3) {
+        document.getElementById("UserNameLBL").innerHTML = " שלום " + PupilIFullName + " <img src='Images/bronze.png' height='70' style='float:left' />";
+
+    }
 }
 
 function FillProgersBarDLL(results) {
@@ -72,6 +116,8 @@ function renderFillUser(results) {
     //}
 
     res = $.parseJSON(results.d);
+
+ 
     document.getElementById("UserNameLBL").innerHTML = " שלום " + res[1] + " " + res[2];
 
     var strProg = ""
@@ -109,7 +155,7 @@ function DisplaySchedule(results) {
     if (res.length === 0) {
         //$('#noSchedule').show();
         //$('#noScheduleBoy').show();
-        $('#todaySchedule').append("<h6 id='noSchedule' style='color:gold;'>אין לימודים היום!</h6><img id='noScheduleBoy' src='Images/yayy.gif' height='130'/> ");
+        $('#todaySchedule').append("<h6 id='noSchedule' style='color:gold;margin-right:25%'>אין לימודים היום!</h6><img id='noScheduleBoy' src='Images/yayy.gif' style='margin-right:20%' height='130'/> ");
 
     }
     else {
@@ -138,13 +184,7 @@ function DisplaySchedule(results) {
     //    title: "Esta é a imagem que pretende inserir?",
     //    imageUrl: "/Images/putInGrade.gif",
     //});
-    swal({
-        title: "כל הכבוד!",
-        text: "מקום ראשון באנגלית!",
-        imageUrl: "/Images/putInGrade.gif",
-        imageSize: '150x150'
-    });
-
+  
 
 };
 
