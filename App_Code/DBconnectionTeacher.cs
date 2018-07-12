@@ -80,16 +80,9 @@ public class DBconnectionTeacher
 
     public DataTable PupilGrades(string PupilID)  //New !! 
     {
-<<<<<<< HEAD
-        string selectSTR = " SELECT dbo.Grades.GradeCode, dbo.Lessons.LessonName, dbo.Grades.ExamDate, dbo.Grades.Grade,dbo.Grades.PupilID , (select [UserFName]+' '+[UserLName]  from [dbo].[Users] where [UserID]= dbo.Grades.TeacherID) as Teacher_FullName" +
-                        " FROM  dbo.Grades INNER JOIN dbo.Users ON dbo.Grades.PupilID = dbo.Users.UserID  INNER JOIN " +
-                        "  dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID INNER JOIN  dbo.Lessons ON dbo.Grades.CodeLesson = dbo.Lessons.CodeLesson " +
-                        " where dbo.Grades.PupilID = '" + PupilID + "' order by dbo.Grades.ExamDate desc";
-=======
-        string selectSTR = "  SELECT ab.GradeCode, dbo.Lessons.LessonName, ab.ExamDate, ab.Grade,ab.PupilID , (select [UserFName]+' '+[UserLName]   from [dbo].[Users] where [UserID]= ab.TeacherID) as Teacher_FullName, " +
+         string selectSTR = "  SELECT ab.GradeCode, dbo.Lessons.LessonName, ab.ExamDate, ab.Grade,ab.PupilID , (select [UserFName]+' '+[UserLName]   from [dbo].[Users] where [UserID]= ab.TeacherID) as Teacher_FullName, " +
                         "  ( select avg(Grade) 'AvgGarde' from [dbo].[Grades] ac  where ac.ExamDate=ab.ExamDate  ) 'ExamAVG' FROM  dbo.Grades ab INNER JOIN dbo.Users ON ab.PupilID = dbo.Users.UserID  INNER JOIN  " +
                         "    dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID INNER JOIN  dbo.Lessons ON ab.CodeLesson = dbo.Lessons.CodeLesson  where ab.PupilID = '"+ PupilID + "'  order by ab.ExamDate desc  ";
->>>>>>> f86fbe4346128edb3c1efcfbdd6636541dce7a50
         DataTable dtt = new DataTable();
         DataSet ds;
         try
@@ -1552,4 +1545,44 @@ public class DBconnectionTeacher
         string cStr = "UPDATE ParentsDayMeeting SET PupilID = null WHERE MeetingCode = '" + ParentsDayMeeting + "'";
         return ExecuteNonQuery(cStr);
     }
+
+    public DataTable getHwInfoForProgBar(string Id)//WebService
+    {
+        string selectSTR = " SELECT  count(dbo.HomeWork.HWCode) as 'Made_HW', (select count(dbo.HomeWork.HWCode) "
+                            + " FROM dbo.HomeWork INNER JOIN dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson "
+                            + " where dbo.HWPupil.PupilID = '" + Id + "'  and CONVERT(datetime, dbo.HomeWork.HWDueDate, 103)> CONVERT(datetime, getdate(), 103)) as 'total_HW' "
+                            + " FROM dbo.HomeWork INNER JOIN dbo.HWPupil ON dbo.HomeWork.HWCode = dbo.HWPupil.HWCode INNER JOIN  dbo.Lessons ON dbo.HomeWork.LessonsCode = dbo.Lessons.CodeLesson "
+                            + " where dbo.HWPupil.PupilID = '" + Id + "'  and CONVERT(datetime, dbo.HomeWork.HWDueDate, 103)> CONVERT(datetime, getdate(), 103) and dbo.HWPupil.IsDone = 1 ";
+        DataTable dtt = new DataTable();
+        DataSet ds;
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
+            ds = new DataSet("HWCountDS");
+            daa.Fill(ds);
+            return dtt = ds.Tables[0];
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
 }

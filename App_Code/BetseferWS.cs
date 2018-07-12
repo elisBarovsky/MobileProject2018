@@ -459,8 +459,6 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-<<<<<<< HEAD
-=======
     public string getHwInfoForProgBar(string PupilID)
     {
         HomeWork HW = new HomeWork();
@@ -514,7 +512,6 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
->>>>>>> f86fbe4346128edb3c1efcfbdd6636541dce7a50
     public string FillHW(string UserID)
     {
         HomeWork HW = new HomeWork();
