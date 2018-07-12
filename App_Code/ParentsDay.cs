@@ -54,4 +54,16 @@ public class ParentsDay
     {
         return dbt.Parent_LoadParentDay(PupilID);
     }
+
+    public int SaveMeMeeting(string ParentsDayMeeting, string PupilID)
+    {
+        DBconnection db = new DBconnection();
+        return db.SaveMeMeeting(ParentsDayMeeting, PupilID);
+    }
+
+    public int DeleteMyMeeting(string ParentsDayMeeting)
+    {
+        DBconnection db = new DBconnection();
+        return db.DeleteMyMeeting(ParentsDayMeeting);
+    }
 }

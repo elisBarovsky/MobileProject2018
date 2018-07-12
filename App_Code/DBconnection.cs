@@ -3334,5 +3334,15 @@ public class DBconnection
         return (int)dateValue.DayOfWeek;
     }
 
+    public int SaveMeMeeting(string ParentsDayMeeting, string PupilID)
+    {
+        String cStr = "UPDATE ParentsDayMeeting SET PupilID = '" + PupilID + "' WHERE MeetingCode = " + ParentsDayMeeting;
+        return ExecuteNonQuery(cStr);
+    }
 
+    public int DeleteMyMeeting(string ParentsDayMeeting)
+    {
+        String cStr = "UPDATE ParentsDayMeeting SET PupilID = null WHERE MeetingCode = " + ParentsDayMeeting;
+        return ExecuteNonQuery(cStr);
+    }
 }

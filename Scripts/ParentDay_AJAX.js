@@ -35,6 +35,22 @@ function SaveParentDay(parentsDay, AfterSave) {
     });
 }
 
+function SaveMeMeeting(ParentsDayMeeting, PupilID, ChangeButton) {
+    $.ajax({
+        url: 'BetseferWS.asmx/SaveMeMeeting',
+        data: JSON.stringify({ 'ParentsDayMeeting': ParentsDayMeeting, 'PupilID': PupilID }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            ChangeButton(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
 function GiveMeBreak(ParentsDayMeeting, ChangeButton) {
     $.ajax({
         url: 'BetseferWS.asmx/GiveMeBreak',
@@ -67,15 +83,31 @@ function DeleteBreak(ParentsDayMeeting, ChangeButton) {//need meetting code not 
     });
 }
 
-function Parent_LoadParentDay(pupilID, ShowParentsDay) {
+function Parent_LoadParentDay(PupilID, ShowParentsDay) {
     $.ajax({
         url: 'BetseferWS.asmx/Parent_LoadParentDay',
-        data: JSON.stringify({ 'PupilID': pupilID }),
+        data: JSON.stringify({ 'PupilID': PupilID }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
             ShowParentsDay(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
+function DeleteMyMeeting(ParentsDayMeeting, ChangeButton) {
+    $.ajax({
+        url: 'BetseferWS.asmx/DeleteMyMeeting',
+        data: JSON.stringify({ 'ParentsDayMeeting': ParentsDayMeeting }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            ChangeButton(results);
         },
         error: function (request, error) {
             alert('Network error has occurred please try again!');

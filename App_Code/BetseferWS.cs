@@ -746,8 +746,6 @@ public class BetseferWS : System.Web.Services.WebService
     }
 
 
-    //***********************************************************************************
-
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string IfMehanech_LoadParentDay(string UserId)
@@ -814,6 +812,18 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string SaveMeMeeting(string ParentsDayMeeting, string PupilID)
+    {
+        ParentsDay p = new ParentsDay();
+        int res = p.SaveMeMeeting(ParentsDayMeeting, PupilID);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string PushUpdateRegId(string Id, string RegID)
     {
         Users u = new Users();
@@ -853,10 +863,23 @@ public class BetseferWS : System.Web.Services.WebService
     public string Parent_LoadParentDay(string PupilID)
     {
         ParentsDay p = new ParentsDay();
+        PupilID = PupilID.Replace(@"\", string.Empty);
         p = p.Parent_LoadParentDay(PupilID);
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(p);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string DeleteMyMeeting(string ParentsDayMeeting)
+    {
+        ParentsDay p = new ParentsDay();
+        int res = p.DeleteMyMeeting(ParentsDayMeeting);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
         return jsonString;
     }
 }
