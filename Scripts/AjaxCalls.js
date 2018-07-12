@@ -330,6 +330,7 @@ function GivenGradeByCode(GradeDate, renderGrades) {
 }
 
 function FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone) {
+
     var dataString = JSON.stringify(User);
     $.ajax({
         url: path+ 'BetseferWS.asmx/TelephoneList',

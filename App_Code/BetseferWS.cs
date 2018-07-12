@@ -303,13 +303,23 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string TelephoneList(string type, string PupilID)
+    public string TelephoneList(string type, string PupilID,string Teacher)
     {
-        Users PupilClass = new Users();
-        string PupilClassCode = PupilClass.GetPupilOtClass(PupilID);
+        string ClassCode = "";
+        if (Teacher == "True")
+        {
+            ClassCode = PupilID;
+        }
+        else
+        {
+            Users PupilClass = new Users();
+            ClassCode = PupilClass.GetPupilOtClass(PupilID);
+
+        }
 
         TelphoneList TL = new TelphoneList();
-        DataTable DT = TL.FilterTelphoneListForMobile(type, PupilClassCode);
+
+        DataTable DT = TL.FilterTelphoneListForMobile(type, ClassCode);
 
         var list = new List<Dictionary<string, object>>();
 
@@ -328,6 +338,7 @@ public class BetseferWS : System.Web.Services.WebService
         string jsonStringTelephoneList = js.Serialize(list);
         return jsonStringTelephoneList;
     }
+
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetPupilIdByUserTypeAndId(string UserId, string type)
