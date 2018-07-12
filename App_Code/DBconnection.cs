@@ -1647,7 +1647,9 @@ public class DBconnection
            " union " +
            " SELECT UserID, (dbo.Users.UserFName+' '+ dbo.Users.UserLName) as 'FullName'" +
              "  FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID where CodeClass in (SELECT distinct dbo.Timetable.ClassCode FROM  dbo.Timetable INNER JOIN " +
-            "  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where dbo.TimetableLesson.TeacherId='" + TeacherID + "')";
+            "  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where dbo.TimetableLesson.TeacherId='" + TeacherID + "')" +
+            " union " +
+            "   select UserID, (UserFName+' '+ UserLName) as 'FullName' from Users   where CodeUserType=2 and UserID <> '"+ TeacherID + "' ";
 
         List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
         try
@@ -2796,6 +2798,46 @@ public class DBconnection
         }
     }
 
+    public List<string> getParentsAndPupilsIdByClassCode(string classCode)
+    {
+        List<string> parents = new List<string>();
+
+        String selectSTR = "SELECT UserID FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID =" +
+            " dbo.Users.UserID where dbo.PupilsParent.codeClass = ( select ClassCode from [dbo].[Class] where TotalName='"+ classCode + "') union" +
+            "  SELECT dbo.Users.UserID FROM dbo.Pupil INNER JOIN dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID where dbo.Pupil.codeClass = ( select ClassCode from [dbo].[Class] where TotalName='"+ classCode + "')";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                parents.Add(dr["UserID"].ToString());
+            }
+            return parents;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public List<string> getParentsIdByClassCode(string classCode)
     {
         List<string> parents = new List<string>();
@@ -2935,6 +2977,9 @@ public class DBconnection
                 break;
             case "teachers":
                 usersIds = GetTeachersIds();
+                break;
+            case "parentsAndPupils":
+                usersIds = getParentsAndPupilsIdByClassCode(userClass);
                 break;
         }
 

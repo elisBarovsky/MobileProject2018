@@ -10,25 +10,25 @@
             FillClassesInDDL(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
+       //     alert('Network error has occurred please try again!');
         }
     });
 }
 
-function FillPupils(classTotalName, FillUsersInDDL) {
+function FillPupils(TeacherID, FillUsersInDDL) {
 
-    var dataString = JSON.stringify(classTotalName);
+    var dataString = JSON.stringify(TeacherID);
     $.ajax({
         url: 'BetseferWS.asmx/GetPupilsByClassTotalName',
-        data: JSON.stringify({ 'classTotalName': classTotalName }),
+        data: JSON.stringify({ 'TeacherID': TeacherID }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
-            FillPupilInDDL(results);
+            FillTeachersInDDL(results);
         },
         error: function (request, error) {
-            alert('Network error has occurred please try again!');
+  //          alert('Network error has occurred please try again!');
         }
     });
 }

@@ -98,7 +98,8 @@ function SubmitMessage() {
 
         message.MessageType = MSGType;
             //GetMessageType();
-       // message.UserType = userType;
+        message.UserType = "parentsAndPupils";
+        message.UserClass = $('#classDDL').val();
         message.SenderID = localStorage.getItem("UserID");
         message.Subject = subject;
         message.Content = content;
@@ -126,9 +127,7 @@ function AfterMessageSent(results) {
         position: 'top-end',
         type: 'success',
         icon: "success",
-        title: 'הודעתך נשלחה',
-        showConfirmButton: false,
-        timer: 1000
+        title: 'הודעתך נשלחה'
     });
 
     $('#classLBL').hide();
