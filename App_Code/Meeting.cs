@@ -8,6 +8,7 @@ using System.Web;
 /// </summary>
 public class Meeting
 {
+    public string MeetingCode { get; set; }
     public string PupilID { get; set; }
     public string PupilName { get; set; }
     public string StartTime { get; set; }

@@ -47,9 +47,9 @@ public class DBconnection
 
     }
 
-    public string GetClassCodeByUserID(string UserID) 
+    public string GetClassCodeByUserID(string UserID)
     {
-        String selectSTR = "select CodeClass from Pupil where UserID='"+ UserID + "'";
+        String selectSTR = "select CodeClass from Pupil where UserID='" + UserID + "'";
         string CodeClass = "";
         try
         {
@@ -85,9 +85,9 @@ public class DBconnection
         }
     }
 
-    public Dictionary<string, string> GetClassCodeAndParentIDByPupilID(string UserID) 
+    public Dictionary<string, string> GetClassCodeAndParentIDByPupilID(string UserID)
     {
-        String selectSTR = "select ParentID,codeClass from PupilsParent where PupilID='"+ UserID + "'";
+        String selectSTR = "select ParentID,codeClass from PupilsParent where PupilID='" + UserID + "'";
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -899,18 +899,18 @@ public class DBconnection
             {
                 con.Close();
             }
-        }
+        }// 
     }
 
     public int ChangePassword(string userID, string Password)
     {
-        string cStr = "update [dbo].[Users] set[LoginPassword] = ('" + Password + "') WHERE UserID = '" + userID + "'";
+        string cStr = "update[dbo].[Users] set[LoginPassword] = ('" + Password + "') WHERE UserID = '" + userID + "'";
         return ExecuteNonQuery(cStr);
     }
 
     public int PushUpdateRegId(string userID, string RegID)
     {
-        string cStr = "update [dbo].[Users] set[PushRegID] = ('" + RegID + "') WHERE UserID = '" + userID + "'";
+        string cStr = "update[dbo].[Users] set[PushRegID] = ('" + RegID + "') WHERE UserID = '" + userID + "'";
         return ExecuteNonQuery(cStr);
     }
 
@@ -1008,7 +1008,7 @@ public class DBconnection
         }
         try
         {
-            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlCommand cmd = new SqlCommand(selectSTR, conNameClass);
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             while (dr.Read())
             {
@@ -1600,7 +1600,7 @@ public class DBconnection
         "  FROM dbo.Pupil INNER JOIN   dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID   where dbo.Pupil.CodeClass='" + ClassCode + "'";
 
 
-        List< Dictionary<string, string>> l = new List<Dictionary<string, string>>();
+        List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -1649,7 +1649,7 @@ public class DBconnection
              "  FROM dbo.PupilsParent INNER JOIN dbo.Users ON dbo.PupilsParent.ParentID = dbo.Users.UserID where CodeClass in (SELECT distinct dbo.Timetable.ClassCode FROM  dbo.Timetable INNER JOIN " +
             "  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where dbo.TimetableLesson.TeacherId='" + TeacherID + "')";
 
-        List < Dictionary<string, string>> l = new List<Dictionary<string, string>>();
+        List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -1691,11 +1691,11 @@ public class DBconnection
     public List<Dictionary<string, string>> getPupilsAndTeachers(string PupilId)
     {
         String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName) AS PupilName FROM dbo.Pupil INNER JOIN  dbo.Users ON " +
-           "  dbo.Pupil.UserID = dbo.Users.UserID  where CodeClass =(select codeClass from dbo.Pupil where UserID = '"+ PupilId + "')" +
+           "  dbo.Pupil.UserID = dbo.Users.UserID  where CodeClass =(select codeClass from dbo.Pupil where UserID = '" + PupilId + "')" +
            " union " +
            " select UserID,(UserLName + ' ' +UserFName) AS PupilName from dbo.Users where UserID in(select dbo.TimetableLesson.TeacherId " +
              "  FROM  dbo.Timetable INNER JOIN  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where " +
-            "  dbo.Timetable.ClassCode =(select codeClass from dbo.Pupil where UserID = '"+ PupilId + "'))";
+            "  dbo.Timetable.ClassCode =(select codeClass from dbo.Pupil where UserID = '" + PupilId + "'))";
 
         List<Dictionary<string, string>> l = new List<Dictionary<string, string>>();
         try
@@ -1739,7 +1739,7 @@ public class DBconnection
     public List<Dictionary<string, string>> getParentsAndTeachers(string PupilId)
     {
         String selectSTR = "SELECT  distinct   dbo.Users.UserID, dbo.Users.UserLName + ' ' + dbo.Users.UserFName AS PupilName FROM  dbo.Users INNER JOIN dbo.PupilsParent ON " +
-           "   dbo.Users.UserID = dbo.PupilsParent.ParentID where  dbo.PupilsParent.codeClass= (select codeClass from dbo.Pupil where UserID = '"+ PupilId + "') " +
+           "   dbo.Users.UserID = dbo.PupilsParent.ParentID where  dbo.PupilsParent.codeClass= (select codeClass from dbo.Pupil where UserID = '" + PupilId + "') " +
            " union " +
            " select UserID,(UserLName + ' ' +UserFName) AS PupilName from dbo.Users where UserID in(select dbo.TimetableLesson.TeacherId " +
              "  FROM  dbo.Timetable INNER JOIN  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where " +
@@ -2152,10 +2152,10 @@ public class DBconnection
         }
     }
 
-    public Dictionary<string, string> FillTeacherNotBusy(int WeekDay, int LessonNum )
+    public Dictionary<string, string> FillTeacherNotBusy(int WeekDay, int LessonNum)
     {
-        String selectSTR = "select [UserID],[UserFName]+' '+ [UserLName] as FullName from [dbo].[Users] where [CodeUserType]=2 and [UserID] not in (select [TeacherId] from [dbo].[TimetableLesson] "+
-                           " where [CodeWeekDay] = "+WeekDay+" and [ClassTimeCode] = "+ LessonNum+" union select [TeacherId] from [dbo].[TempTimetableLesson] where [CodeWeekDay] = "+ WeekDay+" and [ClassTimeCode] = "+ LessonNum+" )";
+        String selectSTR = "select [UserID],[UserFName]+' '+ [UserLName] as FullName from [dbo].[Users] where [CodeUserType]=2 and [UserID] not in (select [TeacherId] from [dbo].[TimetableLesson] " +
+                           " where [CodeWeekDay] = " + WeekDay + " and [ClassTimeCode] = " + LessonNum + " union select [TeacherId] from [dbo].[TempTimetableLesson] where [CodeWeekDay] = " + WeekDay + " and [ClassTimeCode] = " + LessonNum + " )";
         string UserID, TotalName;
         Dictionary<string, string> l = new Dictionary<string, string>();
         try
@@ -2986,13 +2986,13 @@ public class DBconnection
             }
         }
     }
- public List<string> GetUserImgAndFullNameByUserID(string UserID)
+    public List<string> GetUserImgAndFullNameByUserID(string UserID)
     {
 
-         List<string> UserInfo = new List<string>();
+        List<string> UserInfo = new List<string>();
         String selectSTR = "SELECT UserFName + ' ' + UserLName as UserName, UserImg FROM dbo.Users where UserID = '" + UserID + "'";
-      // string UserImg = "";
-       // string UserName = "";
+        // string UserImg = "";
+        // string UserName = "";
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -3032,7 +3032,7 @@ public class DBconnection
 
     public string UpdateMessageAsRead(string MessageCode)
     {
-        String cStr = "UPDATE Messages SET IsReadByRecipient = 1 WHERE SenderID = (select SenderID from Messages where MessageCode = '"+ MessageCode +"')";
+        String cStr = "UPDATE Messages SET IsReadByRecipient = 1 WHERE SenderID = (select SenderID from Messages where MessageCode = '" + MessageCode + "')";
         string answer = ExecuteNonQuery(cStr).ToString();
         return answer;
     }
@@ -3057,7 +3057,7 @@ public class DBconnection
             case 1: // admin
                 break;
             case 2: // teacher
-                cStr = "select TimeTableCode, (select WeekDayName from WeekDays where CodeWeekDay = '"+ today + "') as WeekDay, ClassTimeCode, CodeLesson, TeacherId from TimetableLesson where CodeWeekDay = "+ today +" and TeacherId = '" + Id + "'";
+                cStr = "select TimeTableCode, (select WeekDayName from WeekDays where CodeWeekDay = '" + today + "') as WeekDay, ClassTimeCode, CodeLesson, TeacherId from TimetableLesson where CodeWeekDay = " + today + " and TeacherId = '" + Id + "'";
                 break;
             case 3: // parent
                 cStr = "";
@@ -3065,7 +3065,7 @@ public class DBconnection
             case 4: // pupil
                 var classCode = GetClassCodeByPupilId(Id);
                 cStr = "select TimetableLesson.TimeTableCode, (select WeekDayName from WeekDays where CodeWeekDay = '" + today + "') as WeekDay, TimetableLesson.ClassTimeCode, TimetableLesson.CodeLesson, TimetableLesson.TeacherId " +
-                    "from TimetableLesson inner join Timetable on TimetableLesson.TimeTableCode = Timetable.TimeTableCode and TimeTable.ClassCode = '"+ classCode + "' and TimetableLesson.CodeWeekDay = '"+ today +"'";
+                    "from TimetableLesson inner join Timetable on TimetableLesson.TimeTableCode = Timetable.TimeTableCode and TimeTable.ClassCode = '" + classCode + "' and TimetableLesson.CodeWeekDay = '" + today + "'";
                 break;
         }
 
@@ -3136,7 +3136,7 @@ public class DBconnection
             throw (ex);
         }
 
-        cStr = "select CONVERT(varchar, StartClassTime, 108) + ' - ' + CONVERT(varchar, EndClassTime, 108) as LessonHours from ClassTime where ClassTimeCode = '" + code +"'";
+        cStr = "select CONVERT(varchar, StartClassTime, 108) + ' - ' + CONVERT(varchar, EndClassTime, 108) as LessonHours from ClassTime where ClassTimeCode = '" + code + "'";
 
         try
         {
@@ -3169,7 +3169,7 @@ public class DBconnection
         SqlCommand cmd; string cStr = "";
         try
         {
-                con = connect("Betsefer"); // create the connection
+            con = connect("Betsefer"); // create the connection
         }
         catch (Exception ex)
         {
@@ -3177,7 +3177,7 @@ public class DBconnection
             throw (ex);
         }
 
-        cStr = "select ClassCode from TimeTable where TimeTableCode = '"+ TTC +"'";
+        cStr = "select ClassCode from TimeTable where TimeTableCode = '" + TTC + "'";
 
         try
         {
@@ -3285,30 +3285,31 @@ public class DBconnection
         }
     }
 
-    public List<Users> getUserList(string conString, string tableName)
+    public List<Users> getUserList()
     {
+        String selectSTR = "select [UserID],[PushRegID] from  [dbo].[Users] where [PushRegID] != 'null'";
 
         List<Users> userList = new List<Users>();
-        SqlConnection con = null;
         try
         {
-            con = connect(conString); // create a connection to the database using the connection String defined in the web config file
-
-            String selectSTR = "SELECT * FROM " + tableName;
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
             SqlCommand cmd = new SqlCommand(selectSTR, con);
-
-            // get a reader
-            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
-
-
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             while (dr.Read())
-            {   // Read till the end of the data into a row               
+            {
                 Users u = new Users();
-                u.UserID1 = dr["userId"].ToString();
-                u.RegId = (string)dr["regId"];
+                u.UserID1 = dr["UserID"].ToString();
+                u.RegId = dr["PushRegID"].ToString();
 
                 userList.Add(u);
-
             }
             return userList;
         }
@@ -3326,5 +3327,12 @@ public class DBconnection
         }
     }
 
-}
+    public int GetCodeWeekDayByDate(string date)
+    {
+        int year = int.Parse(date.Substring(6)), mont = int.Parse(date.Substring(3, 2)), day = int.Parse(date.Substring(0, 2));
+        DateTime dateValue = new DateTime(year, mont, day);
+        return (int)dateValue.DayOfWeek;
+    }
 
+
+}

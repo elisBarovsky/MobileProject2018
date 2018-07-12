@@ -50,7 +50,7 @@ public class BetseferWS : System.Web.Services.WebService
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetPupilsByClassTotalName(string TeacherID)
     {
-       // Classes c = new Classes();
+        // Classes c = new Classes();
         //string classCode = c.GetClassCodeAccordingToClassFullName(TeacherID);
         Users u = new Users();
         List<Dictionary<string, string>> s = new List<Dictionary<string, string>>();
@@ -158,7 +158,7 @@ public class BetseferWS : System.Web.Services.WebService
         string jsonString = js.Serialize(m);
         return jsonString;
     }
-    
+
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetAllConversation(string SenderID, string RecipientID)
@@ -219,21 +219,21 @@ public class BetseferWS : System.Web.Services.WebService
             {
                 isvalid = "openSeqQestion";/*FillSecurityQ();*/
             }
-                switch (int.Parse(UserType))
-                {
-                    case 1:
-                        UserType = "Admin";
-                        break;
-                    case 2:
-                        UserType = "Teacher";
-                        break;
-                    case 3:
-                        UserType = "Parent";
-                        break;
-                    case 4:
-                        UserType = "Child";
-                        break;
-                }
+            switch (int.Parse(UserType))
+            {
+                case 1:
+                    UserType = "Admin";
+                    break;
+                case 2:
+                    UserType = "Teacher";
+                    break;
+                case 3:
+                    UserType = "Parent";
+                    break;
+                case 4:
+                    UserType = "Child";
+                    break;
+            }
 
 
         }
@@ -243,7 +243,7 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonStringCategory;
     }
 
-    
+
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string ParentChooseChild(string ParentID)
@@ -280,7 +280,7 @@ public class BetseferWS : System.Web.Services.WebService
         {
             Qestions[i] = qqqq[i].SecurityInfo;
         }
-        
+
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringQ = js.Serialize(Qestions);
         return jsonStringQ;
@@ -288,10 +288,10 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string SaveQuestion(string ID,string Q1, string Q2, string A1, string A2)
+    public string SaveQuestion(string ID, string Q1, string Q2, string A1, string A2)
     {
         Users UserSaveQA = new Users();
-        int ans = UserSaveQA.SaveQuestion(ID,int.Parse(Q1),A1, int.Parse(Q2), A2);
+        int ans = UserSaveQA.SaveQuestion(ID, int.Parse(Q1), A1, int.Parse(Q2), A2);
         Users UserUpdateLogin = new Users();
         int ans2 = UserUpdateLogin.ChangeFirstLogin(ID);
         int anssss = ans + ans2;
@@ -303,22 +303,13 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string TelephoneList(string type, string PupilID, bool Teacher)
+    public string TelephoneList(string type, string PupilID)
     {
-        string ClassCode = "";
-        if (Teacher)
-        {
-            ClassCode = PupilID;
-        }
-        else
-        {
-            Users PupilClass = new Users();
-            ClassCode = PupilClass.GetPupilOtClass(PupilID);
-
-        }
+        Users PupilClass = new Users();
+        string PupilClassCode = PupilClass.GetPupilOtClass(PupilID);
 
         TelphoneList TL = new TelphoneList();
-        DataTable DT =  TL.FilterTelphoneListForMobile(type, ClassCode);
+        DataTable DT = TL.FilterTelphoneListForMobile(type, PupilClassCode);
 
         var list = new List<Dictionary<string, object>>();
 
@@ -423,7 +414,7 @@ public class BetseferWS : System.Web.Services.WebService
     public string FillAllHomeWork(string PupilID)
     {
         Users PupilClass = new Users();
-        string PupilClassCode =  PupilClass.GetPupilOtClass(PupilID);
+        string PupilClassCode = PupilClass.GetPupilOtClass(PupilID);
         HomeWork HomeWork = new HomeWork();
 
         DataTable DT = HomeWork.FillAllHomeWork(PupilClassCode);
@@ -468,31 +459,6 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string getHwInfoForProgBar(string PupilID)
-    {
-        HomeWork HW = new HomeWork();
-        DataTable HWs = HW.getHwInfoForProgBar(PupilID);
-
-        var list = new List<Dictionary<string, object>>();
-
-        foreach (DataRow row in HWs.Rows)
-        {
-            var dict = new Dictionary<string, object>();
-
-            foreach (DataColumn col in HWs.Columns)
-            {
-                dict[col.ColumnName] = row[col];
-            }
-            list.Add(dict);
-        }
-
-        JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonStringFillHW = js.Serialize(list);
-        return jsonStringFillHW;
-    }
-
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string FillHW(string UserID)
     {
         HomeWork HW = new HomeWork();
@@ -521,9 +487,9 @@ public class BetseferWS : System.Web.Services.WebService
     public string CheckedHW(string PupilID, bool IsDone, string HWCode)
     {
         HomeWork HW = new HomeWork();
-        int HWs = HW.HWDone( PupilID,  IsDone,  HWCode);
+        int HWs = HW.HWDone(PupilID, IsDone, HWCode);
         string result = "";
-        if (IsDone==true & HWs>0)
+        if (IsDone == true & HWs > 0)
         {
             result = "well done!";
         }
@@ -612,16 +578,16 @@ public class BetseferWS : System.Web.Services.WebService
         Messages message = new Messages();
         int answer; string stringAnswer = "bad";
         Classes c = new Classes();
-        if (m.UserClass=="null" & m.UserType== "pupils")
+        if (m.UserClass == "null" & m.UserType == "pupils")
         {
             m.UserClass = c.GetClassCodeByUserID(m.SenderID);
             //m.UserClass = classCode;
         }
         else if (m.UserClass == "null" & m.UserType == "parents")
         {
-            Dictionary<string, string> ClassAndParent =c.GetClassCodeAndParentIDByPupilID(m.SenderID);
+            Dictionary<string, string> ClassAndParent = c.GetClassCodeAndParentIDByPupilID(m.SenderID);
 
-            m.SenderID = ClassAndParent["ParentID"]; 
+            m.SenderID = ClassAndParent["ParentID"];
             m.UserClass = ClassAndParent["codeClass"];
         }
 
@@ -667,7 +633,6 @@ public class BetseferWS : System.Web.Services.WebService
         return m.UpdateMessageAsRead(MessageCode);
     }
 
-    //******************************************************************************************
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string LoadScheduleForToday(string Id, string userType)
@@ -701,8 +666,6 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonStringSchedule;
     }
 
-
-    //***********************************************************************************
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetPupilsByClassTotalName_TheGoodOne(string ClassTotalName)
@@ -717,8 +680,8 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonString;
     }
 
-    
-            [WebMethod]
+
+    [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string LoadTimeTableByIdAndDay(string UserId, string UserType, int Day)
     {
@@ -729,6 +692,8 @@ public class BetseferWS : System.Web.Services.WebService
         return jsonStringTimeTable;
     }
 
+
+    //***********************************************************************************
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -748,7 +713,7 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string PushInsertNewGuard(string UserId, string RegId) 
+    public string PushInsertNewGuard(string UserId, string RegId)
     {
         int cID = Convert.ToInt32(UserId);
 
@@ -771,13 +736,74 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string SaveParentDay(string date, string from, string to, string longMeeting, string teacher)
+    {
+        ParentsDay p = new ParentsDay();
+        p.ParentsDayDate = date;
+        p.from = from;
+        p.to = to;
+        p.longMeeting = int.Parse(longMeeting);
+        p.TeacherID = teacher;
+
+        int numEffected = p.SaveParentsDay(p);
+        if (numEffected > 1)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            // serialize to string
+            string jsonString = js.Serialize(numEffected);
+            return jsonString;
+        }
+        else
+        {
+            throw (new Exception("error in create user"));
+        }
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string PushUpdateRegId(string Id, string RegID)
     {
         Users u = new Users();
-        int res = u.PushUpdateRegId(Id, RegID); 
+        int res = u.PushUpdateRegId(Id, RegID);
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GiveMeBreak(string ParentsDayMeeting)
+    {
+        ParentsDay p = new ParentsDay();
+        int res = p.GiveMeBreak(ParentsDayMeeting);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string DeleteBreak(string ParentsDayMeeting)
+    {
+        ParentsDay p = new ParentsDay();
+        int res = p.DeleteBreak(ParentsDayMeeting);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string Parent_LoadParentDay(string PupilID)
+    {
+        ParentsDay p = new ParentsDay();
+        p = p.Parent_LoadParentDay(PupilID);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(p);
         return jsonString;
     }
 }
