@@ -2593,6 +2593,45 @@ public class DBconnection
             }
         }
     }
+    
+    public DataTable GetsubjectsByClassandTeacherID(string TeacherID, string ClassCode)
+    {
+        String selectSTR = "SELECT  distinct dbo.Lessons.CodeLesson,dbo.Lessons.LessonName FROM  dbo.Timetable INNER JOIN  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode "+
+                           " = dbo.TimetableLesson.TimeTableCode INNER JOIN  dbo.Class ON dbo.Timetable.ClassCode = dbo.Class.ClassCode AND dbo.Timetable.ClassCode = dbo.Class.ClassCode " +
+                            "  INNER JOIN  dbo.Lessons ON dbo.TimetableLesson.CodeLesson = dbo.Lessons.CodeLesson where dbo.TimetableLesson.TeacherId = '"+ TeacherID + "' and dbo.Class.TotalName = '"+ ClassCode + "' ";
+        DataTable dtt = new DataTable();
+        DataSet ds;
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
+            ds = new DataSet("HWCountDS");
+            daa.Fill(ds);
+            return dtt = ds.Tables[0];
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public Dictionary<string, string> GetSubjectsByClassCode(string classCode)
     {
         String selectSTR = "SELECT distinct dbo.Lessons.CodeLesson, dbo.Lessons.LessonName FROM dbo.Timetable " +
@@ -2993,6 +3032,43 @@ public class DBconnection
         }
 
         return ExecuteNonQuery(cStr);
+    }
+
+    public DataTable getPupillistsByClassCode( string ClassCode)
+    {
+        String selectSTR =" SELECT  dbo.Users.UserID,dbo.Users.UserFName + ' ' + dbo.Users.UserLName as 'FullName' FROM dbo.Pupil INNER JOIN "+
+                            " dbo.Class ON dbo.Pupil.CodeClass = dbo.Class.ClassCode INNER JOIN dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID where dbo.Class.TotalName = '"+ClassCode+"'";
+        DataTable dtt = new DataTable();
+        DataSet ds;
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
+            ds = new DataSet("HWpupilDS");
+            daa.Fill(ds);
+            return dtt = ds.Tables[0];
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
     }
 
     public string GetUserImgByUserID(string UserID)

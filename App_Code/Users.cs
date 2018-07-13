@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -413,6 +414,11 @@ public class Users
     public string GetUserImgByUserID(string UserID)
     {
         return db.GetUserImgByUserID(UserID);
+    }
+
+    public DataTable getPupillistsByClassCode(string ClassCode)
+    {
+        return db.getPupillistsByClassCode(ClassCode);
     }
 
     public List<Dictionary<string, string>> getParentsByClassCode(string classCode)

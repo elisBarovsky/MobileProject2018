@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -51,5 +52,10 @@ public class Subject
     public Dictionary<string, string> GetSubjectsByClassCode(string classCode)
     {
         return db.GetSubjectsByClassCode(classCode);
+    }
+
+    public DataTable GetsubjectsByClassandTeacherID(string TeacherID, string ClassCode)
+    {
+        return db.GetsubjectsByClassandTeacherID( TeacherID,  ClassCode);
     }
 }

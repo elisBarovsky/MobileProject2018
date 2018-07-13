@@ -150,6 +150,58 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetsubjectsByClassandTeacherID(string TeacherID,string ClassCode)
+    {
+        Subject s = new Subject();
+
+        DataTable subjs =s.GetsubjectsByClassandTeacherID(TeacherID, ClassCode);
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in subjs.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in subjs.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillHW = js.Serialize(list);
+        return jsonStringFillHW;
+    }
+
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetPupilsListByClassTotalName(string ClassCode)
+    {
+        Users u = new Users();
+        DataTable pupils = u.getPupillistsByClassCode(ClassCode);
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in pupils.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in pupils.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillHW = js.Serialize(list);
+        return jsonStringFillHW; ;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string GetMessagesByUserIdUnread(string userId)
     {
         Messages u = new Messages();
