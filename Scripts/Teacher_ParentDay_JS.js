@@ -146,7 +146,12 @@ function SaveParentsDay() {
     var long = $('#long option:selected').text();
 
     if (date === "" || from === "בחר" || to === "בחר" || long === "בחר") {
-        alert("עליך למלא את כל השדות");
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'עליך למלא את כל השדות'
+        });
         return;
     }
     chosenDate = date.split("-");
@@ -163,12 +168,22 @@ function SaveParentsDay() {
         var yyyy = today.getFullYear();
         today = dd + '/' + mm + '/' + yyyy;
         if (today > date) {
-            alert("תאריך זה כבר עבר");
+            swal({
+                position: 'top-end',
+                type: 'error',
+                icon: "error",
+                title: 'תאריך זה כבר עבר'
+            });
             return;
         }
 
         if (from > to) {
-            alert("שעות אינן תקינות");
+            swal({
+                position: 'top-end',
+                type: 'error',
+                icon: "error",
+                title: 'שעות אינן תקינות'
+            });
             return;
         }
 
@@ -185,7 +200,13 @@ function SaveParentsDay() {
 };
 
 function AfterSave(results) {
-    alert("נוצר בהצלחה");
+
+    swal({
+        position: 'top-end',
+        type: 'success',
+        icon: "success",
+        title: 'נוצר בהצלחה'
+    });
 
     //var date = $('#parentsDayDate').val() = "";
     //var from = $('#from option:selected').select(0);

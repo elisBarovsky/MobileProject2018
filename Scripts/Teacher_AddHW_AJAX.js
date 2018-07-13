@@ -56,18 +56,18 @@ function FillPupils(Teacher, FillPupilsDDL) {
 }
 
 
-function UpdateMessageAsRead(i) {
+function SubmitHWAjax(HomeWork, AfterHWSent) {
+    var dataString = JSON.stringify(HomeWork);
     $.ajax({
-        url: path+ 'BetseferWS.asmx/SetMessageAsRead',
-        data: JSON.stringify({ 'MessageCode': i }),
+        url: path + 'BetseferWS.asmx/SubmitHWInfo ',
+        data: JSON.stringify({ 'HWContent': HomeWork.HWContent , 'DueDate': HomeWork.DueDate, 'ChoosenClass': HomeWork.ChosenClass, 'ChoosenSubject': HomeWork.Chosensubject, 'IsLehagasha': HomeWork.IsLehagasha, 'TeacherID': HomeWork.TeacherID }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
         success: function (results) {
-           
+            AfterHWSent(results);
         },
         error: function (request, error) {
-
         }
     });
 }

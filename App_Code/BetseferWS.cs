@@ -689,6 +689,39 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string SubmitHWInfo( string HWContent, string DueDate ,string ChoosenClass, string ChoosenSubject, string IsLehagasha, string TeacherID)
+    {
+        int answer = 0;
+        string stringAnswer = "bad";
+        HomeWork InsertHomeW = new HomeWork();
+        bool IsLehag = false;
+
+        Classes ClassC = new Classes();
+        string ClassCode= ClassC.GetClassCodeAccordingToClassFullName(ChoosenClass);
+
+        Subject Subj = new Subject();
+        string Lesson = Subj.GetSubjectCodeBySubjectName(ChoosenSubject);
+        if (IsLehagasha=="True")
+        {
+            IsLehag = true;
+        }
+
+        answer= InsertHomeW.InserHomeWork(Lesson, HWContent, TeacherID, ClassCode, DueDate, IsLehag);
+
+        if (answer > 0)
+        {
+            stringAnswer = "good";
+        }
+
+      //  return stringAnswer;
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillSubjects = js.Serialize(stringAnswer);
+        return jsonStringFillSubjects;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string SubmitMessage(Messages m)
     {
         Messages message = new Messages();
