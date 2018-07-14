@@ -11,7 +11,8 @@ function ShowParentsDay(results) {
     $("#parentsDayTable").empty();
     $("#pdDetails").empty();
 
-    if (results === "no") { // this teacher don't has a main class
+    if (results.d === "no") { // this teacher don't has a main class
+        $("#noMehanech").append("אין עבורך כיתת חינוך");
 
         $("#noMehanech").show();
         $("#createNewDay").hide();
@@ -23,7 +24,6 @@ function ShowParentsDay(results) {
     res = $.parseJSON(results.d);
 
     if (res["ParentsDayDate"] === null) { // there is no parents day open
-        $("#noMehanech").append("אין עבורך כיתת חינוך");
         $("#parentsDayTable").hide();
 
         var tr1 = document.createElement('tr');
@@ -122,6 +122,7 @@ function ShowParentsDay(results) {
         submitButton.style = "float: left";
         submitButton.id = "submitPD";
         submitButton.onclick = SaveParentsDay;
+        submitButton.className('btn btn-rounded btn-outline-primary');
         $("#createNewDay").append(submitButton);
 
         return;
@@ -142,10 +143,10 @@ function ShowParentsDay(results) {
     for (var i = 0; i < res["ParentsDayMeetings"].length; i++) {
         // remmember also to check if this is me let me delete myself from the list
         if (res["ParentsDayMeetings"][i].PupilID === "") {//there is nothing in the pupil ID
-            pupilOrBreake = "<button onclick='GiveMeBreak1(" + res["ParentsDayMeetings"][i].MeetingCode + ")'>סגירה עבור הפסקה</button>"
+            pupilOrBreake = "<button onclick='GiveMeBreak1(" + res["ParentsDayMeetings"][i].MeetingCode + ")' class='btn btn-rounded btn-outline-danger'>סגירה עבור הפסקה</button>"
         }
         else if (res["ParentsDayMeetings"][i].PupilID === "0") {
-            pupilOrBreake = "<button onclick='DeleteBreak1(" + res["ParentsDayMeetings"][i].MeetingCode + ")'>ביטול הפסקה</button>";
+            pupilOrBreake = "<button onclick='DeleteBreak1(" + res["ParentsDayMeetings"][i].MeetingCode + ")' class='btn btn-rounded btn-outline-info' >ביטול הפסקה</button>";
         }
         else {
             pupilOrBreake = res["ParentsDayMeetings"][i].PupilName;
