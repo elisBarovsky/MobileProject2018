@@ -722,6 +722,35 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string SubmitNoteInfo(string Pupil, string CodeNoteType, string TeacherID, string LessonsCode, string Comment)
+    {
+        int answer = 0;
+        string stringAnswer = "bad";
+
+        Notes InsertNote = new Notes();
+        string NoteCode = InsertNote.GiveNoteCodeByNoteName(CodeNoteType);
+
+        Subject Subj = new Subject();
+        string Lesson = Subj.GetSubjectCodeBySubjectName(LessonsCode);
+
+        Student student = new Student();
+        string StudID = student.GetUserIDByFullName(Pupil);
+
+        string todayDate = DateTime.Today.ToShortDateString();
+        answer = InsertNote.InsertNotes(StudID, NoteCode, todayDate, TeacherID, Lesson, Comment);
+
+        if (answer > 0)
+        {
+            stringAnswer = "good";
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillSubjects = js.Serialize(stringAnswer);
+        return jsonStringFillSubjects;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string SubmitMessage(Messages m)
     {
         Messages message = new Messages();
@@ -977,6 +1006,31 @@ public class BetseferWS : System.Web.Services.WebService
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(res);
         return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetNoteTypes()
+    {
+        Notes AllNotes = new Notes();
+        DataTable DT = AllNotes.GetNotestype();
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in DT.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in DT.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringGivenAllNotes = js.Serialize(list);
+        return jsonStringGivenAllNotes;
     }
 }
 

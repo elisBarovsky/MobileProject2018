@@ -361,10 +361,14 @@ public class Users
 
     public string GetUserFullNameByID(string teacherId)
     {
-        DBconnection db = new DBconnection();
         return db.GetUserFullNameByID(teacherId);
     }
 
+    public string GetUserIDByFullName(string FullName)
+    {
+        return db.GetUserIDByFullName(FullName);
+
+    }
     public bool IsLegalBday(string day, string month)
     {
         if (int.Parse(month) <= 7)

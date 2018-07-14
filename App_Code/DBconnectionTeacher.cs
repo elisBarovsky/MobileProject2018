@@ -344,6 +344,41 @@ public class DBconnectionTeacher
         }
     }
 
+    public DataTable GetNotestype() //webService
+    {
+        string selectSTR = " select * from [dbo].[NoteType]";
+        DataTable dtt = new DataTable();
+        DataSet ds;
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlDataAdapter daa = new SqlDataAdapter(selectSTR, con); // create the data adapter
+            ds = new DataSet("NotetypeDS");
+            daa.Fill(ds);
+            return dtt = ds.Tables[0];
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
     public DataTable GivenHTByCode(string HWID) //webService
     {
         string selectSTR = " SELECT dbo.HomeWork.HWCode, dbo.HomeWork.HWInfo, dbo.HomeWork.HWGivenDate, dbo.Lessons.LessonName, dbo.HomeWork.HWDueDate, dbo.HomeWork.IsLehagasha, (dbo.Users.UserFName+' '+ dbo.Users.UserLName) as TeacherName " +
@@ -1153,6 +1188,43 @@ public class DBconnectionTeacher
             throw (ex);
         }
 
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public string GiveNoteCodeByNoteName(string NoteName)
+    {
+        String selectSTR = "select CodeNoteType from [dbo].[NoteType] where NoteName=  '" + NoteName + "'";
+        string subjectCode = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                subjectCode = dr[0].ToString();
+            }
+            return subjectCode;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
         finally
         {
             if (con != null)

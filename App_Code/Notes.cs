@@ -43,6 +43,11 @@ public class Notes
         return dbT.GivenNoteByCode(NoteID);
     }
 
+    public string GiveNoteCodeByNoteName(string Notename)
+    {
+        return dbT.GiveNoteCodeByNoteName(Notename);
+    }
+
     public DataTable GivenHTByCode(string HWID)
     {
         return dbT.GivenHTByCode(HWID);
@@ -51,5 +56,10 @@ public class Notes
     public DataTable GivenNotesBySubject(string PupilID, string ChooseSubjectCode)
     {
         return dbT.GivenNotesBySubject(PupilID, ChooseSubjectCode);
+    }
+
+    public DataTable GetNotestype()
+    {
+        return dbT.GetNotestype();
     }
 }

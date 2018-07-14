@@ -23,12 +23,17 @@ function ShowParentsDay(results) {
     res = $.parseJSON(results.d);
 
     if (res["ParentsDayDate"] === null) { // there is no parents day open
-        $("#noMehanech").hide();
+        $("#noMehanech").append("אין עבורך כיתת חינוך");
         $("#parentsDayTable").hide();
 
         var tr1 = document.createElement('tr');
         var td1 = document.createElement('td');
         var td2 = document.createElement('td');
+
+        tr1.setAttribute("style", "text-align:center;");
+        td1.setAttribute("style", "text-align:center;");
+        td2.setAttribute("style", "text-align:center;");
+
         var text = document.createTextNode('בחר מועד:');
         var input = document.createElement('input');
         input.type = "date";
@@ -45,6 +50,10 @@ function ShowParentsDay(results) {
         var tr2 = document.createElement('tr');
         var td3 = document.createElement('td');
         var td4 = document.createElement('td');
+        tr2.setAttribute("style", "text-align:center;");
+        td3.setAttribute("style", "text-align:center;");
+        td4.setAttribute("style", "text-align:center;");
+
         var text2 = document.createTextNode('שעת התחלה:');
         var input2 = document.createElement("select");
         input2.id = "from";
@@ -66,6 +75,10 @@ function ShowParentsDay(results) {
         var tr3 = document.createElement('tr');
         var td5 = document.createElement('td');
         var td6 = document.createElement('td');
+        tr3.setAttribute("style", "text-align:center;");
+        td5.setAttribute("style", "text-align:center;");
+        td6.setAttribute("style", "text-align:center;");
+
         var text3 = document.createTextNode('שעת סיום:');
         var input3 = document.createElement('select');
         input3.id = "to";
@@ -81,6 +94,11 @@ function ShowParentsDay(results) {
         var tr4 = document.createElement('tr');
         var td7 = document.createElement('td');
         var td8 = document.createElement('td');
+
+        tr4.setAttribute("style", "text-align:center;");
+        td7.setAttribute("style", "text-align:center;");
+        td8.setAttribute("style", "text-align:center;");
+
         var text4 = document.createTextNode('משך פגישה (דקות):');
         var input4 = document.createElement('select');
         input4.id = "long";
@@ -112,12 +130,14 @@ function ShowParentsDay(results) {
     // show the existing parents day
     $("#parentsDayTable").show();
     $("#createNewDay").hide();
+
     var title = "כיתה " + res.ClassName + " תאריך: " + res.ParentsDayDate;
+
     $("#pdDetails").append(title);
     $("#pdDetails").show();
     $("#noMehanech").hide();
 
-    var strParentsDay = "<thead class='bg-warning'>< tr ><th>שעה</th><th>תלמיד</th></tr ></thead >";
+    var strParentsDay = "<thead class='bg-warning' >< tr ><th style='text-align:center'>שעה</th><th style='text-align:center'>תלמיד</th></tr ></thead >";
 
     for (var i = 0; i < res["ParentsDayMeetings"].length; i++) {
         // remmember also to check if this is me let me delete myself from the list
@@ -130,9 +150,9 @@ function ShowParentsDay(results) {
         else {
             pupilOrBreake = res["ParentsDayMeetings"][i].PupilName;
         }
-        strParentsDay += "<tr><td>" + res["ParentsDayMeetings"][i].StartTime +
-            "-" + res["ParentsDayMeetings"][i].EndTime +
-            "</td><td>" + pupilOrBreake +
+        strParentsDay += "<tr style='text-align:center'><td style='text-align:center'>" + res["ParentsDayMeetings"][i].StartTime.substring(0, 5) +
+            "-" + res["ParentsDayMeetings"][i].EndTime.substring(0, 5) +
+            "</td><td style='text-align:center'>" + pupilOrBreake +
             "</td></tr>";
     }
 
@@ -150,7 +170,9 @@ function SaveParentsDay() {
             position: 'top-end',
             type: 'error',
             icon: "error",
-            title: 'עליך למלא את כל השדות'
+            title: 'עליך למלא את כל השדות',
+            showConfirmButton: true,
+
         });
         return;
     }
@@ -172,7 +194,9 @@ function SaveParentsDay() {
                 position: 'top-end',
                 type: 'error',
                 icon: "error",
-                title: 'תאריך זה כבר עבר'
+                title: 'שתאריך זה כבר עבר',
+                showConfirmButton: true,
+
             });
             return;
         }
@@ -182,7 +206,9 @@ function SaveParentsDay() {
                 position: 'top-end',
                 type: 'error',
                 icon: "error",
-                title: 'שעות אינן תקינות'
+                title: 'שעות אינן תקינות',
+                showConfirmButton: true,
+
             });
             return;
         }
@@ -200,14 +226,12 @@ function SaveParentsDay() {
 };
 
 function AfterSave(results) {
-
     swal({
         position: 'top-end',
         type: 'success',
         icon: "success",
         title: 'נוצר בהצלחה'
     });
-
     //var date = $('#parentsDayDate').val() = "";
     //var from = $('#from option:selected').select(0);
     //var to = $('#to option:selected').select(0);
