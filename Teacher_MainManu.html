@@ -23,6 +23,9 @@
     <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+
     <!-- jQuery 3 -->
     <script src="dist/js/jquery.min.js"></script>
 
@@ -64,14 +67,28 @@
 
     <div class="login-box">
 
-        <div class="login-box-body" style="height:150px">
-            <h4 class="login-box-msg m-b-3" id="UserNameLBL" style="float:right"></h4>
+        <div class="login-box-body" style="height:80px;border-radius:10px">
+            <h4 class="login-box-msg m-b-3" id="UserNameLBL" style="float:right;text-align:center"></h4>
 
-            <img id="UserIMG" src="" alt="" style="height:110px;float:left;position:fixed" />
+            <!--<img id="UserIMG" src="" alt="" style="height:110px;float:left;position:fixed" />-->
 
         </div>
         <br />
-        <div div class="login-box-body" style="height:300px">
+        <div class="info-box" style="border-radius:10px">
+            <img src="Images/messageShake.gif" height="1" class="TDeshbordImg" />
+            <div>
+                <h6 id="noNewMessages" style="color:gold;text-align:center">אין הודעות חדשות</h6>
+                <table style="width:100%" id="messagesTable" class="table table-hover no-wrap table-striped"></table>
+            </div>
+        </div>
+
+        <div div class="login-box-body" style="border-radius:10px">
+            <div id="todaySchedule" style="margin-left:auto;margin-right:15%">
+                <img src="Images/luzeMoove.gif" height="40" style="margin-right:30%" />
+                <table id="looze" style="border-spacing: 20px;border-collapse: separate;"></table>
+            </div>
+
+
 
         </div>
 

@@ -5879,3 +5879,10 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e73f7c', endCo
 	transform: translate(0px, 0)
 }
 }
+
+.TDeshbordImg {
+    height: 60px;
+    width: 70px;
+    margin-right: 39%;
+    - margin-right: auto;
+}

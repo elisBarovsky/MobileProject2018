@@ -180,12 +180,6 @@ function DisplaySchedule(results) {
         $('#looze').append(tableString);
     }
 
-    //swal({
-    //    title: "Esta é a imagem que pretende inserir?",
-    //    imageUrl: "/Images/putInGrade.gif",
-    //});
-  
-
 };
 
 //-------------------------------------------------
