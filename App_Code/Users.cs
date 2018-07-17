@@ -171,12 +171,6 @@ public class Users
         CodeUserType = codeUserType;
     }
 
-  //  public int insertUser(Users u)
-  //  {
-  //      db = new DBconnection();
-		//return numAffected = db.SaveUser(u);
-  //  }
-
     public List<Users> getUserList()
     {
         db = new DBconnection();
@@ -189,26 +183,6 @@ public class Users
     {
         return db.GetNumChild(UserID);
     }
-
-    //public int UpdatePupil(string userID, string CodeClass)
-    //{
-    //    return db.UpdatePupil(userID, CodeClass);
-    //}
-
-    //public int AddTeacher(string UserID, string IsMain)
-    //{
-    //    return db.AddTeacher(UserID, IsMain);
-    //}
-
-    //public int UpdateTeacher(string UserID, string IsMain)
-    //{
-    //    return db.UpdateTeacher(UserID, IsMain);
-    //}
-
-    //public int AddMainTeacherToClass(string id, string OtClass)
-    //{
-    //    return db.AddMainTeacherToClass(id, OtClass);
-    //}
 
     public Dictionary<string, string> getPupils(string classCode)
     {
@@ -240,41 +214,6 @@ public class Users
         return db.FillClassOt();
     }
 
-    //public int AddClassTeacher(string UserID, string ClassOt)
-    //{
-    //    return db.AddMainTeacherToClass(UserID, ClassOt);
-    //}
-
-    //public int DeleteMainTeacherToClass(string TotalClassName)
-    //{
-    //    return db.DeleteMainTeacherToClass(TotalClassName); // execute the command 
-    //}
-
-    //public List<string> IsAlreadyMainTeacher(string id)
-    //{
-    //    return db.IsAlreadyMainTeacher(id);
-    //}
-
-    //public int AddParent(string ParentID, string PupilID, string ChildCodeClass)
-    //{
-    //    return db.AddParent(ParentID, PupilID, ChildCodeClass);
-    //}
-
-    //public int UpdateParent(string PupilID, string ParentID, string ChildCodeClass)
-    //{
-    //    return db.UpdateParent(PupilID, ParentID, ChildCodeClass);
-    //}
-
-    //public int AddUser(Users NewUser)
-    //{
-    //    return db.AddUser(NewUser);
-    //}
-
-    //public int UpdateUser(string userID, string userFName, string userLName, string birthDate, string userImg, string userName, string userPassword, string phoneNumber)
-    //{
-    //    return db.UpdateUser(userID, userFName, userLName, birthDate, userImg, userName, userPassword, phoneNumber);
-    //}
-
     public List<string>  GetUserType(string UserID, string password)
     {
         return db.GetUserType(UserID, password);
@@ -284,11 +223,6 @@ public class Users
     {
         return db.GetUserTypeById(UserID);
     }
-
-    //public string GetPupilGroup(string UserID)
-    //{
-    //    return db.GetPupilGroup(UserID);
-    //}
 
     public string GetPupilOtClass(string UserID)
     {
