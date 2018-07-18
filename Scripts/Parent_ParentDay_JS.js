@@ -100,7 +100,29 @@ function SaveMeMeeting1(ParentsDayMeeting, StartTime) {
 
 function DeleteMyMeeting1(ParentsDayMeeting) {
     //delete the break time
-    DeleteMyMeeting(ParentsDayMeeting, ChangeButton);
+    swal(("האם אתה בטוח שאתה רוצה לבטל את הפגישה?"), {
+        buttons: {
+            yes: "כן",
+            no: {
+                text: "לא"
+            }
+        },
+    })
+        .then((value) => {
+            switch (value) {
+
+                case "yes":
+                    swal("נמחק");
+                    DeleteMyMeeting(ParentsDayMeeting, ChangeButton);
+                    break;
+
+                case "no":
+                    swal("בוטל");
+                    ChangeButton("");
+                    break;
+            }
+        });
+
 };
 
 function ChangeButton(results) {
