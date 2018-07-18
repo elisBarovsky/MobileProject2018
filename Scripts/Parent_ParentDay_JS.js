@@ -18,13 +18,14 @@ function ShowParentsDay(results) {
     if (res["ParentsDayDate"] === null) { // there is no parents day open
         $("#noParentDay").show();
         $("#parentsDayTable").hide();
+        $("#noParentDay").append("אין יום הורים בקרוב");
 
         return;
     }
 
     // show the existing parents day
     $("#parentsDayTable").show();
-    var title = "כיתה " + res.ClassName + " תאריך: " + res.ParentsDayDate + "מורה: " + res.TeacherName;
+    var title = "כיתה " + res.ClassName + " תאריך: " + res.ParentsDayDate + " מחנך: " + res.TeacherName;
     $("#pdDetails").append(title);
     $("#pdDetails").show();
     $("#noParentDay").hide();
@@ -35,21 +36,21 @@ function ShowParentsDay(results) {
     for (var i = 0; i < res["ParentsDayMeetings"].length; i++) {
 
         if (res["ParentsDayMeetings"][i].PupilID === "") {//there is nothing in the pupil ID
-            pupilOrBreake = "<button class = 'emptyMeeting' onclick='SaveMeMeeting1(" + res["ParentsDayMeetings"][i].MeetingCode + ")'>מתאים לי</button>"
+            pupilOrBreake = "<button class = 'emptyMeeting btn btn-rounded btn-outline-info' onclick='SaveMeMeeting1(" + res["ParentsDayMeetings"][i].MeetingCode + ")'>מתאים לי</button>"
         }
         else if (res["ParentsDayMeetings"][i].PupilID === "0") {
             pupilOrBreake = "סגור";
         }
         else if (res["ParentsDayMeetings"][i].PupilID === localStorage.getItem("PupilID")) { // check if this meeting is mine.
             pupilOrBreake = res["ParentsDayMeetings"][i].PupilName +
-                "<button onclick='DeleteMyMeeting1(" + res["ParentsDayMeetings"][i].MeetingCode + ")'>מחק אותי</button>"
+                " \t   <button onclick='DeleteMyMeeting1(" + res["ParentsDayMeetings"][i].MeetingCode + ")' class='btn btn-rounded btn-outline-danger'>X</button>"
             signToMeeting = "true";
         }
         else {
             pupilOrBreake = res["ParentsDayMeetings"][i].PupilName;
         }
-        strParentsDay += "<tr><td>" + res["ParentsDayMeetings"][i].StartTime +
-            "-" + res["ParentsDayMeetings"][i].EndTime +
+        strParentsDay += "<tr><td>" + res["ParentsDayMeetings"][i].StartTime.substring(0, 5) +
+            "-" + res["ParentsDayMeetings"][i].EndTime.substring(0, 5) +
             "</td><td>" + pupilOrBreake +
             "</td></tr>";
     }
