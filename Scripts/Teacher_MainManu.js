@@ -9,7 +9,7 @@ function onDeviceReady() {
         user.UserId = localStorage.getItem("UserID");
         Id = localStorage.getItem("UserID");
         user.userType = 2;
-    localStorage.setItem("LastVisit","Teacher_MainManu.html"); //saving in localS
+        localStorage.setItem("LastVisit","Teacher_MainManu.html"); //saving in localS
         GetUserInfo(user, renderFillUser);
 
         LoadAllMessagesById(Id, DisplayMessages);
