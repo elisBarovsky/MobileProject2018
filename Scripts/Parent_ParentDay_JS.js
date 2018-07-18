@@ -35,7 +35,7 @@ function ShowParentsDay(results) {
     for (var i = 0; i < res["ParentsDayMeetings"].length; i++) {
 
         if (res["ParentsDayMeetings"][i].PupilID === "") {//there is nothing in the pupil ID
-            pupilOrBreake = "<button class = 'emptyMeeting' onclick='SaveMeMeeting1(" + res["ParentsDayMeetings"][i].MeetingCode + ")'>מתאים לי</button>"
+            pupilOrBreake = "<button class = 'emptyMeeting' onclick='SaveMeMeeting1(" + res["ParentsDayMeetings"][i].MeetingCode +" )'>מתאים לי</button>"
         }
         else if (res["ParentsDayMeetings"][i].PupilID === "0") {
             pupilOrBreake = "סגור";
@@ -60,27 +60,39 @@ function ShowParentsDay(results) {
     }
 };
 
-function AfterSave(results) {
-    alert("נוצר בהצלחה");
 
-    //var date = $('#parentsDayDate').val() = "";
-    //var from = $('#from option:selected').select(0);
-    //var to = $('#to option:selected').select(0);
-    //var long = $('#long option:selected').select(0);
-
-    IfMehanech_LoadParentDay(localStorage.getItem("UserID"), ShowParentsDay);
-};
-
-function SaveMeMeeting1(ParentsDayMeeting) {
+function SaveMeMeeting1(ParentsDayMeeting, StartTime) {
     // save the breake time
-    SaveMeMeeting(ParentsDayMeeting, localStorage.getItem("PupilID"), ChangeButton);
+    swal("האם לשריין עבורך את", {
+        buttons: ["לא", "כן"],
+    });
+    swal("האם לשריין עבורך את 16:30?", {
+        buttons: {
+            yes: "כן",
+            no: {
+                text: "לא"
+            }
+        },
+    })
+        .then((value) => {
+            switch (value) {
+
+                case "yes":
+                    swal("נשמר");
+                    SaveMeMeeting(ParentsDayMeeting, localStorage.getItem("PupilID"), ChangeButton);
+                    break;
+
+                case "no":
+                    swal("בוטל");
+                    ChangeButton("");
+                    break;
+            }
+        });
 };
 
 function DeleteMyMeeting1(ParentsDayMeeting) {
     //delete the break time
     DeleteMyMeeting(ParentsDayMeeting, ChangeButton);
-
-    //change the button text
 };
 
 function ChangeButton(results) {
