@@ -36,11 +36,9 @@ function ShowParentsDay(results) {
     for (var i = 0; i < res["ParentsDayMeetings"].length; i++) {
 
         if (res["ParentsDayMeetings"][i].PupilID === "") {//there is nothing in the pupil ID
-<<<<<<< HEAD
-            pupilOrBreake = "<button class = 'emptyMeeting' onclick='SaveMeMeeting1(" + res["ParentsDayMeetings"][i].MeetingCode +" )'>מתאים לי</button>"
-=======
-            pupilOrBreake = "<button class = 'emptyMeeting btn btn-rounded btn-outline-info' onclick='SaveMeMeeting1(" + res["ParentsDayMeetings"][i].MeetingCode + ")'>מתאים לי</button>"
->>>>>>> e99644842d7190c771add59271fcb027aa5e23bb
+
+
+            pupilOrBreake = "<button class = 'emptyMeeting btn btn-rounded btn-outline-info' onclick='SaveMeMeeting1(" + res["ParentsDayMeetings"][i].MeetingCode + "," + res["ParentsDayMeetings"][i].StartTime.substring(0, 2).toString() + "." + res["ParentsDayMeetings"][i].StartTime.substring(5, 3).toString()+" )'>מתאים לי</button>"
         }
         else if (res["ParentsDayMeetings"][i].PupilID === "0") {
             pupilOrBreake = "סגור";
@@ -68,10 +66,15 @@ function ShowParentsDay(results) {
 
 function SaveMeMeeting1(ParentsDayMeeting, StartTime) {
     // save the breake time
-    swal("האם לשריין עבורך את", {
-        buttons: ["לא", "כן"],
-    });
-    swal("האם לשריין עבורך את 16:30?", {
+    if (StartTime.toString().length > 2) {
+        var res = StartTime.toString().replace(".", ":");
+        res += "0";
+    }
+    else {
+        var res = StartTime.toString().replace(".", ":");
+        res += ":00";
+    }
+    swal(("האם לשריין עבורך את " + res +" ?"), {
         buttons: {
             yes: "כן",
             no: {
