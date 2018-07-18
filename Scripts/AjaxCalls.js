@@ -396,9 +396,26 @@ function LoadScheduleForToday(obj, DisplaySchedule) {
     });
 }
 
+
+
+function registerDevice(dataString) {
+    $.ajax({
+        url: path + 'BetseferWS.asmx/PushUpdateRegId',
+        data: JSON.stringify({ 'RegID': dataString.regId, 'Id': dataString.userId }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
 function LoadAllMessagesById(Id, DisplayMessages) {
     $.ajax({
-        url: 'BetseferWS.asmx/GetMessagesByUserIdUnread',
+        url: path+'BetseferWS.asmx/GetMessagesByUserIdUnread',
         data: JSON.stringify({ 'userId': Id }),
         type: 'POST',
         dataType: "json",
@@ -414,7 +431,7 @@ function LoadAllMessagesById(Id, DisplayMessages) {
 
 function UpdateMessageAsRead(i) {
     $.ajax({
-        url: 'BetseferWS.asmx/SetMessageAsRead',
+        url: path+'BetseferWS.asmx/SetMessageAsRead',
         data: JSON.stringify({ 'MessageCode': i }),
         type: 'POST',
         dataType: "json",

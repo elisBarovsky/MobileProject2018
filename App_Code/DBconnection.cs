@@ -1281,11 +1281,11 @@ public class DBconnection
         string cStr;
         if (userImg == "")
         {
-            cStr = "Update Users set [UserID]='" + userID + "',[UserFName]='" + userFName + "',[UserLName]='" + userLName + "',[BirthDate]='" + birthDate + "',[LoginName]='" + userName + "',[LoginPassword]='" + userPassword + "',[PhoneNumber]='" + phoneNumber + "' where [UserID]='" + userID + "'";
+            cStr = "Update Users set [UserID]='" + userID + "',[UserFName]='" + userFName + "',[UserLName]='" + userLName + "',[BirthDate]='" + birthDate + "',[LoginPassword]='" + userPassword + "',[PhoneNumber]='" + phoneNumber + "' where [UserID]='" + userID + "'";
         }
         else
         {
-            cStr = "Update Users set [UserID]='" + userID + "',[UserFName]='" + userFName + "',[UserLName]='" + userLName + "',[BirthDate]='" + birthDate + "',[UserImg]='" + userImg + "',[LoginName]='" + userName + "',[LoginPassword]='" + userPassword + "',[PhoneNumber]='" + phoneNumber + "' where [UserID]='" + userID + "'";
+            cStr = "Update Users set [UserID]='" + userID + "',[UserFName]='" + userFName + "',[UserLName]='" + userLName + "',[BirthDate]='" + birthDate + "',[UserImg]='" + userImg + "',[LoginPassword]='" + userPassword + "',[PhoneNumber]='" + phoneNumber + "' where [UserID]='" + userID + "'";
         }
         return ExecuteNonQuery(cStr); // execute the command   
     }
@@ -3043,19 +3043,27 @@ public class DBconnection
     {
         List<string> usersIds = new List<string>();
         String cStr = "";
+        string classCode = "";
+
+        if (userClass!= "" )
+        {
+            Classes Cl = new Classes();
+
+            classCode = Cl.GetClassCodeAccordingToClassFullName(userClass);
+        }
         switch (userType)
         {
             case "pupils":
-                usersIds = getPupilsIdByClassCode(userClass);
+                usersIds = getPupilsIdByClassCode(classCode);
                 break;
             case "parents":
-                usersIds = getParentsIdByClassCode(userClass);
+                usersIds = getParentsIdByClassCode(classCode);
                 break;
             case "teachers":
                 usersIds = GetTeachersIds();
                 break;
             case "parentsAndPupils":
-                usersIds = getParentsAndPupilsIdByClassCode(userClass);
+                usersIds = getParentsAndPupilsIdByClassCode(classCode);
                 break;
         }
 
@@ -3293,8 +3301,8 @@ public class DBconnection
             // write to log
             throw (ex);
         }
-
-        cStr = "select CONVERT(varchar, StartClassTime, 108) + ' - ' + CONVERT(varchar, EndClassTime, 108) as LessonHours from ClassTime where ClassTimeCode = '" + code + "'";
+        
+        cStr = "select CONVERT(varchar,EndClassTime , 108) + ' - ' + CONVERT(varchar,StartClassTime , 108) as LessonHours from ClassTime where ClassTimeCode = '" + code + "'";
 
         try
         {

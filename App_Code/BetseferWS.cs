@@ -966,8 +966,19 @@ public class BetseferWS : System.Web.Services.WebService
         p.TeacherID = teacher;
 
         int numEffected = p.SaveParentsDay(p);
-        if (numEffected > 1)
+        if (numEffected >= 1)
         {
+            Users user = new Users();
+            string CodeClass = user.GetTeacherMainClass(teacher);
+
+            List<Users> userList = user.getUserList("Colective", "3", CodeClass);
+
+            string message = "נפתח יום הורים, מהרו להשתבץ";
+            string title = "יום הורים";
+
+            myPushNot pushNot = new myPushNot(message, title, "1", 7, "default");
+            pushNot.RunPushNotification(userList, pushNot);
+
             JavaScriptSerializer js = new JavaScriptSerializer();
             // serialize to string
             string jsonString = js.Serialize(numEffected);
@@ -975,7 +986,7 @@ public class BetseferWS : System.Web.Services.WebService
         }
         else
         {
-            throw (new Exception("error in create user"));
+            throw (new Exception("error in create ParentDay"));
         }
     }
 

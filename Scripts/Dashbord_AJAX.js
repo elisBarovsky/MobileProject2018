@@ -1,6 +1,14 @@
-﻿function LoadAllMessagesById(Id, DisplayMessages) {
+﻿var path = "";
+var isCordovaApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+if (isCordovaApp) {
+    path = "https://proj.ruppin.ac.il/bgroup52/prod/";
+}
+else
+    path = "";
+
+function LoadAllMessagesById(Id, DisplayMessages) {
     $.ajax({
-        url: 'BetseferWS.asmx/GetMessagesByUserIdUnread',
+        url: path+'BetseferWS.asmx/GetMessagesByUserIdUnread',
         data: JSON.stringify({ 'userId': Id }),
         type: 'POST',
         dataType: "json",
@@ -16,7 +24,7 @@
 
 function UpdateMessageAsRead(i) {
     $.ajax({
-        url: 'BetseferWS.asmx/SetMessageAsRead',
+        url: path+'BetseferWS.asmx/SetMessageAsRead',
         data: JSON.stringify({ 'MessageCode': i }),
         type: 'POST',
         dataType: "json",
@@ -32,7 +40,7 @@ function UpdateMessageAsRead(i) {
 
 function LoadScheduleForToday(obj, DisplaySchedule) {
     $.ajax({
-        url: 'BetseferWS.asmx/LoadScheduleForToday',
+        url: path+ 'BetseferWS.asmx/LoadScheduleForToday',
         data: JSON.stringify({ 'Id': obj.Id, 'userType': obj.userType }),
         type: 'POST',
         dataType: "json",

@@ -1,7 +1,17 @@
-﻿function IfMehanech_LoadParentDay(userID, ShowParentsDay) {
+﻿var path = "";
+var isCordovaApp = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+if (isCordovaApp) {
+    path = "https://proj.ruppin.ac.il/bgroup52/prod/";
+}
+else
+    path = "";
+
+
+
+function IfMehanech_LoadParentDay(userID, ShowParentsDay) {
 
     $.ajax({
-        url: 'BetseferWS.asmx/IfMehanech_LoadParentDay',
+        url: path+'BetseferWS.asmx/IfMehanech_LoadParentDay',
         data: JSON.stringify({ 'UserId': userID }),
         //url: path + 'BetseferWS.asmx/IfMehanech_LoadParentDay',
         //data: JSON.stringify({ 'UserId': userID }),
@@ -19,7 +29,7 @@
 
 function SaveParentDay(parentsDay, AfterSave) {
     $.ajax({
-        url: 'BetseferWS.asmx/SaveParentDay',
+        url: path+'BetseferWS.asmx/SaveParentDay',
         data: JSON.stringify({ 'date': parentsDay.date, 'from': parentsDay.from, 'to': parentsDay.to, 'longMeeting': parentsDay.long, 'teacher': parentsDay.teacher }),
         //url: path + 'BetseferWS.asmx/IfMehanech_LoadParentDay',
         //data: JSON.stringify({ 'UserId': userID }),
@@ -37,7 +47,7 @@ function SaveParentDay(parentsDay, AfterSave) {
 
 function SaveMeMeeting(ParentsDayMeeting, PupilID, ChangeButton) {
     $.ajax({
-        url: 'BetseferWS.asmx/SaveMeMeeting',
+        url: path+ 'BetseferWS.asmx/SaveMeMeeting',
         data: JSON.stringify({ 'ParentsDayMeeting': ParentsDayMeeting, 'PupilID': PupilID }),
         type: 'POST',
         dataType: "json",
@@ -53,7 +63,7 @@ function SaveMeMeeting(ParentsDayMeeting, PupilID, ChangeButton) {
 
 function GiveMeBreak(ParentsDayMeeting, ChangeButton) {
     $.ajax({
-        url: 'BetseferWS.asmx/GiveMeBreak',
+        url: path+'BetseferWS.asmx/GiveMeBreak',
         data: JSON.stringify({ 'ParentsDayMeeting': ParentsDayMeeting }),
         type: 'POST',
         dataType: "json",
@@ -69,7 +79,7 @@ function GiveMeBreak(ParentsDayMeeting, ChangeButton) {
 
 function DeleteBreak(ParentsDayMeeting, ChangeButton) {//need meetting code not what i saved
     $.ajax({
-        url: 'BetseferWS.asmx/DeleteBreak',
+        url: path+'BetseferWS.asmx/DeleteBreak',
         data: JSON.stringify({ 'ParentsDayMeeting': ParentsDayMeeting }),
         type: 'POST',
         dataType: "json",
@@ -85,7 +95,7 @@ function DeleteBreak(ParentsDayMeeting, ChangeButton) {//need meetting code not 
 
 function Parent_LoadParentDay(PupilID, ShowParentsDay) {
     $.ajax({
-        url: 'BetseferWS.asmx/Parent_LoadParentDay',
+        url: path+ 'BetseferWS.asmx/Parent_LoadParentDay',
         data: JSON.stringify({ 'PupilID': PupilID }),
         type: 'POST',
         dataType: "json",
@@ -101,7 +111,7 @@ function Parent_LoadParentDay(PupilID, ShowParentsDay) {
 
 function DeleteMyMeeting(ParentsDayMeeting, ChangeButton) {
     $.ajax({
-        url: 'BetseferWS.asmx/DeleteMyMeeting',
+        url: path+ 'BetseferWS.asmx/DeleteMyMeeting',
         data: JSON.stringify({ 'ParentsDayMeeting': ParentsDayMeeting }),
         type: 'POST',
         dataType: "json",

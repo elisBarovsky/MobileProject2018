@@ -111,10 +111,7 @@ function renderFillUser(results) {
     var UserId = localStorage.getItem("UserID");
     user = new Object();
     user.UserId = UserId;
-    //if (type !== 'Teacher') {
-    //    //GetPupilId(user, SavePupilId);
-    //}
-
+ 
     res = $.parseJSON(results.d);
 
  
