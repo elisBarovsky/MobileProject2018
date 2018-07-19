@@ -85,30 +85,18 @@ function LoadHWTable(results) {
     else {
         strProg = "<div class='progress-bar progress-bar-striped bg-info progress-bar-animated' role='progressbar' style='width:" + TotalPresentage + "% ' aria-valuenow='85' aria-valuemin='0' aria-valuemax='100'></div>";
     }
-    //    <h6 id="noSchedule" style="color:gold;visibility:hidden">סיימת שיעורים!</h6>
-   // <img id='noScheduleBoy' src='Images/yayy.gif' height='130' style="visibility:hidden' />
     $('#ProgBar').append(strProg);
     if (res.length === 0) {
-        //$('#noSchedule').show();
-        //$('#noScheduleBoy').show();
-       // document.getElementById('noSchedule').style.visibility = 'visible';
-       // document.getElementById('noScheduleBoy').style.visibility = 'visible';
         $('#appendStuff').append("<br /><h6 id='noSchedule' style='color:gold;margin-right:35%'>סיימת שיעורים!</h6><img id='noScheduleBoy' src='Images/yayy.gif' height='130' style='margin-right:30%'/> ");
 
     }
     else {
-        //$('#noSchedule').hide();
-        //$('#noScheduleBoy').hide();
-
-       // document.getElementById('noSchedule').style.visibility = 'hidden';
-       // document.getElementById('noScheduleBoy').style.visibility = 'hidden';
 
         $("#accordion").accordion();
         var IsLehagasha = "";
         var ImgIcon;
 
-     
-
+   
         for (var i = 0; i < res.length; i++) {
             IsLehagasha = "לא להגשה";
 
@@ -125,32 +113,31 @@ function LoadHWTable(results) {
 
             var newDiv = document.createElement('div');
 
-            var newP0 = document.createElement('p');
-            var newP1 = document.createElement('p');
-            var newP2 = document.createElement('p');
-            var newP3 = document.createElement('p');
-            var newP4 = document.createElement('p');
-            var newP5 = document.createElement('p');
-            var newP6 = document.createElement('p');
+            var newP1 = document.createElement('h6');
+            var newP2 = document.createElement('h6');
+            var newP3 = document.createElement('h6');
+            var newP5 = document.createElement('h6');
+            var newP6 = document.createElement('h6');
 
             var acc = document.getElementById('accordion');
             var div = document.getElementById("Div1");
 
-            newH3.innerText = 'מקצוע: ' + res[counter].LessonName;
-
-            // newH3.appendChild(newIMG);
-
-            newP0.innerText = 'מורה: ' + res[counter].Teacher_FullName;
-            newDiv.appendChild(newP0);
+            newH3.innerText = 'מקצוע: ' + res[counter].LessonName + ", מורה: " + res[counter].Teacher_FullName;
 
             newP2.innerText = 'ניתנו בתאריך: ' + res[counter].HWGivenDate;
             newDiv.appendChild(newP2);
 
-            newP3.innerText = 'עד תאריך: ' + res[counter].HWDueDate;
-            newDiv.appendChild(newP3);
+            if (res[counter].IsLehagasha == true) {
+                IsLehagasha = "להגשה";
+                newP3.innerText = 'להגשה עד : ' + res[counter].HWDueDate;
 
-            newP4.innerText = IsLehagasha;
-            newDiv.appendChild(newP4);
+            }
+            else {
+                newP3.innerText = 'עד תאריך: ' + res[counter].HWDueDate;
+
+            }
+
+            newDiv.appendChild(newP3);
 
             newP6.innerText = res[counter].HWInfo;
             newDiv.appendChild(newP6);
@@ -180,12 +167,11 @@ function LoadHWTable(results) {
                 newDiv.appendChild(newP5);
             }
             else if (usertype == "Child") {
-
-                newP5.innerText = "סיימתי  ";
-                newDiv.appendChild(newP5);
-                newP5.appendChild(checkbox)
                 checkbox.checked = res[counter].IsDone;
-                newDiv.appendChild(checkbox);
+                newP5.innerText = "סיימתי  ";
+                newP5.appendChild(checkbox)
+                newDiv.appendChild(newP5 );
+
             }
            
 

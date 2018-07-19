@@ -28,7 +28,7 @@ Designed By: UXLiner
 --------------------------------------------------------*/
 #accordion {
     width: 600px;
-    margin: 20px auto;
+    //margin: 20px auto;
 }
 
     #accordion .ui-accordion-content {
@@ -36,13 +36,14 @@ Designed By: UXLiner
         width: 100%;
         color: #777;
         font-size: 1.5;
-        line-height: 0.5;
+        line-height: 1;
         height:180px;
     }
 
         #accordion .ui-accordion-content > * {
             margin: 0;
-            padding: 15px;
+            padding: 10px;
+            font-size: 14px;
         }
 
     #accordion .ui-accordion-header {
