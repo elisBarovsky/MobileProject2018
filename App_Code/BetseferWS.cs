@@ -1052,7 +1052,7 @@ public class BetseferWS : System.Web.Services.WebService
     public string GiveMeBreak(string ParentsDayMeeting)
     {
         ParentsDay p = new ParentsDay();
-        int res = p.GiveMeBreak(ParentsDayMeeting);
+        string res = p.GiveMeBreak(ParentsDayMeeting);
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(res);
