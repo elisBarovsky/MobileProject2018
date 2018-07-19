@@ -36,7 +36,8 @@ Designed By: UXLiner
         width: 100%;
         color: #777;
         font-size: 1.5;
-        line-height: 1;
+        line-height: 0.5;
+        height:180px;
     }
 
         #accordion .ui-accordion-content > * {

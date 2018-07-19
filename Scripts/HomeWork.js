@@ -93,7 +93,7 @@ function LoadHWTable(results) {
         //$('#noScheduleBoy').show();
        // document.getElementById('noSchedule').style.visibility = 'visible';
        // document.getElementById('noScheduleBoy').style.visibility = 'visible';
-        $('#appendStuff').append("<h6 id='noSchedule' style='color:gold;'>סיימת שיעורים!</h6><img id='noScheduleBoy' src='Images/yayy.gif' height='130'/> ");
+        $('#appendStuff').append("<br /><h6 id='noSchedule' style='color:gold;margin-right:35%'>סיימת שיעורים!</h6><img id='noScheduleBoy' src='Images/yayy.gif' height='130' style='margin-right:30%'/> ");
 
     }
     else {

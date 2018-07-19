@@ -11,29 +11,19 @@ function onDeviceReady() {
         User.IsTeacher = true;
         User.PupilID = localStorage.getItem("UserID");
         //User.type = 2;
+        User.type = 4;
+        FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
+
     }
     else {
         User.IsTeacher = false;
         User.PupilID = localStorage.getItem("PupilID");
+        User.type = 4;
+
+        FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
+
     }
 
-    //if (sessionStorage.getItem('PupilList') == null && sessionStorage.getItem('ParentsList') == null) {
-
-    //    if (User.type == 4) {
-    //       // sessionStorage.setItem("PupilList", JSON.stringify(results.d));
-
-    //    }
-    //    else {
-    //      //  sessionStorage.setItem("ParentsList", JSON.stringify(results.d));
-
-    //    }
-
-    //   // res = $.parseJSON(results.d);
-
-    //}
-    //else {
-
-    //}
     var retrievedObject = "";
         $('#pupilBphone').click(function () {
             User.type = 4;
@@ -73,9 +63,6 @@ function funcToCall(tele) {
 }
 
 function FillListViewCellPhone(results) {  //contactList
-
-  
-
 
     if (sessionStorage.getItem('PupilList') == null || sessionStorage.getItem('ParentsList') == null ) {
         res = $.parseJSON(results.d);

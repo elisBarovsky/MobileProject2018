@@ -27,7 +27,8 @@ function DisplayMessages(results) {
         objMessage.TheMessage = res[i].TheMessage;
 
         tableString += "<tr onclick = 'OpenMessage(" + JSON.stringify(objMessage) + ")'><td id = '" + res[i].MessageCode + "'></td><td class='mailbox-star'><a href='#'><i class='fa fa-star text-yellow'></i></a></td><td>" +
-            res[i].MessageDate + "</td><td>" + res[i].SenderName + "</td></tr>";
+            res[i].MessageDate.toString().substring(0, 10) + "</td><td>" + res[i].SenderName + "</td></tr>";
+        //alert(res[i].MessageDate.toString().substring(0, 10) );
     }
     $('#messagesTable').append(tableString);
 };

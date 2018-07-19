@@ -1,10 +1,25 @@
-﻿$(document).ready(function () {
+﻿localStorage.setItem("ThereIsParentDay", 0);
+
+$(document).ready(function () {
 
     var userID = localStorage.getItem("UserID");
     var pupilID = localStorage.getItem("PupilID");
-
-    Parent_LoadParentDay(pupilID, ShowParentsDay);
-
+    var ParentDayExisted = localStorage.getItem("ThereIsParentDay");
+    $(function () {
+        setTimeout(function () {
+            Parent_LoadParentDay(pupilID, ShowParentsDay); // to show div after 0 sec of page load
+        
+                // To reshow on every 1.5 second
+            setInterval(function () {
+                var ParentDayExisted = localStorage.getItem("ThereIsParentDay");
+                if (ParentDayExisted === "1") {
+                  //  alert(ParentDayExisted);
+                    Parent_LoadParentDay(pupilID, ShowParentsDay);
+                }
+            }, 1500);
+                     
+       }, 0);
+    });
 
 });
 
@@ -19,6 +34,7 @@ function ShowParentsDay(results) {
         $("#noParentDay").show();
         $("#parentsDayTable").hide();
         $("#noParentDay").append("אין יום הורים בקרוב");
+        localStorage.setItem("ThereIsParentDay", 0);
 
         return;
     }
@@ -29,6 +45,7 @@ function ShowParentsDay(results) {
     $("#pdDetails").append(title);
     $("#pdDetails").show();
     $("#noParentDay").hide();
+    localStorage.setItem("ThereIsParentDay", 1);
 
     var strParentsDay = "<thead class='bg-warning'>< tr ><th>שעה</th><th>תלמיד</th></tr ></thead >";
     var signToMeeting = "false";

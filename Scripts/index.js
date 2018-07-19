@@ -28,11 +28,7 @@ function renderlogin(results) {
         localStorage.setItem("UserType", res[1]);
         window.location.href = "pages-security.html";
     }
-    else if (res[0] === "wrongDetails") { //wrong details
-        //$.alert({
-        //    title: 'שגיאה',
-        //    content: 'לנתונים שהוזנו אין הרשאת כניסה למערכת'
-        //});
+    else if (res[0] === "Forbidden") { //wrong details
         swal({
             position: 'top-end',
             type: 'error',
@@ -44,10 +40,22 @@ function renderlogin(results) {
         document.getElementById("IDTB").value = "";
         document.getElementById("PasswordTB").value = "";
     }
+    else if (res[0] === "wrongDetails") { //wrong details
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'אחד/יותר מהפרטים שהקשת שגויים, נסה שנית',
+            showConfirmButton: true,
+
+        });
+        document.getElementById("IDTB").value = "";
+        document.getElementById("PasswordTB").value = "";
+    }
     else { // already login -> go to main page according the type user. 
         localStorage.setItem("UserType", res[1]);
         localStorage.setItem("registrationId", res[2]);
-
+        sessionStorage.setItem("Loged", 0);
         if (res[1] === 'Parent') {
             //document.location.href = "Parent-ChooseChild.html";
             var ID = localStorage.getItem("UserID");

@@ -252,43 +252,52 @@ public class BetseferWS : System.Web.Services.WebService
     {
         Users UserLogin = new Users();
         List<string> UserInfo = UserLogin.GetUserType(UserID, password);
-        string UserType = UserInfo[0].ToString();
-
-        string UserRegID = UserInfo[1].ToString();
-
-
+        string UserType = "";
         string isvalid = "";
-
-        if (UserType == "" || UserType == "1")
+        string UserRegID = "";
+        if (UserInfo.Count >0)
         {
-            isvalid = "wrongDetails";
+            UserType = UserInfo[0].ToString();
+
+            UserRegID = UserInfo[1].ToString();
+    
+
+            if (UserType == "" || UserType == "1")
+            {
+                isvalid = "Forbidden";
+            }
+            else
+            {
+                bool isAlreadyLogin = bool.Parse(UserLogin.IsAlreadyLogin(UserID, password));
+
+                if (!isAlreadyLogin)
+                {
+                    isvalid = "openSeqQestion";/*FillSecurityQ();*/
+                }
+                switch (int.Parse(UserType))
+                {
+                    case 1:
+                        UserType = "Admin";
+                        break;
+                    case 2:
+                        UserType = "Teacher";
+                        break;
+                    case 3:
+                        UserType = "Parent";
+                        break;
+                    case 4:
+                        UserType = "Child";
+                        break;
+                }
+
+
+            }
         }
         else
         {
-            bool isAlreadyLogin = bool.Parse(UserLogin.IsAlreadyLogin(UserID, password));
-
-            if (!isAlreadyLogin)
-            {
-                isvalid = "openSeqQestion";/*FillSecurityQ();*/
-            }
-            switch (int.Parse(UserType))
-            {
-                case 1:
-                    UserType = "Admin";
-                    break;
-                case 2:
-                    UserType = "Teacher";
-                    break;
-                case 3:
-                    UserType = "Parent";
-                    break;
-                case 4:
-                    UserType = "Child";
-                    break;
-            }
-
-
+            isvalid = "wrongDetails";
         }
+      
         string[] arr = new string[] { isvalid, UserType, UserRegID };
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringCategory = js.Serialize(arr);
