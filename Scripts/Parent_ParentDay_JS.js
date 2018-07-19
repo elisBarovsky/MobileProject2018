@@ -1,25 +1,13 @@
-﻿localStorage.setItem("ThereIsParentDay", 0);
-
+﻿
 $(document).ready(function () {
 
     var userID = localStorage.getItem("UserID");
     var pupilID = localStorage.getItem("PupilID");
     var ParentDayExisted = localStorage.getItem("ThereIsParentDay");
-    $(function () {
-        setTimeout(function () {
-            Parent_LoadParentDay(pupilID, ShowParentsDay); // to show div after 0 sec of page load
+
+
+  Parent_LoadParentDay(pupilID, ShowParentsDay); 
         
-                // To reshow on every 1.5 second
-            setInterval(function () {
-                var ParentDayExisted = localStorage.getItem("ThereIsParentDay");
-                if (ParentDayExisted === "1") {
-                  //  alert(ParentDayExisted);
-                    Parent_LoadParentDay(pupilID, ShowParentsDay);
-                }
-            }, 1500);
-                     
-       }, 0);
-    });
 
 });
 
@@ -144,5 +132,38 @@ function DeleteMyMeeting1(ParentsDayMeeting) {
 
 function ChangeButton(results) {
     var PupilID = localStorage.getItem("PupilID");
+    res = $.parseJSON(results.d);
+    if (res == "teacher") {
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה',
+            text: 'המחנך חסם שעה זאת, נסה שעה אחרת',
+            showConfirmButton: true,
+
+        });
+    }
+    else if (res == "pupil") { 
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה',
+            text: 'השעה נתפסה על ידי הורה אחר, נסה שעה אחרת',
+            showConfirmButton: true,
+
+        });
+    }
+    else { //done
+        swal({
+            position: 'top-end',
+            type: 'success',
+            icon: "success",
+            title: 'עודכן בהצלחה',
+            showConfirmButton: true,
+
+        });
+    }
     Parent_LoadParentDay(PupilID, ShowParentsDay);
 };

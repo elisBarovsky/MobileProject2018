@@ -85,6 +85,7 @@ function renderFillUser(results) {
     user.type = type;
 
     var id = UserId; 
+    localStorage.setItem("ThereIsParentDay", 0);
 
     res = $.parseJSON(results.d);
    

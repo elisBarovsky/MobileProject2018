@@ -2,26 +2,9 @@
 
 
 $(document).ready(function () {
-
     var userID = localStorage.getItem("UserID");
 
-
-    $(function () {
-        setTimeout(function () {
-            IfMehanech_LoadParentDay(userID, ShowParentsDay); // to show div after 0 sec of page load
-            // To reshow on every 1.5 second
-
-            setInterval(function () {
-                var ParentDayExisted = localStorage.getItem("ThereIsParentDay");
-                if (ParentDayExisted === "1") {
-                    //  alert(ParentDayExisted);
-                    IfMehanech_LoadParentDay(userID, ShowParentsDay);
-                }
-            }, 1500);
-
-        }, 0);
-    });
-
+    IfMehanech_LoadParentDay(userID, ShowParentsDay); 
 
 });
 
@@ -277,5 +260,38 @@ function DeleteBreak1(ParentsDayMeeting) {
 };
 
 function ChangeButton(results) {
+    res = $.parseJSON(results.d);
+    if (res == "teacher") {
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה',
+            text: 'המחנך חסם שעה זאת, נסה שעה אחרת',
+            showConfirmButton: true,
+
+        });
+    }
+    else if (res == "pupil") {
+        swal({
+            position: 'top-end',
+            type: 'error',
+            icon: "error",
+            title: 'שגיאה',
+            text: 'השעה נתפסה על ידי הורה, אתה יכול לסגור שעה אחרת',
+            showConfirmButton: true,
+
+        });
+    }
+    else { //done
+        swal({
+            position: 'top-end',
+            type: 'success',
+            icon: "success",
+            title: 'עודכן בהצלחה',
+            showConfirmButton: true,
+
+        });
+    }
     IfMehanech_LoadParentDay(localStorage.getItem("UserID"), ShowParentsDay);
 };

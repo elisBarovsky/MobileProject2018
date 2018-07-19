@@ -1004,7 +1004,7 @@ public class BetseferWS : System.Web.Services.WebService
     public string SaveMeMeeting(string ParentsDayMeeting, string PupilID)
     {
         ParentsDay p = new ParentsDay();
-        int res = p.SaveMeMeeting(ParentsDayMeeting, PupilID);
+        string res = p.SaveMeMeeting(ParentsDayMeeting, PupilID);
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(res);
