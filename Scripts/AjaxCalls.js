@@ -202,13 +202,31 @@ function LoadStudentsClassAvgGrades(user, ClassAvgGrades) {
         error: function (request, error) {
         }
     });
-}
+} 
 
 function FillHW(user, LoadHWTable) {
 
     var dataString = JSON.stringify(user); 
     $.ajax({
         url: path+ 'BetseferWS.asmx/FillHW',
+        data: JSON.stringify({ 'UserID': user.PupilID }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            LoadHWTable(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}
+
+function FillHistotyHW(user, LoadHWTable) {
+
+    var dataString = JSON.stringify(user);
+    $.ajax({
+        url: path + 'BetseferWS.asmx/FillHWHistory',
         data: JSON.stringify({ 'UserID': user.PupilID }),
         type: 'POST',
         dataType: "json",

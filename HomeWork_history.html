@@ -21,7 +21,7 @@
 
     <!-- jQuery 3 -->
     <script src="dist/js/jquery.min.js"></script>
-    <script src="Scripts/HomeWork.js"></script>
+    <script src="Scripts/HomeWork_history.js"></script>
     <script src="Scripts/AjaxCalls.js"></script>>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -77,34 +77,24 @@
 </head>
 <body class="login-page">
 
-      <div class="container" onclick="Dashbord()">
-        <div class="bar1" style="background-color:palevioletred"></div>
-        <div class="bar2" style="background-color:fuchsia"></div>
-        <div class="bar3" style="background-color:deepskyblue"></div>
+    <div class="container" style="float:left">
+        <div class="col-xs-4 m-t-1" style="float:left;position:relative;height:45px;border-radius:50px ">
+            <button class="btn btn-info btn-flat" type="button" style="border-radius:50px;height:50px;width:50px;" onclick="window.location='HomeWork.html';"> <i class="fa fa-arrow-left" style="float:right;color:white"> </i> </button>
+        </div>
     </div>
-      <div class="login-box" id="blabla">
-          <div div class="login-box" style="height:20px;color:white">
-              <h3> שיעורי בית</h3>
-          </div>
-          <button id="HWHistory" type="button" class="btn btn-rounded btn-info" style="margin-right:30%">היסטוריית שיעורים</button>
+    <div class="login-box" id="blabla">
+        <div div class="login-box" style="height:20px;color:white">
+            <h3> היסטוריית שיעורי בית</h3>
+        </div>
 
-          <div class="card m-t-3">
-              <div class="card-block" id="appendStuff">
-                  <!--<h6 id="noSchedule" style="color:gold;visibility:hidden">סיימת שיעורים!</h6>
-            <img id="noScheduleBoy" src="Images/yayy.gif" height="130" style="visibility:hidden"/>-->
+    
+        <br />
+        <!-- <div class="login-box-body" >-->
+        <div id="accordion" style="width:99%">
 
-                  <div class="progress" id="ProgBar" style="direction:ltr">
-                  </div>
+        </div>
 
-              </div>
-          </div>
-          <br />
-          <!-- <div class="login-box-body" >-->
-          <div id="accordion" style="width:99%">
-
-          </div>
-
-      </div>
+    </div>
 
     <!-- v4.0.0-alpha.6 -->
     <script src="dist/bootstrap/js/bootstrap.min.js"></script>

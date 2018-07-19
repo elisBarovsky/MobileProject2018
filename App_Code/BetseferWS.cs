@@ -609,6 +609,30 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string FillHWHistory(string UserID)
+    {
+        HomeWork HW = new HomeWork();
+        DataTable HWs = HW.FillAllHomeWork_history(UserID);
+
+        var list = new List<Dictionary<string, object>>();
+
+        foreach (DataRow row in HWs.Rows)
+        {
+            var dict = new Dictionary<string, object>();
+
+            foreach (DataColumn col in HWs.Columns)
+            {
+                dict[col.ColumnName] = row[col];
+            }
+            list.Add(dict);
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonStringFillHW = js.Serialize(list);
+        return jsonStringFillHW;
+    }
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string CheckedHW(string PupilID, bool IsDone, string HWCode)
     {
         HomeWork HW = new HomeWork();

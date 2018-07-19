@@ -5,7 +5,7 @@ user = new Object();
 function onDeviceReady() {
     $('body').fadeIn(500, function () {
 
-            localStorage.setItem("LastVisit", "HomeWork.html"); //saving in localS
+          localStorage.setItem("LastVisit", "HomeWork_history.html"); //saving in localS
             user.PupilID = localStorage.getItem("PupilID");
 
             $(function () {
@@ -13,13 +13,8 @@ function onDeviceReady() {
                     collapsible: true
                 });
             });
-        FillProgersBar(user, FillProgersBarDLL);
-    }); 
-
-    $('#HWHistory').click(function () {
-        document.location.href = "HomeWork_history.html";
-
-    });
+        FillHistotyHW(user, LoadHWTable);
+    });   
 }
 
 user = new Object();
@@ -36,66 +31,16 @@ function HWDone(checkB) {
     user.PupilID = localStorage.getItem("PupilID");
     user.HWID = checkB.id;
     user.IsChecked = StatusHW;
-    CheckedHW(user, CheckedDB);
 }
 
-function CheckedDB(results) {
-    res = $.parseJSON(results.d);
 
-    if (res == "well done!") {
 
-        //$('#myModal').modal('show');
-       // swal("עבודה טובה!", "סיימת שיעורים", "success");
-        swal({
-            title: "עבודה טובה!",
-            text: "סיימת שיעורים" ,
-            icon: "success",
-        })
-          .then((willDelete) => {
-              location.reload();
-             // $("#accordion").load(window.location.href + " #accordion");
-
-          });
-    }
-    else if (res == "something went wrong") {
-        //alert("res");
-    }
-    else if (res == "updated") {
-       // alert("עודכן");
-    }
-
-}
-
-function FillProgersBarDLL(results) {
-    res = $.parseJSON(results.d);
-    user.PupilID = localStorage.getItem("PupilID");
-
-    var TotalCountHW = res[0].total_HW;
-    var CountMadeHW = res[0].Made_HW;
-    TotalPresentage = (CountMadeHW / TotalCountHW) * 100;
-    FillHW(user, LoadHWTable);
-}
 
 function LoadHWTable(results) {
     res = $.parseJSON(results.d);
     var counter = 0;
 
-    var strProg = ""
-    if (TotalPresentage < 40) {
-        strProg = "<div class='progress-bar progress-bar-striped bg-danger progress-bar-animated' role='progressbar' style='width:" + TotalPresentage + "% ' aria-valuenow='85' aria-valuemin='0' aria-valuemax='100'></div>";
-    }
-    else if (TotalPresentage > 70) {
-        strProg = "<div class='progress-bar progress-bar-striped bg-success progress-bar-animated' role='progressbar' style='width:" + TotalPresentage + "% ' aria-valuenow='85' aria-valuemin='0' aria-valuemax='100'></div>";
-    }
-    else {
-        strProg = "<div class='progress-bar progress-bar-striped bg-info progress-bar-animated' role='progressbar' style='width:" + TotalPresentage + "% ' aria-valuenow='85' aria-valuemin='0' aria-valuemax='100'></div>";
-    }
-    $('#ProgBar').append(strProg);
-    if (res.length === 0) {
-        $('#appendStuff').append("<br /><h6 id='noSchedule' style='color:gold;margin-right:35%'>סיימת שיעורים!</h6><img id='noScheduleBoy' src='Images/yayy.gif' height='130' style='margin-right:30%'/> ");
-
-    }
-    else {
+ 
 
         $("#accordion").accordion();
         var IsLehagasha = "";
@@ -173,6 +118,7 @@ function LoadHWTable(results) {
             }
             else if (usertype == "Child") {
                 checkbox.checked = res[counter].IsDone;
+                checkbox.disabled = true;
                 newP5.innerText = "סיימתי  ";
                 newP5.appendChild(checkbox)
                 newDiv.appendChild(newP5 );
@@ -192,7 +138,6 @@ function LoadHWTable(results) {
             //  dynamicLy = "<li> <a href='#' data-id=" + res[counter].CodeGivenNote + "><img src='" + ImgIcon + "' /> <p>סוג הערה: " + res[counter].NoteName + "</p><p>מקצוע: " + res[counter].LessonName + "</p><p>תאריך: " + res[counter].NoteDate + "</p> </li>";
             counter++;
         }
-    }
-    //  $('#accordion').listview('refresh');
+   
 
 }
