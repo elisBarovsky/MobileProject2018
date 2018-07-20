@@ -97,4 +97,8 @@ public class TimeTable
         return db.LoadScheduleForToday(Id, userType, day);
     }
 
+    public Dictionary<string, string> FillTeacherNotBusy(int WDay,int LesNum)
+    {
+        return db.FillTeacherNotBusy(WDay, LesNum);
+    }
 }

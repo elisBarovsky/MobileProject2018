@@ -177,10 +177,10 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string GetPupilsListByClassTotalName(string ClassCode)
+    public string GetPupilsListByClassTotalName(string Class)
     {
         Users u = new Users();
-        DataTable pupils = u.getPupillistsByClassCode(ClassCode);
+        DataTable pupils = u.getPupillistsByClassCode(Class);
 
         var list = new List<Dictionary<string, object>>();
 
@@ -1119,6 +1119,96 @@ public class BetseferWS : System.Web.Services.WebService
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonStringGivenAllNotes = js.Serialize(list);
         return jsonStringGivenAllNotes;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string LoadSubjectsByTeacherID(string teacherId)
+    {
+        Dictionary<string, string> subjects;
+        List<string> subjectsList = new List<string>();
+
+        Teacher t = new Teacher();
+        subjects = t.FillLessonsAccordingTeacherId(teacherId);
+
+        foreach (var item in subjects)
+        {
+            subjectsList.Add(item.Value);
+        }
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(subjectsList);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string LoadClassesAccordingToTeacherIdAndSubject(string teacherId, string subject)
+    {
+        Dictionary<string, string> classes;
+        List<string> classesList = new List<string>();
+
+        Teacher t = new Teacher();
+        classes = t.FillClassOtAccordingTeacherIdAndSubject(teacherId, subject);
+
+        foreach (var item in classes)
+        {
+            classesList.Add(item.Value);
+        }
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(classesList);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string SaveClassGrades(List<Object> pupilGrades)
+    {
+        Grades g = new Grades();
+        int res = g.InsertGradesAfterAdjustTheDetails(pupilGrades);
+        if (res >=1)
+        {
+            Dictionary<System.String, System.Object> y = (Dictionary<System.String, System.Object>)pupilGrades[0];
+
+            Subject sub = new Subject();
+            Users user = new Users();            
+            List<Users> userList = user.getUserList("Colective", "5", user.GetPupilOtClass(y["pupilID"].ToString()));
+
+            string Pushmessage = "הוזנו ציונים ב"+ y["subject"].ToString();
+            string title = "ציונים";
+
+            myPushNot pushNot = new myPushNot(Pushmessage, title, "1", 7, "default");
+            pushNot.RunPushNotification(userList, pushNot);
+        }
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(res);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string LoadTestsByTeacherID(string teacherId)
+    {
+        List<Grades> tests = new List<Grades>();
+        Grades g = new Grades();
+        tests = g.LoadTestsByTeacherID(teacherId);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(tests);
+        return jsonString;
+    }
+
+    
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string GetAllGradesByExamCode(string examCode)
+    {
+        List<Grades> grades = new List<Grades>();
+        Grades g = new Grades();
+        grades = g.GetAllGradesByExamCode(examCode);
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(grades);
+        return jsonString;
     }
 }
 

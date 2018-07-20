@@ -3578,4 +3578,40 @@ public class DBconnection
         String cStr = "UPDATE ParentsDayMeeting SET PupilID = null WHERE MeetingCode = " + ParentsDayMeeting;
         return ExecuteNonQuery(cStr);
     }
+
+    public string GetLessonCodeByLessonName(string Lesson) {
+        String selectSTR = "SELECT CodeLesson FROM Lessons where LessonName = '" + Lesson + "'";
+        string lessonCode = "";
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                lessonCode = dr[0].ToString();
+            }
+            return lessonCode;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
 }

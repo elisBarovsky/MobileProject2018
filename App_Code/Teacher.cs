@@ -62,4 +62,10 @@ public class Teacher : Users
 
         return dbt.FillClassOtAccordingTeacherId_List(teacherID);
     }
+
+    public Dictionary<string, string> FillClassOtAccordingTeacherIdAndSubject(string teacherID, string Lesson)
+    {
+        string lessonCode = db.GetLessonCodeByLessonName(Lesson);
+        return FillClassOtAccordingTeacherIdAndSubjectCode(teacherID, lessonCode);
+    }
 }

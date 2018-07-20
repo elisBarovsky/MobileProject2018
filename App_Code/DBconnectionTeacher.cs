@@ -15,6 +15,7 @@ public class DBconnectionTeacher
     public SqlDataAdapter da;
     public DataTable dt;
     SqlConnection con = new SqlConnection();
+    DBconnection db = new DBconnection();
 
     public DBconnectionTeacher()
     {
@@ -1006,12 +1007,9 @@ public class DBconnectionTeacher
         string cStr = "update[dbo].[Users] set[LoginPassword] = ('" + Password + "') WHERE UserID = '" + userID + "'";
         return ExecuteNonQuery(cStr);
     }
-
-    public int InsertGrade(string PupilID, string TeacherID, string CodeLesson, string ExamDate, int Grade)
+    public int InsertGrade(string PupilID, int ExamCode, int Grade)
     {
-        //SqlConnection conGrades = new SqlConnection();
-        //conGrades = connect("Betsefer");
-        string cStr = "INSERT INTO [dbo].[Grades]  ([PupilID] ,[TeacherID],[CodeLesson],[ExamDate],[Grade])   VALUES ('" + PupilID + "','" + TeacherID + "','" + CodeLesson + "' ,'" + ExamDate + "' ," + Grade + ")";
+        string cStr = "INSERT INTO [dbo].[Grades] (ExamCode, PupilID, [Grade]) VALUES ('"+ ExamCode + "','"+ PupilID + "',"+ Grade + ")";
         return ExecuteNonQuery(cStr);
     }
 
@@ -1644,7 +1642,7 @@ public class DBconnectionTeacher
             {
                 to = from.AddMinutes((double)p.longMeeting);
                 insertSTR += " insert into ParentsDayMeeting (TeacherID, ParentsDayCode, StartTime, EndTime) " +
-                    "values ('" + p.TeacherID + "', " + parentsDayCode + ", '" + from + "', '" + to + "')";
+                    "values ('" + p.TeacherID + "', " + parentsDayCode + ", '" + from.ToShortTimeString() + "', '" + to.ToShortTimeString() + "')";
                 from = from.AddMinutes((double)p.longMeeting);
             }
 
@@ -1736,6 +1734,145 @@ public class DBconnectionTeacher
             ds = new DataSet("HWCountDS");
             daa.Fill(ds);
             return dtt = ds.Tables[0];
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public List<Grades> LoadTestsByTeacherID(string teacherId)
+    {
+        string selectSTR = "select ExamCode, ExamDate, ClassCode, SubjectCode from Exams where " +
+            "TeacherID = '" + teacherId + "' order by ExamDate desc";
+
+        List<Grades> tests = new List<Grades>();
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            DBconnection db = new DBconnection();
+            while (dr.Read())
+            {
+                Grades g = new Grades();
+                g.examCode = int.Parse(dr["ExamCode"].ToString());
+                g.date = dr["ExamDate"].ToString();
+                g.classID = int.Parse(dr["ClassCode"].ToString());
+                g.subjectCode = dr["SubjectCode"].ToString();
+
+                tests.Add(g);
+            }
+            return tests;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    public int InserExam(string examDate, string teacherID, int classCode, string lessonCode)
+    {
+        string cStr = "INSERT INTO [dbo].[Exams] ([ExamDate] ,[TeacherID],[ClassCode],[SubjectCode]) "+
+            " VALUES ('" + examDate + "','" + teacherID + "','" + classCode + "' ,'" + lessonCode + "')";
+        return ExecuteNonQuery(cStr);
+    }
+
+    public int GetLastExamCode()
+    {
+        string selectSTR = "select max(ExamCode) from Exams";
+
+        int examCode = 0;
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            DBconnection db = new DBconnection();
+            while (dr.Read())
+            {
+                examCode = int.Parse(dr[0].ToString());
+            }
+            return examCode;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    
+    public List<Grades> GetAllGradesByExamCode(string examCode)
+    {
+        string selectSTR = "select [PupilID], [Grade] from [dbo].[Grades] where [ExamCode] = '" + examCode + "'";
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            List<Grades> grades = new List<Grades>();
+
+            while (dr.Read())
+            {
+                Grades g = new Grades();
+                g.pupilID = dr["PupilID"].ToString();
+                g.grade = int.Parse(dr["Grade"].ToString());
+                g.pupilName = db.GetUserFullNameByID(g.pupilID);
+
+                grades.Add(g);
+            }
+            return grades;
         }
         catch (Exception ex)
         {
