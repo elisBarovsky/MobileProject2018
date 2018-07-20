@@ -1665,10 +1665,45 @@ public class DBconnectionTeacher
         }
     }
 
-    public int GiveMeBreak(string ParentsDayMeeting)
+    public string GiveMeBreak(string ParentsDayMeeting)
     {
-        string cStr = "UPDATE ParentsDayMeeting SET PupilID = '0' WHERE MeetingCode = '" + ParentsDayMeeting + "'";
-        return ExecuteNonQuery(cStr);
+        string num = "";
+        try
+        {
+            using (var con = new SqlConnection(WebConfigurationManager.ConnectionStrings["Betsefer"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("UpdateMeeting", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@PupilID", 0);
+                    cmd.Parameters.AddWithValue("@MeetingCode", ParentsDayMeeting);
+
+                    con.Open();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            num = reader[0].ToString();
+                        }
+                        //  num = 1;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+        return num;
     }
 
     public int DeleteBreak(string ParentsDayMeeting)
