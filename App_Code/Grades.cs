@@ -65,9 +65,9 @@ public class Grades
         return dbT.PupilGrades(PupilID);
     }
 
-    public DataTable FilterGrade(string GradeDate)  // NEW !
+    public DataTable FilterGrade(string GradeCode)  // NEW !
     {
-        return dbT.FilterGrade(GradeDate);
+        return dbT.FilterGrade(GradeCode);
     }
 
     public DataTable PupilAvgGrades(string ClassCode) // NEW !!!!

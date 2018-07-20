@@ -55,12 +55,12 @@ function renderGrades(results) {
         var GraphButton = document.createElement('button');
 
         GraphButton.setAttribute("id", (i + 1));
-        GraphButton.setAttribute("dateExam", res[counter].ExamDate);
+        GraphButton.setAttribute("codeExam", res[counter].ExamCode);
         GraphButton.setAttribute("ExamGrade", res[counter].Grade);
         GraphButton.value = (i + 1);
         GraphButton.onclick = function () {
          //   debugger;
-            sessionStorage['dateExam'] = $(this).attr('dateExam'); 
+            sessionStorage['codeExam'] = $(this).attr('codeExam'); 
             sessionStorage['ExamGrade'] = $(this).attr('ExamGrade');            
             window.location.href = 'Grades_Graph.html'
         };

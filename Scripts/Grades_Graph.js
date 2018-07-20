@@ -4,7 +4,7 @@ function onDeviceReady() {
  localStorage.setItem("LastVisit", "Grades.html"); //saving in localS
 
     GradeDate = new Object();
-    GradeDate.Date =   sessionStorage['dateExam'];
+    GradeDate.code = sessionStorage['codeExam'];
     GivenGradeByCode(GradeDate, renderGivenGradeByDate);
 }
 

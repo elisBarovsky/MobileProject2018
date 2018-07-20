@@ -685,10 +685,10 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public string FillGradeInfoByCode(string GradeDate)
+    public string FillGradeInfoByCode(string GradeCode)
     {
         Grades Grade = new Grades();
-        DataTable Grades = Grade.FilterGrade(GradeDate);
+        DataTable Grades = Grade.FilterGrade(GradeCode);
 
         var list = new List<Dictionary<string, object>>();
 

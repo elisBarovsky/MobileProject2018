@@ -334,7 +334,7 @@ function GivenGradeByCode(GradeDate, renderGrades) {
     var dataString = JSON.stringify(GradeDate);
     $.ajax({
         url: path+ 'BetseferWS.asmx/FillGradeInfoByCode',
-        data: JSON.stringify({ 'GradeDate': GradeDate.Date }),
+        data: JSON.stringify({ 'GradeCode': GradeDate.code }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
