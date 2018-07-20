@@ -148,6 +148,9 @@ function renderFillUser(results) {
 }
 
 function DisplaySchedule(results) {
+    //document.getElementById("loader").style.display = "none";
+    //document.getElementById("myDiv").style.display = "block";
+
     res = $.parseJSON(results.d);
     if (res.length === 0) {
         //$('#noSchedule').show();

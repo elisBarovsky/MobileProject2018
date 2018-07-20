@@ -13,6 +13,8 @@ function onDeviceReady() {
 }
 
 function renderFillUser(results) {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
     //Save pupil in localstorage
     var UserId = localStorage.getItem("PupilID");
     user = new Object();

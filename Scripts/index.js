@@ -10,10 +10,13 @@ function onDeviceReady() {
     $('body').fadeIn(500, function () {
         $('#LoginBTN').click(function () {
             //alert(1);
+            document.getElementById("loader").style.display = "block";
+            document.getElementById("myDiv").style.display = "none";
             UserInfo.ID = document.getElementById("IDTB").value;
             UserInfo.PS = document.getElementById("PasswordTB").value;
             localStorage.setItem("UserID", UserInfo.ID); //saving in localS
             localStorage.setItem("PasswordTB", UserInfo.PS); //saving in localS
+       
             Login(UserInfo, renderlogin);
         });
     });

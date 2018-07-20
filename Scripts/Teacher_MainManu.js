@@ -9,7 +9,8 @@ function onDeviceReady() {
         user.UserId = localStorage.getItem("UserID");
         Id = localStorage.getItem("UserID");
         user.userType = 2;
-        localStorage.setItem("LastVisit","Teacher_MainManu.html"); //saving in localS
+        localStorage.setItem("LastVisit", "Teacher_MainManu.html"); //saving in localS
+
         GetUserInfo(user, renderFillUser);
 
         LoadAllMessagesById(Id, DisplayMessages);
@@ -97,6 +98,8 @@ function renderFillUser(results) {
 }
 
 function DisplaySchedule(results) {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
     res = $.parseJSON(results.d);
     if (res.length === 0) {
         //$('#noSchedule').show();

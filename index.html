@@ -28,6 +28,81 @@
 
     <script src="Scripts/transition.min.js"></script>
 
+    <style>
+
+        #loader {
+            display: none;
+            position: absolute;
+            /*left: 50%;*/
+            top: 40%;
+            /*z-index: 1;*/
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            /*border: 16px solid #f3f3f3;*/
+            border-radius: 50%;
+            /*border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;*/
+        }
+
+        /*@-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }*/
+
+        /* Add animation to "page content" */
+        .animate-bottom {
+            position: relative;
+            -webkit-animation-name: animatebottom;
+            -webkit-animation-duration: 1s;
+            animation-name: animatebottom;
+            animation-duration: 1s
+        }
+
+        @-webkit-keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0px;
+                opacity: 1
+            }
+        }
+
+        @keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+
+   
+    </style>
 
     <link rel="stylesheet" href="CSS/normalize.css">
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -40,53 +115,59 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 </head>
-<body class="login-page" >
-    <div class="login-box" style="float: inherit">
-        <div>
-            <img src="Images/Betsefer.png" alt="" class="img-responsive">
-        </div>
-        <div class="login-box-body">
-            <div  >
-                <div class="form-group has-feedback">
-                    <input id="IDTB" type="text" class="form-control sty1" placeholder="תעודת זהות">
-                </div>
-                <div class="form-group has-feedback">
-                    <input id="PasswordTB" type="password" class="form-control sty1" placeholder="סיסמה">
-                </div>
+<body class="login-page">
+    <div id="loader" style="display:none;" >
+        <img src="Images/school-clubs.gif" />
+    </div>
+    <div  id="myDiv" >
+
+        <div class="login-box" style="float: inherit">
+            <div>
+                <img src="Images/Betsefer.png" alt="" class="img-responsive">
+            </div>
+            <div class="login-box-body">
                 <div>
-                    <div class="col-xs-8">
-                        <div class="checkbox icheck">
-                            <label>
-                                <input type="checkbox">
-                                זכור אותי
-                            </label>
-                            <a href="pages-recover-password.html" class="pull-left">
-                                <!--<i class="fa fa-lock"></i>-->
-                                <img src="Images/forget.png" height="40"/>
-                            </a>
+                    <div class="form-group has-feedback">
+                        <input id="IDTB" type="text" class="form-control sty1" placeholder="תעודת זהות">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="PasswordTB" type="password" class="form-control sty1" placeholder="סיסמה">
+                    </div>
+                    <div>
+                        <div class="col-xs-8">
+                            <div class="checkbox icheck">
+                                <label>
+                                    <input type="checkbox">
+                                    זכור אותי
+                                </label>
+                                <a href="pages-recover-password.html" class="pull-left">
+                                    <!--<i class="fa fa-lock"></i>-->
+                                    <img src="Images/forget.png" height="40" />
+                                </a>
+                            </div>
                         </div>
+                        <!-- /.col -->
+                        <div class="col-xs-4 m-t-1">
+                            <center>
+                                <button id="LoginBTN" type="button" style="background-color:transparent;border-radius:50px;border:0; outline:none">
+                                    <img src="Images/go.png" height="60" style="background-color:transparent" />
+                                </button>
+                            </center>
+                        </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.col -->
-                    <div class="col-xs-4 m-t-1">
-                        <center>
-                            <button id="LoginBTN" type="button" style="background-color:transparent;border-radius:50px;border:0; outline:none">
-                                <img  src="Images/go.png" height="60" style="background-color:transparent" />
-                            </button>
-                        </center>
-                    </div>
-                    <!-- /.col -->
                 </div>
             </div>
-         </div>
-        <!-- /.login-box-body -->
-    </div>
-    <!-- /.login-box -->
-   
-    <!-- v4.0.0-alpha.6 -->
-    <script src="dist/bootstrap/js/bootstrap.min.js"></script>
+            <!-- /.login-box-body -->
+        </div>
+        </div>
+        <!-- /.login-box -->
+        <!-- v4.0.0-alpha.6 -->
+        <script src="dist/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- template -->
-    <script src="dist/js/niche.js"></script>
+        <!-- template -->
+        <script src="dist/js/niche.js"></script>
 </body>
 </html>
