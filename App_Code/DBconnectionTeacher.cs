@@ -1057,7 +1057,10 @@ public class DBconnectionTeacher
 
     public int InsertNotes(string PupilID, string CodeNoteType, string NoteDate, string TeacherID, string LessonsCode, string Comment)
     {
-        string cStr = "INSERT INTO [dbo].[GivenNotes]  ([PupilID] ,[CodeNoteType],[NoteDate],[TeacherID],[LessonsCode],[Comment])   VALUES ('" + PupilID + "','" + CodeNoteType + "','" + NoteDate + "' ,'" + TeacherID + "' ,'" + LessonsCode + "','" + Comment + "')";
+        string contentToHtml = Comment.Replace("\n", "<br />");
+        string tipulBeGeresh = contentToHtml.Replace("'", "''");
+
+        string cStr = "INSERT INTO [dbo].[GivenNotes]  ([PupilID] ,[CodeNoteType],[NoteDate],[TeacherID],[LessonsCode],[Comment])   VALUES ('" + PupilID + "','" + CodeNoteType + "','" + NoteDate + "' ,'" + TeacherID + "' ,'" + LessonsCode + "','" + tipulBeGeresh + "')";
         return ExecuteNonQuery(cStr);
     }
 
@@ -1075,6 +1078,8 @@ public class DBconnectionTeacher
     public int InserHomeWork(string LessonsCode, string HWInfo, string TeacherID, string CodeClass, string HWDate, bool IsLehagasha)
     {
         int num = 0;
+        string contentToHtml = HWInfo.Replace("\n", "<br />");
+        string tipulBeGeresh = contentToHtml.Replace("'", "''");
         try
         {
             using (var con = new SqlConnection(WebConfigurationManager.ConnectionStrings["Betsefer"].ConnectionString))
@@ -1083,7 +1088,7 @@ public class DBconnectionTeacher
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@LessonsCode", LessonsCode);
-                    cmd.Parameters.AddWithValue("@HWInfo", HWInfo);
+                    cmd.Parameters.AddWithValue("@HWInfo", tipulBeGeresh);
                     cmd.Parameters.AddWithValue("@GivenDate", DateTime.Today.ToShortDateString());
                     cmd.Parameters.AddWithValue("@TeacherID", TeacherID);
                     cmd.Parameters.AddWithValue("@CodeClass", CodeClass);
