@@ -44,24 +44,43 @@ function ClassAvgGrades(results) {
 
      uppPresentage = (res.length * 0.3);
      DownPresentage = (res.length * 0.7);
+    console.log("essionStorage.getItem('Loged')" + essionStorage.getItem('Loged'));
 
-    if (place < uppPresentage) {
-        swal({
-            title: "כל הכבוד!",
-            text: "אתה בין החזקים בכיתה",
-            imageUrl: "/Images/putInGrade.gif",
-            imageSize: '150x150'
-        });
+    var AlreadyLogged = sessionStorage.getItem('Loged');
+    if (AlreadyLogged != "1") {
+        console.log("localStorage.getItem('PasswordTB')" + localStorage.getItem("PasswordTB"));
+        if (localStorage.getItem("PasswordTB") == '1234') {
+            swal({
+                position: 'top-end',
+                type: 'error',
+                icon: "error",
+                title: 'בעיית אבטחה',
+                text: 'אתה עדיין משתמש בסיסמה הראשונית, תחליף אותה בהגדרות כאמצעי זהירות',
+                showConfirmButton: true,
 
-    }
-    else if (place > uppPresentage && MyAvgGrades > ClassAvgGrades) {
-        alert('אמנם אתה לא בעשירון העליון, הממוצע שלך גבוה מהממוצע הכיתתי');
-    }
-    else if (place > DownPresentage ) {
-        alert('אתה בתחת');
-    }
-    else  {
-        alert('אמנם אתה לא בטופ ולא באחרונים, אבל הממוצע שלך על הפנים');
+            });
+        }
+
+        if (place < uppPresentage) {
+            //alert('אתה בעשירון העליון');
+            swal({
+                title: "כל הכבוד!",
+                text: "אתה בין החזקים בכיתה",
+                imageUrl: 'Images/putInGrade.gif',
+                imageSize: '150x150'
+            });
+            console.log("אתה בין החזקים בכיתה" + DownPresentage);
+
+        }
+        else if (place > uppPresentage && MyAvgGrades > ClassAvgGrades) {
+            alert('אמנם אתה לא בעשירון העליון, הממוצע שלך גבוה מהממוצע הכיתתי');
+        }
+        else if (place > DownPresentage) {
+            alert('אתה בתחת');
+        }
+        else {
+            alert('אמנם אתה לא בטופ ולא באחרונים, אבל הממוצע שלך על הפנים');
+        }
     }
 
     var PupilIFullName = localStorage.getItem("UserFullName");
@@ -77,6 +96,8 @@ function ClassAvgGrades(results) {
         document.getElementById("UserNameLBL").innerHTML = " שלום " + PupilIFullName + " <img src='Images/bronze.png' height='70' style='float:left' />";
 
     }
+    sessionStorage.setItem("Loged", 1);
+    console.log('Changed AlreadyLogged  to 1');
 }
 
 function FillProgersBarDLL(results) {

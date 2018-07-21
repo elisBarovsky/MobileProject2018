@@ -69,6 +69,9 @@ function renderlogin(results) {
         localStorage.setItem("UserType", res[1]);
         localStorage.setItem("registrationId", res[2]);
         sessionStorage.setItem("Loged", 0);
+
+     
+
         if (res[1] === 'Parent') {
             var ID = localStorage.getItem("UserID");
             ParentChooseChild(ID, getChildrenArray);
