@@ -18,7 +18,7 @@ function onDeviceReady() {
                             showConfirmButton: false,
                         });
                         setTimeout(function () {
-                            window.location.href = "index.html"
+                            window.location.href = "Login.html"
 
                         }, 700);
 

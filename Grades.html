@@ -56,67 +56,7 @@
             transition: 0.4s;
         }
     </style>
-    <script src="dist/plugins/knob/jquery.knob.js"></script>
 
-
-    <script>
-        $(function ($) {
-
-            $(".knob").knob({
-                change: function (value) {
-                    //console.log("change : " + value);
-                },
-                release: function (value) {
-                    //console.log(this.$.attr('value'));
-                    console.log("release : " + value);
-                },
-                cancel: function () {
-                    console.log("cancel : ", this);
-                },
-                /*format : function (value) {
-                    return value + '%';
-                },*/
-                draw: function () {
-
-                    // "tron" case
-                    if (this.$.data('skin') == 'tron') {
-
-                        this.cursorExt = 0.3;
-
-                        var a = this.arc(this.cv)  // Arc
-                            , pa                   // Previous arc
-                            , r = 1;
-
-                        this.g.lineWidth = this.lineWidth;
-
-                        if (this.o.displayPrevious) {
-                            pa = this.arc(this.v);
-                            this.g.beginPath();
-                            this.g.strokeStyle = this.pColor;
-                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, pa.s, pa.e, pa.d);
-                            this.g.stroke();
-                        }
-
-                        this.g.beginPath();
-                        this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
-                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
-                        this.g.stroke();
-
-                        this.g.lineWidth = 2;
-                        this.g.beginPath();
-                        this.g.strokeStyle = this.o.fgColor;
-                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
-                        this.g.stroke();
-
-                        return false;
-                    }
-                }
-            });
-
-            // Example of infinite knob, iPod click wheel
-        
-        });
-    </script>
     <script>
         function Dashbord() {
             var type = localStorage.getItem("UserType");
@@ -144,29 +84,22 @@
         <div div class="login-box" style="height:20px;color:white">
             <h3>ציונים</h3>
         </div>
-        <!-- <div class="login-box-body" >-->
         <div  style="width:99%;">
-        <div class="col-lg-4"  ">
+        <div class="col-lg-4" >
             <div class="info-box"  style="width:100%;height:20px;text-align:center">
                 <div id="AvgGrades" class="col-12" style="color:#01c0c8;font-weight:bold;font-size:18px">
                    
                 </div>
-                <!--<div class="text-center" style="float:left;height:80px">
-                    <input class="knob" id="KnobChart" data-width="70" data-height="70" data-linecap=round data-fgColor="#01c0c8"  data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".2" />
-                </div>-->
+
             </div>
         </div>
         
-      
         </div>
         <div id="accordion" style="width:99%">
 
         </div>
     </div>
 
-    <!-- /.login-box-body -->
-    <!--</div>-->
-    <!-- /.login-box -->
     <!-- v4.0.0-alpha.6 -->
     <script src="dist/bootstrap/js/bootstrap.min.js"></script>
 

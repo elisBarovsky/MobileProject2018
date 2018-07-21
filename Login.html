@@ -33,15 +33,32 @@
         #loader {
             display: none;
             position: absolute;
-            /*left: 50%;*/
             top: 40%;
-            /*z-index: 1;*/
             width: 150px;
             height: 150px;
             margin: -75px 0 0 -75px;
             border-radius: 50%;
+        }
 
-        }   
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
 
         /* Add animation to "page content" */
         .animate-bottom {
@@ -49,6 +66,14 @@
             -webkit-animation-name: animatebottom;
             -webkit-animation-duration: 1s;
             animation-name: animatebottom;
+            animation-duration: 1s
+        }
+
+        .animate-top {
+            position: relative;
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 1s;
+            animation-name: animatetop;
             animation-duration: 1s
         }
 
@@ -92,11 +117,10 @@
 
 </head>
 <body class="login-page">
-    <div id="loader" style="display:none;" >
+    <div id="loader" style="display:none;">
         <img src="Images/school-clubs.gif" />
     </div>
-    <div  id="myDiv" >
-
+    <div id="myDiv" class="animate-bottom">
         <div class="login-box" style="float: inherit">
             <div>
                 <img src="Images/Betsefer.png" alt="" class="img-responsive">
@@ -135,12 +159,12 @@
             </div>
             <!-- /.login-box-body -->
         </div>
-        </div>
-        <!-- /.login-box -->
-        <!-- v4.0.0-alpha.6 -->
-        <script src="dist/bootstrap/js/bootstrap.min.js"></script>
+    </div>
+    <!-- /.login-box -->
+    <!-- v4.0.0-alpha.6 -->
+    <script src="dist/bootstrap/js/bootstrap.min.js"></script>
 
-        <!-- template -->
-        <script src="dist/js/niche.js"></script>
+    <!-- template -->
+    <script src="dist/js/niche.js"></script>
 </body>
 </html>

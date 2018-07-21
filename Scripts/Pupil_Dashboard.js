@@ -19,7 +19,7 @@ function onDeviceReady() {
                             buttons: false,
                         });
                         setTimeout(function () {
-                            window.location.href = "index.html"
+                            window.location.href = "Login.html"
 
                         }, 700);
 

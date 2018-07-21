@@ -52,7 +52,7 @@ function getChildrenArray(results) {//return string[].
             showConfirmButton: true,
 
         });
-        document.location.href = "index.html";
+        document.location.href = "Login.html";
     }
     else if (res.length === 1) {
         localStorage.setItem("PupilID", JSON.stringify(res[0].UserID1)); //saving in localS

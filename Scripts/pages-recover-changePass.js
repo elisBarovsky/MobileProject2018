@@ -71,5 +71,5 @@ function tellMeItsOk(results) {
 
 function ChangePage() {
 
-    window.location.href = "index.html";
+    window.location.href = "Login.html";
 }

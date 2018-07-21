@@ -12,8 +12,8 @@ function onDeviceReady() {
         }
 
         $('#LoginBTN').click(function () {        
-            //document.getElementById("loader").style.display = "block";
-            //document.getElementById("myDiv").style.display = "none";
+            document.getElementById("loader").style.display = "block";
+            document.getElementById("myDiv").style.display = "none";
             UserInfo.ID = document.getElementById("IDTB").value;
             UserInfo.PS = document.getElementById("PasswordTB").value;
             localStorage.setItem("UserID", UserInfo.ID); //saving in localS
@@ -130,7 +130,7 @@ function getChildrenArray(results) {//return string[].
             showConfirmButton: true,
 
         });
-        document.location.href = "index.html";
+        document.location.href = "Login.html";
     }
     else if (res.length === 1) {
         localStorage.setItem("PupilID", JSON.stringify(res[0].UserID1)); //saving in localS
