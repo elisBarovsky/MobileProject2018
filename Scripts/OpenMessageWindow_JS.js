@@ -1,26 +1,19 @@
 ﻿$(window).on('load', function () {
 
     $('body').fadeIn(500, function () {
+        var messageDetails = JSON.parse(localStorage.getItem("messageDetails"));
+        var sender = messageDetails.SenderID;
+        var me = localStorage.getItem("UserID");
 
-var messageDetails = JSON.parse(localStorage.getItem("messageDetails"));
-    var sender = messageDetails.SenderID;
-    var me = localStorage.getItem("UserID");
+        localStorage.setItem("SenderID", sender);
+        GetAllConversation(sender, me, ShowAllConversation);
 
-    localStorage.setItem("SenderID", sender);
-    GetAllConversation(sender, me, ShowAllConversation);
-
-    $('#senderTytle').text(messageDetails.SenderName);
-
-
+        $('#senderTytle').text(messageDetails.SenderName);
     });
-
-    
-
 });
 
 function ShowAllConversation(results) {
     res = $.parseJSON(results.d);
-  //  localStorage.setItem("SenderID", res[0].SenderID); // for know who the person you should send him answer.
 
     var str = '<div class="direct- chat-messages" id = "addToHereNewMessage">';
     var me = localStorage.getItem("UserID").toString();
@@ -29,7 +22,6 @@ function ShowAllConversation(results) {
     for (var i = 0; i < res.length; i++) {
         
         if (res[i].SenderID === me) {
-
             str += '<div class="direct-chat-msg">' +
                 '<div class="direct-chat-info clearfix">' +
                 '<span class="direct-chat-name pull-left">'+ res[i].SenderName +'</span>' +
@@ -39,8 +31,7 @@ function ShowAllConversation(results) {
                 '<div class="direct-chat-text">' +
                 '<div><u>' + res[i].Subject + '</u></div>' +
                 res[i].Content + '</div > ' +
-                '</div > ';
-                
+                '</div > ';                
         }
         else {
             str += '<div class="direct-chat-msg right">' +
@@ -79,14 +70,10 @@ function SubmitMessage() {
         message.RecipientID = localStorage.getItem("SenderID"); // the one you answer him.
 
         localStorage.setItem("putMessageUp", JSON.stringify(message));
-
         SubmitMessageAjax(message, AfterMessageSent);
-
 };
 
 function AfterMessageSent(results) {
- 
-
     var date = new Date();
     var FullDAte = ('0' + date.getDate()).slice(-2) + "/" + ('0' + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear() + " " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2) + ":" + ('0' + date.getSeconds()).slice(-2);
 
@@ -108,6 +95,5 @@ function AfterMessageSent(results) {
   
     subject = document.getElementById('newSubject').value="";
     content = document.getElementById('newMessage').value = "";
-   // alert("נשלח");
 };
 

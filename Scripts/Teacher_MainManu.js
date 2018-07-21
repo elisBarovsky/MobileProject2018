@@ -10,14 +10,9 @@ function onDeviceReady() {
         Id = localStorage.getItem("UserID");
         user.userType = 2;
         localStorage.setItem("LastVisit", "Teacher_MainManu.html"); //saving in localS
-
         GetUserInfo(user, renderFillUser);
-
         LoadAllMessagesById(Id, DisplayMessages);
-
         LoadScheduleForToday(user, DisplaySchedule);
-
-
      });
 }
 
@@ -56,11 +51,8 @@ function OpenMessage(obj) {
     localStorage.setItem("messageDetails", JSON.stringify(obj));
     var i = obj.MessageCode, iconID = obj.IconId;
     UpdateMessageAsRead(i);
-    $(iconID).removeClass('fa fa-envelope-o').addClass('fa fa-envelope-open-o');
-
-    
+    $(iconID).removeClass('fa fa-envelope-o').addClass('fa fa-envelope-open-o');  
     a = window.location = "OpenMessageWindow.html";
-        //window.open("OpenMessageWindow.html", "window", "toolbar=no,scrollbars=yes,resizable=yes,top=50%,left=25%,width=500,height=600,modal=yes");
 
     a.focus();
     document.onmousedown = a;
@@ -73,27 +65,14 @@ function parent_disable() {
         a.focus();
 }
 
-
 function renderFillUser(results) {
     //Save pupil in localstorage
     var UserId = localStorage.getItem("UserID");
     user = new Object();
     user.UserId = UserId;
-    //if (type !== 'Teacher') {
-    //    //GetPupilId(user, SavePupilId);
-    //}
 
     res = $.parseJSON(results.d);
     document.getElementById("UserNameLBL").innerHTML = " שלום " + res[1] + " " + res[2];
-    //if (res[6] === "") {
-    //    document.getElementById("UserIMG").src = "Images/NoImg.png";
-    //    localStorage.setItem("UserImg", "Images/NoImg.png");
-    //}
-    //else {
-    //    document.getElementById("UserIMG").src = res[6];
-    //    localStorage.setItem("UserImg", res[6]);
-    //}
-    //document.getElementById("UserIMG").src = "Images/NoImg.png";
     localStorage.setItem("UserFullName", res[1] + " " + res[2]);
 }
 
@@ -102,14 +81,9 @@ function DisplaySchedule(results) {
     document.getElementById("myDiv").style.display = "block";
     res = $.parseJSON(results.d);
     if (res.length === 0) {
-        //$('#noSchedule').show();
-        //$('#noScheduleBoy').show();
         $('#todaySchedule').append("<h6 id='noSchedule' style='color:gold;margin-right:25%'>אין לימודים היום!</h6><img id='noScheduleBoy' src='Images/yayy.gif' style='margin-right:20%' height='130'/> ");
-
     }
     else {
-        //$('#noSchedule').hide();
-
         var tableString = "<tr><td colspan='2'>יום " + res[0].WeekDay + "</td></tr>";
         var day = res[0].WeekDay;
         var counter = 0;
@@ -119,7 +93,6 @@ function DisplaySchedule(results) {
             if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
                 tableString += "<tr><td> " + res[counter].lessonHours + "</td>";
             }
-           // else tableString += "<tr><td> - </td>";
 
             if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
 
@@ -130,5 +103,4 @@ function DisplaySchedule(results) {
         }
         $('#looze').append(tableString);
     }
-
 }

@@ -78,27 +78,15 @@ function LoadScheduleForSpecipicDay(day) {
     };
 };
 
-    //function LetsClick(getID) {
-    //    alert(getID);
-    //}
-   
 
 function LoadTimeTable(results) {
     $('#looze').empty();
     $('#appendStuff').empty();
     res = $.parseJSON(results.d);
-    if (res.length === 0) {
-        //$('#noSchedule').show();
-        //$('#noScheduleBoy').show();
-      
-        $('#appendStuff').append("<h6 id='noSchedule' style='color:gold;margin-right:25%'>אין שיעורים היום!</h6><img id='noScheduleBoy' src='Images/yayy.gif' style='margin-right:20%' height='130'/> ");
-        
+    if (res.length === 0) {  
+        $('#appendStuff').append("<h6 id='noSchedule' style='color:gold;margin-right:25%'>אין שיעורים היום!</h6><img id='noScheduleBoy' src='Images/yayy.gif' style='margin-right:20%' height='130'/> ");  
     }
     else {
-      //  $('#appendStuff').empty();
-        //$('#noSchedule').hide();
-        //$('#noScheduleBoy').hide();
-
         var tableString = "<tr><td colspan='2'>יום " + res[0].WeekDay + "</td></tr>";
         var day = res[0].WeekDay;
         var counter = 0;
@@ -109,7 +97,6 @@ function LoadTimeTable(results) {
             if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
                 tableString += "<tr><td> " + res[counter].lessonHours + "</td>";
             }
-            //else tableString += "<tr><td> - </td>";
             else tableString += "<tr>";
 
             if (counter < res.length && i.toString() === res[counter].ClassTimeCode) {
@@ -125,9 +112,7 @@ function LoadTimeTable(results) {
             }
             tableString += "</tr>";
         }
-        $('#looze').append(tableString);
-
-        
+        $('#looze').append(tableString);        
     }
 }
 

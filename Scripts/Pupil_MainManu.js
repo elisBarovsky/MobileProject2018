@@ -8,24 +8,13 @@ var UserInfo = {
 var user = new Object();
 
 function onDeviceReady() {
-    //alert(2);
- 
-    //setTimeout(function () {
-    //    $('body').addClass('loaded');
-    //    $('h1').css('color', '#222222');
-    //    document.getElementById('loadingIMG').style.visibility = "visible";
-    //}, 3000);
-  
-   // alert(5);
+
     $('body').fadeIn(500, function () {
-       // document.getElementById('loadingIMG').style.visibility = "hidden";
-       // alert(6);
         user.PupilID = localStorage.getItem("UserID");
         user.UserId = localStorage.getItem("UserID");
         user.userType = 4;
         localStorage.setItem("LastVisit", "Pupil_MainManu.html"); //saving in localS
         FillProgersBar(user, FillProgersBarDLL);
-
 
         LoadScheduleForToday(user, DisplaySchedule);
     });
@@ -50,7 +39,6 @@ function ClassAvgGrades(results) {
     }
     localStorage.setItem("StudentGradePlace", place); //saving in localS
 
-  //  var TotalCountHW = res[place-1].PupilID;
     ClassAvgGrades = (ClassAvgGrades / res.length );
     var MyAvgGrades = res[place-1].AvgGarde;
 
@@ -58,7 +46,6 @@ function ClassAvgGrades(results) {
      DownPresentage = (res.length * 0.7);
 
     if (place < uppPresentage) {
-        //alert('אתה בעשירון העליון');
         swal({
             title: "כל הכבוד!",
             text: "אתה בין החזקים בכיתה",
@@ -76,8 +63,6 @@ function ClassAvgGrades(results) {
     else  {
         alert('אמנם אתה לא בטופ ולא באחרונים, אבל הממוצע שלך על הפנים');
     }
-
-   // localStorage.setItem("UserFullName", res[1] + " " + res[2]);
 
     var PupilIFullName = localStorage.getItem("UserFullName");
     if (place == 1) {
@@ -114,7 +99,6 @@ function renderFillUser(results) {
  
     res = $.parseJSON(results.d);
 
- 
     document.getElementById("UserNameLBL").innerHTML = " שלום " + res[1] + " " + res[2];
 
     var strProg = ""
@@ -127,24 +111,9 @@ function renderFillUser(results) {
     else {
         strProg = "<div class='progress-bar progress-bar-striped bg-info progress-bar-animated' role='progressbar' style='width:" + TotalPresentage + "% ' aria-valuenow='85' aria-valuemin='0' aria-valuemax='100'></div>";
     }
-    //    <h6 id="noSchedule" style="color:gold;visibility:hidden">סיימת שיעורים!</h6>
-    // <img id='noScheduleBoy' src='Images/yayy.gif' height='130' style="visibility:hidden' />
     $('#ProgBar').append(strProg);
 
-    //if (res[6] === "") {
-    //  //  document.getElementById("UserIMG").src = "Images/NoImg.png";
-    //    localStorage.setItem("UserImg", "Images/NoImg.png");
-
-    //}
-    //else {
-    //    document.getElementById("UserIMG").src = res[6];
-    //    localStorage.setItem("UserImg", res[6]);
-
-    //}
-   // document.getElementById("UserIMG").src = "Images/NoImg.png";
     localStorage.setItem("UserFullName", res[1] + " " + res[2]);
-
-
 }
 
 function DisplaySchedule(results) {
@@ -153,14 +122,10 @@ function DisplaySchedule(results) {
 
     res = $.parseJSON(results.d);
     if (res.length === 0) {
-        //$('#noSchedule').show();
-        //$('#noScheduleBoy').show();
         $('#todaySchedule').append("<h6 id='noSchedule' style='color:gold;margin-right:25%'>אין לימודים היום!</h6><img id='noScheduleBoy' src='Images/yayy.gif' style='margin-right:20%' height='130'/> ");
 
     }
     else {
-        //$('#noSchedule').hide();
-
         var tableString = "";
         var counter = 0;
 

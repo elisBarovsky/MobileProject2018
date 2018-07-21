@@ -1,8 +1,6 @@
 ﻿$(document).ready(onDeviceReady);
 
 function onDeviceReady() {
-
-
     $('body').fadeIn(500, function () {
 
         $('#Logout').click(function () {

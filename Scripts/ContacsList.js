@@ -10,7 +10,6 @@ function onDeviceReady() {
     if (Usertype == "Teacher") {
         User.IsTeacher = true;
         User.PupilID = localStorage.getItem("UserID");
-        //User.type = 2;
         User.type = 4;
         FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
 
@@ -31,12 +30,9 @@ function onDeviceReady() {
             if (sessionStorage.getItem('PupilList') != null) {
                 retrievedObject = JSON.parse(sessionStorage.getItem('PupilList'));
                 FillListViewCellPhone(retrievedObject);
-              //  res = JSON.parse(retrievedObject);
-
             }
             else {
                 FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
-
             }
         });
 
@@ -46,20 +42,17 @@ function onDeviceReady() {
             if (sessionStorage.getItem('ParentsList') !=null) {
                 retrievedObject = JSON.parse(sessionStorage.getItem('ParentsList'));
                 FillListViewCellPhone(retrievedObject);
-              //  res = JSON.parse(retrievedObject);
             }
             else {
                 FillCelphoneByTypeAndPupilId(User, FillListViewCellPhone);
 
             }
         });
-
 }
 
 function funcToCall(tele) {
     tele = tele.toString().substring(2);
-    
-   window.open('tel:' + tele, '_system', 'location=yes');
+    window.open('tel:' + tele, '_system', 'location=yes');
 }
 
 function FillListViewCellPhone(results) {  //contactList
@@ -69,33 +62,15 @@ function FillListViewCellPhone(results) {  //contactList
 
         if (User.type == 4) {
             sessionStorage.setItem("PupilList", JSON.stringify(res));
-
         }
         else {
             sessionStorage.setItem("ParentsList", JSON.stringify(res));
-
         }
     }
     else {
         res = results;
     }
-
-    //else {
-
-    //    if (User.type == 4) {
-    //        var retrievedObject = sessionStorage.getItem('PupilList');
-
-    //        res = JSON.parse(retrievedObject) ;
-
-    //    }
-    //    else {
-    //        retrievedObject = sessionStorage.getItem('ParentsList');
-
-    //        res = JSON.parse(retrievedObject);
-    //    }
-    //}
-
-    
+   
     counter = 0;
     var phoneIcon = "Images/PhoneIcon.png";
 

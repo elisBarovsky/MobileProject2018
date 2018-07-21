@@ -17,9 +17,7 @@ function onDeviceReady() {
                         swal("תחזור בקרוב!", {
                             icon: "success",
                             buttons: false,
-                         //  timer: 3000
                         });
-                      //  window.location.href = "index.html"
                         setTimeout(function () {
                             window.location.href = "index.html"
 

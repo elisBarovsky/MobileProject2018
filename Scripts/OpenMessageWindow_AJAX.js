@@ -6,8 +6,6 @@ if (isCordovaApp) {
 else
     path = "";
 
-
-
 function GetAllConversation(sender, me, ShowAllConversation) {
     $.ajax({
         url: path+ 'BetseferWS.asmx/GetAllConversation',

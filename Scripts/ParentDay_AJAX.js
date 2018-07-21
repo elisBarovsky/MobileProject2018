@@ -6,15 +6,11 @@ if (isCordovaApp) {
 else
     path = "";
 
-
-
 function IfMehanech_LoadParentDay(userID, ShowParentsDay) {
 
     $.ajax({
         url: path+'BetseferWS.asmx/IfMehanech_LoadParentDay',
         data: JSON.stringify({ 'UserId': userID }),
-        //url: path + 'BetseferWS.asmx/IfMehanech_LoadParentDay',
-        //data: JSON.stringify({ 'UserId': userID }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
@@ -30,8 +26,6 @@ function SaveParentDay(parentsDay, AfterSave) {
     $.ajax({
         url: path+'BetseferWS.asmx/SaveParentDay',
         data: JSON.stringify({ 'date': parentsDay.date, 'from': parentsDay.from, 'to': parentsDay.to, 'longMeeting': parentsDay.long, 'teacher': parentsDay.teacher }),
-        //url: path + 'BetseferWS.asmx/IfMehanech_LoadParentDay',
-        //data: JSON.stringify({ 'UserId': userID }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
@@ -73,7 +67,7 @@ function GiveMeBreak(ParentsDayMeeting, ChangeButton) {
     });
 }
 
-function DeleteBreak(ParentsDayMeeting, ChangeButton) {//need meetting code not what i saved
+function DeleteBreak(ParentsDayMeeting, ChangeButton) {
     $.ajax({
         url: path+'BetseferWS.asmx/DeleteBreak',
         data: JSON.stringify({ 'ParentsDayMeeting': ParentsDayMeeting }),

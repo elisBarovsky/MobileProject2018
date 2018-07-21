@@ -1,21 +1,8 @@
 ﻿var Teacher = new Object();
 
 $(document).ready(function () {
-    //alert(1);
-
-    //IfMehanech_LoadParentDay(userID, ShowParentsDay);
-
     $('body').fadeIn(500, function () {
-
         var TeacherID = localStorage.getItem("UserID");
-        //var TeacherID = userID;
-        //$("#childrenDDL").hide();
-        //$("#parentsDDL").hide();
-        //$("#teachersDDL").hide();
-        //$('#forLBL').hide();
-        //$("#classDDL").hide();
-        //$('#classLBL').hide();
-
         LoadClasses(TeacherID, FillClassesInDDL);
         LoadNotes(TeacherID, FillNotesInDDL);
 
@@ -26,7 +13,6 @@ function FillClassesInDDL(results) {
     res = $.parseJSON(results.d);
 
     $('#classDDL').empty();
-
     var dynamicLy = "<option value='0'>בחר</option>";
     $('#classDDL').append(dynamicLy);
 
@@ -34,7 +20,6 @@ function FillClassesInDDL(results) {
         dynamicLy = " <option value='" + res[i] + "' style='text- align:right'>" + res[i] + "</option> ";
         $('#classDDL').append(dynamicLy);
     }
-
     var userID = localStorage.getItem("UserID");
     var TeacherID = userID;
 
@@ -59,7 +44,6 @@ function FillNotesInDDL(results) {
 }
 
 function FillSubjects(drak) {
-   // res = $.parseJSON(results.d);
 
     Teacher.Id = localStorage.getItem("UserID");
     Teacher.Class = $('#classDDL').val();
@@ -83,7 +67,6 @@ function FillSubjectsDDL(results) {
 
     var userID = localStorage.getItem("UserID");
     var TeacherID = userID;
-
 }
 
 function FillPupilsDDL(results) {
@@ -98,10 +81,8 @@ function FillPupilsDDL(results) {
         dynamicLy = " <option value='" + res[i].FullName + "' id='" + res[i].UserID  + "' style='text- align:right'>" + res[i].FullName  + "</option> ";
         $('#PupilDDL').append(dynamicLy);
     }
-
     var userID = localStorage.getItem("UserID");
     var TeacherID = userID;
-
 }
 
 function SubmitMessage(drak) {
@@ -159,17 +140,4 @@ function AfterHWSent(results) {
     $('#PupilDDL').val('0');
     $('#NoteDDL').val('0');
     $('#NoteContent').val('');
-  
-
 }
-//function KeyByValue(dict, val) {
-//    var key = null;
-
-//    for (var i = 0; i < dict.length; i++) {
-//        if (dict[i].value == val) {
-//            key = dict[i].key;
-//            break;
-//        }
-//    }
-//    return key;
-//}

@@ -86,7 +86,6 @@ function MessageType(messageType) {
 }
 
 function SubmitMessage() {
-  //  var userType = GetUserType(),
         subject = $('#messageSubject').val(),
         content = $('#messageContent').val();
    var usrererer = $('#tags').val();
@@ -149,18 +148,3 @@ function GetMessageType() {
         else return "kolektive";
 }
 
-//function GetUserType() {
-//    var pupil = document.getElementById('pupils').checked;
-//    var parent = document.getElementById('parents').checked;
-//    var teacher = document.getElementById('teachers').checked;
-//    if (pupil) {
-//        return "pupils";
-//    }
-//    else if (parent) {
-//        return "parents";
-//    }
-//    else if (teacher) {
-//        return "teachers";
-//    }
-//    else return "notSelected";
-//}

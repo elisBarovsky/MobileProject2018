@@ -22,20 +22,9 @@ function renderGrades(results) {
     var counter2 = 0;
     $('#accordion').empty();
     var ImgIcon;
-   // var SumAvgTotal = 0;
     var SumAvg = 0;
 
     var ExamsCountTotal = 0 ;
-  //  for (var i = 0; i < res.length; i++) {
-      
-  //   //   SumAvgTotal += res[counter].ExamAVG;
-  //      SumAvg += res[counter].Grade;
-  //      ExamsCountTotal++;
-  //  }
-
-  ////  TotalAvg = (SumAvgTotal / ExamsCountTotal);
-  // var PupilAvg = (SumAvg / ExamsCountTotal);
-   // document.getElementById('KnobChart').value = PupilAvg;
 
     for (var i = 0; i < res.length; i++) {
         if (res[counter].Grade > "50") {
@@ -77,14 +66,10 @@ function renderGrades(results) {
         var newP0 = document.createElement('p');
         var newP1 = document.createElement('p');
         var newP2 = document.createElement('p');
-        //var newP3 = document.createElement('p');
-        //var newP4 = document.createElement('p');
         var acc = document.getElementById('accordion');
         var div = document.getElementById("Div1");
 
         newH3.innerText =  res[counter].LessonName + ' ציון: ' + res[counter].Grade;
-
-      //  newH3.appendChild(newIMG);
 
         newP0.innerText = 'מורה: ' + res[counter].Teacher_FullName;
         newDiv.appendChild(newP0);
@@ -104,6 +89,5 @@ function renderGrades(results) {
     }
     var PupilAvg = (counter2 / counter);
     document.getElementById('AvgGrades').innerText = " ממוצע הציונים שלי הוא: " + PupilAvg ;
-    //$("#KnobChart").refresh();
 
 }

@@ -5,28 +5,23 @@ function onDeviceReady() {
 
     $('body').fadeIn(500, function () {
 
+        FillSecurityQ(renderFillSecurityQ);
+        SecurityQA = new Object();
 
- FillSecurityQ(renderFillSecurityQ);
-
-
-
-    SecurityQA = new Object();
-
-    $('#SaveQBTN').click(function () {
-        SecurityQA.UserID = localStorage.getItem("UserID");
-        SecurityQA.choosenQ1 = document.getElementById("Q1").value;
-        SecurityQA.choosenQ2 = document.getElementById("Q2").value;
-        SecurityQA.choosenA1 = document.getElementById("ans11").value;
-        SecurityQA.choosenA2 = document.getElementById("ans21").value;
-        SaveQuestion(SecurityQA, renderSaveQuestion);
-    });
+        $('#SaveQBTN').click(function () {
+            SecurityQA.UserID = localStorage.getItem("UserID");
+            SecurityQA.choosenQ1 = document.getElementById("Q1").value;
+            SecurityQA.choosenQ2 = document.getElementById("Q2").value;
+            SecurityQA.choosenA1 = document.getElementById("ans11").value;
+            SecurityQA.choosenA2 = document.getElementById("ans21").value;
+            SaveQuestion(SecurityQA, renderSaveQuestion);
+        });
 
     });
    
 }
 
 function renderFillSecurityQ(results) {
-    //this is the callBackFunc 
     res = $.parseJSON(results.d);
 
     $('#Q1').empty();
@@ -44,25 +39,12 @@ function renderFillSecurityQ(results) {
     }
     $('#Q1').selectmenu('refresh');
 
-    //dynamicLy = "<option value='0'>בחר</option>";
-    //$('#Q1').append(dynamicLy);
-    //$('#Q1').selectmenu('refresh');
-    //$.each(res, function (i, row) {
-    //    dynamicLy = " <option value='" + (i + 1) + "' style='text- align:right'>" + row + "</option> ";
-    //    $('#Q1').append(dynamicLy);
-    //    $('#Q1').selectmenu('refresh');
-    //});
 }
 
 $(document).on("change", "#Q1", function (event) {
     $('#Q2').empty()
     choosen = document.getElementById("Q1").value;
-    //  dynamicLy = "<option value='0'>בחר</option>";
-    //  $('#Q2').append(dynamicLy);
-    //$('#Q2').selectmenu('refresh', true);
-    // $('#Q2').selectmenu().selectmenu('refresh');
-
-
+ 
     var x = $('#Q2');
     var option = document.createElement("option");
     option.text = 'בחר ';
@@ -84,7 +66,6 @@ $(document).on("change", "#Q1", function (event) {
 UserFullInfo = new Object();
 
 function renderSaveQuestion(results) {
-    //this is the callBackFunc 
     UserFullInfo.Id = localStorage.getItem("UserID");
     res = $.parseJSON(results.d);
     if (res === 2) {
@@ -94,7 +75,6 @@ function renderSaveQuestion(results) {
 
         if (userType === "Parent") {
             document.location.href = "Parent-ChooseChild.html";
-            //$.mobile.changePage("#ParentChooseChild", { transition: "slide", changeHash: false }); // מעביר עמוד 
         }
         else {
             $.mobile.changePage("#DashBordPage", { transition: "slide", changeHash: false }); // מעביר עמוד 
@@ -123,12 +103,10 @@ function renderFillUser(results) {
    
     res = $.parseJSON(results.d);
    
-
     if (type == 'Child') {
         document.location.href = "Pupil_MainManu.html";
     }
     else if (type == 'Parent') {
         document.location.href = "Parent-ChooseChild.html";
     }
-
 }

@@ -5,14 +5,14 @@ user = new Object();
 function onDeviceReady() {
     $('body').fadeIn(500, function () {
 
-          localStorage.setItem("LastVisit", "HomeWork_history.html"); //saving in localS
-            user.PupilID = localStorage.getItem("PupilID");
+        localStorage.setItem("LastVisit", "HomeWork_history.html"); //saving in localS
+        user.PupilID = localStorage.getItem("PupilID");
 
-            $(function () {
-                $("#accordion").accordion({
-                    collapsible: true
-                });
+        $(function () {
+            $("#accordion").accordion({
+                collapsible: true
             });
+        });
         FillHistotyHW(user, LoadHWTable);
     });   
 }

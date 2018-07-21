@@ -18,7 +18,7 @@ function LoadClasses(TeacherID, FillClassesInDDL) {
             FillClassesInDDL(results);
         },
         error: function (request, error) {
-       //     alert('Network error has occurred please try again!');
+
         }
     });
 }
@@ -36,7 +36,7 @@ function FillPupils(TeacherID, FillUsersInDDL) {
             FillTeachersInDDL(results);
         },
         error: function (request, error) {
-  //          alert('Network error has occurred please try again!');
+
         }
     });
 }

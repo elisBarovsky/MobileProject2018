@@ -13,7 +13,7 @@ function onDeviceReady() {
                     collapsible: true
                 });
             });
-        FillProgersBar(user, FillProgersBarDLL);
+            FillProgersBar(user, FillProgersBarDLL);
     }); 
 
     $('#HWHistory').click(function () {
@@ -44,8 +44,6 @@ function CheckedDB(results) {
 
     if (res == "well done!") {
 
-        //$('#myModal').modal('show');
-       // swal("עבודה טובה!", "סיימת שיעורים", "success");
         swal({
             title: "עבודה טובה!",
             text: "סיימת שיעורים" ,
@@ -53,17 +51,20 @@ function CheckedDB(results) {
         })
           .then((willDelete) => {
               location.reload();
-             // $("#accordion").load(window.location.href + " #accordion");
-
           });
     }
     else if (res == "something went wrong") {
-        //alert("res");
-    }
+        swal({
+            title: "שגיאה",
+            text: "הייתה בעיה עם העדכון, נסה שנית מאוחר יותר או פנה לתמיכה",
+            icon: "error",
+        })    }
     else if (res == "updated") {
-       // alert("עודכן");
+        swal({
+            title: "עודכן",
+            icon: "info",
+        })
     }
-
 }
 
 function FillProgersBarDLL(results) {
@@ -135,11 +136,9 @@ function LoadHWTable(results) {
             if (res[counter].IsLehagasha == true) {
                 IsLehagasha = "להגשה";
                 newP3.innerText = 'להגשה עד : ' + res[counter].HWDueDate;
-
             }
             else {
                 newP3.innerText = 'עד תאריך: ' + res[counter].HWDueDate;
-
             }
 
             newDiv.appendChild(newP3);
@@ -152,7 +151,6 @@ function LoadHWTable(results) {
             checkbox.name = "CBIsDone";
             checkbox.value = "value";
             checkbox.id = res[counter].HWCode;
-            //        checkbox.setAttribute("onchange", "HWDone(" + res[counter].HWCode  + ");");
 
             checkbox.setAttribute("onclick", "HWDone(this);");
 
@@ -164,9 +162,7 @@ function LoadHWTable(results) {
                     newP5.innerText = "בוצע  ";
                 }
                 else {
-                    newP5.innerText ="  טרם בוצע  ";
-                   
-
+                    newP5.innerText ="  טרם בוצע  ";                
                 }
                  newP5.style.fontWeight = 'bold';
                 newDiv.appendChild(newP5);
@@ -176,23 +172,13 @@ function LoadHWTable(results) {
                 newP5.innerText = "סיימתי  ";
                 newP5.appendChild(checkbox)
                 newDiv.appendChild(newP5 );
-
             }
            
-
             //get inside the accordion!
             acc.appendChild(newH3);
             acc.appendChild(newDiv);
             $("#accordion").accordion("refresh");
-
-            //$("#accordion").accordion();
-            //   $('#accordion').append('<h3>First Floor</h3><div><p>Welcome to da first floor.</p></div> <h3>Floor numbah 2</h3><div><p>you are now on floor 2</p></div>');
-            //  $("#accordion").accordion()
-            // dynamicLy = "<img src='" + ImgIcon + "'style='height:100px;float:left'/> <h3>סוג הערה: " + res[counter].NoteName + "</h3><div><p>מקצוע: " + res[counter].LessonName + "</p><p>תאריך: " + res[counter].NoteDate + "</p></div>";
-            //  dynamicLy = "<li> <a href='#' data-id=" + res[counter].CodeGivenNote + "><img src='" + ImgIcon + "' /> <p>סוג הערה: " + res[counter].NoteName + "</p><p>מקצוע: " + res[counter].LessonName + "</p><p>תאריך: " + res[counter].NoteDate + "</p> </li>";
-            counter++;
+             counter++;
         }
     }
-    //  $('#accordion').listview('refresh');
-
 }

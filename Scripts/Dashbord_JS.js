@@ -2,16 +2,12 @@
     var Id = localStorage.getItem("UserID");
     var z = localStorage.getItem("UserImg");
     document.getElementById('imgUser').src = z;
-    //document.getElementById('UserImgimg').src = z;
 
     obj = new Object()
     obj.Id = Id;
     obj.userType = "2";
-    //var Date = new Date();
-    //obj.weekDay = Date.getDay();
 
     LoadAllMessagesById(Id, DisplayMessages);
-
     LoadScheduleForToday(obj, DisplaySchedule);
 });
 

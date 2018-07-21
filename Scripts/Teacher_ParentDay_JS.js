@@ -1,11 +1,8 @@
 ﻿localStorage.setItem("ThereIsParentDay", 0);
 
-
 $(document).ready(function () {
     var userID = localStorage.getItem("UserID");
-
     IfMehanech_LoadParentDay(userID, ShowParentsDay); 
-
 });
 
 function ShowParentsDay(results) {
@@ -237,11 +234,6 @@ function AfterSave(results) {
         icon: "success",
         title: 'נוצר בהצלחה'
     });
-    //var date = $('#parentsDayDate').val() = "";
-    //var from = $('#from option:selected').select(0);
-    //var to = $('#to option:selected').select(0);
-    //var long = $('#long option:selected').select(0);
-
     IfMehanech_LoadParentDay(localStorage.getItem("UserID"), ShowParentsDay);
 };
 

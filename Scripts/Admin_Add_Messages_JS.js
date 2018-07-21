@@ -110,7 +110,6 @@ function ChooseDDL(userType) {
                 $('#classDDL').val('0');
                 $('#classDDL').hide();
                 break;
-
         }
     }
     else {
@@ -127,8 +126,7 @@ function ChooseDDL(userType) {
             $('#classDDL').val('0');
             $('#classDDL').show();
         }
-    }
-    
+    }   
 }
 
 function MessageType(messageType) {
@@ -175,7 +173,6 @@ function SubmitMessage() {
                     break;
             }
         }
-
         SubmitMessageAjax(message, AfterMessageSent);
     }
 }
@@ -204,7 +201,6 @@ function AfterMessageSent(results) {
     $('#pupils').val([]);
     $('#parents').val([]);
     $('#teachers').val([]);
-
 }
 
 function GetMessageType() {

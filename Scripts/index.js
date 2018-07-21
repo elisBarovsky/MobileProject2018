@@ -1,12 +1,8 @@
-﻿
-//alert(5);
-$(document).ready(onDeviceReady);
+﻿$(document).ready(onDeviceReady);
 
 UserInfo = new Object();
 
 function onDeviceReady() {
-    //alert(2);
-
     $('body').fadeIn(500, function () {
         var Remember = localStorage.getItem("rememberME");
         if (Remember != null) {
@@ -15,8 +11,7 @@ function onDeviceReady() {
 
         }
 
-        $('#LoginBTN').click(function () {
-            //alert(1);
+        $('#LoginBTN').click(function () {        
             //document.getElementById("loader").style.display = "block";
             //document.getElementById("myDiv").style.display = "none";
             UserInfo.ID = document.getElementById("IDTB").value;

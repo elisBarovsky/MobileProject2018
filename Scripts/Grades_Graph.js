@@ -1,7 +1,7 @@
 ﻿$(document).ready(onDeviceReady);
 
 function onDeviceReady() {
- localStorage.setItem("LastVisit", "Grades.html"); //saving in localS
+    localStorage.setItem("LastVisit", "Grades.html"); //saving in localS
 
     GradeDate = new Object();
     GradeDate.code = sessionStorage['codeExam'];
@@ -36,7 +36,6 @@ function renderGivenGradeByDate(results) {
         PupilGrades.push({ x: i + 1, y: results[counter++].Grade });
         PupilGradesAVG.push({ x: i+1 , y: GradeAvg });
     }
-  //  PupilGrades = PupilGrades.sort(y);
 
     var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,

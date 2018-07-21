@@ -75,8 +75,6 @@ function SubmitMessage() {
         message.Content = content;
         message.UserClass = "null";
 
-    
-
         SubmitMessageAjax(message, AfterMessageSent);
     }
 }

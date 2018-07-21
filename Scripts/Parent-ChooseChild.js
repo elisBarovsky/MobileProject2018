@@ -2,9 +2,7 @@
 
 function onDeviceReady() {
 
-    //$('body').fadeIn(500, function () {
-  var ID = localStorage.getItem("UserID");
-   // ParentChooseChild(ID, getChildrenArray);
+    var ID = localStorage.getItem("UserID");
 
     var children = JSON.parse(localStorage.getItem("allParentChildren"));
 
@@ -19,7 +17,6 @@ function onDeviceReady() {
         option.text = children[i].UserFName1 + ' ' + children[i].UserLName1;
         x.append(option);
     }
-  //  $('#ChooseChild').selectmenu('refresh');
 
     $('#continueLogin').click(function () {
       //  alert(5);
@@ -78,10 +75,8 @@ function getChildrenArray(results) {//return string[].
     }
 }
 
-
 function renderFillUser(results) {
 
     res = $.parseJSON(results.d);
-
     document.location.href = "Parent_MainManu.html";
 }

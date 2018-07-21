@@ -4,23 +4,16 @@ UserInfoNote = new Object();
 
 function onDeviceReady() {
 
-
     $('body').fadeIn(500, function () {
-
-
-    localStorage.setItem("LastVisit", "Notes.html"); //saving in localS
-    UserInfoNote.ID = localStorage.getItem("PupilID");
-    $(function () {
-        $("#accordion").accordion({
-            collapsible: true
+        localStorage.setItem("LastVisit", "Notes.html"); //saving in localS
+        UserInfoNote.ID = localStorage.getItem("PupilID");
+        $(function () {
+            $("#accordion").accordion({
+                collapsible: true
+            });
         });
+        GetUserNotes(UserInfoNote, renderNotes);
     });
-    GetUserNotes(UserInfoNote, renderNotes);
-
-
-    });
-
-
 }
 
 function renderNotes(results) {
@@ -56,8 +49,6 @@ function renderNotes(results) {
 
         newH3.innerText = 'סוג הערה: ' + res[counter].NoteName + '                         ';
 
-       // newH3.appendChild(newIMG);
-
         newP0.innerText = 'מורה: ' + res[counter].Teacher_FullName;
         newDiv.appendChild(newP0);
 
@@ -75,15 +66,7 @@ function renderNotes(results) {
         acc.appendChild(newDiv);
         $("#accordion").accordion("refresh");
 
-       // $('#accordion').append('<h3><img src="' + ImgIcon + '"style="height: 100px; float: left"/>סוג הערה: ' + res[counter].NoteName + '</h3><div><p>מקצוע: ' + res[counter].LessonName + '<br />תאריך: ' + res[counter].NoteDate + ' </p></div>');
-        //$("#accordion").accordion();
-     //   $('#accordion').append('<h3>First Floor</h3><div><p>Welcome to da first floor.</p></div> <h3>Floor numbah 2</h3><div><p>you are now on floor 2</p></div>');
-      //  $("#accordion").accordion()
-       // dynamicLy = "<img src='" + ImgIcon + "'style='height:100px;float:left'/> <h3>סוג הערה: " + res[counter].NoteName + "</h3><div><p>מקצוע: " + res[counter].LessonName + "</p><p>תאריך: " + res[counter].NoteDate + "</p></div>";
-      //  dynamicLy = "<li> <a href='#' data-id=" + res[counter].CodeGivenNote + "><img src='" + ImgIcon + "' /> <p>סוג הערה: " + res[counter].NoteName + "</p><p>מקצוע: " + res[counter].LessonName + "</p><p>תאריך: " + res[counter].NoteDate + "</p> </li>";
         counter++;
     }
-
-  //  $('#accordion').listview('refresh');
 
 }

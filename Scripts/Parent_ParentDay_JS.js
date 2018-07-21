@@ -5,10 +5,7 @@ $(document).ready(function () {
     var pupilID = localStorage.getItem("PupilID");
     var ParentDayExisted = localStorage.getItem("ThereIsParentDay");
 
-
-  Parent_LoadParentDay(pupilID, ShowParentsDay); 
-        
-
+    Parent_LoadParentDay(pupilID, ShowParentsDay);   
 });
 
 function ShowParentsDay(results) {

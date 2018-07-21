@@ -74,7 +74,7 @@ function SaveQuestion(SecurityQA, renderlogin) {
             renderSaveQuestion(results);
         },
         error: function (request, error) {
-            //alert('Network error has occurred please try again!');
+
         }
     });
 }
@@ -146,7 +146,7 @@ function GetUserInfo(user, renderFillUser) {
             renderFillUser(results);
         },
         error: function (request, error) {
-          //  alert('Network error has occurred please try again!');
+
         }
     });
 }
@@ -409,7 +409,7 @@ function LoadScheduleForToday(obj, DisplaySchedule) {
             DisplaySchedule(results);
         },
         error: function (request, error) {
-          //  alert('Network error has occurred please try again!');
+
         }
     });
 }
@@ -442,7 +442,7 @@ function LoadAllMessagesById(Id, DisplayMessages) {
             DisplayMessages(results);
         },
         error: function (request, error) {
-        //    alert('Network error has occurred please try again!');
+
         }
     });
 }
