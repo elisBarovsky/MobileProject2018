@@ -792,7 +792,6 @@ public class BetseferWS : System.Web.Services.WebService
         if (m.UserClass == "null" & m.UserType == "pupils")
         {
             m.UserClass = c.GetClassCodeByUserID(m.SenderID);
-            //m.UserClass = classCode;
         }
         else if (m.UserClass == "null" & m.UserType == "parents")
         {

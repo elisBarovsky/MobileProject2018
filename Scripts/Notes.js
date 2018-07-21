@@ -27,19 +27,23 @@ function renderNotes(results) {
         if (res[counter].NoteName === "הצטיינות") {
             ImgIcon = "Images/happy.png";
         }
+        if (res[counter].NoteName === "אחר") {
+            ImgIcon = "Images/kof.png";
+        }
         else {
             ImgIcon = "Images/sad.png";
         }
 
         var newIMG = document.createElement("img");
         newIMG.setAttribute('src', ImgIcon);
-        newIMG.setAttribute('height', '55px');
+        newIMG.setAttribute('height', '35px');
         newIMG.setAttribute('style', 'padding-right:38%');
+        
 
         var newH3 = document.createElement('h3');
-
+       
         var newDiv = document.createElement('div');
-
+        
         var newP0 = document.createElement('p');
         var newP1 = document.createElement('p');
         var newP2 = document.createElement('p');
@@ -47,8 +51,8 @@ function renderNotes(results) {
         var acc = document.getElementById('accordion');
         var div = document.getElementById("Div1");
 
-        newH3.innerText = 'סוג הערה: ' + res[counter].NoteName + '                         ';
-
+        newH3.innerText = 'סוג הערה: ' + res[counter].NoteName;
+        newH3.appendChild(newIMG);
         newP0.innerText = 'מורה: ' + res[counter].Teacher_FullName;
         newDiv.appendChild(newP0);
 
@@ -58,7 +62,7 @@ function renderNotes(results) {
         newP2.innerText = 'תאריך: ' + res[counter].NoteDate;
         newDiv.appendChild(newP2);
 
-        newP3.innerText = 'תיאור הערה: ' + res[counter].Comment;
+        newP3.innerHTML = 'תיאור הערה: </br>' + res[counter].Comment;
         newDiv.appendChild(newP3);
 
         //get inside the accordion!
