@@ -8,22 +8,34 @@ function onDeviceReady() {
     //alert(2);
 
     $('body').fadeIn(500, function () {
+        var Remember = localStorage.getItem("rememberME");
+        if (Remember != null) {
+            document.getElementById("IDTB").value = localStorage.getItem("rememberME");
+            document.getElementById("rememberME").checked = true;
+
+        }
+
         $('#LoginBTN').click(function () {
             //alert(1);
-            document.getElementById("loader").style.display = "block";
-            document.getElementById("myDiv").style.display = "none";
+            //document.getElementById("loader").style.display = "block";
+            //document.getElementById("myDiv").style.display = "none";
             UserInfo.ID = document.getElementById("IDTB").value;
             UserInfo.PS = document.getElementById("PasswordTB").value;
             localStorage.setItem("UserID", UserInfo.ID); //saving in localS
             localStorage.setItem("PasswordTB", UserInfo.PS); //saving in localS
-       
+            var checkBox = document.getElementById("rememberME");
+
+            if (checkBox.checked == true) {
+                localStorage.setItem("rememberME", UserInfo.ID); //saving in localS
+            }
+            else {
+                window.localStorage.removeItem("rememberME");
+            }
+
             Login(UserInfo, renderlogin);
         });
     });
-   
 }
-
-
 
 function renderlogin(results) {
     res = $.parseJSON(results.d);
@@ -60,7 +72,6 @@ function renderlogin(results) {
         localStorage.setItem("registrationId", res[2]);
         sessionStorage.setItem("Loged", 0);
         if (res[1] === 'Parent') {
-            //document.location.href = "Parent-ChooseChild.html";
             var ID = localStorage.getItem("UserID");
             ParentChooseChild(ID, getChildrenArray);
 
@@ -96,8 +107,7 @@ function renderFillUser(results) {
        $("body").fadeOut(500, redirectPage);  
     }
     else if (type === 'Teacher') {
-        $("body").fadeOut(500, redirectPage1);
-        
+        $("body").fadeOut(500, redirectPage1);      
     }
     else {
         swal({
@@ -110,8 +120,7 @@ function renderFillUser(results) {
         });
         document.getElementById("IDTB").value = "";
         document.getElementById("PasswordTB").value = "";
-    }
-   
+    } 
 }
 
 function getChildrenArray(results) {//return string[].
@@ -140,13 +149,10 @@ function getChildrenArray(results) {//return string[].
 }
 
 function redirectPage1() {
-
-
     document.location.href = "Teacher_MainManu.html";
 }
 
 function redirectPage() {
     window.location = "Pupil_MainManu.html";
-
-}
+ }
 
