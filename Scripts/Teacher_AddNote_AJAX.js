@@ -73,7 +73,7 @@ function LoadNotes(TeacherID, FillNotesInDDL) {
 function SubmitHWAjax(Note, AfterHWSent) {
     var dataString = JSON.stringify(Note);
     $.ajax({
-        url: path + 'BetseferWS.asmx/SubmitNoteInfo ',
+        url: path + 'BetseferWS.asmx/SubmitNoteInfo',
         data: JSON.stringify({ 'Pupil': Note.ChosenPupil, 'CodeNoteType': Note.ChosenNote, 'TeacherID': Note.TeacherID, 'LessonsCode': Note.Chosensubject, 'Comment': Note.NoteContent }),
         type: 'POST',
         dataType: "json",

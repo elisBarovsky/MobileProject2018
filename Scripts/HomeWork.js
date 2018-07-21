@@ -143,7 +143,7 @@ function LoadHWTable(results) {
 
             newDiv.appendChild(newP3);
 
-            newP6.innerText = res[counter].HWInfo;
+            newP6.innerHTML = res[counter].HWInfo;
             newDiv.appendChild(newP6);
 
             var checkbox = document.createElement("input");

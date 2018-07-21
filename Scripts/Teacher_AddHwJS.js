@@ -88,7 +88,7 @@ function SubmitMessage(drak) {
         return;
     }
 
-    if (todayDate> DueDateWeb) {
+    if (todayDate > DueDate) {
         swal({
             position: 'top-end',
             type: 'error',
@@ -133,6 +133,7 @@ function AfterHWSent(results) {
     $('#SubjectDDL').val('0');
     $('#IsLehagasha').prop('checked', false); // Unchecks it
     $('#HWContent').val('');
+    $('#date').val('');
   
 
 }
