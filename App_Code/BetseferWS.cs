@@ -180,7 +180,7 @@ public class BetseferWS : System.Web.Services.WebService
     public string GetPupilsListByClassTotalName(string Class)
     {
         Users u = new Users();
-        DataTable pupils = u.getPupillistsByClassCode(Class);
+        DataTable pupils = u.getPupillistsByClassCode(Class);//className - not code.
 
         var list = new List<Dictionary<string, object>>();
 

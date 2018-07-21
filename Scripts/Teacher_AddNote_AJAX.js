@@ -42,7 +42,7 @@ function FillSubject(Teacher, FillSubjectsDDL) {
 function FillPupils(Teacher, FillPupilsDDL) {
     $.ajax({
         url: path + 'BetseferWS.asmx/GetPupilsListByClassTotalName',
-        data: JSON.stringify({ 'ClassCode': Teacher.Class }),
+        data: JSON.stringify({ 'Class': Teacher.Class }),
         type: 'POST',
         dataType: "json",
         contentType: 'application/json; charset = utf-8',
