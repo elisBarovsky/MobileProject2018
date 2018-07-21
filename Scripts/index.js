@@ -8,7 +8,6 @@ function onDeviceReady() {
         if (Remember != null) {
             document.getElementById("IDTB").value = localStorage.getItem("rememberME");
             document.getElementById("rememberME").checked = true;
-
         }
 
         $('#LoginBTN').click(function () {        
@@ -39,6 +38,8 @@ function renderlogin(results) {
         window.location.href = "pages-security.html";
     }
     else if (res[0] === "Forbidden") { //wrong details
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
         swal({
             position: 'top-end',
             type: 'error',
@@ -51,6 +52,8 @@ function renderlogin(results) {
         document.getElementById("PasswordTB").value = "";
     }
     else if (res[0] === "wrongDetails") { //wrong details
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
         swal({
             position: 'top-end',
             type: 'error',
@@ -148,6 +151,6 @@ function redirectPage1() {
 }
 
 function redirectPage() {
-    window.location = "Pupil_MainManu.html";
- }
+    document.location.href = "Pupil_MainManu.html";
+}
 
