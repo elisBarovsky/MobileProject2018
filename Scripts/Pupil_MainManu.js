@@ -108,7 +108,7 @@ function FillProgersBarDLL(results) {
     var CountMadeHW = res[0].Made_HW;
     TotalPresentage = (CountMadeHW / TotalCountHW) * 100;
     GetUserInfo(user, renderFillUser);
-    LoadStudentsClassAvgGrades(user, ClassAvgGrades);
+   
 
 }
 
@@ -135,6 +135,9 @@ function renderFillUser(results) {
     $('#ProgBar').append(strProg);
 
     localStorage.setItem("UserFullName", res[1] + " " + res[2]);
+
+    user.PupilID = UserId;
+    LoadStudentsClassAvgGrades(user, ClassAvgGrades);
 }
 
 function DisplaySchedule(results) {
