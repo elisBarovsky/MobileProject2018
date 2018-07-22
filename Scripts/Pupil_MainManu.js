@@ -10,6 +10,9 @@ var user = new Object();
 function onDeviceReady() {
 
     $('body').fadeIn(500, function () {
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("myDiv").style.display = "none";
+
         user.PupilID = localStorage.getItem("UserID");
         user.UserId = localStorage.getItem("UserID");
         user.userType = 4;
@@ -26,6 +29,8 @@ function redirectPage() {
 }
 
 function ClassAvgGrades(results) {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
     res = $.parseJSON(results.d);
     user.PupilID = localStorage.getItem("PupilID");
     var ClassAvgGrades = 0;
@@ -98,6 +103,7 @@ function ClassAvgGrades(results) {
     }
     sessionStorage.setItem("Loged", 1);
     console.log('Changed AlreadyLogged  to 1');
+  
 }
 
 function FillProgersBarDLL(results) {

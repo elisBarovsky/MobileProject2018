@@ -3,6 +3,8 @@
 function onDeviceReady() {
 
     $('body').fadeIn(500, function () {
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("myDiv").style.display = "none";
         localStorage.setItem("LastVisit", "TimeTable.html"); //saving in localS
 
         day = 0;
@@ -84,7 +86,7 @@ function LoadTimeTable(results) {
     $('#appendStuff').empty();
     res = $.parseJSON(results.d);
     if (res.length === 0) {  
-        $('#appendStuff').append("<h6 id='noSchedule' style='color:gold;margin-right:25%'>אין שיעורים היום!</h6><img id='noScheduleBoy' src='Images/yayy.gif' style='margin-right:20%' height='130'/> ");  
+        $('#appendStuff').append("<h6 id='noSchedule' style='color:gold;'>אין שיעורים היום!</h6><img id='noScheduleBoy' src='Images/yayy.gif'  height='130'/> ");  
     }
     else {
         var tableString = "<tr><td colspan='2'>יום " + res[0].WeekDay + "</td></tr>";
@@ -114,5 +116,7 @@ function LoadTimeTable(results) {
         }
         $('#looze').append(tableString);        
     }
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
 }
 

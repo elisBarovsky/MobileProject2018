@@ -48,6 +48,77 @@
             margin: 6px 2px;
             transition: 0.4s;
         }
+        #loader {
+            display: none;
+            position: absolute;
+            top: 20%;
+            width: 100px;
+            height: 100px;
+            margin-right: 20%;
+            border-radius: 50%;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Add animation to "page content" */
+        .animate-bottom {
+            position: relative;
+            -webkit-animation-name: animatebottom;
+            -webkit-animation-duration: 1s;
+            animation-name: animatebottom;
+            animation-duration: 1s
+        }
+
+        .animate-top {
+            position: relative;
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 1s;
+            animation-name: animatetop;
+            animation-duration: 1s
+        }
+
+        @-webkit-keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0px;
+                opacity: 1
+            }
+        }
+
+        @keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+   
     </style>
     <script>
         function Dashbord() {
@@ -65,50 +136,56 @@
     </script>
 </head>
 <body class="login-page">
-
-    <div class="container" onclick="Dashbord()">
-        <div class="bar1" style="background-color:palevioletred"></div>
-        <div class="bar2" style="background-color:fuchsia"></div>
-        <div class="bar3" style="background-color:deepskyblue"></div>
+    <div id="loader" style="display:none;">
+        <img src="Images/school-clubs.gif" />
     </div>
-    <div class="login-box">
-        <div div class="login-box" style="height:20px;color:white">
-            <h3>מערכת שעות</h3>
+    <div id="myDiv" class="animate-bottom">
+        <div class="container" onclick="Dashbord()">
+            <div class="bar1" style="background-color:palevioletred"></div>
+            <div class="bar2" style="background-color:fuchsia"></div>
+            <div class="bar3" style="background-color:deepskyblue"></div>
         </div>
-        <div class="info-box">
-            <div class="col-xs-8">
-                <div>
-                    <button type="button" id="1" class="btn btn-outline-primary btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(1)">א</button>
-                    <button type="button" id="2" class="btn btn-outline-secondary btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(2)">ב</button>
-                    <button type="button" id="3" class="btn btn-outline-success btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(3)">ג</button>
-                    <button type="button" id="4" class="btn btn-outline-info btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(4)">ד</button>
-                    <button type="button" id="5" class="btn btn-outline-warning btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(5)">ה</button>
-                    <button type="button" id="6" class="btn btn-outline-danger btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(6)">ו</button>
+        <div class="login-box">
+            <div div class="login-box" style="height:20px;color:white">
+                <h3>מערכת שעות</h3>
+            </div>
+            <div class="info-box">
+                <div class="col-xs-8">
+                    <div>
+                        <button type="button" id="1" class="btn btn-outline-primary btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(1)">א</button>
+                        <button type="button" id="2" class="btn btn-outline-secondary btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(2)">ב</button>
+                        <button type="button" id="3" class="btn btn-outline-success btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(3)">ג</button>
+                        <button type="button" id="4" class="btn btn-outline-info btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(4)">ד</button>
+                        <button type="button" id="5" class="btn btn-outline-warning btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(5)">ה</button>
+                        <button type="button" id="6" class="btn btn-outline-danger btn-rounded waves-effect" onclick="LoadScheduleForSpecipicDay(6)">ו</button>
+                    </div>
+                </div>
+
+                <!-- <div class="login-box-body" >-->
+                <div class="table-responsive" style="width:100%">
+                    <div class="info-box" style="height:400px;overflow: auto">
+                        <br /><br />
+                        <div>
+                            <center>
+                                <div id="appendStuff">
+
+                                </div>
+                            </center>
+                            <table class="table table-hover no-wrap table-striped" style="width:100%; color: black" id="looze"></table>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <!-- <div class="login-box-body" >-->
-            <div class="table-responsive" style="width:100%">
-                <div class="info-box">
-                    <br/><br/>
-                         <div >
-                             <div  id="appendStuff">
-
-                             </div>
-
-                             <table class="table table-hover no-wrap table-striped" style="width:100%; color: black" id="looze"></table>
-                         </div>
-                </div>
         </div>
-    </div>
-    <!-- /.login-box-body -->
-    <!--</div>-->
-    <!-- /.login-box -->
-    <!-- v4.0.0-alpha.6 -->
-    <script src="dist/bootstrap/js/bootstrap.min.js"></script>
+        </div>
+        <!-- /.login-box-body -->
+        <!--</div>-->
+        <!-- /.login-box -->
+        <!-- v4.0.0-alpha.6 -->
+        <script src="dist/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- template -->
-    <script src="dist/js/niche.js"></script>
+        <!-- template -->
+        <script src="dist/js/niche.js"></script>
 
 
 </body>

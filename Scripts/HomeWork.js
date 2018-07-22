@@ -4,6 +4,8 @@ user = new Object();
 
 function onDeviceReady() {
     $('body').fadeIn(500, function () {
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("myDiv").style.display = "none";
 
             localStorage.setItem("LastVisit", "HomeWork.html"); //saving in localS
             user.PupilID = localStorage.getItem("PupilID");
@@ -181,4 +183,6 @@ function LoadHWTable(results) {
              counter++;
         }
     }
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
 }

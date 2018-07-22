@@ -1,6 +1,8 @@
 ﻿$(window).on('load', function () {
 
     $('body').fadeIn(500, function () {
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("myDiv").style.display = "none";
         var messageDetails = JSON.parse(localStorage.getItem("messageDetails"));
         var sender = messageDetails.SenderID;
         var me = localStorage.getItem("UserID");
@@ -52,9 +54,14 @@ function ShowAllConversation(results) {
 
     scrollingElement = (document.scrollingElement || document.body)
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block"
 };
 
 function SubmitMessage() {
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("myDiv").style.display = "none";
+
         subject = $('#newSubject').val(),
         content = $('#newMessage').val();
 
@@ -95,5 +102,8 @@ function AfterMessageSent(results) {
   
     subject = document.getElementById('newSubject').value="";
     content = document.getElementById('newMessage').value = "";
+
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block"
 };
 

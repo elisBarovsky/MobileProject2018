@@ -47,20 +47,13 @@
         }
 
         #loader {
+            display: none;
             position: absolute;
-            left: 50%;
-            top: 50%;
-            z-index: 1;
-            width: 150px;
-            height: 150px;
-            margin: -75px 0 0 -75px;
-            border: 16px solid #f3f3f3;
+            top: 20%;
+            width: 100px;
+            height: 100px;
+            margin-right: 20%;
             border-radius: 50%;
-            border-top: 16px solid #3498db;
-            width: 120px;
-            height: 120px;
-            -webkit-animation: spin 2s linear infinite;
-            animation: spin 2s linear infinite;
         }
 
         @-webkit-keyframes spin {
@@ -92,6 +85,14 @@
             animation-duration: 1s
         }
 
+        .animate-top {
+            position: relative;
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 1s;
+            animation-name: animatetop;
+            animation-duration: 1s
+        }
+
         @-webkit-keyframes animatebottom {
             from {
                 bottom: -100px;
@@ -115,9 +116,6 @@
                 opacity: 1
             }
         }
-        /*#myDiv {
-            display: none;
-        }*/
 
     </style>
 
@@ -131,19 +129,23 @@
     <script type="text/javascript" src="Scripts/cordova.js"></script>
 
 </head>
-<body class="login-page animate-bottom" >
-    <div class="container" onclick="window.location='Pupil_Dashboard.html'">
-        <div class="bar1" style="background-color:palevioletred"></div>
-        <div class="bar2" style="background-color:fuchsia"></div>
-        <div class="bar3" style="background-color:deepskyblue"></div>
+<body class="login-page animate-bottom">
+    <div id="loader" style="display:none;">
+        <img src="Images/school-clubs.gif" />
     </div>
-    <div class="login-box">
-        <div class="login-box-body" style="height:90px;border-radius:10px">
-            <!--<img id="UserIMG" src="" alt="" style="height:110px;float:left;position:fixed" />-->
-            <h4 class="login-box-msg m-b-3" id="UserNameLBL"></h4>
+    <div id="myDiv" class="animate-bottom">
+        <div class="container" onclick="window.location='Pupil_Dashboard.html'">
+            <div class="bar1" style="background-color:palevioletred"></div>
+            <div class="bar2" style="background-color:fuchsia"></div>
+            <div class="bar3" style="background-color:deepskyblue"></div>
         </div>
-        <div class="card m-t-3" style="border-radius:10px">
-            <div class="card-block">
+        <div class="login-box">
+            <div class="login-box-body" style="height:90px;border-radius:10px">
+                <!--<img id="UserIMG" src="" alt="" style="height:110px;float:left;position:fixed" />-->
+                <h4 class="login-box-msg m-b-3" id="UserNameLBL"></h4>
+            </div>
+            <div class="card m-t-3" style="border-radius:10px">
+                <div class="card-block">
 
                     <h6 style="color:cornflowerblue;direction:rtl"> מצב שיעורי הבית</h6>
 
@@ -154,7 +156,7 @@
             </div>
             <br />
             <div div class="login-box-body" style="border-radius:10px">
-                <div id="todaySchedule" style="margin-left:auto;margin-right:15%">
+                <div id="todaySchedule" style="margin-left:auto;margin-right:15%;overflow: auto;height:300px">
                     <img src="Images/luzeMoove.gif" height="40" style="margin-right:30%" />
                     <table id="looze" style="border-spacing: 20px;border-collapse: separate;"></table>
                 </div>

@@ -85,68 +85,70 @@
             </h3>
         </div>
         <!-- Main content -->
-        <section class="content" style="width:110%; position:center;margin-right:-10px;">
-            <div class="info-box" style="width:95%">
-                <div class="row">
-                    <Table ID="Table1" class="table" style="width:95%">
-                        <tr style="width:95%">
-                            <td style="width:95%">
-                                <div style="float:right;margin-left:40px">
-                                    <div style="float:right">
-                                        <Label ID="sugLBL">סוג הודעה:</Label>
+        <center>
+            <section class="content" style="position:center;">
+                <div class="info-box" >
+                    <div class="row">
+                        <Table ID="Table1" class="table" >
+                            <tr >
+                                <td >
+                                    <div >
+                                        <div>
+                                            <Label ID="sugLBL">סוג הודעה:</Label>
+                                        </div>
+                                        <div >
+
+                                            <fieldset id="messageTypeRBL">
+                                                <button type="button" value="private" name="msgType" id="private" onclick="MessageType('private')" style="margin-left:5px;border-radius:40px;width:70px;background-color:transparent;outline:none"><img src="Images/alone.png" Height="35" /></button>
+
+                                                <button type="button" value="kolektive" name="msgType" id="kolektive" onclick="MessageType('kolektive')" style="margin-left:5px;border-radius:40px;background-color:transparent;outline:none"><img src="Images/kolektive.gif" Height="35" /></button>
+
+                                            </fieldset>
+                                            <br />
+                                        </div>
                                     </div>
-                                    <div style="padding-right:80px">
-
-                                        <fieldset id="messageTypeRBL">
-                                            <button type="button" value="private" name="msgType" id="private" onclick="MessageType('private')" style="margin-left:5px;border-radius:40px;width:70px;background-color:transparent;outline:none"><img src="Images/alone.png" Height="35" /></button>
-
-                                            <button type="button" value="kolektive" name="msgType" id="kolektive" onclick="MessageType('kolektive')" style="margin-left:5px;border-radius:40px;background-color:transparent;outline:none"><img src="Images/kolektive.gif" Height="35" /></button>
-
-                                        </fieldset>
-                                        <br />
+                                    <div>
+                                        <div style="float:right;margin-left:10px">
+                                            <Label ID="classLBL">כיתה: </Label>
+                                        </div>
+                                        <div style="padding-right:140px">
+                                            <select ID="classDDL" CssClass="form-control" data-toggle="dropdown" onchange="FillUsers()">
+                                                <option value="0">בחר</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div>
-                                    <div style="float:right;margin-left:10px">
-                                        <Label ID="classLBL">כיתה: </Label>
+                                </td>
+
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="form-group">
+
+                                        <div class="ui-widget" style="width:100%">
+                                            <input id="tags" class="form-control" placeholder="נמען">
+                                            <br />
+                                        </div>
+
+                                        <input class="form-control" placeholder="נושא" id="messageSubject">
                                     </div>
-                                    <div style="padding-right:140px">
-                                        <select ID="classDDL" CssClass="form-control" data-toggle="dropdown" onchange="FillUsers()">
-                                            <option value="0">בחר</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
+                                    <div class="form-group">
 
-                        </tr>
-                        <tr></tr>
-                        <tr>
-                            <td colspan="2">
-                                <div class="form-group">
-
-                                    <div class="ui-widget" style="width:100%">
-                                        <input id="tags" class="form-control" placeholder="נמען">
-                                        <br />
+                                        <textarea id="messageContent" class="form-control" style="height: 150px;"></textarea>
+                                        <div style="float:left">
+                                            <br />
+                                            <button type="button" ID="paperPlaneButton" onclick="SubmitMessage(this)" style="margin-left:5px;border-radius:50px;width:90px;background-color:coral;outline:none"><img src="Images/paperPlane.png" Height="35" /></button>
+                                        </div>
                                     </div>
 
-                                    <input class="form-control" placeholder="נושא" id="messageSubject">
-                                </div>
-                                <div class="form-group">
+                                </td>
+                            </tr>
 
-                                    <textarea id="messageContent" class="form-control" style="height: 150px;"></textarea>
-                                    <div style="float:left">
-                                        <br />
-                                        <button type="button" ID="paperPlaneButton" onclick="SubmitMessage(this)" style="margin-left:5px;border-radius:50px;width:90px;background-color:coral;outline:none"><img src="Images/paperPlane.png" Height="35" /></button>
-                                    </div>
-                                </div>
-
-                            </td>
-                        </tr>
-
-                    </Table>
+                        </Table>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </center>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->

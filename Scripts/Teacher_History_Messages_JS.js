@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
-    $('body').fadeIn(500, function () {     
+    $('body').fadeIn(500, function () {
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("myDiv").style.display = "none";
         var teacherId = localStorage.getItem("UserID");
          LoadAllMessagesById(teacherId, DisplayMessages);
     }); 
@@ -24,6 +26,8 @@ function DisplayMessages(results) {
         res[i].MessageDate.toString().substring(0, 10) + "</td><td>" + res[i].SenderName + "</td></tr>";
     }
     $('#messagesTable').append(tableString);
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block"
 };
 
 function OpenMessage(obj) {

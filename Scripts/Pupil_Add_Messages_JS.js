@@ -3,7 +3,8 @@ var MSGType = "private";
 $(document).ready(function () {
 
     $('body').fadeIn(500, function () {
-
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("myDiv").style.display = "none";
         var userID = localStorage.getItem("UserID");
         var TeacherID = userID;    
             $("#childrenDDL").hide();
@@ -38,7 +39,8 @@ function FillTeachersInDDL(results) {
         autoFocus: true,
         position: { my: "center top", at: "center bottom" },
     });
-
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
 }
 
 function MessageType(messageType) {
@@ -61,6 +63,8 @@ function MessageType(messageType) {
 }
 
 function SubmitMessage() {
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("myDiv").style.display = "none";
         subject = $('#messageSubject').val(),
         content = $('#messageContent').val();
    var usrererer = $('#tags').val();
@@ -109,6 +113,9 @@ function AfterMessageSent(results) {
     $('#forLBL').hide();
     $('#private').select();
     $('#tags').val('');
+
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
 }
 
 function GetMessageType() {

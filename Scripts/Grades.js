@@ -2,7 +2,8 @@
 
 Grade = new Object();
 function onDeviceReady() {
-
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("myDiv").style.display = "none";
     localStorage.setItem("LastVisit", "Grades.html"); //saving in localS
     Grade.ID = localStorage.getItem("PupilID");
 
@@ -89,5 +90,6 @@ function renderGrades(results) {
     }
     var PupilAvg = (counter2 / counter);
     document.getElementById('AvgGrades').innerText = " ממוצע הציונים שלי הוא: " + PupilAvg ;
-
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
 }

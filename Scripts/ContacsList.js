@@ -3,7 +3,8 @@
 User = new Object();
 
 function onDeviceReady() {
-
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("myDiv").style.display = "none";
     localStorage.setItem("LastVisit", "ContacsList.html"); //saving in localS
     var Usertype = localStorage.getItem('UserType');
 
@@ -84,4 +85,6 @@ function FillListViewCellPhone(results) {  //contactList
         counter++;
         $('#contactList').append(dynamicLy);
     }
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
 }

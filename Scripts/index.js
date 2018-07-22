@@ -13,6 +13,7 @@ function onDeviceReady() {
         $('#LoginBTN').click(function () {        
             document.getElementById("loader").style.display = "block";
             document.getElementById("myDiv").style.display = "none";
+
             UserInfo.ID = document.getElementById("IDTB").value;
             UserInfo.PS = document.getElementById("PasswordTB").value;
             localStorage.setItem("UserID", UserInfo.ID); //saving in localS

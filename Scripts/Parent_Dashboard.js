@@ -3,6 +3,12 @@
 function onDeviceReady() {
     $('body').fadeIn(500, function () {
 
+
+
+
+
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
         $('#Logout').click(function () {
 
             swal({
