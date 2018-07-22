@@ -51,6 +51,76 @@
             margin: 6px 2px;
             transition: 0.4s;
         }
+        #loader {
+            display: none;
+            position: absolute;
+            top: 20%;
+            width: 100px;
+            height: 100px;
+            margin-right: 20%;
+            border-radius: 50%;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Add animation to "page content" */
+        .animate-bottom {
+            position: relative;
+            -webkit-animation-name: animatebottom;
+            -webkit-animation-duration: 1s;
+            animation-name: animatebottom;
+            animation-duration: 1s
+        }
+
+        .animate-top {
+            position: relative;
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 1s;
+            animation-name: animatetop;
+            animation-duration: 1s
+        }
+
+        @-webkit-keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0px;
+                opacity: 1
+            }
+        }
+
+        @keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
     </style>
     <script>
         function Dashbord() {
@@ -68,116 +138,117 @@
     </script>
 </head>
 <body class="login-page">
-
-    <div class="container" onclick="Dashbord()">
-        <div class="bar1" style="background-color:greenyellow"></div>
-        <div class="bar2" style="background-color:fuchsia"></div>
-        <div class="bar3" style="background-color:deepskyblue"></div>
+    <div id="loader" style="display:none;">
+        <img src="Images/school-clubs.gif" />
     </div>
-    <div class="container" style="float:left">
-        <div class="col-xs-4 m-t-1" style="float:left;position:relative;height:45px;border-radius:50px ">
-            <button class="btn btn-info btn-flat" type="button" style="border-radius:50px;height:50px;width:50px;" onclick="window.location='History_Messages.html';"> <i class="fa fa-arrow-left" style="float:right;color:white"> </i> </button>
+    <div id="myDiv" class="animate-bottom">
+        <div class="container" onclick="Dashbord()">
+            <div class="bar1" style="background-color:greenyellow"></div>
+            <div class="bar2" style="background-color:fuchsia"></div>
+            <div class="bar3" style="background-color:deepskyblue"></div>
         </div>
-    </div>
-    <div class="login-box">
-        <div div class="login-box" style="height:10px;color:white">
-            <h3>
-                הוספת הערת משמעת
-            </h3>
-        </div>
-        <!-- Main content -->
-        <section class="content" style="width:110%; position:center;margin-right:-10px;">
-            <div class="info-box" style="width:95%">
-                <div class="row">
-                    <Table ID="Table1" class="table" style="width:95%">
-                        <tr style="width:95%">
-                            <td style="width:95%">
-                               <div>
-                                    <div style="float:right;margin-left:10px">
-                                        <Label ID="classLBL">כיתה: </Label>
-                                    </div>
-                                    <div style="padding-right:140px">
-                                        <select ID="classDDL" Class ="btn btn-default dropdown-toggle" data-toggle="dropdown" onchange="FillSubjects(this)">
-                                            <option value="0">בחר</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr style="width:95%">
-                            <td style="width:95%">
-                                <div>
-                                    <div style="float:right;margin-left:10px">
-                                        <Label ID="subjectLBL">מקצוע: </Label>
-                                    </div>
-                                    <div style="padding-right:140px">
-                                        <select ID="SubjectDDL" Class="btn btn-default dropdown-toggle" data-toggle="dropdown" >
-                                            <option value="0">בחר</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr style="width:95%">
-                            <td style="width:95%">
-                                <div>
-                                    <div style="float:right;margin-left:10px">
-                                        <Label ID="pupilLBL">תלמיד: </Label>
-                                    </div>
-                                    <div style="padding-right:140px">
-                                        <select ID="PupilDDL" Class="btn btn-default dropdown-toggle" data-toggle="dropdown" >
-                                            <option value="0">בחר</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr style="width:95%">
-                            <td style="width:95%">
-                                <div>
-                                    <div style="float:right;margin-left:10px">
-                                        <Label ID="NoteLBL">סוג הערת משמעת: </Label>
-                                    </div>
-                                    <div style="padding-right:140px">
-                                        <select ID="NoteDDL" Class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                            <option value="0">בחר</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                       
-                        <tr>
-                            <td colspan="2">
-                            
-                                <div class="form-group">
-
-                                    <textarea id="NoteContent" placeholder="תוספת המורה" class="form-control" style="height: 150px;"></textarea>
-
-                                    <div style="float:left">
-                                        <br />
-                                        <button type="button" ID="paperPlaneButton" onclick="SubmitMessage(this)" style="margin-left:5px;border-radius:50px;width:90px;background-color:coral;outline:none"><img src="Images/paperPlane.png" Height="35" /></button>
-                                    </div>
-                                </div>
-
-                            </td>
-                        </tr>
-
-                    </Table>
-                </div>
+   
+        <div class="login-box">
+            <div div class="login-box" style="height:10px;color:white">
+                <h3>
+                    הוספת הערת משמעת
+                </h3>
             </div>
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    <!-- ./wrapper -->
-    <!-- jQuery 3 -->
-    <!-- v4.0.0-alpha.6 -->
-    <script src="dist/bootstrap/js/bootstrap.min.js"></script>
+            <!-- Main content -->
+            <section class="content" style="width:110%; position:center;margin-right:-10px;">
+                <div class="info-box" style="width:95%">
+                    <div class="row">
+                        <Table ID="Table1" class="table" style="width:95%">
+                            <tr style="width:95%">
+                                <td style="width:95%">
+                                    <div>
+                                        <div style="float:right;margin-left:10px">
+                                            <Label ID="classLBL">כיתה: </Label>
+                                        </div>
+                                        <div style="padding-right:140px">
+                                            <select ID="classDDL" Class="btn btn-default dropdown-toggle" data-toggle="dropdown" onchange="FillSubjects(this)">
+                                                <option value="0">בחר</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </td>
 
-    <!-- template -->
-    <script src="dist/js/niche.js"></script>
+                            </tr>
+                            <tr style="width:95%">
+                                <td style="width:95%">
+                                    <div>
+                                        <div style="float:right;margin-left:10px">
+                                            <Label ID="subjectLBL">מקצוע: </Label>
+                                        </div>
+                                        <div style="padding-right:140px">
+                                            <select ID="SubjectDDL" Class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <option value="0">בחר</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="width:95%">
+                                <td style="width:95%">
+                                    <div>
+                                        <div style="float:right;margin-left:10px">
+                                            <Label ID="pupilLBL">תלמיד: </Label>
+                                        </div>
+                                        <div style="padding-right:140px">
+                                            <select ID="PupilDDL" Class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <option value="0">בחר</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="width:95%">
+                                <td style="width:95%">
+                                    <div>
+                                        <div style="float:right;margin-left:10px">
+                                            <Label ID="NoteLBL">סוג הערת משמעת: </Label>
+                                        </div>
+                                        <div style="padding-right:140px">
+                                            <select ID="NoteDDL" Class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <option value="0">בחר</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">
+
+                                    <div class="form-group">
+
+                                        <textarea id="NoteContent" placeholder="תוספת המורה" class="form-control" style="height: 150px;"></textarea>
+
+                                        <div style="float:left">
+                                            <br />
+                                            <button type="button" ID="paperPlaneButton" onclick="SubmitMessage(this)" style="margin-left:5px;border-radius:50px;width:90px;background-color:coral;outline:none"><img src="Images/paperPlane.png" Height="35" /></button>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                        </Table>
+                    </div>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- ./wrapper -->
+        <!-- jQuery 3 -->
+        <!-- v4.0.0-alpha.6 -->
+        <script src="dist/bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- template -->
+        <script src="dist/js/niche.js"></script>
 
 
 </body>

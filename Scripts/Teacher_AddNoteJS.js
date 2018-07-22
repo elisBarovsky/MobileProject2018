@@ -2,6 +2,8 @@
 
 $(document).ready(function () {
     $('body').fadeIn(500, function () {
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("myDiv").style.display = "none";
         var TeacherID = localStorage.getItem("UserID");
         LoadClasses(TeacherID, FillClassesInDDL);
         LoadNotes(TeacherID, FillNotesInDDL);
@@ -40,7 +42,8 @@ function FillNotesInDDL(results) {
 
     var userID = localStorage.getItem("UserID");
     var TeacherID = userID;
-
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
 }
 
 function FillSubjects(drak) {

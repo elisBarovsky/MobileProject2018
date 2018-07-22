@@ -5,7 +5,8 @@ $(document).ready(function () {
      $('body').fadeIn(500, function () {
 
         var TeacherID = localStorage.getItem("UserID");
-
+         document.getElementById("loader").style.display = "block";
+         document.getElementById("myDiv").style.display = "none";
         LoadClasses(TeacherID, FillClassesInDDL);
       
     });
@@ -26,7 +27,8 @@ function FillClassesInDDL(results) {
 
     var userID = localStorage.getItem("UserID");
     var TeacherID = userID;
-
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
 }
 
 function FillSubjects(drak) {

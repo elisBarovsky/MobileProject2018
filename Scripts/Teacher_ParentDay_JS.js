@@ -1,6 +1,8 @@
 ﻿localStorage.setItem("ThereIsParentDay", 0);
 
 $(document).ready(function () {
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("myDiv").style.display = "none";
     var userID = localStorage.getItem("UserID");
     IfMehanech_LoadParentDay(userID, ShowParentsDay); 
 });
@@ -17,7 +19,8 @@ function ShowParentsDay(results) {
         $("#parentsDayTable").hide();
         $("#pdDetails").hide();
         localStorage.setItem("ThereIsParentDay", 0);
-
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
         return;
     }
 
@@ -126,6 +129,8 @@ function ShowParentsDay(results) {
         submitButton.className('btn btn-rounded btn-outline-primary');
         $("#createNewDay").append(submitButton);
 
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
         return;
     }
 
@@ -159,15 +164,21 @@ function ShowParentsDay(results) {
     }
 
     $("#parentsDayTable").append(strParentsDay);
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
 };
 
 function SaveParentsDay() {
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("myDiv").style.display = "none";
     var date = $('#parentsDayDate').val();
     var from = $('#from option:selected').text();
     var to = $('#to option:selected').text();
     var long = $('#long option:selected').text();
 
     if (date === "" || from === "בחר" || to === "בחר" || long === "בחר") {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
         swal({
             position: 'top-end',
             type: 'error',
@@ -228,6 +239,8 @@ function SaveParentsDay() {
 };
 
 function AfterSave(results) {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
     swal({
         position: 'top-end',
         type: 'success',
