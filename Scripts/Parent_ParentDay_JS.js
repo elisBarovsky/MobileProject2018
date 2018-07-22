@@ -1,6 +1,7 @@
 ﻿
 $(document).ready(function () {
-
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("myDiv").style.display = "none";
     var userID = localStorage.getItem("UserID");
     var pupilID = localStorage.getItem("PupilID");
     var ParentDayExisted = localStorage.getItem("ThereIsParentDay");
@@ -20,7 +21,8 @@ function ShowParentsDay(results) {
         $("#parentsDayTable").hide();
         $("#noParentDay").append("אין יום הורים בקרוב");
         localStorage.setItem("ThereIsParentDay", 0);
-
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
         return;
     }
 
@@ -63,6 +65,9 @@ function ShowParentsDay(results) {
     if (signToMeeting === "true") {
         $('.emptyMeeting').hide();
     }
+
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
 };
 
 
