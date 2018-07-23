@@ -17,8 +17,8 @@ function onDeviceReady() {
         user.UserId = localStorage.getItem("UserID");
         user.userType = 4;
         localStorage.setItem("LastVisit", "Pupil_MainManu.html"); //saving in localS
-        FillProgersBar(user, FillProgersBarDLL);
 
+        FillProgersBar(user, FillProgersBarDLL);
         LoadScheduleForToday(user, DisplaySchedule);
     });
 
@@ -29,8 +29,8 @@ function redirectPage() {
 }
 
 function ClassAvgGrades(results) {
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("myDiv").style.display = "block";
+    //document.getElementById("loader").style.display = "none";
+    //document.getElementById("myDiv").style.display = "block";
     res = $.parseJSON(results.d);
     user.PupilID = localStorage.getItem("PupilID");
     var ClassAvgGrades = 0;
@@ -54,40 +54,19 @@ function ClassAvgGrades(results) {
     var AlreadyLogged = sessionStorage.getItem('Loged');
     if (AlreadyLogged != "1") {
         console.log("localStorage.getItem('PasswordTB')" + localStorage.getItem("PasswordTB"));
-        if (localStorage.getItem("PasswordTB") == '1234') {
-            swal({
-                position: 'top-end',
-                type: 'error',
-                icon: "warning",
-                title: 'בעיית אבטחה',
-                text: 'אתה עדיין משתמש בסיסמה הראשונית, תחליף אותה בהגדרות כאמצעי זהירות',
-                showConfirmButton: true,
+        //if (localStorage.getItem("PasswordTB") == '1234') {
+        //    swal({
+        //        position: 'top-end',
+        //        type: 'error',
+        //        icon: "warning",
+        //        title: 'בעיית אבטחה',
+        //        text: 'אתה עדיין משתמש בסיסמה הראשונית, תחליף אותה בהגדרות כאמצעי זהירות',
+        //        showConfirmButton: true,
 
-            });
-        }
+        //    });
+        //}
 
         GetEncourageSentences(user.PupilID, ShowStudentMessage);
-
-        //if (place < uppPresentage) {
-        //    //alert('אתה בעשירון העליון');
-        //    swal({
-        //        title: "כל הכבוד!",
-        //        text: "אתה בין החזקים בכיתה",
-        //        imageUrl: 'Images/putInGrade.gif',
-        //        imageSize: '150x150'
-        //    });
-        //    console.log("אתה בין החזקים בכיתה" + DownPresentage);
-
-        //}
-        //else if (place > uppPresentage && MyAvgGrades > ClassAvgGrades) {
-        //    alert('אמנם אתה לא בעשירון העליון, הממוצע שלך גבוה מהממוצע הכיתתי');
-        //}
-        //else if (place > DownPresentage) {
-        //    alert('אתה בתחת');
-        //}
-        //else {
-        //    alert('אמנם אתה לא בטופ ולא באחרונים, אבל הממוצע שלך על הפנים');
-        //}
     }
 
     var PupilIFullName = localStorage.getItem("UserFullName");
@@ -110,11 +89,17 @@ function ClassAvgGrades(results) {
 
 function ShowStudentMessage(results) {
     res = $.parseJSON(results.d);
-    swal({
+
+    if (res !="") {
+        swal({
+            title: "",
             text: res,
             imageUrl: 'Images/putInGrade.gif',
             imageSize: '150x150'
         });
+    }
+   
+ 
 }
 
 function FillProgersBarDLL(results) {
@@ -158,8 +143,8 @@ function renderFillUser(results) {
 }
 
 function DisplaySchedule(results) {
-    //document.getElementById("loader").style.display = "none";
-    //document.getElementById("myDiv").style.display = "block";
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
 
     res = $.parseJSON(results.d);
     if (res.length === 0) {
