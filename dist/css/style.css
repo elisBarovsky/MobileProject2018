@@ -30,7 +30,9 @@ Designed By: UXLiner
     width: 600px;
     //margin: 20px auto;
 }
-
+.swal-text {
+    text-align: center;
+}
     #accordion .ui-accordion-content {
         background-color: #f3f3f3;
         width: 100%;
