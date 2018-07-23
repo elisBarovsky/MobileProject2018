@@ -53,19 +53,7 @@ function ClassAvgGrades(results) {
 
     var AlreadyLogged = sessionStorage.getItem('Loged');
     if (AlreadyLogged != "1") {
-        console.log("localStorage.getItem('PasswordTB')" + localStorage.getItem("PasswordTB"));
-        //if (localStorage.getItem("PasswordTB") == '1234') {
-        //    swal({
-        //        position: 'top-end',
-        //        type: 'error',
-        //        icon: "warning",
-        //        title: 'בעיית אבטחה',
-        //        text: 'אתה עדיין משתמש בסיסמה הראשונית, תחליף אותה בהגדרות כאמצעי זהירות',
-        //        showConfirmButton: true,
-
-        //    });
-        //}
-
+     
         GetEncourageSentences(user.PupilID, ShowStudentMessage);
     }
 
@@ -82,7 +70,7 @@ function ClassAvgGrades(results) {
         document.getElementById("UserNameLBL").innerHTML = " שלום " + PupilIFullName + " <img src='Images/bronze.png' height='70' style='float:left' />";
 
     }
-    sessionStorage.setItem("Loged", 1);
+    
     //console.log('Changed AlreadyLogged  to 1');
   
 }
@@ -110,8 +98,7 @@ function FillProgersBarDLL(results) {
     var CountMadeHW = res[0].Made_HW;
     TotalPresentage = (CountMadeHW / TotalCountHW) * 100;
     GetUserInfo(user, renderFillUser);
-   
-
+  
 }
 
 function renderFillUser(results) {
