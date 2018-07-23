@@ -584,6 +584,17 @@ public class BetseferWS : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public string getGradesFeedbackPerStudent(string PupilID)
+    {
+        Grades g = new Grades();
+        string feedback = g.GetGradesFeedbackPerStudent(PupilID);
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string pupilFeedback = js.Serialize(feedback);
+        return pupilFeedback;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public string FillHW(string UserID)
     {
         HomeWork HW = new HomeWork();

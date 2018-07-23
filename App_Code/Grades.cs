@@ -140,4 +140,9 @@ public class Grades
     {
         return dbT.GetAllGradesByExamCode(examCode);
     }
+
+    public string GetGradesFeedbackPerStudent(string PupilID)
+    {
+        return db.GetGradesFeedbackPerStudent(PupilID);
+    }
 }

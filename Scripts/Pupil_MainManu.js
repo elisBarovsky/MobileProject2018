@@ -49,7 +49,7 @@ function ClassAvgGrades(results) {
 
      uppPresentage = (res.length * 0.3);
      DownPresentage = (res.length * 0.7);
-    console.log("essionStorage.getItem('Loged')" + essionStorage.getItem('Loged'));
+    //console.log("essionStorage.getItem('Loged')" + essionStorage.getItem('Loged')); 
 
     var AlreadyLogged = sessionStorage.getItem('Loged');
     if (AlreadyLogged != "1") {
@@ -58,7 +58,7 @@ function ClassAvgGrades(results) {
             swal({
                 position: 'top-end',
                 type: 'error',
-                icon: "error",
+                icon: "warning",
                 title: 'בעיית אבטחה',
                 text: 'אתה עדיין משתמש בסיסמה הראשונית, תחליף אותה בהגדרות כאמצעי זהירות',
                 showConfirmButton: true,
@@ -66,26 +66,28 @@ function ClassAvgGrades(results) {
             });
         }
 
-        if (place < uppPresentage) {
-            //alert('אתה בעשירון העליון');
-            swal({
-                title: "כל הכבוד!",
-                text: "אתה בין החזקים בכיתה",
-                imageUrl: 'Images/putInGrade.gif',
-                imageSize: '150x150'
-            });
-            console.log("אתה בין החזקים בכיתה" + DownPresentage);
+        GetEncourageSentences(user.PupilID, ShowStudentMessage);
 
-        }
-        else if (place > uppPresentage && MyAvgGrades > ClassAvgGrades) {
-            alert('אמנם אתה לא בעשירון העליון, הממוצע שלך גבוה מהממוצע הכיתתי');
-        }
-        else if (place > DownPresentage) {
-            alert('אתה בתחת');
-        }
-        else {
-            alert('אמנם אתה לא בטופ ולא באחרונים, אבל הממוצע שלך על הפנים');
-        }
+        //if (place < uppPresentage) {
+        //    //alert('אתה בעשירון העליון');
+        //    swal({
+        //        title: "כל הכבוד!",
+        //        text: "אתה בין החזקים בכיתה",
+        //        imageUrl: 'Images/putInGrade.gif',
+        //        imageSize: '150x150'
+        //    });
+        //    console.log("אתה בין החזקים בכיתה" + DownPresentage);
+
+        //}
+        //else if (place > uppPresentage && MyAvgGrades > ClassAvgGrades) {
+        //    alert('אמנם אתה לא בעשירון העליון, הממוצע שלך גבוה מהממוצע הכיתתי');
+        //}
+        //else if (place > DownPresentage) {
+        //    alert('אתה בתחת');
+        //}
+        //else {
+        //    alert('אמנם אתה לא בטופ ולא באחרונים, אבל הממוצע שלך על הפנים');
+        //}
     }
 
     var PupilIFullName = localStorage.getItem("UserFullName");
@@ -102,8 +104,17 @@ function ClassAvgGrades(results) {
 
     }
     sessionStorage.setItem("Loged", 1);
-    console.log('Changed AlreadyLogged  to 1');
+    //console.log('Changed AlreadyLogged  to 1');
   
+}
+
+function ShowStudentMessage(results) {
+    res = $.parseJSON(results.d);
+    swal({
+            text: res,
+            imageUrl: 'Images/putInGrade.gif',
+            imageSize: '150x150'
+        });
 }
 
 function FillProgersBarDLL(results) {

@@ -27,7 +27,6 @@ function onDeviceReady() {
                         swal("יש נשארת!");
                     }
                 });
-
     });
 
     });

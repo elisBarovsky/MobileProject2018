@@ -462,3 +462,19 @@ function UpdateMessageAsRead(i) {
         }
     });
 }
+
+function GetEncourageSentences(PupilID, ShowStudentMessage) {
+    $.ajax({
+        url: path + 'BetseferWS.asmx/getGradesFeedbackPerStudent',
+        data: JSON.stringify({ 'PupilID': PupilID }),
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json; charset = utf-8',
+        success: function (results) {
+            ShowStudentMessage(results);
+        },
+        error: function (request, error) {
+            alert('Network error has occurred please try again!');
+        }
+    });
+}

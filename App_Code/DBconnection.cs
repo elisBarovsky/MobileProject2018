@@ -3614,4 +3614,213 @@ public class DBconnection
             }
         }
     }
+
+    public string GetGradesFeedbackPerStudent(string PupilID)
+    {
+        List<string> good = new List<string>();
+        List<string> bad = new List<string>();
+
+        //get list avg every subject per pupil
+        Dictionary<string, int> avgSubjectsPupil = GetAvgEachSubjectPerPupil(PupilID);
+
+        //get class code
+        string classCode = GetClassCodeByPupilId(PupilID);
+
+        //get list avg class every subject
+        Dictionary<string, int> avgSubjectsClass = GetAvgEachSubjectPerClass(classCode);
+
+        // check where the pupil is under the avg and if it much lower,
+        //and where he is higher than avg class and keep it in 2 lists.
+        foreach (var item in avgSubjectsPupil)
+        {
+            if (item.Value < avgSubjectsClass[item.Key]) //under the avg
+            {
+                if (avgSubjectsClass[item.Key] - item.Value >= 10) //HomeWork much under (if more than 20 points different)
+                {
+                    //change the subjects code to subjects name
+                    bad.Add(GetSubjectNameBySubjectCode(item.Key));
+                }
+            }
+            else if (avgSubjectsClass[item.Key] < 75)
+            { 
+                if (item.Value - avgSubjectsClass[item.Key] >= 15) //higher thgan avg (if more than 20 points different)
+                {
+                    //change the subjects code to subjects name
+                    good.Add(GetSubjectNameBySubjectCode(item.Key));
+                }
+            }
+            else if (item.Value > avgSubjectsClass[item.Key] + 5)
+            {
+                good.Add(GetSubjectNameBySubjectCode(item.Key));
+            }
+        }
+
+        //random from the table sentence
+        List<string> randon = GetEncourageAndComplimentSentences();
+
+        //return sentence and insert the subjects that he had to practice on and also good at them
+        //combine the to lists to one sentence. (כל הכבוד אתה ממש טוב במתמטיקה ואנגלית. אולי כדאי לצפות ביוטיוב בנושאים הקשורים לפיזיקה)
+        string subjectsGood = "", subjectsBad = "";
+
+        for (int i = 0; i < good.Count; i++)
+        {
+            subjectsGood += good[i];
+            if (i + 1 != good.Count)
+            {
+                subjectsGood += ", ";
+            }
+            else
+            {
+                subjectsGood += ".\n";
+            }
+        }
+        for (int i = 0; i < bad.Count; i++)
+        {
+            subjectsBad += bad[i];
+            if (i + 1 != bad.Count)
+            {
+                if (i + 2 == bad.Count)
+                {
+                    subjectsBad += " ו";
+                }
+                else subjectsBad += ", ";
+            }
+            else
+            {
+                subjectsBad += ".\n";
+            }
+        }
+        string answer = "";
+        if (good.Count > 0)
+        {
+            answer += randon.Last() + subjectsGood;
+        }
+        if (bad.Count > 0)
+        {
+            answer += randon.First() + subjectsBad;
+        }
+        return answer;
+    }
+
+    private Dictionary<string, int> GetAvgEachSubjectPerPupil(string PupilID)
+    {
+        String selectSTR = "SELECT  dbo.Exams.SubjectCode, avg(dbo.Grades.Grade) 'AvgGarde' FROM dbo.Exams INNER JOIN " +
+            "dbo.Grades ON dbo.Exams.ExamCode = dbo.Grades.ExamCode where dbo.Grades.PupilID='" +
+            PupilID + "' group by dbo.Exams.SubjectCode order by AvgGarde desc";
+
+        Dictionary<string, int> avgSubjectsPupil = new Dictionary<string, int>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                avgSubjectsPupil.Add(dr["SubjectCode"].ToString(), int.Parse(dr["AvgGarde"].ToString()));
+            }
+            return avgSubjectsPupil;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    private Dictionary<string, int> GetAvgEachSubjectPerClass(string classCode)
+    {
+        String selectSTR = "SELECT  dbo.Exams.SubjectCode, avg(dbo.Grades.Grade) 'AvgGarde' FROM dbo.Exams INNER JOIN " +
+            "dbo.Grades ON dbo.Exams.ExamCode = dbo.Grades.ExamCode where dbo.Exams.ClassCode='" +
+            classCode + "' group by dbo.Exams.SubjectCode order by AvgGarde desc";
+
+        Dictionary<string, int> avgSubjectsClass = new Dictionary<string, int>();
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                avgSubjectsClass.Add(dr["SubjectCode"].ToString(), int.Parse(dr["AvgGarde"].ToString()));
+            }
+            return avgSubjectsClass;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
+
+    private List<string> GetEncourageAndComplimentSentences()
+    {
+        Random random = new Random();
+        int rnd1 = random.Next(1, 10), rnd2 = random.Next(1, 10); // 1-9
+        List<string> sentences = new List<string>();
+
+        String selectSTR = "SELECT ComplimentsStr as Sentence FROM Compliments where ComplimentCode = " + rnd1 + " " +
+            "union SELECT EnSentence as Sentence FROM EncourageSentence where EnSenCode = " + rnd2;
+
+        try
+        {
+            con = connect("Betsefer"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        try
+        {
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dr.Read())
+            {
+                sentences.Add(dr[0].ToString());
+            }
+            return sentences;
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+        }
+    }
 }
