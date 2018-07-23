@@ -46,6 +46,7 @@ function DisplayMessages(results) {
     }
     $('#messagesTable').append(tableString);
 };
+
 var a = null;
 
 function OpenMessage(obj) {
@@ -73,7 +74,7 @@ function renderFillUser(results) {
     user.UserId = UserId;
 
     res = $.parseJSON(results.d);
-    document.getElementById("UserNameLBL").innerHTML = " שלום " + res[1] + " " + res[2];
+    document.getElementById("UserNameLBL").innerHTML = res[1] + " " + res[2];
     localStorage.setItem("UserFullName", res[1] + " " + res[2]);
 }
 
