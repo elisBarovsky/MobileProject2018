@@ -89,7 +89,12 @@ function renderGrades(results) {
 
     }
     var PupilAvg = (counter2 / counter);
-    document.getElementById('AvgGrades').innerText = " ממוצע הציונים שלי הוא: " + PupilAvg ;
+    if (res.length === 0) {
+        document.getElementById('AvgGrades').innerText = " אין ציונים להצגה ";
+    }
+    else {
+        document.getElementById('AvgGrades').innerText = " ממוצע הציונים שלי הוא: " + PupilAvg;
+    }
     document.getElementById("loader").style.display = "none";
     document.getElementById("myDiv").style.display = "block";
 }

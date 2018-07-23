@@ -60,7 +60,8 @@ function CheckedDB(results) {
             title: "שגיאה",
             text: "הייתה בעיה עם העדכון, נסה שנית מאוחר יותר או פנה לתמיכה",
             icon: "error",
-        })    }
+        })
+    }
     else if (res == "updated") {
         swal({
             title: "עודכן",

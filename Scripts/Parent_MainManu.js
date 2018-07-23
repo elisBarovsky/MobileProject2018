@@ -4,8 +4,7 @@ function onDeviceReady() {
     //alert(2);
 
     $('body').fadeIn(500, function () {
-        document.getElementById("loader").style.display = "block";
-        document.getElementById("myDiv").style.display = "none";
+      
         var user = new Object();
         user.UserId = localStorage.getItem("UserID");
         localStorage.setItem("LastVisit","Parent_MainManu.html"); //saving in localS
