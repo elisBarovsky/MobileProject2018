@@ -3667,7 +3667,11 @@ public class DBconnection
             subjectsGood += good[i];
             if (i + 1 != good.Count)
             {
-                subjectsGood += ", ";
+                if (i + 2 == good.Count)
+                {
+                    subjectsGood += " ו";
+                }
+                else subjectsGood += ", ";
             }
             else
             {
@@ -3693,11 +3697,11 @@ public class DBconnection
         string answer = "";
         if (good.Count > 0)
         {
-            answer += randon.Last() + subjectsGood;
+            answer += randon.First() + subjectsGood;
         }
         if (bad.Count > 0)
         {
-            answer += randon.First() + subjectsBad;
+            answer += randon.Last() + subjectsBad;
         }
         return answer;
     }
@@ -3788,9 +3792,8 @@ public class DBconnection
         int rnd1 = random.Next(1, 10), rnd2 = random.Next(1, 10); // 1-9
         List<string> sentences = new List<string>();
 
-        String selectSTR = "SELECT ComplimentsStr as Sentence FROM Compliments where ComplimentCode = " + rnd1 + " " +
-            "union SELECT EnSentence as Sentence FROM EncourageSentence where EnSenCode = " + rnd2;
-
+        String selectSTR =  " SELECT ComplimentsStr, EnSentence FROM dbo.EncourageSentence CROSS JOIN " +
+                           "  dbo.Compliments where ComplimentCode = "+ rnd1+" and EnSenCode =  " + rnd2;
         try
         {
             con = connect("Betsefer"); // create the connection
@@ -3806,7 +3809,8 @@ public class DBconnection
             SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             while (dr.Read())
             {
-                sentences.Add(dr[0].ToString());
+                sentences.Add(dr["ComplimentsStr"].ToString());
+                sentences.Add(dr["EnSentence"].ToString());
             }
             return sentences;
         }
