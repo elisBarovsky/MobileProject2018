@@ -42,7 +42,7 @@ function onDeviceReady() {
                     if (willDelete) {
                         swal("תחזור בקרוב!", {
                             icon: "success",
-                            showConfirmButton: false,
+                            buttons: false,
                         });
                         setTimeout(function () {
                             window.location.href = "Login.html"

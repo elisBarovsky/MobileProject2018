@@ -47,7 +47,84 @@
             transition: 0.4s;
         }
 
-  
+        #loader {
+            display: none;
+            position: absolute;
+            /*left: 50%;*/
+            top: 20%;
+            /*z-index: 1;*/
+            width: 100px;
+            height: 100px;
+            margin-right: 20%;
+            /*border: 16px solid #f3f3f3;*/
+            border-radius: 50%;
+            /*border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;*/
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Add animation to "page content" */
+        .animate-bottom {
+            position: relative;
+            -webkit-animation-name: animatebottom;
+            -webkit-animation-duration: 1s;
+            animation-name: animatebottom;
+            animation-duration: 1s
+        }
+
+        .animate-top {
+            position: relative;
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 1s;
+            animation-name: animatetop;
+            animation-duration: 1s
+        }
+
+        @-webkit-keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0px;
+                opacity: 1
+            }
+        }
+
+        @keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
     </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -76,7 +153,10 @@
         <div class="bar2" style="background-color:fuchsia"></div>
         <div class="bar3" style="background-color:deepskyblue"></div>
     </div>
-    <div class="login-box" style="float: inherit">
+    <div id="loader" style="display:none;">
+        <img src="Images/_preloader.gif" />
+    </div>
+    <div id="myDiv" class="animate-bottom">
         <br /><br /><br />
         <div class="login-box-body">
             <h3 class="login-box-msg m-b-1">שינוי סיסמה</h3>
