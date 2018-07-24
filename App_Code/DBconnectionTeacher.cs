@@ -1351,7 +1351,7 @@ public class DBconnectionTeacher
 
     public int GetClassCodeByMainTeacherID(string teacherID)
     {
-        String selectSTR = "SELECT ClassCode FROM TeacherClass where TeacherID  = '" + teacherID + "'";
+        String selectSTR = "SELECT ClassCode FROM Class where MainTeacherID  = '" + teacherID + "'";
         int classCode = 0;
         try
         {
