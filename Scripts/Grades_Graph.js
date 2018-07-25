@@ -14,13 +14,13 @@ function renderGivenGradeByDate(results) {
     var counter1 = 0;
     var GradeAvg = 0;
     var GradeThisPupil = [];
-    var PupilGradeThis = sessionStorage['ExamGrade'];
+    var PupilGradeThis = localStorage['PupilID'];
     var GradePos = 0;
 
     for (var i = 0; i < results.length; i++) {
-        if (results[counter1].Grade == PupilGradeThis) {
+        if (results[counter1].PupilID == PupilGradeThis) {
             GradePos = i + 1;
-            GradeThisPupil.push({ x: GradePos, y: parseInt(PupilGradeThis) });
+            GradeThisPupil.push({ x: GradePos, y: parseInt(results[counter1].Grade) });
         }
 
         GradeAvg += results[counter1].Grade;
