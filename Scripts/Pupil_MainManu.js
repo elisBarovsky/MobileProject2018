@@ -59,7 +59,6 @@ function ClassAvgGrades(results) {
 
     var PupilIFullName = localStorage.getItem("UserFullName");
     if (place == 1) {
-<<<<<<< HEAD
         document.getElementById("UserNameLBL").innerHTML = PupilIFullName + " <img src='Images/gold.png'  height='70' style='float:left' />";
 
     }
@@ -69,7 +68,6 @@ function ClassAvgGrades(results) {
     }
     else if (place == 3) {
         document.getElementById("UserNameLBL").innerHTML = PupilIFullName + " <img src='Images/bronze.png' height='70' style='float:left' />";
-=======
         document.getElementById("UserNameLBL").innerHTML =  PupilIFullName + " <img src='Images/gold.png'  height='70' style='float:left' />";
 
     }
@@ -79,8 +77,6 @@ function ClassAvgGrades(results) {
     }
     else if (place == 3) {
         document.getElementById("UserNameLBL").innerHTML =  PupilIFullName + " <img src='Images/bronze.png' height='70' style='float:left' />";
->>>>>>> 14cf586d96dddce1a82ab209e922d2b182e85e05
-
     }
       
 }
