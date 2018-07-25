@@ -59,20 +59,18 @@ function ClassAvgGrades(results) {
 
     var PupilIFullName = localStorage.getItem("UserFullName");
     if (place == 1) {
-        document.getElementById("UserNameLBL").innerHTML = " שלום " + PupilIFullName + " <img src='Images/gold.png'  height='70' style='float:left' />";
+        document.getElementById("UserNameLBL").innerHTML =  PupilIFullName + " <img src='Images/gold.png'  height='70' style='float:left' />";
 
     }
     else if (place == 2) {
-        document.getElementById("UserNameLBL").innerHTML = " שלום " + PupilIFullName + " <img src='Images/Silver.png'  height='70' style='float:left' />";
+        document.getElementById("UserNameLBL").innerHTML =  PupilIFullName + " <img src='Images/Silver.png'  height='70' style='float:left' />";
 
     }
     else if (place == 3) {
-        document.getElementById("UserNameLBL").innerHTML = " שלום " + PupilIFullName + " <img src='Images/bronze.png' height='70' style='float:left' />";
+        document.getElementById("UserNameLBL").innerHTML =  PupilIFullName + " <img src='Images/bronze.png' height='70' style='float:left' />";
 
     }
-    
-    //console.log('Changed AlreadyLogged  to 1');
-  
+      
 }
 
 function ShowStudentMessage(results) {
@@ -87,7 +85,6 @@ function ShowStudentMessage(results) {
         });
     }
    
- 
 }
 
 function FillProgersBarDLL(results) {
@@ -109,7 +106,7 @@ function renderFillUser(results) {
  
     res = $.parseJSON(results.d);
 
-    document.getElementById("UserNameLBL").innerHTML = " שלום " + res[1] + " " + res[2];
+    document.getElementById("UserNameLBL").innerHTML = res[1] + " " + res[2];
 
     var strProg = ""
     if (TotalPresentage < 40) {

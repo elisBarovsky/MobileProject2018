@@ -82,7 +82,7 @@ public class DBconnectionTeacher
     public DataTable PupilGrades(string PupilID)  //New !! 
     {
         string selectSTR = "    SELECT ab.ExamCode,dbo.Lessons.LessonName,ab.ExamDate,dbo.Grades.PupilID,dbo.Grades.Grade,    (select [UserFName]+' '+[UserLName]   from [dbo].[Users] where [UserID]= ab.TeacherID) as Teacher_FullName," +
-                       "   ( select avg(Grade) 'AvgGarde' from [dbo].[Grades] ac  where ab.ExamCode= dbo.Grades.ExamCode  ) 'ExamAVG'  FROM    dbo.Exams ab INNER JOIN  dbo.Grades ON dbo.Grades.ExamCode = ab.ExamCode INNER JOIN " +
+                       "   ( select avg(Grade) 'AvgGarde' from [dbo].[Grades]  where ab.ExamCode= dbo.Grades.ExamCode  ) 'ExamAVG'  FROM    dbo.Exams ab INNER JOIN  dbo.Grades ON dbo.Grades.ExamCode = ab.ExamCode INNER JOIN " +
                        "      dbo.Users ON dbo.Grades.PupilID = dbo.Users.UserID  INNER JOIN   dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID INNER JOIN  " +
                        "   dbo.Lessons ON ab.SubjectCode = dbo.Lessons.CodeLesson where  dbo.Grades.PupilID = '"+ PupilID+"'  order by ab.ExamDate desc  ";
         DataTable dtt = new DataTable();
@@ -158,10 +158,10 @@ public class DBconnectionTeacher
 
     public DataTable FilterGrade(string GradeCode) //NEW
     {
-        string selectSTR = " SELECT  dbo.Lessons.LessonName, ab.ExamDate, dbo.Grades.Grade ,( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as TeacherName " +
+        string selectSTR = " SELECT  dbo.Lessons.LessonName,dbo.Grades.PupilID, ab.ExamDate, dbo.Grades.Grade ,( dbo.Users.UserFName+' '+ dbo.Users.UserLName) as TeacherName " +
                             "   FROM    dbo.Exams ab INNER JOIN  dbo.Grades ON dbo.Grades.ExamCode = ab.ExamCode INNER JOIN  " +
                             "     dbo.Users ON dbo.Grades.PupilID = dbo.Users.UserID  INNER JOIN   dbo.Pupil ON dbo.Users.UserID = dbo.Pupil.UserID INNER JOIN " +
-                            "   dbo.Lessons ON ab.SubjectCode = dbo.Lessons.CodeLesson where ab.ExamCode='"+ GradeCode+"' group by dbo.Lessons.LessonName,ab.ExamDate,dbo.Users.UserFName,dbo.Users.UserLName ,dbo.Grades.Grade";
+                            "   dbo.Lessons ON ab.SubjectCode = dbo.Lessons.CodeLesson where ab.ExamCode='"+ GradeCode+ "' group by dbo.Lessons.LessonName,ab.ExamDate,dbo.Users.UserFName,dbo.Users.UserLName ,dbo.Grades.Grade,dbo.Grades.PupilID order by dbo.Grades.Grade asc  ";
         DataTable dtt = new DataTable();
         DataSet ds;
         try
