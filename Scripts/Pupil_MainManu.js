@@ -59,24 +59,15 @@ function ClassAvgGrades(results) {
 
     var PupilIFullName = localStorage.getItem("UserFullName");
     if (place == 1) {
-        document.getElementById("UserNameLBL").innerHTML = PupilIFullName + " <img src='Images/gold.png'  height='70' style='float:left' />";
-
+        document.getElementById("UserNameLBL").innerHTML = " "+ PupilIFullName + " <img src='Images/gold.png'  height='70' style='float:left' />";
     }
     else if (place == 2) {
-        document.getElementById("UserNameLBL").innerHTML = PupilIFullName + " <img src='Images/Silver.png'  height='70' style='float:left' />";
+        document.getElementById("UserNameLBL").innerHTML = " " + PupilIFullName + " <img src='Images/Silver.png'  height='70' style='float:left' />";
 
     }
     else if (place == 3) {
-        document.getElementById("UserNameLBL").innerHTML = PupilIFullName + " <img src='Images/bronze.png' height='70' style='float:left' />";
-        document.getElementById("UserNameLBL").innerHTML =  PupilIFullName + " <img src='Images/gold.png'  height='70' style='float:left' />";
 
-    }
-    else if (place == 2) {
-        document.getElementById("UserNameLBL").innerHTML =  PupilIFullName + " <img src='Images/Silver.png'  height='70' style='float:left' />";
-
-    }
-    else if (place == 3) {
-        document.getElementById("UserNameLBL").innerHTML =  PupilIFullName + " <img src='Images/bronze.png' height='70' style='float:left' />";
+        document.getElementById("UserNameLBL").innerHTML = " " +  PupilIFullName + " <img src='Images/bronze.png' height='70' style='float:left' />";
     }
       
 }
@@ -89,7 +80,7 @@ function ShowStudentMessage(results) {
             title: "",
             text: res,
             imageUrl: 'Images/putInGrade.gif',
-            imageSize: '150x150'
+            imageSize: '150x150',
         });
     }
    
@@ -128,7 +119,7 @@ function renderFillUser(results) {
     }
     $('#ProgBar').append(strProg);
 
-    localStorage.setItem("UserFullName", res[1] + " " + res[2]);
+    localStorage.setItem("UserFullName", " " + res[1] + " " + res[2]);
 
     user.PupilID = UserId;
     LoadStudentsClassAvgGrades(user, ClassAvgGrades);
