@@ -15,7 +15,7 @@ $(document).ready(function () {
             $('#classLBL').hide();
         
         LoadClasses(userID, FillClassesInDDL);
-        FillPupils(TeacherID, FillTeachersInDDL);
+        PupilsTeachersParents(TeacherID, FillTeachersInDDL);
     });
 
 });

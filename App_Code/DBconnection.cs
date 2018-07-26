@@ -1641,7 +1641,7 @@ public class DBconnection
     }
     public List<Dictionary<string, string>> getPupilsByClassCode(string TeacherID)
     {
-        String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName)AS PupilName" +
+        String selectSTR = "SELECT   dbo.Users.UserID,(dbo.Users.UserLName + ' ' + dbo.Users.UserFName)AS 'FullName'" +
            "  FROM dbo.Pupil INNER JOIN    dbo.Users ON dbo.Pupil.UserID = dbo.Users.UserID  where CodeClass in (SELECT distinct dbo.Timetable.ClassCode FROM  dbo.Timetable INNER JOIN " +
            "  dbo.TimetableLesson ON dbo.Timetable.TimeTableCode = dbo.TimetableLesson.TimeTableCode where dbo.TimetableLesson.TeacherId='" + TeacherID + "')" +
            " union " +
@@ -1670,7 +1670,7 @@ public class DBconnection
             {
                 Dictionary<string, string> p = new Dictionary<string, string>();
                 p["UserId"] = dr["UserID"].ToString();
-                p["UserName"] = dr["PupilName"].ToString();
+                p["UserName"] = dr["FullName"].ToString();
 
                 l.Add(p);
             }

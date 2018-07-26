@@ -21,13 +21,12 @@ function LoadClasses(TeacherID, FillClassesInDDL) {
 
         }
     });
-}
+} 
 
-function FillPupils(TeacherID, FillUsersInDDL) {
+function PupilsTeachersParents(TeacherID, FillTeachersInDDL) {
 
-    var dataString = JSON.stringify(TeacherID);
     $.ajax({
-        url: path+ 'BetseferWS.asmx/GetPupilsByClassTotalName',
+        url: path + 'BetseferWS.asmx/getPupilsTeachersParents',
         data: JSON.stringify({ 'TeacherID': TeacherID }),
         type: 'POST',
         dataType: "json",
@@ -36,10 +35,11 @@ function FillPupils(TeacherID, FillUsersInDDL) {
             FillTeachersInDDL(results);
         },
         error: function (request, error) {
-
+            alert('Network error has occurred please try again!');
         }
     });
 }
+
 
 function FillParents(classTotalName, FillUsersInDDL) {
 

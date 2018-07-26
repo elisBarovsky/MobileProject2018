@@ -10,8 +10,8 @@ var user = new Object();
 function onDeviceReady() {
 
     $('body').fadeIn(500, function () {
-        document.getElementById("loader").style.display = "block";
-        document.getElementById("myDiv").style.display = "none";
+       // document.getElementById("loader").style.display = "block";
+       // document.getElementById("myDiv").style.display = "none";
 
         user.PupilID = localStorage.getItem("UserID");
         user.UserId = localStorage.getItem("UserID");
@@ -120,6 +120,16 @@ function renderFillUser(results) {
     $('#ProgBar').append(strProg);
 
     localStorage.setItem("UserFullName", " " + res[1] + " " + res[2]);
+
+    if (res[6] != "") {
+        localStorage.setItem("UserImg", res[6]);
+        //console.log("myImg if not null");
+    }
+    else {
+
+        localStorage.setItem("UserImg", "Images/NoImg.png");
+       // console.log("myImg if null" + res[6]);
+    }
 
     user.PupilID = UserId;
     LoadStudentsClassAvgGrades(user, ClassAvgGrades);

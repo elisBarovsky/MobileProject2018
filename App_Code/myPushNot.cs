@@ -182,26 +182,7 @@ public class myPushNot
         gcmBroker.Stop();
     }
 
-    public void cancelRide(int rideID, Users user)
-    {
-        var x = new JObject();
+   
 
-        x.Add("title", "נסיעה בוטלה");
-
-        //modify by import ride from db by rideID
-        x.Add("message", "ביום 26.8 מהדסה לירושלים");
-
-        x.Add("rideID", rideID);
-        x.Add("info", "Canceled");
-        x.Add("content-available", 1);
-
-        RunPushNotificationOne(user, x);
-    }
-
-    void NotificationSent(object sender, INotification notification)
-    {
-        //ScriptManager.RegisterClientScriptBlock(this., this.GetType(), "success", "Erroralert(Sent'" + sender + " -> " + notification + ".');", true);
-        Console.WriteLine("Sent: " + sender + " -> " + notification);
-    }
 
 }

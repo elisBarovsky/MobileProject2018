@@ -141,6 +141,11 @@ public class Users
         db = new DBconnection();
     }
 
+    public List<Dictionary<string, string>> getPupilsTeachersParents(string TeacherID)
+    {
+        return db.getPupilsByClassCode(TeacherID);
+
+    }
     public Users(string userID)
     {
         db = new DBconnection();

@@ -1,8 +1,9 @@
-﻿$(window).on('load', function () {
+﻿var path = "http://proj.ruppin.ac.il/bgroup52/prod/";
+
+$(window).on('load', function () {
 
     $('body').fadeIn(500, function () {
-        document.getElementById("loader").style.display = "block";
-        document.getElementById("myDiv").style.display = "none";
+      
         var messageDetails = JSON.parse(localStorage.getItem("messageDetails"));
         var sender = messageDetails.SenderID;
         var me = localStorage.getItem("UserID");
@@ -19,8 +20,8 @@ function ShowAllConversation(results) {
 
     var str = '<div class="direct- chat-messages" id = "addToHereNewMessage">';
     var me = localStorage.getItem("UserID").toString();
-    var myImg = localStorage.getItem("UserImg") ? localStorage.getItem("UserImg").toString() : "/Images/NoImg.png";
-
+  
+    var myImg = path + localStorage.getItem("UserImg");
     for (var i = 0; i < res.length; i++) {
         
         if (res[i].SenderID === me) {
@@ -54,8 +55,7 @@ function ShowAllConversation(results) {
 
     scrollingElement = (document.scrollingElement || document.body)
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("myDiv").style.display = "block"
+ 
 };
 
 function SubmitMessage() {
@@ -92,7 +92,7 @@ function AfterMessageSent(results) {
         '<span class="direct-chat-name pull-left">' + myFullName + '</span>' +
         '<span class="direct-chat-timestamp pull-right">' + FullDAte  + '</span>' +
         '</div >' +
-        '<img class="direct-chat-img" alt="user image" src="' + myImg + '">' +
+        '<img class="direct-chat-img" alt="user image" src="' + path+ myImg + '">' +
         '<div class="direct-chat-text">' +
         '<div><u>' + message.Subject + '</u></div>' +
         message.Content + '</div > ' +
