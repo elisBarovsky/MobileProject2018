@@ -161,7 +161,7 @@ function DisplaySchedule(results) {
             }
             tableString += "</tr>";
         }
-        $('#looze').append(tableString);
+        $('#loozeA').append(tableString);
     }
 
 };
