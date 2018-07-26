@@ -76,12 +76,19 @@ function ShowStudentMessage(results) {
     res = $.parseJSON(results.d);
 
     if (res !="") {
+        //swal({
+        //    title: "",
+        //    text: res,
+        //    imageUrl: 'Images/putInGrade.gif',
+        //    imageSize: '150x150',
+        //});
+
         swal({
-            title: "",
+                title: "כל הכבוד!",
             text: res,
-            imageUrl: 'Images/putInGrade.gif',
-            imageSize: '150x150',
-        });
+                imageUrl: 'Images/putInGrade.gif',
+                imageSize: '150x150'
+            });
     }
    
 }
