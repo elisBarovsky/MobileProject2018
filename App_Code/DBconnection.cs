@@ -3049,10 +3049,16 @@ public class DBconnection
         {
             Classes Cl = new Classes();
 
-            classCode = Cl.GetClassCodeAccordingToClassFullName(userClass);
+           classCode = Cl.GetClassCodeAccordingToClassFullName(userClass);
+        }
+
+        if (classCode == "")
+        {
+            classCode = userClass;
         }
         switch (userType)
         {
+        
             case "pupils":
                 usersIds = getPupilsIdByClassCode(classCode);
                 break;
