@@ -3220,7 +3220,7 @@ public class DBconnection
         int today;
         if (day != null && day != 0)
         {
-            today = day.Value;
+            today =day.Value;
         }
         else today = (int)DateTime.Now.DayOfWeek + 1; //check that it is work ok!! ****************************************************************************
 
